@@ -15,7 +15,7 @@
       "node": {
         "moduleDirectory": [
           "node_modules",
-          "src"
+          "lib"
         ]
       }
     }
