@@ -20,7 +20,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/bitfinexcom/hf-algo.git"
+    "url": "https://github.com/bitfinexcom/bfx-hf-algo.git"
+  },
+  "bugs": {
+    "url": "https://github.com/bitfinexcom/bfx-hf-algo/issues"
   },
   "keywords": [
     "honey framework",
