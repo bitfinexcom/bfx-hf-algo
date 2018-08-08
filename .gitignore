@@ -1,0 +1,8 @@
+.idea
+dist/*
+node_modules
+npm-debug.log
+.vscode
+*.swo
+*.swp
+.DS_Store
