@@ -10,7 +10,7 @@
     "node": ">=6"
   },
   "author": "Cris Mihalache <cris.m@bitfinex.com> (https://www.bitfinex.com)",
-  "license": "",
+  "license": "Apache-2.0",
   "private": true,
   "scripts": {
     "lint": "standard",
