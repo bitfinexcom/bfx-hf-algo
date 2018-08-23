@@ -33,10 +33,15 @@
   ],
   "dependencies": {
     "bfx-api-mock-srv": "https://github.com/bitfinexcom/bfx-api-mock-srv.git",
+    "bfx-api-node-core": "bitfinexcom/bfx-api-node-core",
+    "bfx-api-node-util": "bitfinexcom/bfx-api-node-util",
+    "bfx-api-node-models": "bitfinexcom/bfx-api-node-models",
     "bitfinex-api-node": "^2.0.0-beta.1",
     "bluebird": "^3.5.1",
+    "eventemitter2": "^5.0.1",
     "lodash": "^4.17.10",
-    "lodash.throttle": "^4.1.1"
+    "lodash.throttle": "^4.1.1",
+    "p-iteration": "^1.1.7"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.6",
