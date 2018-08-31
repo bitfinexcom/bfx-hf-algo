@@ -36,6 +36,7 @@
     "bfx-api-node-core": "bitfinexcom/bfx-api-node-core",
     "bfx-api-node-util": "bitfinexcom/bfx-api-node-util",
     "bfx-api-node-models": "bitfinexcom/bfx-api-node-models",
+    "bfx-api-node-plugin-managed-ob": "bitfinexcom/bfx-api-node-plugin-managed-ob",
     "bitfinex-api-node": "^2.0.0-beta.1",
     "bluebird": "^3.5.1",
     "eventemitter2": "^5.0.1",
