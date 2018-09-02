@@ -1,8 +1,8 @@
 /* eslint-env mocha */
 'use strict'
 
-const Promise = require('bluebird')
 const assert = require('assert')
+const Promise = require('bluebird')
 const onLifeStart = require('experimental/iceberg/events/life_start')
 
 describe('iceberg:events:life_start', () => {
