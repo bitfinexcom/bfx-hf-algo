@@ -32,7 +32,7 @@
     "BTC"
   ],
   "dependencies": {
-    "bfx-api-mock-srv": "https://github.com/bitfinexcom/bfx-api-mock-srv.git",
+    "bfx-api-mock-srv": "bitfinexcom/bfx-api-mock-srv",
     "bfx-api-node-core": "bitfinexcom/bfx-api-node-core",
     "bfx-api-node-util": "bitfinexcom/bfx-api-node-util",
     "bfx-api-node-models": "bitfinexcom/bfx-api-node-models",
@@ -40,6 +40,7 @@
     "bfx-api-node-plugin-managed-candles": "bitfinexcom/bfx-api-node-plugin-managed-candles",
     "bitfinex-api-node": "^2.0.0-beta.1",
     "bfx-hf-indicators": "bitfinexcom/bfx-hf-indicators",
+    "bfx-hf-util": "bitfinexcom/bfx-hf-util",
     "bluebird": "^3.5.1",
     "eventemitter2": "^5.0.1",
     "lodash": "^4.17.10",
