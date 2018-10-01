@@ -3,8 +3,8 @@
 
 const assert = require('assert')
 const Promise = require('bluebird')
-const onLifeStart = require('experimental/twap/events/life_start')
-const Config = require('experimental/twap/config')
+const onLifeStart = require('twap/events/life_start')
+const Config = require('twap/config')
 
 describe('twap:events:life_start', () => {
   it('sets up interval & saves it on state', (done) => {

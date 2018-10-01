@@ -3,8 +3,8 @@
 
 const assert = require('assert')
 const Promise = require('bluebird')
-const onDataManagedBook = require('experimental/twap/events/data_managed_book')
-const Config = require('experimental/twap/config')
+const onDataManagedBook = require('twap/events/data_managed_book')
+const Config = require('twap/config')
 
 const args = {
   symbol: 'tBTCUSD',

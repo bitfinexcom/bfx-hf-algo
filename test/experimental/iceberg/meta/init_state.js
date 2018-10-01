@@ -2,7 +2,7 @@
 'use strict'
 
 const assert = require('assert')
-const initState = require('experimental/iceberg/meta/init_state')
+const initState = require('iceberg/meta/init_state')
 
 describe('iceberg:meta:init_state', () => {
   it('sets initial remainingAmount', () => {

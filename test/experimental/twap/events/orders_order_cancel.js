@@ -2,7 +2,7 @@
 'use strict'
 
 const assert = require('assert')
-const onOrderCancel = require('experimental/twap/events/orders_order_cancel')
+const onOrderCancel = require('twap/events/orders_order_cancel')
 
 describe('twap:events:orders_order_cancel', () => {
   it('submits all known orders for cancellation & stops operation', (done) => {

@@ -3,7 +3,7 @@
 
 const assert = require('assert')
 const _isFinite = require('lodash/isFinite')
-const generateOrders = require('experimental/iceberg/util/generate_orders')
+const generateOrders = require('iceberg/util/generate_orders')
 const { Config } = require('bfx-api-node-core')
 const { DUST } = Config
 

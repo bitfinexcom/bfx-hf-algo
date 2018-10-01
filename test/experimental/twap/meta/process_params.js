@@ -3,7 +3,7 @@
 
 const assert = require('assert')
 const _isFinite = require('lodash/isFinite')
-const processParams = require('experimental/twap/meta/process_params')
+const processParams = require('twap/meta/process_params')
 
 describe('twap:meta:process_params', () => {
   it('adds EXCHANGE prefix for non-margin order types', () => {

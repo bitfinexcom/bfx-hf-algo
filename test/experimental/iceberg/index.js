@@ -2,9 +2,9 @@
 'use strict'
 
 const assert = require('assert')
-const Iceberg = require('experimental/iceberg')
-const initAO = require('experimental/host/init_ao')
-const createTestHarness = require('experimental/testing/create_harness')
+const Iceberg = require('iceberg')
+const initAO = require('host/init_ao')
+const createTestHarness = require('testing/create_harness')
 
 const params = {
   symbol: 'tBTCUSD',

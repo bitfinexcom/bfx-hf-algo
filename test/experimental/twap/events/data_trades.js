@@ -3,8 +3,8 @@
 
 const assert = require('assert')
 const Promise = require('bluebird')
-const onDataTrades = require('experimental/twap/events/data_trades')
-const Config = require('experimental/twap/config')
+const onDataTrades = require('twap/events/data_trades')
+const Config = require('twap/config')
 
 const args = {
   symbol: 'tBTCUSD',

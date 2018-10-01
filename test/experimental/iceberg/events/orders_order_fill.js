@@ -3,7 +3,7 @@
 
 const assert = require('assert')
 const Promise = require('bluebird')
-const onOrderFill = require('experimental/iceberg/events/orders_order_fill')
+const onOrderFill = require('iceberg/events/orders_order_fill')
 
 describe('iceberg:events:orders_order_fill', () => {
   const orderState = { 1: 'some_order_object' }

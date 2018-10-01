@@ -3,7 +3,7 @@
 
 const assert = require('assert')
 const _isFinite = require('lodash/isFinite')
-const processParams = require('experimental/iceberg/meta/process_params')
+const processParams = require('iceberg/meta/process_params')
 
 describe('iceberg:meta:process_params', () => {
   it('adds EXCHANGE prefix for non-margin order types', () => {

@@ -3,7 +3,7 @@
 
 const assert = require('assert')
 const _isString = require('lodash/isString')
-const validateParams = require('experimental/iceberg/meta/validate_params')
+const validateParams = require('iceberg/meta/validate_params')
 
 const validParams = {
   price: 1000,
