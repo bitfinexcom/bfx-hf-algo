@@ -21,7 +21,8 @@ describe('iceberg:events:orders_order_fill', () => {
       debug: () => {},
       updateState: async () => {},
       emitSelf: async () => {},
-      emit: async () => {}
+      emit: async () => {},
+      debouncedSubmitOrders: () => {}
     }
   }
 
@@ -88,11 +89,8 @@ describe('iceberg:events:orders_order_fill', () => {
       h: {
         ...instance.h,
 
-        emitSelf: (eName) => {
-          return new Promise((resolve) => {
-            assert.equal(eName, 'submit_orders')
-            resolve()
-          }).then(done).catch(done)
+        debouncedSubmitOrders: () => {
+          done()
         }
       }
     }, filledOrder)

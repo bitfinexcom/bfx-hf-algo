@@ -35,6 +35,10 @@ describe('iceberg:exec', () => {
     const iTest = createTestHarness(instance, Iceberg)
     let cancelled = false
 
+    instance.h.debouncedSubmitOrders = () => {
+      instance.h.emitSelf('submit_orders')
+    }
+
     iTest.on('exec:order:cancel:all', () => {
       cancelled = true
     })
