@@ -19,6 +19,10 @@ describe('iceberg:events:life_stop', () => {
       },
 
       h: {
+        debouncedSubmitOrders: {
+          cancel: () => {}
+        },
+
         emit: (eName, gid, orders, cancelDelay) => {
           return new Promise((resolve) => {
             assert.equal(gid, 100)
