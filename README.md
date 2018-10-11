@@ -119,6 +119,11 @@ const AO = defineAlgoOrder({
       ticker,         // triggered by receipt of a ticker
       trades,         // triggered by receipt of trades
       book,           // triggered by receipt of an order book snapshot/update
+    },
+
+    errors: {
+      minimum_size,   // triggered when an order fails due to being below the
+                      // minimum size for its symbol; the AO may need to be stopped
     }
   }
 })
