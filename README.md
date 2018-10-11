@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/bitfinexcom/bfx-hf-algo.svg?branch=master)](https://travis-ci.org/bitfinexcom/bfx-hf-algo)
 
-This repo contains an algorithmic order system built on top of the Bitfinex node API, along with three algo orders: `Iceberg`, `TWAP`, and `Accumulate/Distribute`
+This repo contains an algorithmic order system built on top of the Bitfinex node API, along with three algo orders: `Iceberg`, `TWAP`, and `Accumulate/Distribute`. To use the order types directly from the Bitfinex UI, see the [algo server](https://github.com/bitfinexcom/bfx-hf-algo-server)
 
 ### Usage
 
