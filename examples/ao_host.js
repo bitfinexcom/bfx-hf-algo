@@ -57,7 +57,7 @@ host.once('ws2:auth:success', async () => {
     cancelDelay: 150,
     catchUp: true, // if true & behind, ignore slice interval (after prev fill)
     awaitFill: true,
-    _margin: false,
+    _margin: false
   })
 
   debug('started AO %s', gid)
