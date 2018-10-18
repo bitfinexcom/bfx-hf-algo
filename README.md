@@ -2,17 +2,19 @@
 
 [![Build Status](https://travis-ci.org/bitfinexcom/bfx-hf-algo.svg?branch=master)](https://travis-ci.org/bitfinexcom/bfx-hf-algo)
 
-This repo contains an algorithmic order system built on top of the Bitfinex node API, along with three algo orders: `Iceberg`, `TWAP`, and `Accumulate/Distribute`. To use the order types directly from the Bitfinex UI, see the [algo server](https://github.com/bitfinexcom/bfx-hf-algo-server)
+This repo contains an algorithmic order system built on top of the Bitfinex node API, along with four algo orders: `Ping/Pong`, `Iceberg`, `TWAP`, and `Accumulate/Distribute`. To use the order types directly from the Bitfinex UI, see the [algo server](https://github.com/bitfinexcom/bfx-hf-algo-server)
 
 ### Usage
 
 To use, create an `AOHost` instance and call `startAO(id, args)`:
 
 ```js
-const { AOHost, Iceberg, TWAP, AccumulateDistribute } = require('bfx-hf-algo')
+const {
+  AOHost, PingPong, Iceberg, TWAP, AccumulateDistribute
+} = require('bfx-hf-algo')
 
 const host = new AOHost({
-  aos: [Iceberg, TWAP, AccumulateDistribute],
+  aos: [PingPong, Iceberg, TWAP, AccumulateDistribute],
   apiKey: '...',
   apiSecret: '...',
   wsURL: '...',
@@ -199,6 +201,26 @@ module.exports = async (instance = {}, host) => {
     throw new Error(`invalid price target ${priceTarget}`)
   }
 }
+```
+
+## Ping/Pong Order Type
+Ping/pong submits multiple 'ping' orders; once a ping order fills, an associated 'pong' order is submitted.
+
+Multiple ping/pong pairs can be created by specifying an order count greater than 1, a suitable min/max ping price, and a pong distance. Multiple ping orders will be created between the specified min/max prices, with the associated pongs offset by the pong distance from the ping price.
+
+Example:
+```js
+await host.startAO('bfx.ping_pong', {
+  symbol: 'tBTCUSD',
+  amount: 0.5,
+  orderCount: 5,
+  pingMinPrice: 6000,
+  pingMaxPrice: 6700,
+  pongDistance: 300,
+  submitDelay: 150,
+  cancelDelay: 150,
+  _margin: false,
+})
 ```
 
 ## Iceberg Order Type
