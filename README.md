@@ -296,8 +296,10 @@ await host.startAO('bfx.accumulate_distribute', {
   intervalDistortion: 0.20, // %
   amountDistortion: 0.20, // %
   orderType: 'RELATIVE', // MARKET, LIMIT, RELATIVE
-  relativeOffset: { type: 'ask', args: [20], delta: -10 },
-  relativeCap: { type: 'bid', delta: 10 },
+  offsetType: 'ask',
+  offsetDelta: -10,
+  capType: 'bid',
+  capDelta: 10,
   submitDelay: 150,
   cancelDelay: 150,
   catchUp: true, // if true & behind, ignore slice interval (after prev fill)
