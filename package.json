@@ -1,6 +1,6 @@
 {
   "name": "bfx-hf-algo",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "HF Algorithmic Order Module",
   "main": "index.js",
   "directories": {
