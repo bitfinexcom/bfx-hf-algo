@@ -48,7 +48,7 @@ const run = async () => {
   })
 
   host.once('ws2:auth:success', async () => {
-    const gid = await host.startAO('bfx.accumulate_distribute', {
+    const gid = await host.startAO('bfx-accumulate_distribute', {
       symbol: 'tBTCUSD',
       amount: -0.2,
       sliceAmount: -0.1,
@@ -70,7 +70,7 @@ const run = async () => {
     debug('started AO %s', gid)
 
     /*
-    const gid = await host.startAO('bfx.twap', {
+    const gid = await host.startAO('bfx-twap', {
       symbol: 'tBTCUSD',
       amount: -0.5,
       sliceAmount: -0.1,
@@ -87,7 +87,7 @@ const run = async () => {
     */
 
     /*
-    const gid = host.startAO('bfx.iceberg', {
+    const gid = host.startAO('bfx-iceberg', {
       symbol: 'tBTCUSD',
       price: 21000,
       amount: -0.5,
