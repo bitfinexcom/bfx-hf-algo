@@ -44,7 +44,7 @@ host.on('error', (err) => {
 host.once('ws2:auth:success', async () => {
 
   // Start an Iceberg order instance
-  const gid = await host.startAO('bfx.iceberg', {
+  const gid = await host.startAO('bfx-iceberg', {
     symbol: 'tBTCUSD',
     price: 21000,
     amount: -0.5,
@@ -210,7 +210,7 @@ Multiple ping/pong pairs can be created by specifying an order count greater tha
 
 Example:
 ```js
-await host.startAO('bfx.ping_pong', {
+await host.startAO('bfx-ping_pong', {
   symbol: 'tBTCUSD',
   amount: 0.5,
   orderCount: 5,
@@ -228,7 +228,7 @@ Iceberg allows you to place a large order on the market while ensuring only a sm
 
 Example:
 ```js
-await host.startAO('bfx.iceberg', {
+await host.startAO('bfx-iceberg', {
   symbol: 'tBTCUSD',
   price: 21000,
   amount: -0.5,
@@ -253,7 +253,7 @@ Available price targets/explicit target conditions:
 
 Example:
 ```js
-await host.startAO('bfx.twap', {
+await host.startAO('bfx-twap', {
   symbol: 'tBTCUSD',
   amount: -0.5,
   sliceAmount: -0.1,
@@ -288,7 +288,7 @@ The period limit for moving average targets/caps is `240`, being the number of c
 
 Example:
 ```js
-await host.startAO('bfx.accumulate_distribute', {
+await host.startAO('bfx-accumulate_distribute', {
   symbol: 'tBTCUSD',
   amount: -0.2,
   sliceAmount: -0.1,

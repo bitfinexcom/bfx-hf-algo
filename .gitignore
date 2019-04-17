@@ -10,3 +10,5 @@ yarn-error.log
 coverage
 package-lock.json
 .env
+!db/.keep
+db/*
