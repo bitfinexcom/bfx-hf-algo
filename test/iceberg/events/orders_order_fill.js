@@ -44,9 +44,9 @@ describe('iceberg:events:orders_order_fill', () => {
           called += 1
 
           return new Promise((resolve) => {
-            assert.equal(gid, 100)
-            assert.equal(eName, 'exec:order:cancel:all')
-            assert.equal(cancelDelay, 42)
+            assert.strictEqual(gid, 100)
+            assert.strictEqual(eName, 'exec:order:cancel:all')
+            assert.strictEqual(cancelDelay, 42)
             assert.deepStrictEqual(orders, orderState)
             resolve()
           }).then(done).catch(done)

@@ -10,7 +10,7 @@ describe('iceberg:meta:init_state', () => {
       amount: 42
     })
 
-    assert.equal(state.remainingAmount, 42)
+    assert.strictEqual(state.remainingAmount, 42)
   })
 
   it('saves args on state', () => {

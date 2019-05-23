@@ -37,9 +37,9 @@ describe('twap:events:self_interval_tick', () => {
               return
             }
 
-            assert.equal(gid, 100)
-            assert.deepEqual(orders, { o: 42 })
-            assert.equal(delay, 100)
+            assert.strictEqual(gid, 100)
+            assert.deepStrictEqual(orders, { o: 42 })
+            assert.strictEqual(delay, 100)
             resolve()
           }).then(done).catch(done)
         }
@@ -112,16 +112,16 @@ describe('twap:events:self_interval_tick', () => {
         debug: () => {},
         emit: (eventName, gid, orders, delay) => {
           return new Promise((resolve) => {
-            assert.equal(eventName, 'exec:order:submit:all')
-            assert.equal(gid, 100)
-            assert.equal(delay, 200)
-            assert.equal(orders.length, 1)
+            assert.strictEqual(eventName, 'exec:order:submit:all')
+            assert.strictEqual(gid, 100)
+            assert.strictEqual(delay, 200)
+            assert.strictEqual(orders.length, 1)
 
             const [order] = orders
             assert(_isObject(order))
-            assert.equal(order.price, args.priceTarget)
-            assert.equal(order.amount, args.sliceAmount)
-            assert.equal(order.type, 'LIMIT')
+            assert.strictEqual(order.price, args.priceTarget)
+            assert.strictEqual(order.amount, args.sliceAmount)
+            assert.strictEqual(order.type, 'LIMIT')
             resolve()
           }).then(done).catch(done)
         }
@@ -145,16 +145,16 @@ describe('twap:events:self_interval_tick', () => {
         debug: () => {},
         emit: (eventName, gid, orders, delay) => {
           return new Promise((resolve) => {
-            assert.equal(eventName, 'exec:order:submit:all')
-            assert.equal(gid, 100)
-            assert.equal(delay, 200)
-            assert.equal(orders.length, 1)
+            assert.strictEqual(eventName, 'exec:order:submit:all')
+            assert.strictEqual(gid, 100)
+            assert.strictEqual(delay, 200)
+            assert.strictEqual(orders.length, 1)
 
             const [order] = orders
             assert(_isObject(order))
-            assert.equal(order.price, args.priceTarget)
-            assert.equal(order.amount, args.sliceAmount)
-            assert.equal(order.type, 'LIMIT')
+            assert.strictEqual(order.price, args.priceTarget)
+            assert.strictEqual(order.amount, args.sliceAmount)
+            assert.strictEqual(order.type, 'LIMIT')
             resolve()
           }).then(done).catch(done)
         }

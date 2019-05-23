@@ -72,7 +72,7 @@ describe('twap:events:data_managed_book', () => {
         debug: () => {},
         updateState: (instance, state) => {
           return new Promise((resolve) => {
-            assert.equal(state.lastBook, 42)
+            assert.strictEqual(state.lastBook, 42)
             resolve()
           }).then(done).catch(done)
         }

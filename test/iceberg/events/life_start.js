@@ -10,10 +10,10 @@ describe('iceberg:events:life_start', () => {
     onLifeStart({ h: {
       emitSelf: (eName) => {
         return new Promise((resolve) => {
-          assert.equal(eName, 'submit_orders')
+          assert.strictEqual(eName, 'submit_orders')
           resolve()
         }).then(done).catch(done)
       }
-    }})
+    } })
   })
 })

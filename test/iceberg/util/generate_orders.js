@@ -21,18 +21,18 @@ describe('iceberg:util:generate_orders', () => {
     const orders = generateOrders({ remainingAmount: args.amount, args })
     const [ slice ] = orders
 
-    assert.equal(orders.length, 1)
-    assert.equal(slice.symbol, args.symbol)
-    assert.equal(slice.price, args.price)
-    assert.equal(slice.type, args.orderType)
+    assert.strictEqual(orders.length, 1)
+    assert.strictEqual(slice.symbol, args.symbol)
+    assert.strictEqual(slice.price, args.price)
+    assert.strictEqual(slice.type, args.orderType)
     assert(_isFinite(Number(slice.cid)))
-    assert.equal(slice.amount, args.sliceAmount)
+    assert.strictEqual(slice.amount, args.sliceAmount)
   })
 
   it('caps slice order at remainingAmount if less than slice', () => {
     const orders = generateOrders({ remainingAmount: 0.05, args })
     const [ slice ] = orders
-    assert.equal(slice.amount, 0.05)
+    assert.strictEqual(slice.amount, 0.05)
   })
 
   it('generates hidden order if excess flag is enabled', () => {
@@ -45,12 +45,12 @@ describe('iceberg:util:generate_orders', () => {
     })
 
     const [, hidden] = orders
-    assert.equal(orders.length, 2)
-    assert.equal(hidden.symbol, args.symbol)
-    assert.equal(hidden.price, args.price)
-    assert.equal(hidden.type, args.orderType)
+    assert.strictEqual(orders.length, 2)
+    assert.strictEqual(hidden.symbol, args.symbol)
+    assert.strictEqual(hidden.price, args.price)
+    assert.strictEqual(hidden.type, args.orderType)
     assert(_isFinite(Number(hidden.cid)))
-    assert.equal(hidden.amount, 0.9)
+    assert.strictEqual(hidden.amount, 0.9)
   })
 
   it('caps excess order at remaining amount after slice', () => {
@@ -75,7 +75,7 @@ describe('iceberg:util:generate_orders', () => {
       }
     })
 
-    assert.equal(orders.length, 1)
+    assert.strictEqual(orders.length, 1)
   })
 
   it('generates no orders if remaining amount is less than dust', () => {
@@ -84,6 +84,6 @@ describe('iceberg:util:generate_orders', () => {
       args
     })
 
-    assert.equal(orders.length, 0)
+    assert.strictEqual(orders.length, 0)
   })
 })
