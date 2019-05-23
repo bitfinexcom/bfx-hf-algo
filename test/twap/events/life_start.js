@@ -32,7 +32,7 @@ describe('twap:events:life_start', () => {
 
         emitSelf: (eName) => {
           return new Promise((resolve) => {
-            assert.equal(eName, 'interval_tick')
+            assert.strictEqual(eName, 'interval_tick')
             assert(interval)
             clearInterval(interval)
             resolve()

@@ -22,13 +22,13 @@ describe('twap:events:orders_order_cancel', () => {
         debug: () => {},
         emit: async (eName, gid, orders, cancelDelay) => {
           if (call === 0) {
-            assert.equal(gid, 100)
-            assert.equal(eName, 'exec:order:cancel:all')
-            assert.equal(cancelDelay, 42)
+            assert.strictEqual(gid, 100)
+            assert.strictEqual(eName, 'exec:order:cancel:all')
+            assert.strictEqual(cancelDelay, 42)
             assert.deepStrictEqual(orders, orderState)
             call += 1
           } else if (call === 1) {
-            assert.equal(eName, 'exec:stop')
+            assert.strictEqual(eName, 'exec:stop')
             done()
           } else {
             done(new Error('too many events emitted'))

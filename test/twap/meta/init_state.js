@@ -7,7 +7,7 @@ const initState = require('twap/meta/init_state')
 describe('twap:meta:init_state', () => {
   it('sets initial remainingAmount', () => {
     const state = initState({ amount: 42 })
-    assert.equal(state.remainingAmount, 42)
+    assert.strictEqual(state.remainingAmount, 42)
   })
 
   it('saves args on state', () => {
@@ -18,6 +18,6 @@ describe('twap:meta:init_state', () => {
 
   it('seeds null interval', () => {
     const state = initState({ amount: 42 })
-    assert.equal(state.interval, null)
+    assert.strictEqual(state.interval, null)
   })
 })

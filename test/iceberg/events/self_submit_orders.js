@@ -25,16 +25,16 @@ describe('iceberg:events:self_submit_orders', () => {
       h: {
         emit: (eName, gid, orders, submitDelay) => {
           return new Promise((resolve) => {
-            assert.equal(eName, 'exec:order:submit:all')
-            assert.equal(gid, 41)
-            assert.equal(submitDelay, 42)
-            assert.equal(orders.length, 1)
+            assert.strictEqual(eName, 'exec:order:submit:all')
+            assert.strictEqual(gid, 41)
+            assert.strictEqual(submitDelay, 42)
+            assert.strictEqual(orders.length, 1)
 
             const [order] = orders
-            assert.equal(order.symbol, 'tBTCUSD')
-            assert.equal(order.type, 'EXCHANGE MARKET')
-            assert.equal(order.price, 1000)
-            assert.equal(order.amount, 0.05)
+            assert.strictEqual(order.symbol, 'tBTCUSD')
+            assert.strictEqual(order.type, 'EXCHANGE MARKET')
+            assert.strictEqual(order.price, 1000)
+            assert.strictEqual(order.amount, 0.05)
 
             resolve()
           }).then(done).catch(done)

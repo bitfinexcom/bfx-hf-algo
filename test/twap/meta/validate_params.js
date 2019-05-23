@@ -18,7 +18,7 @@ const validParams = {
 
 describe('twap:meta:validate_params', () => {
   it('returns no error on valid params', () => {
-    assert.equal(validateParams(validParams), null)
+    assert.strictEqual(validateParams(validParams), null)
   })
 
   it('returns error on invalid order type', () => {

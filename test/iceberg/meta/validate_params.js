@@ -16,7 +16,7 @@ const validParams = {
 
 describe('iceberg:meta:validate_params', () => {
   it('returns no error on valid params', () => {
-    assert.equal(validateParams(validParams), null)
+    assert.strictEqual(validateParams(validParams), null)
   })
 
   it('returns error on invalid order type', () => {
@@ -69,7 +69,7 @@ describe('iceberg:meta:validate_params', () => {
     delete params.price
     assert(_isString(validateParams(params)))
 
-    assert.equal(validateParams({
+    assert.strictEqual(validateParams({
       ...params,
       orderType: 'MARKET'
     }), null)

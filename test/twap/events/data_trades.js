@@ -72,7 +72,7 @@ describe('twap:events:data_trades', () => {
         debug: () => {},
         updateState: (instance, state) => {
           return new Promise((resolve) => {
-            assert.equal(state.lastTrade, 42)
+            assert.strictEqual(state.lastTrade, 42)
             resolve()
           }).then(done).catch(done)
         }
