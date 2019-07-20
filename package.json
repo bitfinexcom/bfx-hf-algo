@@ -49,6 +49,7 @@
     "bfx-hf-util": "^1.0.0",
     "bitfinex-api-node": "^2.0.0",
     "bluebird": "^3.5.1",
+    "debug": "^4.1.1",
     "eventemitter2": "^5.0.1",
     "lodash": "^4.17.10",
     "lodash.throttle": "^4.1.1",
