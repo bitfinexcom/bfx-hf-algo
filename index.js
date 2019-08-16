@@ -6,5 +6,6 @@ module.exports = {
   TWAP: require('./lib/twap'),
   AccumulateDistribute: require('./lib/accumulate_distribute'),
   PingPong: require('./lib/ping_pong'),
+  MACrossover: require('./lib/ma_crossover'),
   NoDataError: require('./lib/errors/no_data')
 }
