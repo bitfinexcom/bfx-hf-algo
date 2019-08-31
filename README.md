@@ -2,23 +2,38 @@
 
 [![Build Status](https://travis-ci.org/bitfinexcom/bfx-hf-algo.svg?branch=master)](https://travis-ci.org/bitfinexcom/bfx-hf-algo)
 
-This repo contains an algorithmic order system built on top of the Bitfinex node API, along with four algo orders: `Ping/Pong`, `Iceberg`, `TWAP`, and `Accumulate/Distribute`. To use the order types directly from the Bitfinex UI, see the [algo server](https://github.com/bitfinexcom/bfx-hf-algo-server)
+This repo contains an algorithmic order system built on top of the Bitfinex node API, along with five algo orders: `Ping/Pong`, `Iceberg`, `TWAP`, `Accumulate/Distribute`, and `MA Crossover`. To use the order types directly from the Bitfinex UI, see the [algo server](https://github.com/bitfinexcom/bfx-hf-algo-server)
 
 ### Usage
 
-To use, create an `AOHost` instance and call `startAO(id, args)`:
+To use, initialize an `AOAdapter` and `HFDB` instance, then pass them to a new `AOHost` instance and call `startAO(id, args)`:
 
 ```js
+const HFDB = require('bfx-hf-models')
+const HFDBLowDBAdapter = require('bfx-hf-models-adapter-lowdb')
 const {
-  AOHost, PingPong, Iceberg, TWAP, AccumulateDistribute
+  AOAdapter,
+  schema: HFDBBitfinexSchema
+} = require('bfx-hf-ext-plugin-bitfinex')
+
+const {
+  AOHost, PingPong, Iceberg, TWAP, AccumulateDistribute, MACrossover
 } = require('bfx-hf-algo')
 
 const host = new AOHost({
   aos: [PingPong, Iceberg, TWAP, AccumulateDistribute],
-  apiKey: '...',
-  apiSecret: '...',
-  wsURL: '...',
-  restURL: '...',
+  adapter: new AOAdapter({
+    apiKey: '...',
+    apiSecret: '...',
+    dms: 4
+  }),
+
+  db: new HFDB({
+    schema: HFDBBitfinexSchema,
+    adapter: HFDBLowDBAdapter({
+      dbPath: `${__dirname}/db.json`,
+    })
+  })
 })
 
 host.on('ao:start', (instance) => {
@@ -62,11 +77,9 @@ host.once('ws2:auth:success', async () => {
 
 ### Algo Order Host
 
-The `AOHost` class provides a wrapper around the algo order system, and manages lifetime events/order execution. Internally it hosts a `Manager` instance from `bfx-api-node-core` for communication with the Bitfinex API, and listens for websocket stream events in order to update order state/trigger algo order events.
+The `AOHost` class provides a wrapper around the algo order system, and manages lifetime events/order execution. Internally utilizes an `AOAdapter` instance to communicate with the exchange API, and listens for websocket stream events in order to update order state/trigger algo order events.
 
-Execution is handled by an event system, with events being triggered by Bitfinex API websocket stream payloads, and the algo orders themselves.
-
-The host must be instantiated with a valid API key/secret pair, and websocket/REST endpoints, along with an optional proxy agent. These parameters are the same as those passed to the `bfx-api-node-core` `Manager` constructor. Note that the `Manager` is instantiated with the dead-man-switch active (dms: 4).
+Execution is handled by an event system, with events being triggered by `AOAdapter` websocket stream payloads, and the algo orders themselves.
 
 To start/stop algo orders, `gid = startAO(id, args)` and `stopAO(gid)` methods are provided, with the generated group ID (`gid`) being the same as that used for all atomic orders created by the individual algo orders.
 
@@ -304,6 +317,28 @@ await host.startAO('bfx-accumulate_distribute', {
   cancelDelay: 150,
   catchUp: true, // if true & behind, ignore slice interval (after prev fill)
   awaitFill: true, // await current slice fill before continuing to next slice
+  _margin: false,
+})
+```
+
+## MA Crossover
+MA Crossover triggers either a MARKET or LIMIT order when two user-defined moving averages cross (configurable to use MA or EMA for either the long or short signals.)
+
+Example:
+```js
+await host.startAO('bfx-ma_crossover', {
+  shortType: 'EMA',
+  shortEMATF: '1m',
+  shortEMAPeriod: '20',
+  shortEMAPrice: 'close',
+  longType: 'EMA',
+  longEMATF: '1m',
+  longEMAPeriod: '100',
+  longEMAPrice: 'close',
+  amount: 1,
+  symbol: 'tEOSUSD',
+  orderType: 'MARKET',
+  action: 'Buy',
   _margin: false,
 })
 ```

@@ -3,9 +3,11 @@
 
 const assert = require('assert')
 const Iceberg = require('iceberg')
+const { AOAdapter } = require('bfx-hf-ext-plugin-bitfinex')
 const initAO = require('host/init_ao')
 const createTestHarness = require('testing/create_harness')
 
+const adapter = new AOAdapter({})
 const params = {
   symbol: 'tBTCUSD',
   price: 21000,
@@ -20,7 +22,7 @@ const params = {
 
 describe('iceberg:exec', () => {
   it('submits initial orders on startup', (done) => {
-    const instance = initAO(Iceberg, params)
+    const instance = initAO(adapter, Iceberg, params)
     const iTest = createTestHarness(instance, Iceberg)
 
     iTest.on('self:submit_orders', () => {
@@ -31,10 +33,11 @@ describe('iceberg:exec', () => {
   })
 
   it('cancels & submits new orders when an order fills', (done) => {
-    const instance = initAO(Iceberg, params)
+    const instance = initAO(adapter, Iceberg, params)
     const iTest = createTestHarness(instance, Iceberg)
     let cancelled = false
 
+    instance.state.remainingAmount = -0.5
     instance.h.debouncedSubmitOrders = () => {
       instance.h.emitSelf('submit_orders')
     }
@@ -49,12 +52,13 @@ describe('iceberg:exec', () => {
     })
 
     iTest.trigger('orders', 'order_fill', {
+      resetFilledAmount: () => {},
       getLastFillAmount: () => { return -0.05 }
     })
   })
 
   it('stops when remaining amount is dust or less', (done) => {
-    const instance = initAO(Iceberg, params)
+    const instance = initAO(adapter, Iceberg, params)
     const iTest = createTestHarness(instance, Iceberg)
     let cancelled = false
     let submitted = false
@@ -76,6 +80,7 @@ describe('iceberg:exec', () => {
     instance.state.remainingAmount = -0.05000001
 
     iTest.trigger('orders', 'order_fill', {
+      resetFilledAmount: () => {},
       getLastFillAmount: () => { return -0.05 }
     })
   })
