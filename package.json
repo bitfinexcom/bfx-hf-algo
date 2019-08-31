@@ -75,6 +75,8 @@
     "tape": "^4.6.3",
     "tape-watch": "^2.3.0",
     "webpack": "^2.4.1",
-    "yargs": "6.6.0"
+    "yargs": "6.6.0",
+    "bfx-hf-ext-plugin-bitfinex": "^1.0.0",
+    "bfx-hf-models-adapter-lowdb": "^1.0.0"
   }
 }

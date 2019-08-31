@@ -10,7 +10,11 @@ describe('twap:events:life_stop', () => {
     }, 10)
 
     onLifeStop({
-      state: { interval }
+      state: { interval },
+      h: {
+        updateState: () => {},
+        debug: () => {}
+      }
     })
 
     setTimeout(done, 50)

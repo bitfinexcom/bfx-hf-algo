@@ -26,6 +26,7 @@ describe('twap:events:orders_order_fill', () => {
   }
 
   const filledOrder = {
+    resetFilledAmount: () => {},
     getLastFillAmount: () => {
       return 42
     }

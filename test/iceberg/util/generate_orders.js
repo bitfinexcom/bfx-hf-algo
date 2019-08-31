@@ -44,7 +44,7 @@ describe('iceberg:util:generate_orders', () => {
       }
     })
 
-    const [, hidden] = orders
+    const [hidden] = orders
     assert.strictEqual(orders.length, 2)
     assert.strictEqual(hidden.symbol, args.symbol)
     assert.strictEqual(hidden.price, args.price)
@@ -62,7 +62,7 @@ describe('iceberg:util:generate_orders', () => {
       }
     })
 
-    const [, hidden] = orders
+    const [hidden] = orders
     assert((hidden.amount - 0.05) < DUST)
   })
 

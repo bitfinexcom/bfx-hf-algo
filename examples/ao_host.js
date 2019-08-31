@@ -5,21 +5,33 @@ require('dotenv').config()
 process.env.DEBUG = '*,-bfx:api:ws:on_channel_message'
 
 const debug = require('debug')('bfx:ao:examples:ao-host')
-const AOHost = require('./ao_host')
-const Iceberg = require('./iceberg')
-const TWAP = require('./twap')
-const AccumulateDistribute = require('./accumulate_distribute')
-
 const {
-  WS_URL, REST_URL, API_KEY, API_SECRET
-} = process.env
+  AOHost, Iceberg, TWAP, AccumulateDistribute, MACrossover
+} = require('../')
+
+const HFDB = require('bfx-hf-models')
+const HFDBLowDBAdapter = require('bfx-hf-models-adapter-lowdb')
+const {
+  AOAdapter,
+  schema: HFDBBitfinexSchema
+} = require('bfx-hf-ext-plugin-bitfinex')
+
+const { API_KEY, API_SECRET } = process.env
 
 const host = new AOHost({
-  aos: [Iceberg, TWAP, AccumulateDistribute],
-  apiKey: API_KEY,
-  apiSecret: API_SECRET,
-  wsURL: WS_URL,
-  restURL: REST_URL
+  aos: [Iceberg, TWAP, AccumulateDistribute, MACrossover],
+  adapter: new AOAdapter({
+    apiKey: API_KEY,
+    apiSecret: API_SECRET,
+    dms: 4
+  }),
+
+  db: new HFDB({
+    schema: HFDBBitfinexSchema,
+    adapter: HFDBLowDBAdapter({
+      dbPath: `${__dirname}/../db/example.json`,
+    })
+  })
 })
 
 host.on('ao:start', (instance) => {

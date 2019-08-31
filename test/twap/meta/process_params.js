@@ -35,7 +35,7 @@ describe('twap:meta:process_params', () => {
 
   it('integrates custom price target from price field', () => {
     const params = processParams({
-      priceTarget: 'custom',
+      priceTarget: 'CUSTOM',
       price: 100
     })
 
