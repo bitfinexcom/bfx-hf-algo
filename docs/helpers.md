@@ -26,9 +26,10 @@ order set.</p>
 <dt><a href="#cancelAllOrdersWithDelay">cancelAllOrdersWithDelay(state, delay)</a> ⇒ <code>Object</code></dt>
 <dd><p>Cancels all orders currently on the AO state after the specified delay</p>
 </dd>
-<dt><a href="#submitOrderWithDelay">submitOrderWithDelay(state, delay, order)</a> ⇒ <code>Object</code></dt>
+<dt><a href="#submitOrderWithDelay">submitOrderWithDelay(state, delay, order, attempt)</a> ⇒ <code>Object</code></dt>
 <dd><p>Submits an order after a delay, and adds it to the active order set on
-the AO state.</p>
+the AO state. Emits errors if the order fails to submit; retries up to
+MAX_SUBMIT_ATTEMPTS in the case of balance evaluation errors.</p>
 </dd>
 <dt><a href="#declareEvent">declareEvent(instance, aoHost, eventName, path)</a></dt>
 <dd><p>Hooks up the listener for a new event on the &#39;self&#39; section</p>
@@ -155,9 +156,10 @@ Cancels all orders currently on the AO state after the specified delay
 
 <a name="submitOrderWithDelay"></a>
 
-## submitOrderWithDelay(state, delay, order) ⇒ <code>Object</code>
+## submitOrderWithDelay(state, delay, order, attempt) ⇒ <code>Object</code>
 Submits an order after a delay, and adds it to the active order set on
-the AO state.
+the AO state. Emits errors if the order fails to submit; retries up to
+MAX_SUBMIT_ATTEMPTS in the case of balance evaluation errors.
 
 **Kind**: global function  
 **Returns**: <code>Object</code> - nextState  
@@ -167,6 +169,7 @@ the AO state.
 | state | <code>Object</code> | current AO instance state |
 | delay | <code>number</code> |  |
 | order | <code>Order</code> |  |
+| attempt | <code>number</code> | attempt count, max is 10 (set as a constant) |
 
 <a name="declareEvent"></a>
 
