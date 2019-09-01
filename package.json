@@ -16,12 +16,13 @@
     "test": "npm run lint && npm run unit",
     "unit": "DEBUG='bfx:hf:*' NODE_PATH=lib/ NODE_ENV=test istanbul cover _mocha -- -R spec -b --recursive",
     "test-without-coverage": "NODE_ENV=test mocha -R spec -b --recursive",
+    "macrossover_docs": "node_modules/jsdoc-to-markdown/bin/cli.js lib/ma_crossover/index.js > docs/ma_crossover.md",
     "aohost_docs": "node_modules/jsdoc-to-markdown/bin/cli.js lib/ao_host.js > docs/ao_host.md",
     "helpers_docs": "node_modules/jsdoc-to-markdown/bin/cli.js lib/host/gen_helpers.js > docs/helpers.md",
     "iceberg_docs": "node_modules/jsdoc-to-markdown/bin/cli.js lib/iceberg/index.js > docs/iceberg.md",
     "twap_docs": "node_modules/jsdoc-to-markdown/bin/cli.js lib/twap/index.js > docs/twap.md",
     "ad_docs": "node_modules/jsdoc-to-markdown/bin/cli.js lib/accumulate_distribute/index.js > docs/accumulate_distribute.md",
-    "docs": "npm run aohost_docs && npm run helpers_docs && npm run iceberg_docs && npm run twap_docs && npm run ad_docs"
+    "docs": "npm run aohost_docs && npm run helpers_docs && npm run iceberg_docs && npm run twap_docs && npm run ad_docs && npm run macrossover_docs"
   },
   "repository": {
     "type": "git",

@@ -29,7 +29,7 @@ const host = new AOHost({
   db: new HFDB({
     schema: HFDBBitfinexSchema,
     adapter: HFDBLowDBAdapter({
-      dbPath: `${__dirname}/../db/example.json`,
+      dbPath: `${__dirname}/../db/example.json`
     })
   })
 })
