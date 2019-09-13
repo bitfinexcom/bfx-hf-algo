@@ -1,7 +1,7 @@
 {
   "parser": "babel-eslint",
   "extends": [
-    "airbnb"
+    "standard"
   ],
   "rules": {
     "jsx-quotes": ["error", "prefer-single"],
@@ -21,7 +21,6 @@
     }
   },
   "env": {
-    "browser": true,
     "jest": true
   }
 }
