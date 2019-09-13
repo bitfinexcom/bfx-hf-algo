@@ -19,7 +19,7 @@ const args = {
 describe('iceberg:util:generate_orders', () => {
   it('generates valid slice order', () => {
     const orders = generateOrders({ remainingAmount: args.amount, args })
-    const [ slice ] = orders
+    const [slice] = orders
 
     assert.strictEqual(orders.length, 1)
     assert.strictEqual(slice.symbol, args.symbol)
@@ -31,7 +31,7 @@ describe('iceberg:util:generate_orders', () => {
 
   it('caps slice order at remainingAmount if less than slice', () => {
     const orders = generateOrders({ remainingAmount: 0.05, args })
-    const [ slice ] = orders
+    const [slice] = orders
     assert.strictEqual(slice.amount, 0.05)
   })
 

@@ -4,7 +4,7 @@ require('dotenv').config()
 
 process.env.DEBUG = '*,-bfx:api:ws:on_channel_message'
 
-const debug = require('debug')('bfx:ao:examples:ao-host')
+const debug = require('debug')('bfx:hf:algo:examples:ao-host')
 const {
   AOHost, Iceberg, TWAP, AccumulateDistribute, MACrossover
 } = require('../')
