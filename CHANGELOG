@@ -1,0 +1,99 @@
+# 2.0.1
+- manifest: bump deps
+- meta: add github issue/pr templates
+- meta: standardize travis config
+
+# 2.0.0
+- meta: update readme
+- meta: standard --fix
+- meta: major version bump due to significant changes in 1.3.0
+- feature: add example
+- fix: tests
+
+# 1.3.0
+- feature: add MACrossover
+- AOHost fix: set active to true in state on loaded active AOs
+- AOHost fix: don't propagate order error events as AO order events
+- AOHost fix: stringify/parse AO state when saving/loading [sql]
+- AOHost refactor: init AO state with active false
+- AOHost refactor: parse notification as text or object
+- AOHost feature: add generic order error event handlers, use on AOs
+- AOHost refactor: rm send() function, moved to adapter
+- AOHost refactor: use Date.now() as nonce
+- AOHost refactor: use new adapter system
+- meta add ID to AO UI defs
+- meta: save & load name and label on all AOs
+- manifest: bump deps
+
+# 1.2.3
+- AOHost fix: replace AlgoOrder.find() call until bug is fixed
+
+# 1.2.2
+- AOHost fix: use set instead of create when persisting AO
+- AOHost refactor: support external db instance
+- fix: new bfx-hf-models integration fixes
+- meta: overwrite UI defs on init (due to past ID change)
+- meta: standard --fix
+
+# 1.2.1
+- manifest: bump deps
+- refactor: use new bfx-hf-models
+
+# 1.2.0
+- meta: rename all AOs (use - instead of . in ID)
+- refactor: use LowDB for storage
+
+# 1.1.1
+- Ping/Pong refactor: improve order label verbosity
+- Ping/Pong fix: use pong amount when initializing pingPongTable (post-split)
+- Ping/Pong fix: negate split amounts if selling
+
+# 1.1.0
+- Ping/Pong feature: add option to set individual ping & pong amounts
+- meta: rename IcebergOrder -> Iceberg, TWAPOder -> TWAP
+
+# 1.0.9
+- feature: attempt to resubmit if failed to due insufficient balance
+- AOHost refactor: expose dms flag on constructor
+
+# 1.0.8
+- AOHost fix: add close method
+- fix: examples
+
+# 1.0.7
+- Ping/Pong feature: expose cancelDelay and submitDelay in UI def
+
+# 1.0.6
+- feature: tag HF orders
+
+# 1.0.5
+- Ping/Pong refactor: add labels to preview order set
+- Ping/Pong fix: use preparePrice() to generate prices
+- A/D fix: add life:stop handler to clear tick timeout
+- meta: add LICENSE
+
+# 1.0.4
+- fix: implode AO instance after final persist
+- Ping/Pong feature: add endless exec support
+
+# 1.0.3
+- fix: support custom platform for user setting queries (i.e. ethfinex)
+
+# 1.0.2
+- fix: handle empty RESTv2 settings response in register_ao_uis
+- fix: reload AOs on server restarts
+- fix: don't attempt to cancel known market orders
+- fix: handle missing AO in a few places due to prior exec:stop
+- fix: handle promise rejection for AO UI registration
+- refactor: add node API packet watchdog plugin to ws2 Manager
+- refactor: don't throw error on unknown AO in min size error handler
+- feature: add handlers for insufficient balance error
+
+# 1.0.1
+- standard --fix
+- meta: rm package-lock.json
+- add Ping/Pong AO
+
+# 1.0.0
+- Initial version
+
