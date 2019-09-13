@@ -9,7 +9,13 @@
   "engines": {
     "node": ">=6"
   },
-  "author": "Cris Mihalache <cris.m@bitfinex.com> (https://www.bitfinex.com)",
+  "author": "Bitfinex",
+  "contributors": [
+    "Cris Mihalache <cris.m@bitfinex.com> (https://www.bitfinex.com)",
+    "Paolo Ardoino <paolo@bitfinex.com> (https://www.bitfinex.com)",
+    "Jacob Plaster <jacob.plaster@bitfinex.com> (https://www.bitfinex.com)",
+    "Anton Nazarenko <anton@code-care.pro>"
+  ],
   "license": "Apache-2.0",
   "scripts": {
     "lint": "standard",
