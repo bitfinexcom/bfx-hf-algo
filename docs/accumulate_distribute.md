@@ -46,13 +46,13 @@ channel.
 | relativeOffset | <code>Object</code> | price reference for RELATIVE orders |
 | relativeOffset.type | <code>string</code> | ask, bid, mid, last, ma, or ema |
 | relativeOffset.delta | <code>number</code> | offset distance from price reference |
-| relativeOffset.args | <code>Array.&lt;number&gt;</code> | MA or EMA indicator arguments [period] |
+| relativeOffset.args | <code>[ &#x27;Array&#x27; ].&lt;number&gt;</code> | MA or EMA indicator arguments [period] |
 | relativeOffset.candlePrice | <code>string</code> | 'open', 'high', 'low', 'close' for MA or EMA indicators |
 | relativeOffset.candleTimeFrame | <code>string</code> | '1m', '5m', '1D', etc, for MA or EMA indicators |
 | relativeCap | <code>Object</code> | maximum price reference for RELATIVE orders |
 | relativeCap.type | <code>string</code> | ask, bid, mid, last, ma, or ema |
 | relativeCap.delta | <code>number</code> | cap distance from price reference |
-| relativeCap.args | <code>Array.&lt;number&gt;</code> | MA or EMA indicator arguments [period] |
+| relativeCap.args | <code>[ &#x27;Array&#x27; ].&lt;number&gt;</code> | MA or EMA indicator arguments [period] |
 | relativeCap.candlePrice | <code>string</code> | 'open', 'high', 'low', 'close' for MA or EMA indicators |
 | relativeCap.candleTimeFrame | <code>string</code> | '1m', '5m', '1D', etc, for MA or EMA indicators |
 | _margin | <code>boolean</code> | if false, order type is prefixed with EXCHANGE |

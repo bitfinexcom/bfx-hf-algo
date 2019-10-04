@@ -17,7 +17,7 @@ Bitfinex API websocket stream payloads, and the algo orders themselves.
     * [.connect()](#AOHost+connect)
     * [.getAO(id)](#AOHost+getAO) ⇒ <code>Object</code>
     * [.getAOInstance(gid)](#AOHost+getAOInstance) ⇒ <code>Object</code>
-    * [.getAOInstances()](#AOHost+getAOInstances) ⇒ <code>Array.&lt;Object&gt;</code>
+    * [.getAOInstances()](#AOHost+getAOInstances) ⇒ <code>[ &#x27;Array&#x27; ].&lt;Object&gt;</code>
     * [.reloadAllAOs()](#AOHost+reloadAllAOs)
     * [.loadAllAOs()](#AOHost+loadAllAOs)
     * [.loadAO(id, gid, loadedState)](#AOHost+loadAO) ⇒ <code>string</code>
@@ -38,7 +38,7 @@ Bitfinex API websocket stream payloads, and the algo orders themselves.
 | args.wsURL | <code>string</code> | wss://api.bitfinex.com/ws/2 |
 | args.restURL | <code>string</code> | https://api.bitfinex.com |
 | args.agent | <code>Object</code> | optional proxy agent |
-| args.aos | <code>Array.&lt;Object&gt;</code> | algo orders to manage |
+| args.aos | <code>[ &#x27;Array&#x27; ].&lt;Object&gt;</code> | algo orders to manage |
 | args.dms | <code>number</code> | dead man switch, active 4 (default) |
 
 <a name="AOHost+connect"></a>
@@ -73,9 +73,9 @@ Returns the active AO instance state identified by the provided GID
 
 <a name="AOHost+getAOInstances"></a>
 
-### aoHost.getAOInstances() ⇒ <code>Array.&lt;Object&gt;</code>
+### aoHost.getAOInstances() ⇒ <code>[ &#x27;Array&#x27; ].&lt;Object&gt;</code>
 **Kind**: instance method of [<code>AOHost</code>](#AOHost)  
-**Returns**: <code>Array.&lt;Object&gt;</code> - aoInstances  
+**Returns**: <code>[ &#x27;Array&#x27; ].&lt;Object&gt;</code> - aoInstances  
 <a name="AOHost+reloadAllAOs"></a>
 
 ### aoHost.reloadAllAOs()

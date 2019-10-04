@@ -1,6 +1,6 @@
 {
   "name": "bfx-hf-algo",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "HF Algorithmic Order Module",
   "main": "index.js",
   "directories": {
@@ -27,8 +27,9 @@
     "helpers_docs": "node_modules/jsdoc-to-markdown/bin/cli.js lib/host/gen_helpers.js > docs/helpers.md",
     "iceberg_docs": "node_modules/jsdoc-to-markdown/bin/cli.js lib/iceberg/index.js > docs/iceberg.md",
     "twap_docs": "node_modules/jsdoc-to-markdown/bin/cli.js lib/twap/index.js > docs/twap.md",
+    "pingpong_docs": "node_modules/jsdoc-to-markdown/bin/cli.js lib/ping_pong/index.js > docs/ping_pong.md",
     "ad_docs": "node_modules/jsdoc-to-markdown/bin/cli.js lib/accumulate_distribute/index.js > docs/accumulate_distribute.md",
-    "docs": "npm run aohost_docs && npm run helpers_docs && npm run iceberg_docs && npm run twap_docs && npm run ad_docs && npm run macrossover_docs"
+    "docs": "npm run aohost_docs && npm run helpers_docs && npm run iceberg_docs && npm run twap_docs && npm run ad_docs && npm run macrossover_docs && npm run pingpong_docs"
   },
   "repository": {
     "type": "git",
