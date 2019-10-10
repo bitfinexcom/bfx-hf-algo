@@ -97,7 +97,7 @@ host.once('ws2:auth:success', async () => {
 
 ### Docs
 
-Refer to the `docs/` folder for JSDoc-generated API documentation. For an overview of the architecture, see `docs/overview.md`.
+[Refer to the `docs/`](/docs) folder for JSDoc-generated API documentation. For an overview of the architecture, [see `docs/overview.md`](/docs/overview.md).
 
 ### Contributing
 
