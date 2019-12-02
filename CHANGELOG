@@ -1,3 +1,6 @@
+# 2.0.4
+- fix: make order client ID always unique
+
 # 2.0.3
 - all order types: add uiIcon field to ui definitions
 
