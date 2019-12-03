@@ -1,3 +1,6 @@
+# 2.0.5
+- feature: futures support
+
 # 2.0.4
 - fix: make order client ID always unique
 
