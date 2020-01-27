@@ -7,5 +7,6 @@ module.exports = {
   AccumulateDistribute: require('./lib/accumulate_distribute'),
   PingPong: require('./lib/ping_pong'),
   MACrossover: require('./lib/ma_crossover'),
-  NoDataError: require('./lib/errors/no_data')
+  NoDataError: require('./lib/errors/no_data'),
+  TriangularArbitrage: require('./lib/triangular_arbitrage')
 }

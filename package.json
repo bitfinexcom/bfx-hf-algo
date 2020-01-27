@@ -45,6 +45,7 @@
     "BTC"
   ],
   "dependencies": {
+    "@bitfinex/lib-js-util-symbol": "git+https://github.com/bitfinexcom/lib-js-util-symbol.git",
     "bfx-api-mock-srv": "^1.0.0",
     "bfx-api-node-core": "^1.1.0",
     "bfx-api-node-models": "^1.0.12",
@@ -69,6 +70,7 @@
     "bfx-hf-ext-plugin-bitfinex": "^1.0.0",
     "bfx-hf-models-adapter-lowdb": "^1.0.0",
     "chai": "^4.2.0",
+    "chai-as-promised": "^7.1.1",
     "dotenv": "^6.0.0",
     "eslint": "^4.19.1",
     "eslint-config-standard": "^7.0.0",
