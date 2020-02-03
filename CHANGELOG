@@ -1,3 +1,7 @@
+# 2.0.7
+- refactor: OCOCO now keeps 'ocoAction' and 'action' params
+- feature: add reconnect() method to AO Host
+
 # 2.0.6
 - feature: OCOCO type
 
