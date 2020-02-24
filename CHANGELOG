@@ -1,8 +1,13 @@
+# 2.0.11
+- meta: bump bitfinex-api-node to v4
+
 # 2.0.10
 - feature: add AOHost getAdapter()
 
 # 2.0.9
-- meta: bump bitfinex-api-node to v4
+- refactor: revert 2.0.8 nonce(), switch OCOCO onto internal cid gen
+- feature: AO Host 'exec:stop' now supports onCleanup()
+- refactor: error event handlers now have a pre-cleanup grace period
 
 # 2.0.8
 - refactor: use nonce() from bfx-api-node-util
