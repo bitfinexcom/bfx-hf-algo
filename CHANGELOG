@@ -1,3 +1,6 @@
+# 2.0.10
+- feature: add AOHost getAdapter()
+
 # 2.0.9
 - meta: bump bitfinex-api-node to v4
 
