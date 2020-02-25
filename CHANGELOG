@@ -1,5 +1,5 @@
 # 2.0.12
-- fix: refactor tests so they can run alongside all other HF/API library tests
+- fix: use relative paths to allow generic mocha execution
 
 # 2.0.11
 - meta: bump bitfinex-api-node to v4
