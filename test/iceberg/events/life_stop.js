@@ -3,7 +3,7 @@
 
 const assert = require('assert')
 const Promise = require('bluebird')
-const onLifeStop = require('iceberg/events/life_stop')
+const onLifeStop = require('../../../lib/iceberg/events/life_stop')
 
 describe('iceberg:events:life_stop', () => {
   it('submits all known orders for cancellation', (done) => {

@@ -2,10 +2,10 @@
 'use strict'
 
 const assert = require('assert')
-const Iceberg = require('iceberg')
+const Iceberg = require('../../lib/iceberg')
 const { AOAdapter } = require('bfx-hf-ext-plugin-bitfinex')
-const initAO = require('host/init_ao')
-const createTestHarness = require('testing/create_harness')
+const initAO = require('../../lib/host/init_ao')
+const createTestHarness = require('../../lib/testing/create_harness')
 
 const adapter = new AOAdapter({})
 const params = {

@@ -3,7 +3,7 @@
 
 const Promise = require('bluebird')
 const assert = require('assert')
-const onSubmitOrders = require('iceberg/events/self_submit_orders')
+const onSubmitOrders = require('../../../lib/iceberg/events/self_submit_orders')
 
 describe('iceberg:events:self_submit_orders', () => {
   it('submits generated orders', (done) => {

@@ -1,7 +1,7 @@
 /* eslint-env mocha */
 'use strict'
 
-const onLifeStop = require('twap/events/life_stop')
+const onLifeStop = require('../../../lib/twap/events/life_stop')
 
 describe('twap:events:life_stop', () => {
   it('sets up interval & saves it on state', (done) => {

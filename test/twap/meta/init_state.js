@@ -2,7 +2,7 @@
 'use strict'
 
 const assert = require('assert')
-const initState = require('twap/meta/init_state')
+const initState = require('../../../lib/twap/meta/init_state')
 
 describe('twap:meta:init_state', () => {
   it('sets initial remainingAmount', () => {
