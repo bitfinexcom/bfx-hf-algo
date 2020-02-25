@@ -4,8 +4,8 @@
 const assert = require('assert')
 const Promise = require('bluebird')
 const _isObject = require('lodash/isObject')
-const onIntervalTick = require('twap/events/self_interval_tick')
-const Config = require('twap/config')
+const onIntervalTick = require('../../../lib/twap/events/self_interval_tick')
+const Config = require('../../../lib/twap/config')
 
 const args = {
   priceTarget: 1000,

@@ -3,7 +3,7 @@
 
 const assert = require('assert')
 const _isString = require('lodash/isString')
-const validateParams = require('twap/meta/validate_params')
+const validateParams = require('../../../lib/twap/meta/validate_params')
 
 const validParams = {
   orderType: 'LIMIT',
