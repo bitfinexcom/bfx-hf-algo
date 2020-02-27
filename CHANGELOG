@@ -1,3 +1,6 @@
+# 2.0.13
+- feature: add AO host helper call traces to log output if DEBUG_TRACE
+
 # 2.0.12
 - fix: use relative paths to allow generic mocha execution
 
