@@ -1,3 +1,8 @@
+# 2.0.15
+- meta: switch to nyc for coverage and set/enforce limits
+- meta: add husky pre-commit test hook
+- meta: bump deps
+
 # 2.0.14
 - feature: AO host now cancels AO orders in snapshot before restoring on load
 
