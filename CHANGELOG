@@ -1,3 +1,6 @@
+# 2.0.14
+- feature: AO host now cancels AO orders in snapshot before restoring on load
+
 # 2.0.13
 - feature: add AO host helper call traces to log output if DEBUG_TRACE
 
