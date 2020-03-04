@@ -68,7 +68,8 @@
     "lodash": "^4.17.15",
     "lodash.throttle": "^4.1.1",
     "lowdb": "^1.0.0",
-    "p-iteration": "^1.1.7"
+    "p-iteration": "^1.1.7",
+    "wtfnode": "^0.8.1"
   },
   "devDependencies": {
     "babel-eslint": "^10.1.0",
@@ -86,6 +87,7 @@
     "jsdoc-to-markdown": "^5.0.3",
     "mocha": "^7.1.0",
     "nyc": "^15.0.0",
+    "sinon": "^9.0.0",
     "socks-proxy-agent": "^5.0.0",
     "standard": "^14.2.0",
     "webpack": "^4.42.0"
