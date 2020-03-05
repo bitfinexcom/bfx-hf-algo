@@ -1,27 +1,22 @@
 /* eslint-env mocha */
 'use strict'
 
-require('dotenv').config()
+process.env.DEBUG = '*'
 
-if (process.env.API_KEY && process.env.API_SECRET) { // needed for tests
-  process.env.DEBUG = '*'
+const assert = require('chai').assert
+const _isFunction = require('lodash/isFunction')
+const { EMA } = require('bfx-hf-indicators')
+const { Config } = require('bfx-api-node-core')
+const AccumulateDistribute = require('../../../lib/accumulate_distribute')
+const testAOLive = require('../../util/test_ao_live')
 
-  const assert = require('chai').assert
-  const _isFunction = require('lodash/isFunction')
-  const { AOAdapter } = require('bfx-hf-ext-plugin-bitfinex')
-  const { EMA } = require('bfx-hf-indicators')
-  const { Config } = require('bfx-api-node-core')
-  const { DUST } = Config
-  const AOHost = require('../../../lib/ao_host')
-  const {
-    PingPong, Iceberg, TWAP, AccumulateDistribute, MACrossover, OCOCO
-  } = require('../../../')
+const { DUST } = Config
 
-  const createTestHarness = require('../../../lib/testing/create_harness')
-
-  const apiKey = process.env.API_KEY
-  const apiSecret = process.env.API_SECRET
-  const params = {
+testAOLive({
+  name: 'Accumulate/Distribute',
+  aoID: 'bfx-accumulate_distribute',
+  aoClass: AccumulateDistribute,
+  defaultParams: {
     symbol: 'tLEOUSD',
     orderType: 'RELATIVE',
     amount: -18,
@@ -45,192 +40,101 @@ if (process.env.API_KEY && process.env.API_SECRET) { // needed for tests
     capIndicatorPriceEMA: 'close',
     capIndicatorTFEMA: 'ONE_MINUTE',
     capDelta: 1
-  }
+  },
 
-  describe('accumulate_distribute', () => {
-    let host = null
-    let gid = null
-
-    const spawnHost = (onReadyCB) => {
-      const adapter = new AOAdapter({ apiKey, apiSecret })
-      host = new AOHost({
-        adapter,
-        aos: [
-          PingPong, Iceberg, TWAP, AccumulateDistribute, MACrossover, OCOCO
-        ]
+  tests: [{
+    description: 'submits initial order on startup',
+    exec: ({ harness, done }) => {
+      harness.once('exec:order:submit:all', (_, orders) => {
+        assert.ok(orders.length === 1, 'expected 1 order')
+        assert.strictEqual(orders[0].amount, -6)
+        done()
       })
-
-      if (_isFunction(onReadyCB)) {
-        host.once('ready', () => onReadyCB(host))
-        host.connect()
-      }
-
-      return host
     }
-
-    afterEach(async () => {
-      if (gid !== null) {
-        await host.stopAO(gid)
-        gid = null
-      }
-
-      if (host !== null) {
-        await host.close()
-        host = null
-      }
-    })
-
-    it('submits initial order on startup', (done) => {
-      spawnHost(async (host) => {
-        gid = await host.startAO('bfx-accumulate_distribute', params)
-        const instance = host.getAOInstance(gid)
-        const iTest = createTestHarness(instance, AccumulateDistribute)
-
-        iTest.once('exec:order:submit:all', async (_, orders, __) => {
-          try {
-            assert.ok(orders.length === 1, 'expected 1 order')
-            assert.strictEqual(orders[0].amount, -6)
-            done()
-          } catch (e) {
-            done(e)
-          }
+  }, {
+    params: { catchUp: true },
+    description: 'lowers delay for next order if prev not filled & catch-up enabled',
+    exec: ({ harness, done }) => {
+      harness.once('exec:order:submit:all', () => {
+        harness.next('self:interval_tick', (delay) => {
+          assert.strictEqual(delay, 200)
+          done()
         })
       })
-    }).timeout(10000)
+    }
+  }, {
+    params: { catchUp: false },
+    description: 'respects delay for next order if prev not filled and catch-up disabled',
+    exec: ({ harness, done }) => {
+      harness.once('exec:order:submit:all', () => {
+        harness.next('self:interval_tick', (delay) => {
+          assert.strictEqual(delay, 1000)
+          done()
+        })
+      })
+    }
+  }, {
+    params: { catchUp: false, awaitFill: true },
+    description: 'awaits fill if requested',
+    exec: ({ harness, done }) => {
+      harness.once('exec:order:submit:all', () => {
+        setTimeout(() => {
+          done()
+        }, 1200)
 
-    it('lowers delay for next order if prev not filled & catch-up enabled', (done) => {
-      spawnHost(async (host) => {
-        gid = await host.startAO('bfx-accumulate_distribute', params)
-        const instance = host.getAOInstance(gid)
-        const iTest = createTestHarness(instance, AccumulateDistribute)
-
-        iTest.once('exec:order:submit:all', () => {
-          iTest.once('scheduled_tick', (delay) => {
-            try {
-              assert.strictEqual(delay, 200)
-              done()
-            } catch (e) {
-              done(e)
-            }
+        setTimeout(() => {
+          harness.once('exec:order:submit:all', () => {
+            assert.ok(false, 'should not have submitted again')
           })
-        })
+        }, 0)
       })
-    }).timeout(10000)
+    }
+  }, {
+    params: {
+      offsetType: 'trade',
+      offsetDelta: 1,
+      capType: 'none'
+    },
 
-    it('respects delay for next order if prev not filled and catch-up disabled', (done) => {
-      spawnHost(async (host) => {
-        gid = await host.startAO('bfx-accumulate_distribute', {
-          ...params,
-          catchUp: false
-        })
-
-        const instance = host.getAOInstance(gid)
-        const iTest = createTestHarness(instance, AccumulateDistribute)
-
-        iTest.once('exec:order:submit:all', () => {
-          iTest.once('scheduled_tick', (delay) => {
-            try {
-              assert.strictEqual(delay, 1000)
-              done()
-            } catch (e) {
-              done(e)
-            }
-          })
-        })
+    description: 'sets order price at offset from last trade if requested',
+    exec: ({ instance, harness, done }) => {
+      harness.once('exec:order:submit:all', (_, orders) => {
+        assert.strictEqual(orders.length, 1)
+        assert.isBelow(Math.abs(orders[0].price - (instance.state.lastTrade.price + 1)), DUST)
+        done()
       })
-    }).timeout(10000)
+    }
+  }, {
+    params: {
+      offsetType: 'trade',
+      offsetDelta: 100,
+      capType: 'EMA',
+      capIndicatorPeriodEMA: 10,
+      capIndicatorPriceEMA: 'close',
+      capIndicatorTFEMA: 'ONE_MINUTE',
+      capDelta: 0
+    },
 
-    it('awaits fill if requested', (done) => {
-      spawnHost(async (host) => {
-        gid = await host.startAO('bfx-accumulate_distribute', {
-          ...params,
-          catchUp: false,
-          awaitFill: true
-        })
+    description: 'caps order price at EMA(10) if requested',
+    exec: ({ harness, done }) => {
+      const ema = new EMA([10])
+      let emaSeeded = false
 
-        const instance = host.getAOInstance(gid)
-        const iTest = createTestHarness(instance, AccumulateDistribute)
+      harness.once('internal:data:managedCandles', (candles, meta) => {
+        if (meta.chanFilter.key.split(':')[2] !== 'tLEOUSD') {
+          return
+        }
 
-        iTest.once('exec:order:submit:all', () => {
-          setTimeout(() => {
-            done()
-          }, 1200)
-
-          setTimeout(() => {
-            iTest.once('exec:order:submit:all', () => {
-              try {
-                assert.ok(false, 'should not have submitted again')
-              } catch (e) {
-                done(e)
-              }
-            })
-          }, 0)
-        })
+        candles.forEach(c => { ema.add(c.close) })
+        emaSeeded = true
       })
-    }).timeout(10000)
 
-    it('sets order price at offset from last trade if requested', (done) => {
-      spawnHost(async (host) => {
-        gid = await host.startAO('bfx-accumulate_distribute', {
-          ...params,
-          offsetType: 'trade',
-          offsetDelta: 1,
-          capType: 'none'
-        })
-
-        const instance = host.getAOInstance(gid)
-        const iTest = createTestHarness(instance, AccumulateDistribute)
-
-        iTest.once('exec:order:submit:all', (_, orders) => {
-          try {
-            assert.strictEqual(orders.length, 1)
-            assert.isBelow(Math.abs(orders[0].price - (instance.state.lastTrade.price + 1)), DUST)
-            done()
-          } catch (e) {
-            done(e)
-          }
-        })
+      harness.once('exec:order:submit:all', (_, orders) => {
+        assert.ok(emaSeeded)
+        assert.strictEqual(orders.length, 1)
+        assert.isBelow(Math.abs(orders[0].price - ema.v()), DUST)
+        done()
       })
-    }).timeout(10000)
-
-    it('caps order price at EMA(10) if requested', (done) => {
-      spawnHost(async (host) => {
-        gid = await host.startAO('bfx-accumulate_distribute', {
-          ...params,
-          offsetType: 'trade',
-          offsetDelta: 100,
-          capType: 'EMA',
-          capIndicatorPeriodEMA: 10,
-          capIndicatorPriceEMA: 'close',
-          capIndicatorTFEMA: 'ONE_MINUTE',
-          capDelta: 0
-        })
-
-        const instance = host.getAOInstance(gid)
-        const iTest = createTestHarness(instance, AccumulateDistribute)
-        const ema = new EMA([10])
-        let emaSeeded = false
-
-        iTest.once('internal:data:managedCandles', (candles, meta) => {
-          if (meta.chanFilter.key.split(':')[2] !== 'tLEOUSD') {
-            return
-          }
-
-          candles.forEach(c => { ema.add(c.close) })
-          emaSeeded = true
-        })
-
-        iTest.once('exec:order:submit:all', (_, orders) => {
-          try {
-            assert.ok(emaSeeded)
-            assert.strictEqual(orders.length, 1)
-            assert.isBelow(Math.abs(orders[0].price - ema.v()), DUST)
-            done()
-          } catch (e) {
-            done(e)
-          }
-        })
-      })
-    }).timeout(10000)
-  })
-}
+    }
+  }]
+})

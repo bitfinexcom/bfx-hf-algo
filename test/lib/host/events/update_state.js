@@ -2,10 +2,20 @@
 'use strict'
 
 const assert = require('assert')
-const _isFunction = require('lodash/isObject')
-const updateState = require('../../../lib/host/events/update_state')
+const updateState = require('../../../../lib/host/events/update_state')
 
-// TODO: stub for coverage results
 describe('host:events:update_state', () => {
-  assert.ok(_isFunction(updateState))
+  it('patches state with the provided update packet', async () => {
+    const host = {
+      emit: async () => {},
+      instances: {
+        a: {
+          state: { value: 0 }
+        }
+      }
+    }
+
+    await updateState(host, 'a', { value: 42 })
+    assert.strictEqual(host.instances.a.state.value, 42)
+  })
 })

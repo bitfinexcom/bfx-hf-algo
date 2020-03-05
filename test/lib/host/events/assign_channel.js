@@ -2,10 +2,24 @@
 'use strict'
 
 const assert = require('assert')
-const _isFunction = require('lodash/isObject')
-const assignChannel = require('../../../lib/host/events/assign_channel')
+const assignChannel = require('../../../../lib/host/events/assign_channel')
 
-// TODO: stub for coverage results
 describe('host:events:assign_channel', () => {
-  assert.ok(_isFunction(assignChannel))
+  it('adds the provided channel/filter combo to the specified instance\'s state', async () => {
+    const channel = 'trades'
+    const filter = { symbol: 'tBTCUSD' }
+    const i = {
+      state: { channels: [] }
+    }
+
+    await assignChannel({
+      emit: async () => {},
+      instances: { a: i }
+    }, 'a', channel, filter)
+
+    assert.deepStrictEqual(i.state.channels, [{
+      channel,
+      filter
+    }])
+  })
 })
