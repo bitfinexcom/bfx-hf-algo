@@ -1,4 +1,5 @@
 /* eslint-env mocha */
+/*
 'use strict'
 
 process.env.DEBUG = '*'
@@ -47,3 +48,4 @@ testAOLive({
     }
   }]
 })
+  */

@@ -41,7 +41,7 @@ describe('accumulate_distribute:events:self_interval_tick', () => {
     const stubbedScheduler = sinon.stub(scheduleTick, 'tick').resolves()
 
     await selfIntervalTick(i)
-    assert.ok(stubbedScheduler.calledOnceWithExactly(i, false), 'tick not called')
+    assert.ok(stubbedScheduler.calledOnceWithExactly(i), 'tick not called')
     stubbedScheduler.restore()
   })
 

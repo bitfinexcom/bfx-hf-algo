@@ -4,7 +4,6 @@
 process.env.DEBUG = '*'
 
 const assert = require('chai').assert
-const _isFunction = require('lodash/isFunction')
 const { EMA } = require('bfx-hf-indicators')
 const { Config } = require('bfx-api-node-core')
 const AccumulateDistribute = require('../../../lib/accumulate_distribute')
@@ -12,6 +11,7 @@ const testAOLive = require('../../util/test_ao_live')
 
 const { DUST } = Config
 
+// all prices must be set so orders never fill automatically!
 testAOLive({
   name: 'Accumulate/Distribute',
   aoID: 'bfx-accumulate_distribute',
@@ -112,7 +112,7 @@ testAOLive({
       capIndicatorPeriodEMA: 10,
       capIndicatorPriceEMA: 'close',
       capIndicatorTFEMA: 'ONE_MINUTE',
-      capDelta: 0
+      capDelta: 1
     },
 
     description: 'caps order price at EMA(10) if requested',
@@ -132,7 +132,7 @@ testAOLive({
       harness.once('exec:order:submit:all', (_, orders) => {
         assert.ok(emaSeeded)
         assert.strictEqual(orders.length, 1)
-        assert.isBelow(Math.abs(orders[0].price - ema.v()), DUST)
+        assert.isBelow(Math.abs(orders[0].price - (ema.v() + 1)), DUST)
         done()
       })
     }
