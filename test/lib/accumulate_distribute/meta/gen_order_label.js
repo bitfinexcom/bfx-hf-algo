@@ -2,6 +2,7 @@
 'use strict'
 
 const assert = require('assert')
+const _includes = require('lodash/includes')
 const genOrderLabel = require('../../../../lib/accumulate_distribute/meta/gen_order_label')
 
 describe('accumulate_distribute:meta:gen_order_label', () => {
@@ -18,10 +19,10 @@ describe('accumulate_distribute:meta:gen_order_label', () => {
   it('includes basic information', () => {
     const str = genOrderLabel(state)
     assert.ok(/LIMIT/.test(str), 'type not included')
-    assert.ok(str.indexOf('42') !== -1, 'amount not included')
-    assert.ok(str.indexOf('1') !== -1, 'price not included')
-    assert.ok(str.indexOf('7') !== -1, 'slice amount not included')
-    assert.ok(str.indexOf('' + Math.floor(13 / 1000)) !== -1, 'slice interval not included')
+    assert.ok(!_includes(str, '42'), 'amount not included')
+    assert.ok(!_includes(str, '1'), 'price not included')
+    assert.ok(!_includes(str, '7'), 'slice amount not included')
+    assert.ok(!_includes(str, '' + Math.floor(13 / 1000)) !== -1, 'slice interval not included')
   })
 
   it('includes offset and cap information if used', () => {
@@ -34,7 +35,7 @@ describe('accumulate_distribute:meta:gen_order_label', () => {
       }
     })
 
-    assert.ok(str.indexOf('Offset EMA') !== -1, 'relative offset type not included')
-    assert.ok(str.indexOf('Cap MA') !== -1, 'relative cap type not included')
+    assert.ok(!_includes(str, 'Offset EMA'), 'relative offset type not included')
+    assert.ok(!_includes(str, 'Cap MA'), 'relative cap type not included')
   })
 })

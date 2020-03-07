@@ -62,10 +62,7 @@ describe('host:events:stop', () => {
 
     await stop({
       instances,
-      emit: async (eventName) => {
-        if (eventName === 'ao:stop') {
-        }
-      }
+      emit: async (eventName) => {}
     }, 'a')
 
     assert.ok(_isEmpty(instances))

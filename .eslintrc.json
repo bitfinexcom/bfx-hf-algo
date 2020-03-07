@@ -1,26 +1,34 @@
 {
-  "parser": "babel-eslint",
-  "extends": [
-    "standard"
+  "plugins": [
+    "jsdoc"
   ],
-  "rules": {
-    "jsx-quotes": ["error", "prefer-single"],
-    "semi": [1, "never"],
-    "max-len": 0,
-    "import/no-named-as-default": 0,
-    "import/no-named-as-default-member": 0
-  },
-  "settings": {
-    "import/resolver": {
-      "node": {
-        "moduleDirectory": [
-          "node_modules",
-          "lib"
-        ]
-      }
-    }
-  },
+
   "env": {
-    "jest": true
+    "es6": true,
+    "node": true,
+    "es2020": true
+  },
+
+  "extends": [
+    "standard",
+    "eslint:recommended",
+    "plugin:promise/recommended",
+    "plugin:node/recommended",
+    "plugin:import/errors",
+    "plugin:import/warnings",
+    "plugin:lodash/recommended"
+  ],
+
+  "parserOptions": {
+    "ecmaVersion": 2020
+  },
+
+  "rules": {
+    "no-multiple-empty-lines": ["error", { "max": 1, "maxEOF": 1 }],
+    "promise/no-callback-in-promise": 0,
+    "lodash/prefer-lodash-method": 0,
+    "lodash/prefer-noop": 0,
+    "lodash/prefer-constant": 0,
+    "node/no-unpublished-require": 0
   }
 }
