@@ -68,8 +68,7 @@
     "lodash": "^4.17.15",
     "lodash.throttle": "^4.1.1",
     "lowdb": "^1.0.0",
-    "p-iteration": "^1.1.7",
-    "wtfnode": "^0.8.1"
+    "p-iteration": "^1.1.7"
   },
   "devDependencies": {
     "babel-eslint": "^10.1.0",
