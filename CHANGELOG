@@ -5,7 +5,8 @@
 - fix: set _HF flag on atomics where missing
 - fix: AsyncEventEmitter off() handler logic
 - feature: add more tests to improve coverage
-- AOHost: all internal AO events are now emit(ed) on the AO event emitter
+- AOHost refactor: all internal AO events are now emit(ed) on the AO event emitter
+- AOHost feature: add getAOs() method
 - TWAP fix: allow exact match in price target verification
 - TWAP fix: allow 0 cancel/submit delays
 - TWAP fix: amount checking in tick handler
