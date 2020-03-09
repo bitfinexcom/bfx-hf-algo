@@ -1,4 +1,4 @@
-# 2.0.15
+# 2.1.0
 - meta: switch to nyc for coverage and set/enforce limits
 - meta: add husky pre-commit test hook
 - meta: bump deps
@@ -17,6 +17,7 @@
 - AccumulateDistribute refactor: decrease catch-up delay to 200ms
 - AccumulateDistribute fix: catch-up did not result in decreased delay
 - AsyncEventEmitter: expand & improve functionality (added await())
+- AsyncEventEmitter: off() changed to take (cb) as args
 
 # 2.0.14
 - feature: AO host now cancels AO orders in snapshot before restoring on load

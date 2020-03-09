@@ -62,11 +62,11 @@ describe('AsyncEventEmitter', () => {
   })
 
   describe('off', () => {
-    it('removes a listener by name if found', async () => {
+    it('removes a listener by callback if found', async () => {
       const e = new AsyncEventEmitter()
-      const cb = async () => assert(false, 'should not have been called')
+      const cb = async () => assert.ok(false, 'should not have been called')
       e.on('test', cb)
-      e.off('test', cb)
+      e.off(cb)
       return e.emit('test')
     })
   })
@@ -143,6 +143,26 @@ describe('AsyncEventEmitter', () => {
 
       assert.ok(fired, 'listener not called')
       assert.ok(_isEmpty(e.listeners.test), 'once listener not removed after being called')
+    })
+  })
+
+  describe('regex event handler matching', () => {
+    it('calls event handlers if event name is matched by regexp', async () => {
+      const e = new AsyncEventEmitter()
+      let matchedCountA = 0
+      let matchedCountB = 0
+
+      e.on(/^test/, async () => { matchedCountA += 1 })
+      e.on(/^another(.*)test$/, async () => { matchedCountB += 1 })
+
+      await e.emit('test-a')
+      await e.emit('test-b')
+      await e.emit('another-abc-test')
+      await e.emit('another42test')
+      await e.emit('another?test')
+
+      assert.strictEqual(matchedCountA, 2)
+      assert.strictEqual(matchedCountB, 3)
     })
   })
 })
