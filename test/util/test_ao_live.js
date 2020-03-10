@@ -14,11 +14,14 @@ const {
   PingPong, Iceberg, TWAP, AccumulateDistribute, MACrossover, OCOCO
 } = require('../../')
 
-const { API_KEY, API_SECRET } = process.env
+const { SKIP_LIVE_TESTS, API_KEY, API_SECRET } = process.env
 
 module.exports = ({ name, aoID, aoClass, defaultParams = {}, tests = [] }) => {
   if (!API_KEY || !API_SECRET) {
     debug('API credentials missing on env, skipping live test for %s', name)
+    return
+  } else if (SKIP_LIVE_TESTS) {
+    debug('skipping live tests')
     return
   }
 
