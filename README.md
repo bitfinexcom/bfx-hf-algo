@@ -1,10 +1,14 @@
-## Bitfinex Honey Framework Algorithmic Order Library for Node.JS
+# Bitfinex Honey Framework Algorithmic Order Library for Node.JS
 
 [![Build Status](https://travis-ci.org/bitfinexcom/bfx-hf-algo.svg?branch=master)](https://travis-ci.org/bitfinexcom/bfx-hf-algo)
 
-This library implements an algorithmic order system using the Bitfinex Node.JS API, and provides several official algo orders which serve as reference implementations.
+This library implements an algorithmic order system using the Bitfinex Node.JS
+API, and provides several official algo orders which serve as reference
+implementations.
 
-The system is exchange-agnostic and relies on external adapter libraries for the actual exchange API connection. For bitfinex, this adapter is provided by the [bfx-hf-ext-plugin-bitfinex](https://github.com/bitfinexcom/bfx-hf-ext-plugin-bitfinex) library.
+The system is exchange-agnostic and relies on external adapter libraries for the
+actual exchange API connection. For bitfinex, this adapter is provided by the
+[bfx-hf-ext-plugin-bitfinex](https://github.com/bitfinexcom/bfx-hf-ext-plugin-bitfinex) library.
 
 ### Features
 
@@ -26,7 +30,8 @@ npm i --save bfx-hf-models-adapter-lowdb
 
 ### Quickstart & Example
 
-To get started, initialize an `AOAdapter` and `HFDB` instance, then pass them to a new `AOHost` instance and call `startAO(id, args)`:
+To get started, initialize an `AOAdapter` and `HFDB` instance, then pass them
+to a new `AOHost` instance and call `startAO(id, args)`:
 
 ```js
 const HFDB = require('bfx-hf-models')
@@ -97,7 +102,7 @@ host.once('ws2:auth:success', async () => {
 
 ### Docs
 
-[Refer to the `docs/`](/docs) folder for JSDoc-generated API documentation. For an overview of the architecture, [see `docs/overview.md`](/docs/overview.md).
+[Refer to the `docs/`](/docs) folder for JSDoc-generated API documentation.
 
 ### Contributing
 

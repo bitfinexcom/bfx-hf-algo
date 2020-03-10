@@ -6,7 +6,9 @@
 - fix: AsyncEventEmitter off() handler logic
 - feature: add more tests to improve coverage
 - AOHost refactor: all internal AO events are now emit(ed) on the AO event emitter
+- AOHost refactor: all trigger* methods now return promises
 - AOHost feature: add getAOs() method
+- AOHost refactor: emitSelf() and emit() helpers now return a promise
 - TWAP fix: allow exact match in price target verification
 - TWAP fix: allow 0 cancel/submit delays
 - TWAP fix: amount checking in tick handler

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>accumulate_distribute/index.js - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="AOHost.html">AOHost</a><ul class='methods'><li data-type='method'><a href="AOHost.html#aosRunning">aosRunning</a></li><li data-type='method'><a href="AOHost.html#close">close</a></li><li data-type='method'><a href="AOHost.html#connect">connect</a></li><li data-type='method'><a href="AOHost.html#getAdapter">getAdapter</a></li><li data-type='method'><a href="AOHost.html#getAO">getAO</a></li><li data-type='method'><a href="AOHost.html#getAOInstance">getAOInstance</a></li><li data-type='method'><a href="AOHost.html#getAOInstances">getAOInstances</a></li><li data-type='method'><a href="AOHost.html#getAOs">getAOs</a></li><li data-type='method'><a href="AOHost.html#loadAllAOs">loadAllAOs</a></li><li data-type='method'><a href="AOHost.html#reconnect">reconnect</a></li><li data-type='method'><a href="AOHost.html#reloadAllAOs">reloadAllAOs</a></li><li data-type='method'><a href="AOHost.html#startAO">startAO</a></li><li data-type='method'><a href="AOHost.html#stopAO">stopAO</a></li></ul></li><li><a href="AsyncEventEmitter.html">AsyncEventEmitter</a><ul class='methods'><li data-type='method'><a href="AsyncEventEmitter.html#emit">emit</a></li><li data-type='method'><a href="AsyncEventEmitter.html#off">off</a></li><li data-type='method'><a href="AsyncEventEmitter.html#on">on</a></li><li data-type='method'><a href="AsyncEventEmitter.html#onAll">onAll</a></li><li data-type='method'><a href="AsyncEventEmitter.html#onAllOnce">onAllOnce</a></li><li data-type='method'><a href="AsyncEventEmitter.html#once">once</a></li><li data-type='method'><a href="AsyncEventEmitter.html#removeAllListeners">removeAllListeners</a></li></ul></li></ul><h3>Modules</h3><ul><li><a href="module-AccumulateDistribute.html">AccumulateDistribute</a><ul class='methods'><li data-type='method'><a href="module-AccumulateDistribute.html#.declareChannels">declareChannels</a></li><li data-type='method'><a href="module-AccumulateDistribute.html#.declareEvents">declareEvents</a></li><li data-type='method'><a href="module-AccumulateDistribute.html#.generateOrder">generateOrder</a></li><li data-type='method'><a href="module-AccumulateDistribute.html#.generateOrderAmounts">generateOrderAmounts</a></li><li data-type='method'><a href="module-AccumulateDistribute.html#.genOrderLabel">genOrderLabel</a></li><li data-type='method'><a href="module-AccumulateDistribute.html#.genPreview">genPreview</a></li><li data-type='method'><a href="module-AccumulateDistribute.html#.getUIDef">getUIDef</a></li><li data-type='method'><a href="module-AccumulateDistribute.html#.hasIndicatorCap">hasIndicatorCap</a></li><li data-type='method'><a href="module-AccumulateDistribute.html#.hasIndicatorOffset">hasIndicatorOffset</a></li><li data-type='method'><a href="module-AccumulateDistribute.html#.hasOBRequirement">hasOBRequirement</a></li><li data-type='method'><a href="module-AccumulateDistribute.html#.hasTradeRequirement">hasTradeRequirement</a></li><li data-type='method'><a href="module-AccumulateDistribute.html#.initState">initState</a></li><li data-type='method'><a href="module-AccumulateDistribute.html#.onDataManagedBook">onDataManagedBook</a></li><li data-type='method'><a href="module-AccumulateDistribute.html#.onDataManagedCandles">onDataManagedCandles</a></li><li data-type='method'><a href="module-AccumulateDistribute.html#.onDataTrades">onDataTrades</a></li><li data-type='method'><a href="module-AccumulateDistribute.html#.onLifeStart">onLifeStart</a></li><li data-type='method'><a href="module-AccumulateDistribute.html#.onLifeStop">onLifeStop</a></li><li data-type='method'><a href="module-AccumulateDistribute.html#.onOrdersOrderCancel">onOrdersOrderCancel</a></li><li data-type='method'><a href="module-AccumulateDistribute.html#.onOrdersOrderFill">onOrdersOrderFill</a></li><li data-type='method'><a href="module-AccumulateDistribute.html#.onSelfIntervalTick">onSelfIntervalTick</a></li><li data-type='method'><a href="module-AccumulateDistribute.html#.onSelfSubmitOrder">onSelfSubmitOrder</a></li><li data-type='method'><a href="module-AccumulateDistribute.html#.processParams">processParams</a></li><li data-type='method'><a href="module-AccumulateDistribute.html#.scheduleTick">scheduleTick</a></li><li data-type='method'><a href="module-AccumulateDistribute.html#.serialize">serialize</a></li><li data-type='method'><a href="module-AccumulateDistribute.html#.unserialize">unserialize</a></li><li data-type='method'><a href="module-AccumulateDistribute.html#.validateParams">validateParams</a></li></ul></li><li><a href="module-Helpers.html">Helpers</a><ul class='methods'><li data-type='method'><a href="module-Helpers.html#~cancelAllOrdersWithDelay">cancelAllOrdersWithDelay</a></li><li data-type='method'><a href="module-Helpers.html#~cancelOrderWithDelay">cancelOrderWithDelay</a></li><li data-type='method'><a href="module-Helpers.html#~clearAllTimeouts">clearAllTimeouts</a></li><li data-type='method'><a href="module-Helpers.html#~debug">debug</a></li><li data-type='method'><a href="module-Helpers.html#~declareChannel">declareChannel</a></li><li data-type='method'><a href="module-Helpers.html#~declareEvent">declareEvent</a></li><li data-type='method'><a href="module-Helpers.html#~emit">emit</a></li><li data-type='method'><a href="module-Helpers.html#~emitAsync">emitAsync</a></li><li data-type='method'><a href="module-Helpers.html#~emitSelf">emitSelf</a></li><li data-type='method'><a href="module-Helpers.html#~emitSelfAsync">emitSelfAsync</a></li><li data-type='method'><a href="module-Helpers.html#~notifyUI">notifyUI</a></li><li data-type='method'><a href="module-Helpers.html#~submitOrderWithDelay">submitOrderWithDelay</a></li><li data-type='method'><a href="module-Helpers.html#~updateState">updateState</a></li></ul></li><li><a href="module-Iceberg.html">Iceberg</a></li><li><a href="module-MACrossover.html">MACrossover</a></li><li><a href="module-OCOCO.html">OCOCO</a></li><li><a href="module-PingPong.html">PingPong</a></li><li><a href="module-TWAP.html">TWAP</a></li></ul><h3>Tutorials</h3><ul><li><a href="tutorial-Architecture.html">Architecture</a></li></ul><h3>Global</h3><ul><li><a href="global.html#defineAlgoOrder">defineAlgoOrder</a></li></ul>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">accumulate_distribute/index.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>'use strict'
+
+const defineAlgoOrder = require('../define_algo_order')
+
+const validateParams = require('./meta/validate_params')
+const processParams = require('./meta/process_params')
+const initState = require('./meta/init_state')
+const onSelfIntervalTick = require('./events/self_interval_tick')
+const onSelfSubmitOrder = require('./events/self_submit_order')
+const onLifeStart = require('./events/life_start')
+const onLifeStop = require('./events/life_stop')
+const onOrdersOrderFill = require('./events/orders_order_fill')
+const onOrdersOrderCancel = require('./events/orders_order_cancel')
+const onDataManagedBook = require('./events/data_managed_book')
+const onDataManagedCandles = require('./events/data_managed_candles')
+const onDataTrades = require('./events/data_trades')
+const genOrderLabel = require('./meta/gen_order_label')
+const genPreview = require('./meta/gen_preview')
+const declareEvents = require('./meta/declare_events')
+const declareChannels = require('./meta/declare_channels')
+const getUIDef = require('./meta/get_ui_def')
+const serialize = require('./meta/serialize')
+const unserialize = require('./meta/unserialize')
+
+/**
+ * Accumulate/Distribute allows you to break up a large order into smaller
+ * randomized chunks, submitted at regular or irregular intervals to minimise
+ * detection by other players in the market.
+ *
+ * By enabling the 'Await Fill' option, the algorithm will ensure each
+ * component fills before submitting subsequent orders. Enabling the 'Catch Up'
+ * flag will cause the algorithm to ignore the slice interval for the next order
+ * if previous orders have taken longer than expected to fill, thereby ensuring
+ * the time-to-fill for the entire order is not adversely affected.
+ *
+ * The price must be manually specified as `limitPrice` for `LIMIT` order types,
+ * or as a combination of a price offset &amp; cap for `RELATIVE` order types.
+ * `MARKET` A/D orders execute using `MARKET` atomic orders, and offer no price
+ * control.
+ *
+ * For `RELATIVE` A/D orders, the price offset &amp; cap can both be set to one of
+ * the following:
+ * * Top ask
+ * * Top bid
+ * * Orderbook mid price
+ * * Last trade price
+ * * Moving Average (configurable period, time frame, candle price)
+ * * Exponential Moving Average (configurable period, time frame, candle price)
+ *
+ * The period limit for moving average targets/caps is `240`, being the number
+ * of candles returned by the Bitfinex API when subscribing to a candle data
+ * channel.
+ *
+ * @module AccumulateDistribute
+ * @param {string} symbol - symbol to trade on
+ * @param {number} amount - total order amount
+ * @param {number} sliceAmount - individual slice order amount
+ * @param {number} sliceInterval - delay in ms between slice orders
+ * @param {number} [intervalDistortion] - slice interval distortion in %, default 0
+ * @param {number} [amountDistortion] - slice amount distortion in %, default 0
+ * @param {string} orderType - LIMIT, MARKET, RELATIVE
+ * @param {number} [limitPrice] - price for LIMIT orders
+ * @param {boolean} catchUp - if true, interval will be ignored if behind with filling slices
+ * @param {boolean} awaitFill - if true, slice orders will be kept open until filled
+ * @param {Object} [relativeOffset] - price reference for RELATIVE orders
+ * @param {string} [relativeOffset.type] - ask, bid, mid, last, ma, or ema
+ * @param {number} [relativeOffset.delta] - offset distance from price reference
+ * @param {number[]} [relativeOffset.args] - MA or EMA indicator arguments [period]
+ * @param {string} [relativeOffset.candlePrice] - 'open', 'high', 'low', 'close' for MA or EMA indicators
+ * @param {string} [relativeOffset.candleTimeFrame] - '1m', '5m', '1D', etc, for MA or EMA indicators
+ * @param {Object} [relativeCap] - maximum price reference for RELATIVE orders
+ * @param {string} [relativeCap.type] - ask, bid, mid, last, ma, or ema
+ * @param {number} [relativeCap.delta] - cap distance from price reference
+ * @param {number[]} [relativeCap.args] - MA or EMA indicator arguments [period]
+ * @param {string} [relativeCap.candlePrice] - 'open', 'high', 'low', 'close' for MA or EMA indicators
+ * @param {string} [relativeCap.candleTimeFrame] - '1m', '5m', '1D', etc, for MA or EMA indicators
+ * @param {boolean} _margin - if false, order type is prefixed with EXCHANGE
+ */
+const AccumulateDistribute = defineAlgoOrder({
+  id: 'bfx-accumulate_distribute',
+  name: 'Accumulate/Distribute',
+
+  meta: {
+    validateParams,
+    processParams,
+    declareEvents,
+    declareChannels,
+    getUIDef,
+    genOrderLabel,
+    genPreview,
+    initState,
+    serialize,
+    unserialize
+  },
+
+  events: {
+    self: {
+      interval_tick: onSelfIntervalTick,
+      submit_order: onSelfSubmitOrder
+    },
+
+    life: {
+      start: onLifeStart,
+      stop: onLifeStop
+    },
+
+    orders: {
+      order_fill: onOrdersOrderFill,
+      order_cancel: onOrdersOrderCancel
+    },
+
+    data: {
+      managedCandles: onDataManagedCandles,
+      managedBook: onDataManagedBook,
+      trades: onDataTrades
+    }
+  }
+})
+
+module.exports = AccumulateDistribute
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.3</a> on Wed Mar 11 2020 02:28:40 GMT+0700 (Indochina Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+
+
+</body>
+</html>

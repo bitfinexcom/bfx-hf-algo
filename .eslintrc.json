@@ -27,6 +27,7 @@
   },
 
   "rules": {
+    "jsdoc/check-tag-names": 0,
     "no-multiple-empty-lines": ["error", { "max": 1, "maxEOF": 1 }],
     "promise/no-callback-in-promise": 0,
     "lodash/prefer-lodash-method": 0,

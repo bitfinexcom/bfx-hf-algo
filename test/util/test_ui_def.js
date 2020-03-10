@@ -30,7 +30,7 @@ const VALID_FIELDS = [
   * Verifies internal structure.
   *
   *
-  * @param {Object} ui - def
+  * @param {object} ui - def
   */
 module.exports = (ui) => {
   assert.ok(_isObject(ui), 'ui def not an object')
