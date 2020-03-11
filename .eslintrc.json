@@ -28,11 +28,16 @@
 
   "rules": {
     "jsdoc/check-tag-names": 0,
+    "jsdoc/no-undefined-types": 0,
     "no-multiple-empty-lines": ["error", { "max": 1, "maxEOF": 1 }],
     "promise/no-callback-in-promise": 0,
     "lodash/prefer-lodash-method": 0,
     "lodash/prefer-noop": 0,
     "lodash/prefer-constant": 0,
-    "node/no-unpublished-require": 0
+    "node/no-unpublished-require": 0,
+    "mocha/no-mocha-arrows": 0,
+    "mocha/no-hooks-for-single-case": 0,
+    "mocha/no-setup-in-describe": 0,
+    "mocha/no-skipped-tests": 0
   }
 }

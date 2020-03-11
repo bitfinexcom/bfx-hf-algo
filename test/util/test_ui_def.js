@@ -26,12 +26,12 @@ const VALID_FIELDS = [
 ]
 
 /**
-  * Utility to test generated UI defs and ensure they match the BFX structure.
-  * Verifies internal structure.
-  *
-  *
-  * @param {object} ui - def
-  */
+ * Utility to test generated UI defs and ensure they match the BFX structure.
+ * Verifies internal structure.
+ *
+ *
+ * @param {object} ui - def
+ */
 module.exports = (ui) => {
   assert.ok(_isObject(ui), 'ui def not an object')
   assert.ok(_isString(ui.label) && !_isEmpty(ui.label), 'ui def has no label')

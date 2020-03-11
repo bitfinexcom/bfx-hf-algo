@@ -20,14 +20,14 @@ const H = (args = {}, adapter = null) => (
 
 describe('genHelpers', () => {
   /**
-    * These tests enforce the helper API; it is used by all AOs and serves as
-    * the core of bfx-hf-algo alongside the AO Host (which processes all events)
-    *
-    * Methods here are also relied upon by the exchange adapters
-    * (and vice-versa.) Seen throughout AO logic as the 'h' object.
-    *
-    * If something changes here, there better be a good reason for it.
-    */
+   * These tests enforce the helper API; it is used by all AOs and serves as
+   * the core of bfx-hf-algo alongside the AO Host (which processes all events)
+   *
+   * Methods here are also relied upon by the exchange adapters
+   * (and vice-versa.) Seen throughout AO logic as the 'h' object.
+   *
+   * If something changes here, there better be a good reason for it.
+   */
   it('provides a standard API', () => {
     const h = H()
     const API = [
