@@ -3,7 +3,7 @@
 <head>
     
     <meta charset="utf-8">
-    <title>host/events/notify.js - Documentation</title>
+    <title>host/ws2/process_message.js - Documentation</title>
     
     
     <script src="scripts/prettify/prettify.js"></script>
@@ -34,7 +34,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">host/events/notify.js</h1>
+    <h1 class="page-title">host/ws2/process_message.js</h1>
     
 
     
@@ -46,28 +46,153 @@
         <article>
             <pre class="prettyprint source linenums"><code>'use strict'
 
-const withAOUpdate = require('../with_ao_update')
+const debug = require('debug')('bfx:hf:algo:ao-host:ws2:process-message')
 
-/**
- * Broadcasts a ucm notification to be picked up by the UI
- *
- * @param {object} aoHost
- * @param {string} gid - AO instance gid
- * @param {string} level - notification level, i.e. 'info', 'success', etc
- * @param {string} message
- * @returns {object} nextInstanceState
- */
-module.exports = async (aoHost, gid, level, message) => {
-  const { adapter } = aoHost
+module.exports = async (aoHost, msg = {}) => {
+  const { triggerGlobalEvent, triggerOrderEvent } = aoHost
+  const { type, args } = msg
 
-  await withAOUpdate(aoHost, gid, async (instance = {}) => {
-    const { state = {} } = instance
-    const { connection } = state
+  switch (type) {
+    case 'open': {
+      debug('process %s', type)
 
-    adapter.notify(connection.c, level, message)
+      await aoHost.emit('open')
+      break
+    }
 
-    return null
-  })
+    case 'auth:success': {
+      debug('process %s', type)
+
+      const [packet, meta] = args
+      await aoHost.emit('auth:success', packet, meta)
+      break
+    }
+
+    case 'auth:error': {
+      debug('process %s', type)
+
+      const [packet, meta] = args
+      await aoHost.emit('auth:error', packet, meta)
+      break
+    }
+
+    case 'auth:n': {
+      debug('process %s', type)
+
+      const [packet, meta] = args
+      await aoHost.emit('auth:n', packet, meta)
+      break
+    }
+
+    case 'order:snapshot': {
+      debug('process %s', type)
+
+      const [orders] = args
+      await triggerGlobalEvent('orders', 'order_snapshot', orders)
+      break
+    }
+
+    case 'order:new': {
+      const [order] = args
+      const { amount, amountOrig, price, status } = order
+
+      debug(
+        'process %s [%f/%f @ %f %s]',
+        type, amount, amountOrig, price, status
+      )
+
+      await triggerOrderEvent('orders', 'order_new', order)
+
+      if (status.match(/PARTIALLY/)) {
+        await triggerOrderEvent('orders', 'order_fill', order)
+      }
+
+      break
+    }
+
+    case 'order:update': {
+      const [order] = args
+      const { amount, amountOrig, price, status } = order
+
+      debug(
+        'process %s [%f/%f @ %f %s]',
+        type, amount, amountOrig, price, status
+      )
+
+      await triggerOrderEvent('orders', 'order_update', order)
+
+      if (status.match(/PARTIALLY/)) {
+        await triggerOrderEvent('orders', 'order_fill', order)
+      }
+
+      break
+    }
+
+    case 'order:close': {
+      const [order] = args
+      const { amount, amountOrig, price, status } = order
+
+      debug(
+        'process %s [%f/%f @ %f %s]',
+        type, amount, amountOrig, price, status
+      )
+
+      await triggerOrderEvent('orders', 'order_close', order)
+
+      if (status.match(/CANCELED/)) {
+        /**
+         * Triggered on atomic order cancellation
+         *
+         * @event AOHost~ordersOrderCancel
+         * @param {object} order - the order that was cancelled
+         */
+        await triggerOrderEvent('orders', 'order_cancel', order)
+      } else {
+        /**
+         * Triggered on atomic order fill
+         *
+         * @event AOHost~ordersOrderFill
+         * @param {object} order - the order that was filled
+         */
+        await triggerOrderEvent('orders', 'order_fill', order)
+      }
+
+      break
+    }
+
+    case 'order:error': {
+      const [order] = args
+
+      /**
+       * Triggered on a generic order error
+       *
+       * @event AOHost~ordersOrderError
+       * @param {object} order - the order that caused the error
+       */
+      await triggerOrderEvent('orders', 'order_error', order)
+      break
+    }
+
+    case 'trades': {
+      debug('process %s', type)
+
+      const [trades] = args
+      await triggerGlobalEvent('data', 'trades', trades)
+      break
+    }
+
+    case 'book': {
+      debug('process %s', type)
+
+      const [update] = args
+      await triggerGlobalEvent('data', 'book', update)
+      break
+    }
+
+    default: {
+      debug('unknown ws event: %s [%j]', type, args)
+    }
+  }
 }
 </code></pre>
         </article>
