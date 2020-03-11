@@ -14,14 +14,21 @@
   "templates": {
     "cleverLinks": false,
     "monospaceLinks": true,
-    "useLongnameInNav": false,
-    "showInheritedInNav": true
+    "smallSourceLink": true,
+    "hideAuthor": true
   },
   "opts": {
     "destination": "./docs/",
     "encoding": "utf8",
+    "private": false,
     "recurse": true,
-    "template": "./node_modules/docdash"
+    "template": "./node_modules/docdash",
+    "tutorials": "./tutorials"
   },
-  "package": ""
+  "package": "",
+  "docdash": {
+    "static": true,
+    "sort": true,
+    "search": true
+  }
 }
