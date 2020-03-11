@@ -89,6 +89,7 @@ describe('accumulate_distribute:events:data_managed_candles', () => {
   })
 
   it('updates cap indicator if needed', async () => {
+    console.log(CANDLE.constructor.unserialize + '')
     const candles = [Candle.unserialize({
       ...CANDLE.toJS(),
       high: 42

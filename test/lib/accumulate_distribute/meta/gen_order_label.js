@@ -18,11 +18,12 @@ describe('accumulate_distribute:meta:gen_order_label', () => {
 
   it('includes basic information', () => {
     const str = genOrderLabel(state)
+    console.log(str)
     assert.ok(/LIMIT/.test(str), 'type not included')
-    assert.ok(!_includes(str, '42'), 'amount not included')
-    assert.ok(!_includes(str, '1'), 'price not included')
-    assert.ok(!_includes(str, '7'), 'slice amount not included')
-    assert.ok(!_includes(str, '' + Math.floor(13 / 1000)) !== -1, 'slice interval not included')
+    assert.ok(_includes(str, '42'), 'amount not included')
+    assert.ok(_includes(str, '1'), 'price not included')
+    assert.ok(_includes(str, '7'), 'slice amount not included')
+    assert.ok(_includes(str, '' + Math.floor(13 / 1000)) !== -1, 'slice interval not included')
   })
 
   it('includes offset and cap information if used', () => {
@@ -35,7 +36,7 @@ describe('accumulate_distribute:meta:gen_order_label', () => {
       }
     })
 
-    assert.ok(!_includes(str, 'Offset EMA'), 'relative offset type not included')
-    assert.ok(!_includes(str, 'Cap MA'), 'relative cap type not included')
+    assert.ok(_includes(str, 'Offset EMA'), 'relative offset type not included')
+    assert.ok(_includes(str, 'Cap MA'), 'relative cap type not included')
   })
 })

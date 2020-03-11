@@ -67,7 +67,7 @@ module.exports = (ui) => {
     assert.ok(_isObject(ui.header), 'ui def has malformed header')
 
     const { component, fields } = ui.header
-    assert.ok(!_includes(VALID_FIELDS, component), `ui header field uses unknown component: ${component}`)
+    assert.ok(_includes(VALID_FIELDS, component), `ui header field uses unknown component: ${component}`)
 
     fields.forEach((fieldName) => {
       assert.ok(fieldName === null || _isObject(ui.fields[fieldName]), `ui header has unknown field: ${fieldName}`)
@@ -77,10 +77,10 @@ module.exports = (ui) => {
   // TODO: Verify per-component props, overkill for now
   Object.values(ui.fields).forEach((field) => {
     const { component } = field
-    assert.ok(!_includes(VALID_FIELDS, component), `ui field uses unknown component: ${component}`)
+    assert.ok(_includes(VALID_FIELDS, component), `ui field uses unknown component: ${component}`)
   })
 
   ui.actions.forEach(a => {
-    assert.ok(!_includes(VALID_ACTIONS, a), 'ui action is not valid')
+    assert.ok(_includes(VALID_ACTIONS, a), 'ui action is not valid')
   })
 }
