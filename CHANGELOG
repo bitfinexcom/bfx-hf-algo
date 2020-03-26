@@ -5,6 +5,7 @@
 - fix: set _HF flag on atomics where missing
 - fix: AsyncEventEmitter off() handler logic
 - feature: add more tests to improve coverage
+- refactor: AO orders event section is now optional
 - AOHost refactor: all internal AO events are now emit(ed) on the AO event emitter
 - AOHost refactor: all trigger* methods now return promises
 - AOHost feature: add getAOs() method
