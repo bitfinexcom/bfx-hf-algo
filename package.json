@@ -25,7 +25,7 @@
   "scripts": {
     "lint": "eslint lib/ examples/ test/ index.js",
     "test": "npm run lint && npm run unit",
-    "unit": "NODE_ENV=test NODE_PATH=lib/ nyc --check-coverage --lines 90 --branches 60 --functions 90 --statements 90 --reporter=lcov --reporter=html mocha -b --recursive",
+    "unit": "NODE_ENV=test NODE_PATH=lib/ nyc --check-coverage --lines 60 --branches 40 --functions 40 --statements 60 --reporter=lcov --reporter=html mocha -b --recursive",
     "test-without-coverage": "NODE_ENV=test mocha -R spec -b --recursive",
     "docs": "rm -rf docs && node_modules/.bin/jsdoc --configure .jsdoc.json --verbose"
   },
