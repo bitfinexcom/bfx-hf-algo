@@ -16,6 +16,7 @@
 - TWAP fix: await updateState() in life:stop handler
 - Ping/Pong fix: allow 0 cancel/submit delays
 - MACrossover fix: add help text
+- MACrossover fix: use correct CID gen function
 - Iceberg refactor: no longer cancels atomics on exit, to match the other AOs
 - AccumulateDistribute refactor: decrease catch-up delay to 200ms
 - AccumulateDistribute fix: catch-up did not result in decreased delay
