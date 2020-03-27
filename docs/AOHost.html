@@ -1,0 +1,4268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>AOHost - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    <input type="text" id="nav-search" placeholder="Search" />
+    
+    <h2><a href="index.html">Home</a></h2><h2><a href="https://honey.bitfinex.com/" target="_blank" class="menu-item" id="hfui_link" >HF UI</a></h2><h2><a href="/tutorial-Architecture.html" target="" class="menu-item" id="architecture_link" >Getting Started</a></h2><h2><a href="/class-AOHost.html" target="" class="menu-item" id="algo_host_link" >Algo Host</a></h2><h2><a href="/module-AccumulateDistribute.html" target="" class="menu-item" id="ad_link" >Accumulate/Distribute</a></h2><h2><a href="/module-Iceberg.html" target="" class="menu-item" id="iceberg_link" >Iceberg</a></h2><h2><a href="/module-MACrossover.html" target="" class="menu-item" id="mac_link" >MA Crossover</a></h2><h2><a href="/module-OCOCO.html" target="" class="menu-item" id="ococo_link" >Order Creates OCO</a></h2><h2><a href="/module-PingPong.html" target="" class="menu-item" id="pingpong_link" >Ping/Pong</a></h2><h2><a href="/module-TWAP.html" target="" class="menu-item" id="twap_link" >TWAP</a></h2><h3>Classes</h3><ul><li><a href="AOHost.html">AOHost</a><ul class='members'><li data-type='member'><a href="AOHost.html#.TEARDOWN_GRACE_PERIOD_MS">TEARDOWN_GRACE_PERIOD_MS</a></li></ul><ul class='methods'><li data-type='method'><a href="AOHost.html#aosRunning">aosRunning</a></li><li data-type='method'><a href="AOHost.html#close">close</a></li><li data-type='method'><a href="AOHost.html#connect">connect</a></li><li data-type='method'><a href="AOHost.html#getAdapter">getAdapter</a></li><li data-type='method'><a href="AOHost.html#getAO">getAO</a></li><li data-type='method'><a href="AOHost.html#getAOInstance">getAOInstance</a></li><li data-type='method'><a href="AOHost.html#getAOInstances">getAOInstances</a></li><li data-type='method'><a href="AOHost.html#getAOs">getAOs</a></li><li data-type='method'><a href="AOHost.html#loadAllAOs">loadAllAOs</a></li><li data-type='method'><a href="AOHost.html#reconnect">reconnect</a></li><li data-type='method'><a href="AOHost.html#reloadAllAOs">reloadAllAOs</a></li><li data-type='method'><a href="AOHost.html#startAO">startAO</a></li><li data-type='method'><a href="AOHost.html#stopAO">stopAO</a></li></ul></li><li><a href="AsyncEventEmitter.html">AsyncEventEmitter</a><ul class='methods'><li data-type='method'><a href="AsyncEventEmitter.html#emit">emit</a></li><li data-type='method'><a href="AsyncEventEmitter.html#off">off</a></li><li data-type='method'><a href="AsyncEventEmitter.html#on">on</a></li><li data-type='method'><a href="AsyncEventEmitter.html#onAll">onAll</a></li><li data-type='method'><a href="AsyncEventEmitter.html#onAllOnce">onAllOnce</a></li><li data-type='method'><a href="AsyncEventEmitter.html#once">once</a></li><li data-type='method'><a href="AsyncEventEmitter.html#removeAllListeners">removeAllListeners</a></li></ul></li></ul><h3>Modules</h3><ul><li><a href="module-AccumulateDistribute.html">AccumulateDistribute</a><ul class='methods'><li data-type='method'><a href="module-AccumulateDistribute.html#.declareChannels">declareChannels</a></li><li data-type='method'><a href="module-AccumulateDistribute.html#.declareEvents">declareEvents</a></li><li data-type='method'><a href="module-AccumulateDistribute.html#.generateOrderAmounts">generateOrderAmounts</a></li><li data-type='method'><a href="module-AccumulateDistribute.html#.genOrderLabel">genOrderLabel</a></li><li data-type='method'><a href="module-AccumulateDistribute.html#.genPreview">genPreview</a></li><li data-type='method'><a href="module-AccumulateDistribute.html#.getUIDef">getUIDef</a></li><li data-type='method'><a href="module-AccumulateDistribute.html#.hasIndicatorCap">hasIndicatorCap</a></li><li data-type='method'><a href="module-AccumulateDistribute.html#.hasIndicatorOffset">hasIndicatorOffset</a></li><li data-type='method'><a href="module-AccumulateDistribute.html#.hasOBRequirement">hasOBRequirement</a></li><li data-type='method'><a href="module-AccumulateDistribute.html#.hasTradeRequirement">hasTradeRequirement</a></li><li data-type='method'><a href="module-AccumulateDistribute.html#.initState">initState</a></li><li data-type='method'><a href="module-AccumulateDistribute.html#.onDataManagedBook">onDataManagedBook</a></li><li data-type='method'><a href="module-AccumulateDistribute.html#.onDataManagedCandles">onDataManagedCandles</a></li><li data-type='method'><a href="module-AccumulateDistribute.html#.onDataTrades">onDataTrades</a></li><li data-type='method'><a href="module-AccumulateDistribute.html#.onLifeStart">onLifeStart</a></li><li data-type='method'><a href="module-AccumulateDistribute.html#.onLifeStop">onLifeStop</a></li><li data-type='method'><a href="module-AccumulateDistribute.html#.onOrdersOrderCancel">onOrdersOrderCancel</a></li><li data-type='method'><a href="module-AccumulateDistribute.html#.onOrdersOrderFill">onOrdersOrderFill</a></li><li data-type='method'><a href="module-AccumulateDistribute.html#.onSelfIntervalTick">onSelfIntervalTick</a></li><li data-type='method'><a href="module-AccumulateDistribute.html#.onSelfSubmitOrder">onSelfSubmitOrder</a></li><li data-type='method'><a href="module-AccumulateDistribute.html#.processParams">processParams</a></li><li data-type='method'><a href="module-AccumulateDistribute.html#.scheduleTick">scheduleTick</a></li><li data-type='method'><a href="module-AccumulateDistribute.html#.serialize">serialize</a></li><li data-type='method'><a href="module-AccumulateDistribute.html#.unserialize">unserialize</a></li><li data-type='method'><a href="module-AccumulateDistribute.html#.validateParams">validateParams</a></li></ul></li><li><a href="module-DefaultErrorHandlers.html">DefaultErrorHandlers</a><ul class='methods'><li data-type='method'><a href="module-DefaultErrorHandlers.html#.onErrorInsufficientBalance">onErrorInsufficientBalance</a></li><li data-type='method'><a href="module-DefaultErrorHandlers.html#.onErrorMinimumSize">onErrorMinimumSize</a></li><li data-type='method'><a href="module-DefaultErrorHandlers.html#.onOrdersOrderError">onOrdersOrderError</a></li></ul></li><li><a href="module-Helpers.html">Helpers</a><ul class='methods'><li data-type='method'><a href="module-Helpers.html#~cancelAllOrdersWithDelay">cancelAllOrdersWithDelay</a></li><li data-type='method'><a href="module-Helpers.html#~cancelOrderWithDelay">cancelOrderWithDelay</a></li><li data-type='method'><a href="module-Helpers.html#~clearAllTimeouts">clearAllTimeouts</a></li><li data-type='method'><a href="module-Helpers.html#~debug">debug</a></li><li data-type='method'><a href="module-Helpers.html#~declareChannel">declareChannel</a></li><li data-type='method'><a href="module-Helpers.html#~declareEvent">declareEvent</a></li><li data-type='method'><a href="module-Helpers.html#~emit">emit</a></li><li data-type='method'><a href="module-Helpers.html#~emitAsync">emitAsync</a></li><li data-type='method'><a href="module-Helpers.html#~emitSelf">emitSelf</a></li><li data-type='method'><a href="module-Helpers.html#~emitSelfAsync">emitSelfAsync</a></li><li data-type='method'><a href="module-Helpers.html#~notifyUI">notifyUI</a></li><li data-type='method'><a href="module-Helpers.html#~submitOrderWithDelay">submitOrderWithDelay</a></li><li data-type='method'><a href="module-Helpers.html#~updateState">updateState</a></li></ul></li><li><a href="module-Iceberg.html">Iceberg</a><ul class='members'><li data-type='member'><a href="module-Iceberg.html#.generateOrders">generateOrders</a></li></ul><ul class='methods'><li data-type='method'><a href="module-Iceberg.html#.declareEvents">declareEvents</a></li><li data-type='method'><a href="module-Iceberg.html#.genOrderLabel">genOrderLabel</a></li><li data-type='method'><a href="module-Iceberg.html#.genOrderLabel">genOrderLabel</a></li><li data-type='method'><a href="module-Iceberg.html#.genPreview">genPreview</a></li><li data-type='method'><a href="module-Iceberg.html#.getUIDef">getUIDef</a></li><li data-type='method'><a href="module-Iceberg.html#.initState">initState</a></li><li data-type='method'><a href="module-Iceberg.html#.onLifeStart">onLifeStart</a></li><li data-type='method'><a href="module-Iceberg.html#.onLifeStop">onLifeStop</a></li><li data-type='method'><a href="module-Iceberg.html#.onOrdersOrderCancel">onOrdersOrderCancel</a></li><li data-type='method'><a href="module-Iceberg.html#.onOrdersOrderFill">onOrdersOrderFill</a></li><li data-type='method'><a href="module-Iceberg.html#.onSelfSubmitOrders">onSelfSubmitOrders</a></li><li data-type='method'><a href="module-Iceberg.html#.processParams">processParams</a></li><li data-type='method'><a href="module-Iceberg.html#.serialize">serialize</a></li><li data-type='method'><a href="module-Iceberg.html#.unserialize">unserialize</a></li><li data-type='method'><a href="module-Iceberg.html#.validateParams">validateParams</a></li></ul></li><li><a href="module-MACrossover.html">MACrossover</a><ul class='members'><li data-type='member'><a href="module-MACrossover.html#.generateOrder">generateOrder</a></li></ul><ul class='methods'><li data-type='method'><a href="module-MACrossover.html#.declareChannels">declareChannels</a></li><li data-type='method'><a href="module-MACrossover.html#.declareEvents">declareEvents</a></li><li data-type='method'><a href="module-MACrossover.html#.genPreview">genPreview</a></li><li data-type='method'><a href="module-MACrossover.html#.initState">initState</a></li><li data-type='method'><a href="module-MACrossover.html#.onDataManagedCandles">onDataManagedCandles</a></li><li data-type='method'><a href="module-MACrossover.html#.onLifeStop">onLifeStop</a></li><li data-type='method'><a href="module-MACrossover.html#.onOrdersOrderCancel">onOrdersOrderCancel</a></li><li data-type='method'><a href="module-MACrossover.html#.onSelfSubmitOrder">onSelfSubmitOrder</a></li><li data-type='method'><a href="module-MACrossover.html#.processParams">processParams</a></li><li data-type='method'><a href="module-MACrossover.html#.serialize">serialize</a></li><li data-type='method'><a href="module-MACrossover.html#.unserialize">unserialize</a></li><li data-type='method'><a href="module-MACrossover.html#.validateParams">validateParams</a></li></ul></li><li><a href="module-OCOCO.html">OCOCO</a><ul class='members'><li data-type='member'><a href="module-OCOCO.html#.generateInitialOrder">generateInitialOrder</a></li><li data-type='member'><a href="module-OCOCO.html#.generateOCOOrder">generateOCOOrder</a></li></ul><ul class='methods'><li data-type='method'><a href="module-OCOCO.html#.genOrderLabel">genOrderLabel</a></li><li data-type='method'><a href="module-OCOCO.html#.genPreview">genPreview</a></li><li data-type='method'><a href="module-OCOCO.html#.getUIDef">getUIDef</a></li><li data-type='method'><a href="module-OCOCO.html#.initState">initState</a></li><li data-type='method'><a href="module-OCOCO.html#.module.exports">module.exports</a></li><li data-type='method'><a href="module-OCOCO.html#.onLifeStart">onLifeStart</a></li><li data-type='method'><a href="module-OCOCO.html#.onLifeStop">onLifeStop</a></li><li data-type='method'><a href="module-OCOCO.html#.onOrdersOrderCancel">onOrdersOrderCancel</a></li><li data-type='method'><a href="module-OCOCO.html#.onOrdersOrderFill">onOrdersOrderFill</a></li><li data-type='method'><a href="module-OCOCO.html#.onSelfSubmitInitialOrder">onSelfSubmitInitialOrder</a></li><li data-type='method'><a href="module-OCOCO.html#.onSelfSubmitOCOOrder">onSelfSubmitOCOOrder</a></li><li data-type='method'><a href="module-OCOCO.html#.processParams">processParams</a></li><li data-type='method'><a href="module-OCOCO.html#.serialize">serialize</a></li><li data-type='method'><a href="module-OCOCO.html#.unserialize">unserialize</a></li><li data-type='method'><a href="module-OCOCO.html#.validateParams">validateParams</a></li></ul></li><li><a href="module-PingPong.html">PingPong</a><ul class='members'><li data-type='member'><a href="module-PingPong.html#.genPingPongTable">genPingPongTable</a></li></ul><ul class='methods'><li data-type='method'><a href="module-PingPong.html#.genOrderLabel">genOrderLabel</a></li><li data-type='method'><a href="module-PingPong.html#.genPreview">genPreview</a></li><li data-type='method'><a href="module-PingPong.html#.getUIDef">getUIDef</a></li><li data-type='method'><a href="module-PingPong.html#.initState">initState</a></li><li data-type='method'><a href="module-PingPong.html#.onLifeStart">onLifeStart</a></li><li data-type='method'><a href="module-PingPong.html#.onLifeStop">onLifeStop</a></li><li data-type='method'><a href="module-PingPong.html#.onOrdersOrderCancel">onOrdersOrderCancel</a></li><li data-type='method'><a href="module-PingPong.html#.onOrdersOrderFill">onOrdersOrderFill</a></li><li data-type='method'><a href="module-PingPong.html#.processParams">processParams</a></li><li data-type='method'><a href="module-PingPong.html#.serialize">serialize</a></li><li data-type='method'><a href="module-PingPong.html#.unserialize">unserialize</a></li><li data-type='method'><a href="module-PingPong.html#.validateParams">validateParams</a></li></ul></li><li><a href="module-TWAP.html">TWAP</a><ul class='members'><li data-type='member'><a href="module-TWAP.html#.generateOrder">generateOrder</a></li><li data-type='member'><a href="module-TWAP.html#.getOBPrice">getOBPrice</a></li><li data-type='member'><a href="module-TWAP.html#.getTradePrice">getTradePrice</a></li><li data-type='member'><a href="module-TWAP.html#.hasOBTarget">hasOBTarget</a></li><li data-type='member'><a href="module-TWAP.html#.hasTradeTarget">hasTradeTarget</a></li><li data-type='member'><a href="module-TWAP.html#.isTargetMet">isTargetMet</a></li></ul><ul class='methods'><li data-type='method'><a href="module-TWAP.html#.declareChannels">declareChannels</a></li><li data-type='method'><a href="module-TWAP.html#.declareEvents">declareEvents</a></li><li data-type='method'><a href="module-TWAP.html#.genOrderLabel">genOrderLabel</a></li><li data-type='method'><a href="module-TWAP.html#.genPreview">genPreview</a></li><li data-type='method'><a href="module-TWAP.html#.getUIDef">getUIDef</a></li><li data-type='method'><a href="module-TWAP.html#.initState">initState</a></li><li data-type='method'><a href="module-TWAP.html#.onDataManagedBook">onDataManagedBook</a></li><li data-type='method'><a href="module-TWAP.html#.onDataTrades">onDataTrades</a></li><li data-type='method'><a href="module-TWAP.html#.onLifeStart">onLifeStart</a></li><li data-type='method'><a href="module-TWAP.html#.onLifeStop">onLifeStop</a></li><li data-type='method'><a href="module-TWAP.html#.onOrdersOrderCancel">onOrdersOrderCancel</a></li><li data-type='method'><a href="module-TWAP.html#.onOrdersOrderFill">onOrdersOrderFill</a></li><li data-type='method'><a href="module-TWAP.html#.onSelfIntervalTick">onSelfIntervalTick</a></li><li data-type='method'><a href="module-TWAP.html#.processParams">processParams</a></li><li data-type='method'><a href="module-TWAP.html#.serialize">serialize</a></li><li data-type='method'><a href="module-TWAP.html#.unserialize">unserialize</a></li><li data-type='method'><a href="module-TWAP.html#.validateParams">validateParams</a></li></ul></li></ul><h3>Events</h3><ul><li><a href="AOHost.html#~event:dataBook">dataBook</a></li><li><a href="AOHost.html#~event:dataCandles">dataCandles</a></li><li><a href="AOHost.html#~event:dataManagedBook">dataManagedBook</a></li><li><a href="AOHost.html#~event:dataManagedCandles">dataManagedCandles</a></li><li><a href="AOHost.html#~event:dataNotification">dataNotification</a></li><li><a href="AOHost.html#~event:dataTicker">dataTicker</a></li><li><a href="AOHost.html#~event:dataTrades">dataTrades</a></li><li><a href="AOHost.html#~event:errorsInsufficientBalance">errorsInsufficientBalance</a></li><li><a href="AOHost.html#~event:errorsMinimumSize">errorsMinimumSize</a></li><li><a href="AOHost.html#~event:lifeStart">lifeStart</a></li><li><a href="AOHost.html#~event:lifeStop">lifeStop</a></li><li><a href="AOHost.html#~event:ordersOrderCancel">ordersOrderCancel</a></li><li><a href="AOHost.html#~event:ordersOrderError">ordersOrderError</a></li><li><a href="AOHost.html#~event:ordersOrderFill">ordersOrderFill</a></li><li><a href="module-AccumulateDistribute.html#~event:selfIntervalTick">selfIntervalTick</a></li><li><a href="module-AccumulateDistribute.html#~event:selfSubmitOrder">selfSubmitOrder</a></li><li><a href="module-Iceberg.html#~event:event:selfSubmitOrders">selfSubmitOrders</a></li><li><a href="module-MACrossover.html#~event:selfSubmitOrder">selfSubmitOrder</a></li><li><a href="module-OCOCO.html#~event:selfSubmitInitialOrder">selfSubmitInitialOrder</a></li><li><a href="module-OCOCO.html#~event:selfSubmitOCOOrder">selfSubmitOCOOrder</a></li><li><a href="module-TWAP.html#~event:selfIntervalTick">selfIntervalTick</a></li></ul><h3>Tutorials</h3><ul><li><a href="tutorial-Architecture.html">Architecture</a></li></ul><h3>Global</h3><ul><li><a href="global.html#defineAlgoOrder">defineAlgoOrder</a></li></ul>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">AOHost</h1>
+    
+
+    
+
+
+
+
+<section>
+
+<header>
+    
+        <h2>
+        AOHost
+        </h2>
+        
+            <div class="class-description usertext"><p>The AOHost class provides a wrapper around the algo order system, and
+manages lifetime events/order execution. Internally it hosts a Manager
+instance from bfx-api-node-core for communication with the Bitfinex API, and
+listens for websocket stream events in order to update order state/trigger
+algo order events.</p>
+<p>Execution is handled by an event system, with events being triggered by
+Bitfinex API websocket stream payloads, and the algo orders themselves.</p>
+<p>To start/stop algo orders, <code>gid = startAO(id, args)</code> and <code>stopAO(gid)</code>
+methods are provided, with the generated group ID (<code>gid</code>) being the same as
+that used for all atomic orders created by the individual algo orders.</p></div>
+        
+    
+</header>
+
+<article>
+    
+        <div class="container-overview">
+        
+            
+
+    
+    <h2>Constructor</h2>
+    
+
+    <h4 class="name" id="AOHost"><span class="type-signature"></span>new AOHost<span class="signature">(args<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ao_host.js.html">ao_host.js</a>, <a href="ao_host.js.html#line77">line 77</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>args</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>arguments</p>
+                <h6>Properties</h6>
+                
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>db</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>optional</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>wsURL</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>wss://api.bitfinex.com/ws/2</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>restURL</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>https://api.bitfinex.com</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>agent</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>optional proxy agent</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>aos</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;object></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>algo orders to manage</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>dms</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>dead man switch, active 4 (default)</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+        </div>
+    
+
+    
+
+    
+
+    
+    
+    
+
+     
+
+    
+
+    
+        <h3 class="subsection-title">Members</h3>
+
+        
+            
+<h4 class="name" id=".TEARDOWN_GRACE_PERIOD_MS"><span class="type-signature">(static) </span>TEARDOWN_GRACE_PERIOD_MS<span class="type-signature"> :number</span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ao_host.js.html">ao_host.js</a>, <a href="ao_host.js.html#line808">line 808</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-default">Default Value:</dt>
+    <dd class="tag-default"><ul class="dummy">
+            <li>10000</li>
+        </ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>How long orders are allowed to settle for before teardown in ms.</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">number</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    <h4 class="name" id="aosRunning"><span class="type-signature"></span>aosRunning<span class="signature">()</span><span class="type-signature"> &rarr; {boolean}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ao_host.js.html">ao_host.js</a>, <a href="ao_host.js.html#line566">line 566</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>aosRunning - true if any algo order is currently running</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">boolean</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="close"><span class="type-signature"></span>close<span class="signature">()</span><span class="type-signature"> &rarr; {Promise}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ao_host.js.html">ao_host.js</a>, <a href="ao_host.js.html#line144">line 144</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>Close the exchange adapter connection.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>p - resolves on connection close</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="connect"><span class="type-signature"></span>connect<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ao_host.js.html">ao_host.js</a>, <a href="ao_host.js.html#line188">line 188</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>Opens a new socket connection on the internal adapter</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="getAdapter"><span class="type-signature"></span>getAdapter<span class="signature">()</span><span class="type-signature"> &rarr; {object}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ao_host.js.html">ao_host.js</a>, <a href="ao_host.js.html#line128">line 128</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>Get configured exchange adapter</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>adapter</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">object</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="getAO"><span class="type-signature"></span>getAO<span class="signature">(id)</span><span class="type-signature"> &rarr; {object}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ao_host.js.html">ao_host.js</a>, <a href="ao_host.js.html#line207">line 207</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>Returns the algo order definition identified by the provided ID</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>id</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>i.e. bfx-iceberg</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>aoDef</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">object</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="getAOInstance"><span class="type-signature"></span>getAOInstance<span class="signature">(gid)</span><span class="type-signature"> &rarr; {object}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ao_host.js.html">ao_host.js</a>, <a href="ao_host.js.html#line217">line 217</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>Returns the active AO instance state identified by the provided GID</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>gid</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>algo order group ID</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>state - algo order state</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">object</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="getAOInstances"><span class="type-signature"></span>getAOInstances<span class="signature">()</span><span class="type-signature"> &rarr; {Array.&lt;object>}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ao_host.js.html">ao_host.js</a>, <a href="ao_host.js.html#line226">line 226</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>Returns an array of all running algo order instances</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>aoInstances</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Array.&lt;object></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="getAOs"><span class="type-signature"></span>getAOs<span class="signature">()</span><span class="type-signature"> &rarr; {Array}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ao_host.js.html">ao_host.js</a>, <a href="ao_host.js.html#line197">line 197</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>Fetch configured algorithmic orders</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>aos</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Array</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="loadAllAOs"><span class="type-signature">(async) </span>loadAllAOs<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ao_host.js.html">ao_host.js</a>, <a href="ao_host.js.html#line380">line 380</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>Loads and starts all saved previously active algo orders</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="reconnect"><span class="type-signature"></span>reconnect<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ao_host.js.html">ao_host.js</a>, <a href="ao_host.js.html#line135">line 135</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>Disconnect &amp; reconnect the exchange adapter</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="reloadAllAOs"><span class="type-signature">(async) </span>reloadAllAOs<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ao_host.js.html">ao_host.js</a>, <a href="ao_host.js.html#line366">line 366</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>Implodes all current AO instances, but does NOT stop them. Afterwards, all
+known AOs are loaded and started again.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="startAO"><span class="type-signature">(async) </span>startAO<span class="signature">(id, args, gidCB<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {string}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ao_host.js.html">ao_host.js</a>, <a href="ao_host.js.html#line465">line 465</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>Creates and starts a new algo order instance, based on the AO def
+identified by the supplied ID</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>id</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>algo order definition ID, i.e. bfx-iceberg</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>args</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>algo order arguments/parameters</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>gidCB</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>callback to acquire GID prior to ao:start</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>gid - instance GID</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">string</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="stopAO"><span class="type-signature">(async) </span>stopAO<span class="signature">(gid)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ao_host.js.html">ao_host.js</a>, <a href="ao_host.js.html#line539">line 539</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>Stops an algo order instance by GID</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>gid</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>algo order instance GID</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+    
+
+    
+
+    
+        <h3 class="subsection-title">Events</h3>
+
+        
+            
+
+    
+
+    <h4 class="name" id="~event:dataBook">dataBook</h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ao_host.js.html">ao_host.js</a>, <a href="ao_host.js.html#line311">line 311</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>Triggered when an order book update is received.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>update</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;Array></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>incoming snapshot or price level</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>meta</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#EventMetaInformation">EventMetaInformation</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>source channel information</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~event:dataCandles">dataCandles</h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ao_host.js.html">ao_host.js</a>, <a href="ao_host.js.html#line293">line 293</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>Triggered when a candle snapshot or individual candle is received.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>update</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;Array></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>incoming snapshot or single candle</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>meta</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#EventMetaInformation">EventMetaInformation</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>source channel information</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~event:dataManagedBook">dataManagedBook</h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ao_host.js.html">ao_host.js</a>, <a href="ao_host.js.html#line330">line 330</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>Triggered when an order book update is received, and an internally
+managed order book instance is updated. The entire order book is passed
+to the event listeners.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>book</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>full order boook</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>meta</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#EventMetaInformation">EventMetaInformation</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>source channel information</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+<h5>Listeners of This Event:</h5>
+<ul>
+    <li><a href="module-AccumulateDistribute.html#.onDataManagedBook">module:AccumulateDistribute.onDataManagedBook</a></li>
+
+    <li><a href="module-TWAP.html#.onDataManagedBook">module:TWAP.onDataManagedBook</a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~event:dataManagedCandles">dataManagedCandles</h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ao_host.js.html">ao_host.js</a>, <a href="ao_host.js.html#line350">line 350</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>Triggered when a candle update is received, and an internally managed
+candle dataset is updated. The entire dataset is passed to the event
+listeners.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>candles</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;object></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>full dataset</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>meta</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#EventMetaInformation">EventMetaInformation</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>source channel information</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+<h5>Listeners of This Event:</h5>
+<ul>
+    <li><a href="module-AccumulateDistribute.html#.onDataManagedCandles">module:AccumulateDistribute.onDataManagedCandles</a></li>
+
+    <li><a href="module-MACrossover.html#.onDataManagedCandles">module:MACrossover.onDataManagedCandles</a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~event:dataNotification">dataNotification</h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ao_host.js.html">ao_host.js</a>, <a href="ao_host.js.html#line238">line 238</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>Triggered when a notification is received.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>notification</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;Array></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>incoming notification data</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>meta</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#EventMetaInformation">EventMetaInformation</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>source channel information</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~event:dataTicker">dataTicker</h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ao_host.js.html">ao_host.js</a>, <a href="ao_host.js.html#line257">line 257</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>Triggered when a ticker is received.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>ticker</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;Array></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>incoming ticker data</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>meta</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#EventMetaInformation">EventMetaInformation</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>source channel information</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~event:dataTrades">dataTrades</h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ao_host.js.html">ao_host.js</a>, <a href="ao_host.js.html#line275">line 275</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>Triggered when a trade snapshot or single trade is received</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>update</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;Array></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>incoming snapshot or single trade</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>meta</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#EventMetaInformation">EventMetaInformation</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>source channel information</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+<h5>Listeners of This Event:</h5>
+<ul>
+    <li><a href="module-AccumulateDistribute.html#.onDataTrades">module:AccumulateDistribute.onDataTrades</a></li>
+
+    <li><a href="module-TWAP.html#.onDataTrades">module:TWAP.onDataTrades</a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~event:errorsInsufficientBalance">errorsInsufficientBalance</h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="host_events_insufficient_balance.js.html">host/events/insufficient_balance.js</a>, <a href="host_events_insufficient_balance.js.html#line18">line 18</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>Triggered when an order fails due to have insufficient balance</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>order</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>the order that failed</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>notification</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>the incoming notification</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+<h5>Listeners of This Event:</h5>
+<ul>
+    <li><a href="module-DefaultErrorHandlers.html#.onErrorInsufficientBalance">module:DefaultErrorHandlers.onErrorInsufficientBalance</a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~event:errorsMinimumSize">errorsMinimumSize</h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="host_events_minimum_size_error.js.html">host/events/minimum_size_error.js</a>, <a href="host_events_minimum_size_error.js.html#line18">line 18</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>Triggered when an order fails due to being below the minimum size for that
+market.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>order</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>the order that failed</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>notification</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>the incoming notification</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+<h5>Listeners of This Event:</h5>
+<ul>
+    <li><a href="module-DefaultErrorHandlers.html#.onErrorMinimumSize">module:DefaultErrorHandlers.onErrorMinimumSize</a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~event:lifeStart">lifeStart</h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ao_host.js.html">ao_host.js</a>, <a href="ao_host.js.html#line601">line 601</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>Triggered when an algorithmic order begins execution.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Listeners of This Event:</h5>
+<ul>
+    <li><a href="module-AccumulateDistribute.html#.onLifeStart">module:AccumulateDistribute.onLifeStart</a></li>
+
+    <li><a href="module-Iceberg.html#.onLifeStart">module:Iceberg.onLifeStart</a></li>
+
+    <li><a href="module-MACrossver.html#.onLifeStart">module:MACrossver.onLifeStart</a></li>
+
+    <li><a href="module-OCOCO.html#.onLifeStart">module:OCOCO.onLifeStart</a></li>
+
+    <li><a href="module-PingPong.html#.onLifeStart">module:PingPong.onLifeStart</a></li>
+
+    <li><a href="module-TWAP.html#.onLifeStart">module:TWAP.onLifeStart</a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~event:lifeStop">lifeStop</h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ao_host.js.html">ao_host.js</a>, <a href="ao_host.js.html#line639">line 639</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>Triggered when an algorithmic order ends execution.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Listeners of This Event:</h5>
+<ul>
+    <li><a href="module-AccumulateDistribute.html#.onLifeStop">module:AccumulateDistribute.onLifeStop</a></li>
+
+    <li><a href="module-Iceberg.html#.onLifeStop">module:Iceberg.onLifeStop</a></li>
+
+    <li><a href="module-MACrossover.html#.onLifeStop">module:MACrossover.onLifeStop</a></li>
+
+    <li><a href="module-OCOCO.html#.onLifeStop">module:OCOCO.onLifeStop</a></li>
+
+    <li><a href="module-PingPong.html#.onLifeStop">module:PingPong.onLifeStop</a></li>
+
+    <li><a href="module-TWAP.html#.onLifeStop">module:TWAP.onLifeStop</a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~event:ordersOrderCancel">ordersOrderCancel</h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="host_ws2_process_message.js.html">host/ws2/process_message.js</a>, <a href="host_ws2_process_message.js.html#line97">line 97</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>Triggered on atomic order cancellation</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>order</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>the order that was cancelled</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+<h5>Listeners of This Event:</h5>
+<ul>
+    <li><a href="module-AccumulateDistribute.html#.onOrdersOrderCancel">module:AccumulateDistribute.onOrdersOrderCancel</a></li>
+
+    <li><a href="module-Iceberg.html#.onOrdersOrderCancel">module:Iceberg.onOrdersOrderCancel</a></li>
+
+    <li><a href="module-MACrossover.html#.onOrdersOrderCancel">module:MACrossover.onOrdersOrderCancel</a></li>
+
+    <li><a href="module-OCOCO.html#.onOrdersOrderCancel">module:OCOCO.onOrdersOrderCancel</a></li>
+
+    <li><a href="module-OCOCO.html#.onOrdersOrderFill">module:OCOCO.onOrdersOrderFill</a></li>
+
+    <li><a href="module-PingPong.html#.onOrdersOrderCancel">module:PingPong.onOrdersOrderCancel</a></li>
+
+    <li><a href="module-TWAP.html#.onOrdersOrderCancel">module:TWAP.onOrdersOrderCancel</a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~event:ordersOrderError">ordersOrderError</h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="host_ws2_process_message.js.html">host/ws2/process_message.js</a>, <a href="host_ws2_process_message.js.html#line120">line 120</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>Triggered on a generic order error</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>order</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>the order that caused the error</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+<h5>Listeners of This Event:</h5>
+<ul>
+    <li><a href="module-DefaultErrorHandlers.html#.onOrdersOrderError">module:DefaultErrorHandlers.onOrdersOrderError</a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~event:ordersOrderFill">ordersOrderFill</h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="host_ws2_process_message.js.html">host/ws2/process_message.js</a>, <a href="host_ws2_process_message.js.html#line105">line 105</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>Triggered on atomic order fill</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>order</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>the order that was filled</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+<h5>Listeners of This Event:</h5>
+<ul>
+    <li><a href="module-AccumulateDistribute.html#.onOrdersOrderFill">module:AccumulateDistribute.onOrdersOrderFill</a></li>
+
+    <li><a href="module-Iceberg.html#.onOrdersOrderFill">module:Iceberg.onOrdersOrderFill</a></li>
+
+    <li><a href="module-PingPong.html#.onOrdersOrderFill">module:PingPong.onOrdersOrderFill</a></li>
+
+    <li><a href="module-TWAP.html#.onOrdersOrderFill">module:TWAP.onOrdersOrderFill</a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+        
+    
+</article>
+
+</section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.3</a> on Wed Mar 11 2020 15:55:04 GMT+0700 (Indochina Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+<script src="scripts/search.js" defer></script>
+
+
+
+</body>
+</html>

@@ -12,3 +12,7 @@ package-lock.json
 .env
 !db/.keep
 db/*
+tags
+.nyc_output
+.undodir
+Session.vim

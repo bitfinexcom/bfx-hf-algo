@@ -1,3 +1,26 @@
+# 2.1.0
+- meta: switch to nyc for coverage and set/enforce limits
+- meta: add husky pre-commit test hook
+- meta: bump deps
+- fix: set _HF flag on atomics where missing
+- fix: AsyncEventEmitter off() handler logic
+- feature: add more tests to improve coverage
+- AOHost refactor: all internal AO events are now emit(ed) on the AO event emitter
+- AOHost refactor: all trigger* methods now return promises
+- AOHost feature: add getAOs() method
+- AOHost refactor: emitSelf() and emit() helpers now return a promise
+- TWAP fix: allow exact match in price target verification
+- TWAP fix: allow 0 cancel/submit delays
+- TWAP fix: amount checking in tick handler
+- TWAP fix: await updateState() in life:stop handler
+- Ping/Pong fix: allow 0 cancel/submit delays
+- MACrossover fix: add help text
+- Iceberg refactor: no longer cancels atomics on exit, to match the other AOs
+- AccumulateDistribute refactor: decrease catch-up delay to 200ms
+- AccumulateDistribute fix: catch-up did not result in decreased delay
+- AsyncEventEmitter: expand & improve functionality (added await())
+- AsyncEventEmitter: off() changed to take (cb) as args
+
 # 2.0.14
 - feature: AO host now cancels AO orders in snapshot before restoring on load
 

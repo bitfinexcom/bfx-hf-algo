@@ -1,0 +1,98 @@
+{
+  "tags": {
+    "allowUnknownTags": false,
+    "dictionaries": ["jsdoc"]
+  },
+  "source": {
+    "include": ["lib", "DOCUMENTATION.md"],
+    "includePattern": ".js$",
+    "excludePattern": "(node_modules/|docs)"
+  },
+  "plugins": [
+    "plugins/markdown"
+  ],
+  "templates": {
+    "cleverLinks": false,
+    "monospaceLinks": true,
+    "smallSourceLink": true,
+    "hideAuthor": true
+  },
+  "opts": {
+    "destination": "./docs/",
+    "encoding": "utf8",
+    "private": false,
+    "recurse": true,
+    "template": "./node_modules/docdash",
+    "tutorials": "./tutorials"
+  },
+  "package": "",
+  "docdash": {
+    "static": true,
+    "sort": true,
+    "search": true,
+    "menu": {
+      "HF UI": {
+        "href": "https://honey.bitfinex.com/",
+        "target": "_blank",
+        "class": "menu-item",
+        "id": "hfui_link"
+      },
+
+      "Getting Started": {
+        "href": "/tutorial-Architecture.html",
+        "target": "",
+        "class": "menu-item",
+        "id": "architecture_link"
+      },
+
+      "Algo Host": {
+        "href": "/class-AOHost.html",
+        "target": "",
+        "class": "menu-item",
+        "id": "algo_host_link"
+      },
+
+      "Accumulate/Distribute": {
+        "href": "/module-AccumulateDistribute.html",
+        "target": "",
+        "class": "menu-item",
+        "id": "ad_link"
+      },
+
+      "Iceberg": {
+        "href": "/module-Iceberg.html",
+        "target": "",
+        "class": "menu-item",
+        "id": "iceberg_link"
+      },
+
+      "MA Crossover": {
+        "href": "/module-MACrossover.html",
+        "target": "",
+        "class": "menu-item",
+        "id": "mac_link"
+      },
+
+      "Order Creates OCO": {
+        "href": "/module-OCOCO.html",
+        "target": "",
+        "class": "menu-item",
+        "id": "ococo_link"
+      },
+
+      "Ping/Pong": {
+        "href": "/module-PingPong.html",
+        "target": "",
+        "class": "menu-item",
+        "id": "pingpong_link"
+      },
+
+      "TWAP": {
+        "href": "/module-TWAP.html",
+        "target": "",
+        "class": "menu-item",
+        "id": "twap_link"
+      }
+    }
+  }
+}

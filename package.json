@@ -1,13 +1,18 @@
 {
   "name": "bfx-hf-algo",
-  "version": "2.0.14",
+  "version": "2.1.0",
   "description": "HF Algorithmic Order Module",
   "main": "index.js",
   "directories": {
     "lib": "lib"
   },
   "engines": {
-    "node": ">=6"
+    "node": ">=8.3.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm test"
+    }
   },
   "author": "Bitfinex",
   "contributors": [
@@ -18,19 +23,11 @@
   ],
   "license": "Apache-2.0",
   "scripts": {
-    "lint": "standard",
+    "lint": "eslint lib/ examples/ test/ index.js",
     "test": "npm run lint && npm run unit",
-    "unit": "DEBUG='bfx:hf:*' NODE_PATH=lib/ NODE_ENV=test istanbul cover _mocha -- -R spec -b --recursive",
+    "unit": "NODE_ENV=test NODE_PATH=lib/ nyc --check-coverage --lines 60 --branches 40 --functions 40 --statements 60 --reporter=lcov --reporter=html mocha -b --recursive",
     "test-without-coverage": "NODE_ENV=test mocha -R spec -b --recursive",
-    "macrossover_docs": "node_modules/jsdoc-to-markdown/bin/cli.js lib/ma_crossover/index.js > docs/ma_crossover.md",
-    "aohost_docs": "node_modules/jsdoc-to-markdown/bin/cli.js lib/ao_host.js > docs/ao_host.md",
-    "helpers_docs": "node_modules/jsdoc-to-markdown/bin/cli.js lib/host/gen_helpers.js > docs/helpers.md",
-    "iceberg_docs": "node_modules/jsdoc-to-markdown/bin/cli.js lib/iceberg/index.js > docs/iceberg.md",
-    "twap_docs": "node_modules/jsdoc-to-markdown/bin/cli.js lib/twap/index.js > docs/twap.md",
-    "pingpong_docs": "node_modules/jsdoc-to-markdown/bin/cli.js lib/ping_pong/index.js > docs/ping_pong.md",
-    "ad_docs": "node_modules/jsdoc-to-markdown/bin/cli.js lib/accumulate_distribute/index.js > docs/accumulate_distribute.md",
-    "ococo_docs": "node_modules/jsdoc-to-markdown/bin/cli.js lib/ococo/index.js > docs/ococo.md",
-    "docs": "npm run aohost_docs && npm run helpers_docs && npm run iceberg_docs && npm run twap_docs && npm run ad_docs && npm run macrossover_docs && npm run pingpong_docs && npm run ococo_docs"
+    "docs": "rm -rf docs && node_modules/.bin/jsdoc --configure .jsdoc.json --verbose"
   },
   "repository": {
     "type": "git",
@@ -46,42 +43,49 @@
     "BTC"
   ],
   "dependencies": {
-    "bfx-api-mock-srv": "^1.0.0",
-    "bfx-api-node-core": "^1.1.0",
-    "bfx-api-node-models": "^1.0.12",
+    "bfx-api-mock-srv": "^1.0.4",
+    "bfx-api-node-core": "^1.1.8",
+    "bfx-api-node-models": "^1.1.9",
     "bfx-api-node-plugin-managed-candles": "^1.0.0",
     "bfx-api-node-plugin-managed-ob": "^1.0.0",
-    "bfx-api-node-plugin-wd": "^1.0.0",
+    "bfx-api-node-plugin-wd": "^1.0.3",
     "bfx-api-node-util": "^1.0.2",
     "bfx-hf-indicators": "^2.0.0",
     "bfx-hf-models": "^2.1.0",
     "bfx-hf-util": "^1.0.1",
-    "bitfinex-api-node": "^4.0.0",
+    "bitfinex-api-node": "^4.0.10",
     "bluebird": "^3.5.5",
     "debug": "^4.1.1",
-    "eventemitter2": "^5.0.1",
+    "eventemitter2": "^6.0.0",
     "lodash": "^4.17.15",
     "lodash.throttle": "^4.1.1",
     "lowdb": "^1.0.0",
     "p-iteration": "^1.1.7"
   },
   "devDependencies": {
-    "babel-eslint": "^8.2.6",
-    "bfx-hf-ext-plugin-bitfinex": "^1.0.0",
+    "babel-eslint": "^10.1.0",
+    "bfx-hf-ext-plugin-bitfinex": "^1.0.5",
     "bfx-hf-models-adapter-lowdb": "^1.0.0",
     "chai": "^4.2.0",
-    "dotenv": "^6.0.0",
-    "eslint": "^4.19.1",
-    "eslint-config-standard": "^7.0.0",
-    "eslint-loader": "^1.7.1",
-    "eslint-plugin-import": "^2.18.2",
-    "eslint-plugin-promise": "^3.5.0",
-    "eslint-plugin-standard": "^2.0.1",
-    "istanbul": "^0.4.5",
-    "jsdoc-to-markdown": "^4.0.1",
-    "mocha": "^6.2.0",
-    "socks-proxy-agent": "^4.0.1",
+    "docdash": "^1.2.0",
+    "dotenv": "^8.2.0",
+    "eslint": "^6.8.0",
+    "eslint-config-standard": "^14.1.0",
+    "eslint-loader": "^3.0.3",
+    "eslint-plugin-import": "^2.20.1",
+    "eslint-plugin-jsdoc": "^22.0.0",
+    "eslint-plugin-lodash": "^6.0.0",
+    "eslint-plugin-mocha": "^6.3.0",
+    "eslint-plugin-node": "^11.0.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1",
+    "husky": "^4.2.3",
+    "jsdoc": "^3.6.3",
+    "mocha": "^7.1.0",
+    "nyc": "^15.0.0",
+    "sinon": "^9.0.0",
+    "socks-proxy-agent": "^5.0.0",
     "standard": "^14.2.0",
-    "webpack": "^2.4.1"
+    "webpack": "^4.42.0"
   }
 }

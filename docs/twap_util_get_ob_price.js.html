@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>twap/util/get_ob_price.js - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    <input type="text" id="nav-search" placeholder="Search" />
+    
+    <h2><a href="index.html">Home</a></h2><h2><a href="https://honey.bitfinex.com/" target="_blank" class="menu-item" id="hfui_link" >HF UI</a></h2><h2><a href="/tutorial-Architecture.html" target="" class="menu-item" id="architecture_link" >Getting Started</a></h2><h2><a href="/class-AOHost.html" target="" class="menu-item" id="algo_host_link" >Algo Host</a></h2><h2><a href="/module-AccumulateDistribute.html" target="" class="menu-item" id="ad_link" >Accumulate/Distribute</a></h2><h2><a href="/module-Iceberg.html" target="" class="menu-item" id="iceberg_link" >Iceberg</a></h2><h2><a href="/module-MACrossover.html" target="" class="menu-item" id="mac_link" >MA Crossover</a></h2><h2><a href="/module-OCOCO.html" target="" class="menu-item" id="ococo_link" >Order Creates OCO</a></h2><h2><a href="/module-PingPong.html" target="" class="menu-item" id="pingpong_link" >Ping/Pong</a></h2><h2><a href="/module-TWAP.html" target="" class="menu-item" id="twap_link" >TWAP</a></h2><h3>Classes</h3><ul><li><a href="AOHost.html">AOHost</a><ul class='members'><li data-type='member'><a href="AOHost.html#.TEARDOWN_GRACE_PERIOD_MS">TEARDOWN_GRACE_PERIOD_MS</a></li></ul><ul class='methods'><li data-type='method'><a href="AOHost.html#aosRunning">aosRunning</a></li><li data-type='method'><a href="AOHost.html#close">close</a></li><li data-type='method'><a href="AOHost.html#connect">connect</a></li><li data-type='method'><a href="AOHost.html#getAdapter">getAdapter</a></li><li data-type='method'><a href="AOHost.html#getAO">getAO</a></li><li data-type='method'><a href="AOHost.html#getAOInstance">getAOInstance</a></li><li data-type='method'><a href="AOHost.html#getAOInstances">getAOInstances</a></li><li data-type='method'><a href="AOHost.html#getAOs">getAOs</a></li><li data-type='method'><a href="AOHost.html#loadAllAOs">loadAllAOs</a></li><li data-type='method'><a href="AOHost.html#reconnect">reconnect</a></li><li data-type='method'><a href="AOHost.html#reloadAllAOs">reloadAllAOs</a></li><li data-type='method'><a href="AOHost.html#startAO">startAO</a></li><li data-type='method'><a href="AOHost.html#stopAO">stopAO</a></li></ul></li><li><a href="AsyncEventEmitter.html">AsyncEventEmitter</a><ul class='methods'><li data-type='method'><a href="AsyncEventEmitter.html#emit">emit</a></li><li data-type='method'><a href="AsyncEventEmitter.html#off">off</a></li><li data-type='method'><a href="AsyncEventEmitter.html#on">on</a></li><li data-type='method'><a href="AsyncEventEmitter.html#onAll">onAll</a></li><li data-type='method'><a href="AsyncEventEmitter.html#onAllOnce">onAllOnce</a></li><li data-type='method'><a href="AsyncEventEmitter.html#once">once</a></li><li data-type='method'><a href="AsyncEventEmitter.html#removeAllListeners">removeAllListeners</a></li></ul></li></ul><h3>Modules</h3><ul><li><a href="module-AccumulateDistribute.html">AccumulateDistribute</a><ul class='methods'><li data-type='method'><a href="module-AccumulateDistribute.html#.declareChannels">declareChannels</a></li><li data-type='method'><a href="module-AccumulateDistribute.html#.declareEvents">declareEvents</a></li><li data-type='method'><a href="module-AccumulateDistribute.html#.generateOrderAmounts">generateOrderAmounts</a></li><li data-type='method'><a href="module-AccumulateDistribute.html#.genOrderLabel">genOrderLabel</a></li><li data-type='method'><a href="module-AccumulateDistribute.html#.genPreview">genPreview</a></li><li data-type='method'><a href="module-AccumulateDistribute.html#.getUIDef">getUIDef</a></li><li data-type='method'><a href="module-AccumulateDistribute.html#.hasIndicatorCap">hasIndicatorCap</a></li><li data-type='method'><a href="module-AccumulateDistribute.html#.hasIndicatorOffset">hasIndicatorOffset</a></li><li data-type='method'><a href="module-AccumulateDistribute.html#.hasOBRequirement">hasOBRequirement</a></li><li data-type='method'><a href="module-AccumulateDistribute.html#.hasTradeRequirement">hasTradeRequirement</a></li><li data-type='method'><a href="module-AccumulateDistribute.html#.initState">initState</a></li><li data-type='method'><a href="module-AccumulateDistribute.html#.onDataManagedBook">onDataManagedBook</a></li><li data-type='method'><a href="module-AccumulateDistribute.html#.onDataManagedCandles">onDataManagedCandles</a></li><li data-type='method'><a href="module-AccumulateDistribute.html#.onDataTrades">onDataTrades</a></li><li data-type='method'><a href="module-AccumulateDistribute.html#.onLifeStart">onLifeStart</a></li><li data-type='method'><a href="module-AccumulateDistribute.html#.onLifeStop">onLifeStop</a></li><li data-type='method'><a href="module-AccumulateDistribute.html#.onOrdersOrderCancel">onOrdersOrderCancel</a></li><li data-type='method'><a href="module-AccumulateDistribute.html#.onOrdersOrderFill">onOrdersOrderFill</a></li><li data-type='method'><a href="module-AccumulateDistribute.html#.onSelfIntervalTick">onSelfIntervalTick</a></li><li data-type='method'><a href="module-AccumulateDistribute.html#.onSelfSubmitOrder">onSelfSubmitOrder</a></li><li data-type='method'><a href="module-AccumulateDistribute.html#.processParams">processParams</a></li><li data-type='method'><a href="module-AccumulateDistribute.html#.scheduleTick">scheduleTick</a></li><li data-type='method'><a href="module-AccumulateDistribute.html#.serialize">serialize</a></li><li data-type='method'><a href="module-AccumulateDistribute.html#.unserialize">unserialize</a></li><li data-type='method'><a href="module-AccumulateDistribute.html#.validateParams">validateParams</a></li></ul></li><li><a href="module-DefaultErrorHandlers.html">DefaultErrorHandlers</a><ul class='methods'><li data-type='method'><a href="module-DefaultErrorHandlers.html#.onErrorInsufficientBalance">onErrorInsufficientBalance</a></li><li data-type='method'><a href="module-DefaultErrorHandlers.html#.onErrorMinimumSize">onErrorMinimumSize</a></li><li data-type='method'><a href="module-DefaultErrorHandlers.html#.onOrdersOrderError">onOrdersOrderError</a></li></ul></li><li><a href="module-Helpers.html">Helpers</a><ul class='methods'><li data-type='method'><a href="module-Helpers.html#~cancelAllOrdersWithDelay">cancelAllOrdersWithDelay</a></li><li data-type='method'><a href="module-Helpers.html#~cancelOrderWithDelay">cancelOrderWithDelay</a></li><li data-type='method'><a href="module-Helpers.html#~clearAllTimeouts">clearAllTimeouts</a></li><li data-type='method'><a href="module-Helpers.html#~debug">debug</a></li><li data-type='method'><a href="module-Helpers.html#~declareChannel">declareChannel</a></li><li data-type='method'><a href="module-Helpers.html#~declareEvent">declareEvent</a></li><li data-type='method'><a href="module-Helpers.html#~emit">emit</a></li><li data-type='method'><a href="module-Helpers.html#~emitAsync">emitAsync</a></li><li data-type='method'><a href="module-Helpers.html#~emitSelf">emitSelf</a></li><li data-type='method'><a href="module-Helpers.html#~emitSelfAsync">emitSelfAsync</a></li><li data-type='method'><a href="module-Helpers.html#~notifyUI">notifyUI</a></li><li data-type='method'><a href="module-Helpers.html#~submitOrderWithDelay">submitOrderWithDelay</a></li><li data-type='method'><a href="module-Helpers.html#~updateState">updateState</a></li></ul></li><li><a href="module-Iceberg.html">Iceberg</a><ul class='members'><li data-type='member'><a href="module-Iceberg.html#.generateOrders">generateOrders</a></li></ul><ul class='methods'><li data-type='method'><a href="module-Iceberg.html#.declareEvents">declareEvents</a></li><li data-type='method'><a href="module-Iceberg.html#.genOrderLabel">genOrderLabel</a></li><li data-type='method'><a href="module-Iceberg.html#.genOrderLabel">genOrderLabel</a></li><li data-type='method'><a href="module-Iceberg.html#.genPreview">genPreview</a></li><li data-type='method'><a href="module-Iceberg.html#.getUIDef">getUIDef</a></li><li data-type='method'><a href="module-Iceberg.html#.initState">initState</a></li><li data-type='method'><a href="module-Iceberg.html#.onLifeStart">onLifeStart</a></li><li data-type='method'><a href="module-Iceberg.html#.onLifeStop">onLifeStop</a></li><li data-type='method'><a href="module-Iceberg.html#.onOrdersOrderCancel">onOrdersOrderCancel</a></li><li data-type='method'><a href="module-Iceberg.html#.onOrdersOrderFill">onOrdersOrderFill</a></li><li data-type='method'><a href="module-Iceberg.html#.onSelfSubmitOrders">onSelfSubmitOrders</a></li><li data-type='method'><a href="module-Iceberg.html#.processParams">processParams</a></li><li data-type='method'><a href="module-Iceberg.html#.serialize">serialize</a></li><li data-type='method'><a href="module-Iceberg.html#.unserialize">unserialize</a></li><li data-type='method'><a href="module-Iceberg.html#.validateParams">validateParams</a></li></ul></li><li><a href="module-MACrossover.html">MACrossover</a><ul class='members'><li data-type='member'><a href="module-MACrossover.html#.generateOrder">generateOrder</a></li></ul><ul class='methods'><li data-type='method'><a href="module-MACrossover.html#.declareChannels">declareChannels</a></li><li data-type='method'><a href="module-MACrossover.html#.declareEvents">declareEvents</a></li><li data-type='method'><a href="module-MACrossover.html#.genPreview">genPreview</a></li><li data-type='method'><a href="module-MACrossover.html#.initState">initState</a></li><li data-type='method'><a href="module-MACrossover.html#.onDataManagedCandles">onDataManagedCandles</a></li><li data-type='method'><a href="module-MACrossover.html#.onLifeStop">onLifeStop</a></li><li data-type='method'><a href="module-MACrossover.html#.onOrdersOrderCancel">onOrdersOrderCancel</a></li><li data-type='method'><a href="module-MACrossover.html#.onSelfSubmitOrder">onSelfSubmitOrder</a></li><li data-type='method'><a href="module-MACrossover.html#.processParams">processParams</a></li><li data-type='method'><a href="module-MACrossover.html#.serialize">serialize</a></li><li data-type='method'><a href="module-MACrossover.html#.unserialize">unserialize</a></li><li data-type='method'><a href="module-MACrossover.html#.validateParams">validateParams</a></li></ul></li><li><a href="module-OCOCO.html">OCOCO</a><ul class='members'><li data-type='member'><a href="module-OCOCO.html#.generateInitialOrder">generateInitialOrder</a></li><li data-type='member'><a href="module-OCOCO.html#.generateOCOOrder">generateOCOOrder</a></li></ul><ul class='methods'><li data-type='method'><a href="module-OCOCO.html#.genOrderLabel">genOrderLabel</a></li><li data-type='method'><a href="module-OCOCO.html#.genPreview">genPreview</a></li><li data-type='method'><a href="module-OCOCO.html#.getUIDef">getUIDef</a></li><li data-type='method'><a href="module-OCOCO.html#.initState">initState</a></li><li data-type='method'><a href="module-OCOCO.html#.module.exports">module.exports</a></li><li data-type='method'><a href="module-OCOCO.html#.onLifeStart">onLifeStart</a></li><li data-type='method'><a href="module-OCOCO.html#.onLifeStop">onLifeStop</a></li><li data-type='method'><a href="module-OCOCO.html#.onOrdersOrderCancel">onOrdersOrderCancel</a></li><li data-type='method'><a href="module-OCOCO.html#.onOrdersOrderFill">onOrdersOrderFill</a></li><li data-type='method'><a href="module-OCOCO.html#.onSelfSubmitInitialOrder">onSelfSubmitInitialOrder</a></li><li data-type='method'><a href="module-OCOCO.html#.onSelfSubmitOCOOrder">onSelfSubmitOCOOrder</a></li><li data-type='method'><a href="module-OCOCO.html#.processParams">processParams</a></li><li data-type='method'><a href="module-OCOCO.html#.serialize">serialize</a></li><li data-type='method'><a href="module-OCOCO.html#.unserialize">unserialize</a></li><li data-type='method'><a href="module-OCOCO.html#.validateParams">validateParams</a></li></ul></li><li><a href="module-PingPong.html">PingPong</a><ul class='members'><li data-type='member'><a href="module-PingPong.html#.genPingPongTable">genPingPongTable</a></li></ul><ul class='methods'><li data-type='method'><a href="module-PingPong.html#.genOrderLabel">genOrderLabel</a></li><li data-type='method'><a href="module-PingPong.html#.genPreview">genPreview</a></li><li data-type='method'><a href="module-PingPong.html#.getUIDef">getUIDef</a></li><li data-type='method'><a href="module-PingPong.html#.initState">initState</a></li><li data-type='method'><a href="module-PingPong.html#.onLifeStart">onLifeStart</a></li><li data-type='method'><a href="module-PingPong.html#.onLifeStop">onLifeStop</a></li><li data-type='method'><a href="module-PingPong.html#.onOrdersOrderCancel">onOrdersOrderCancel</a></li><li data-type='method'><a href="module-PingPong.html#.onOrdersOrderFill">onOrdersOrderFill</a></li><li data-type='method'><a href="module-PingPong.html#.processParams">processParams</a></li><li data-type='method'><a href="module-PingPong.html#.serialize">serialize</a></li><li data-type='method'><a href="module-PingPong.html#.unserialize">unserialize</a></li><li data-type='method'><a href="module-PingPong.html#.validateParams">validateParams</a></li></ul></li><li><a href="module-TWAP.html">TWAP</a><ul class='members'><li data-type='member'><a href="module-TWAP.html#.generateOrder">generateOrder</a></li><li data-type='member'><a href="module-TWAP.html#.getOBPrice">getOBPrice</a></li><li data-type='member'><a href="module-TWAP.html#.getTradePrice">getTradePrice</a></li><li data-type='member'><a href="module-TWAP.html#.hasOBTarget">hasOBTarget</a></li><li data-type='member'><a href="module-TWAP.html#.hasTradeTarget">hasTradeTarget</a></li><li data-type='member'><a href="module-TWAP.html#.isTargetMet">isTargetMet</a></li></ul><ul class='methods'><li data-type='method'><a href="module-TWAP.html#.declareChannels">declareChannels</a></li><li data-type='method'><a href="module-TWAP.html#.declareEvents">declareEvents</a></li><li data-type='method'><a href="module-TWAP.html#.genOrderLabel">genOrderLabel</a></li><li data-type='method'><a href="module-TWAP.html#.genPreview">genPreview</a></li><li data-type='method'><a href="module-TWAP.html#.getUIDef">getUIDef</a></li><li data-type='method'><a href="module-TWAP.html#.initState">initState</a></li><li data-type='method'><a href="module-TWAP.html#.onDataManagedBook">onDataManagedBook</a></li><li data-type='method'><a href="module-TWAP.html#.onDataTrades">onDataTrades</a></li><li data-type='method'><a href="module-TWAP.html#.onLifeStart">onLifeStart</a></li><li data-type='method'><a href="module-TWAP.html#.onLifeStop">onLifeStop</a></li><li data-type='method'><a href="module-TWAP.html#.onOrdersOrderCancel">onOrdersOrderCancel</a></li><li data-type='method'><a href="module-TWAP.html#.onOrdersOrderFill">onOrdersOrderFill</a></li><li data-type='method'><a href="module-TWAP.html#.onSelfIntervalTick">onSelfIntervalTick</a></li><li data-type='method'><a href="module-TWAP.html#.processParams">processParams</a></li><li data-type='method'><a href="module-TWAP.html#.serialize">serialize</a></li><li data-type='method'><a href="module-TWAP.html#.unserialize">unserialize</a></li><li data-type='method'><a href="module-TWAP.html#.validateParams">validateParams</a></li></ul></li></ul><h3>Events</h3><ul><li><a href="AOHost.html#~event:dataBook">dataBook</a></li><li><a href="AOHost.html#~event:dataCandles">dataCandles</a></li><li><a href="AOHost.html#~event:dataManagedBook">dataManagedBook</a></li><li><a href="AOHost.html#~event:dataManagedCandles">dataManagedCandles</a></li><li><a href="AOHost.html#~event:dataNotification">dataNotification</a></li><li><a href="AOHost.html#~event:dataTicker">dataTicker</a></li><li><a href="AOHost.html#~event:dataTrades">dataTrades</a></li><li><a href="AOHost.html#~event:errorsInsufficientBalance">errorsInsufficientBalance</a></li><li><a href="AOHost.html#~event:errorsMinimumSize">errorsMinimumSize</a></li><li><a href="AOHost.html#~event:lifeStart">lifeStart</a></li><li><a href="AOHost.html#~event:lifeStop">lifeStop</a></li><li><a href="AOHost.html#~event:ordersOrderCancel">ordersOrderCancel</a></li><li><a href="AOHost.html#~event:ordersOrderError">ordersOrderError</a></li><li><a href="AOHost.html#~event:ordersOrderFill">ordersOrderFill</a></li><li><a href="module-AccumulateDistribute.html#~event:selfIntervalTick">selfIntervalTick</a></li><li><a href="module-AccumulateDistribute.html#~event:selfSubmitOrder">selfSubmitOrder</a></li><li><a href="module-Iceberg.html#~event:event:selfSubmitOrders">selfSubmitOrders</a></li><li><a href="module-MACrossover.html#~event:selfSubmitOrder">selfSubmitOrder</a></li><li><a href="module-OCOCO.html#~event:selfSubmitInitialOrder">selfSubmitInitialOrder</a></li><li><a href="module-OCOCO.html#~event:selfSubmitOCOOrder">selfSubmitOCOOrder</a></li><li><a href="module-TWAP.html#~event:selfIntervalTick">selfIntervalTick</a></li></ul><h3>Tutorials</h3><ul><li><a href="tutorial-Architecture.html">Architecture</a></li></ul><h3>Global</h3><ul><li><a href="global.html#defineAlgoOrder">defineAlgoOrder</a></li></ul>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">twap/util/get_ob_price.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>'use strict'
+
+const _isFinite = require('lodash/isFinite')
+const Config = require('../config')
+
+/**
+ * Extracts the target price from the last known order book. Null if unavailable
+ *
+ * @memberOf module:TWAP
+ * @name module:TWAP.getOBPrice
+ * @param {object} state - instance state
+ * @returns {number} obPrice
+ */
+const getOBPrice = (state = {}) => {
+  const { args = {}, lastBook } = state
+  const { amount, priceTarget, priceCondition } = args
+  let price = null
+
+  if (!lastBook) {
+    return null
+  }
+
+  if (_isFinite(priceTarget)) {
+    if (priceCondition === Config.PRICE_COND.MATCH_SIDE) {
+      price = amount &lt; 0
+        ? lastBook.topBid()
+        : lastBook.topAsk()
+    } else if (priceCondition === Config.PRICE_COND.MATCH_MIDPOINT) {
+      price = lastBook.midPrice()
+    }
+  } else if (priceTarget === Config.PRICE_TARGET.OB_SIDE) {
+    price = amount &lt; 0
+      ? lastBook.topBid()
+      : lastBook.topAsk()
+  } else if (priceTarget === Config.PRICE_TARGET.OB_MID) {
+    price = lastBook.midPrice()
+  }
+
+  return price
+}
+
+module.exports = getOBPrice
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.3</a> on Wed Mar 11 2020 15:55:04 GMT+0700 (Indochina Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+<script src="scripts/search.js" defer></script>
+
+
+
+</body>
+</html>
