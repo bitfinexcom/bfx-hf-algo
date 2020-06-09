@@ -8,7 +8,8 @@ implementations.
 
 The system is exchange-agnostic and relies on external adapter libraries for the
 actual exchange API connection. For bitfinex, this adapter is provided by the
-[bfx-hf-ext-plugin-bitfinex](https://github.com/bitfinexcom/bfx-hf-ext-plugin-bitfinex) library.
+[bfx-hf-ext-plugin-bitfinex](https://github.com/bitfinexcom/bfx-hf-ext-plugin-bitfinex)
+library.
 
 ### Features
 
@@ -102,7 +103,11 @@ host.once('ws2:auth:success', async () => {
 
 ### Docs
 
-[Refer to the `docs/`](/docs) folder for JSDoc-generated API documentation.
+API documentation can be found in [`docs/reference.md`](docs/reference.md), and
+examples in the [`examples`](examples) folder.
+
+A tutorial detailing the library architecture can be found at
+[`docs/tutorial_architecture`](docs/tutorial_architecture.md).
 
 ### Contributing
 
