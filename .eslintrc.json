@@ -1,4 +1,6 @@
 {
+  "root": true,
+
   "plugins": [
     "jsdoc",
     "mocha"

@@ -1,3 +1,8 @@
+# 2.1.1
+- meta: bump deps
+- meta: normalize eslint config
+- refactor: improve doclets
+
 # 2.1.0
 - meta: switch to nyc for coverage and set/enforce limits
 - meta: add husky pre-commit test hook
