@@ -1,3 +1,6 @@
+# 2.1.1
+- Ping/Pong: change default orderCount from string to number
+
 # 2.1.0
 - meta: switch to nyc for coverage and set/enforce limits
 - meta: add husky pre-commit test hook
