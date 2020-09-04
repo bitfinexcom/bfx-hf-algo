@@ -1,3 +1,8 @@
+# 2.2.2
+
+- fix: log output: NaN value for generated market orders (OCOCO / MA Crossover)
+- fix: log output: NaN value for submitted market orders
+
 # 2.1.1
 - Ping/Pong: change default orderCount from string to number
 
