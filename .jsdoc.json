@@ -18,11 +18,11 @@
     "hideAuthor": true
   },
   "opts": {
-    "destination": "./docs/",
+    "destination": "./docs/data.json",
     "encoding": "utf8",
     "private": false,
     "recurse": true,
-    "template": "./node_modules/docdash",
+    "template": "./node_modules/jsdoc-json",
     "tutorials": "./tutorials"
   },
   "package": "",

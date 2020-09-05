@@ -13,6 +13,7 @@
 - fix: set _HF flag on atomics where missing
 - fix: AsyncEventEmitter off() handler logic
 - feature: add more tests to improve coverage
+- refactor: AO orders event section is now optional
 - AOHost refactor: all internal AO events are now emit(ed) on the AO event emitter
 - AOHost refactor: all trigger* methods now return promises
 - AOHost feature: add getAOs() method
@@ -23,6 +24,7 @@
 - TWAP fix: await updateState() in life:stop handler
 - Ping/Pong fix: allow 0 cancel/submit delays
 - MACrossover fix: add help text
+- MACrossover fix: use correct CID gen function
 - Iceberg refactor: no longer cancels atomics on exit, to match the other AOs
 - AccumulateDistribute refactor: decrease catch-up delay to 200ms
 - AccumulateDistribute fix: catch-up did not result in decreased delay
