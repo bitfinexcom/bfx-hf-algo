@@ -29,6 +29,22 @@ describe('iceberg:util:generate_orders', () => {
     assert.strictEqual(slice.amount, args.sliceAmount)
   })
 
+  it('generates valid slice order, floats', () => {
+    const order = {
+      orderType: 'LIMIT',
+      symbol: 'tBTCUSD',
+      amount: 0.3,
+      sliceAmount: 0.1,
+      excessAsHidden: true,
+      price: 1000
+    }
+
+    const orders = generateOrders({ remainingAmount: 0.3, args: order })
+    const [hidden] = orders
+
+    assert.strictEqual(hidden.amount, 0.2, 'not -0.19999999999999998')
+  })
+
   it('caps slice order at remainingAmount if less than slice', () => {
     const orders = generateOrders({ remainingAmount: 0.05, args })
     const [slice] = orders
