@@ -73,21 +73,13 @@ describe('genHelpers', () => {
     it('emits on the self scope after a timeout using the helper state', (done) => {
       const ev = new AsyncEventEmitter()
       const h = H({ ev })
-      let eventSeen = false
 
       ev.once('self:test', (...args) => {
         assert.deepStrictEqual(args, [1, 2, 3], 'emitter did not pass args through')
-        eventSeen = true
+        done()
       })
 
-      h.emitSelfAsync('test', 1, 2, 3) // still resolves after timeout
-
-      setTimeout(() => {
-        assert.ok(eventSeen, 'did not emit test event')
-        done()
-      }, 1)
-
-      assert.ok(!eventSeen, 'event should not have fired')
+      h.emitSelfAsync('test', 1, 2, 3)
     })
   })
 
@@ -111,21 +103,13 @@ describe('genHelpers', () => {
     it('emits on the self scope after a timeout using the helper state', (done) => {
       const ev = new AsyncEventEmitter()
       const h = H({ ev })
-      let eventSeen = false
 
       ev.once('test', (...args) => {
         assert.deepStrictEqual(args, [1, 2, 3], 'emitter did not pass args through')
-        eventSeen = true
+        done()
       })
 
-      h.emitAsync('test', 1, 2, 3) // still resolves after timeout
-
-      setTimeout(() => {
-        assert.ok(eventSeen, 'did not emit test event')
-        done()
-      }, 1)
-
-      assert.ok(!eventSeen, 'event should not have fired')
+      h.emitAsync('test', 1, 2, 3)
     })
   })
 
@@ -247,11 +231,6 @@ describe('genHelpers', () => {
       assert.strictEqual(patchedState.cancelledOrders[oA.cid], oA, 'order A not marked cancelled in patched state')
       assert.strictEqual(patchedState.cancelledOrders[oB.cid], oB, 'order B not marked cancelled in patched state')
     })
-  })
-
-  describe.skip('submitOrderWithDelay', () => {
-    it('retries up to 10 times if the order fails for any non-standard reason', () => {})
-    it('immediately patches order set', () => {})
   })
 
   describe('declareEvent', () => {
