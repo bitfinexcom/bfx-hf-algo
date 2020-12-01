@@ -1,5 +1,11 @@
-# 2.2.2
+# 2.1.4
+- fix: iceberg: fix float issue in order display
 
+# 2.1.3
+- fix: ema/ma cross: don't allow 0 or negative values
+- fix: iceberg: fix float issues
+
+# 2.1.2
 - fix: log output: NaN value for generated market orders (OCOCO / MA Crossover)
 - fix: log output: NaN value for submitted market orders
 
