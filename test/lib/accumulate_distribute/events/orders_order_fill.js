@@ -45,6 +45,41 @@ describe('accumulate_distribute:events:orders_order_fill', () => {
     assert.strictEqual(o.getLastFillAmount(), 0, 'order fill amount not reset')
   })
 
+  it('updates remaining amount w/ fill amount, floats', (done) => {
+    const filledOrderFloat = {
+      resetFilledAmount: () => {},
+      getLastFillAmount: () => {
+        return 0.2
+      }
+    }
+
+    const instance = getInstance({
+      stateParams: { remainingAmount: 0.7 }
+    })
+
+    ordersOrderFill({
+      ...instance,
+      state: {
+        ...instance.state,
+      },
+
+      h: {
+        ...instance.h,
+
+        updateState: (inst, update) => {
+          return new Promise((resolve) => {
+            assert.deepStrictEqual(update, {
+              currentOrder: 1,
+              ordersBehind: 0,
+              remainingAmount: 0.5
+            })
+            resolve()
+          }).then(done).catch(done)
+        }
+      }
+    }, filledOrderFloat)
+  })
+
   it('updates state with the new remaining amount & timeline position', async () => {
     const o = new Order({ amount: 42 })
     o.amount = 40
