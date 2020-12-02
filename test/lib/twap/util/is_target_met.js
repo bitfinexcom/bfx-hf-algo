@@ -10,4 +10,10 @@ describe('twap:util:is_target_met', () => {
     assert.ok(isTargetMet({ priceTarget: 1, priceDelta: 0.2 }, 1.2))
     assert.ok(!isTargetMet({ priceTarget: 1, priceDelta: 0.2 }, 1.3))
   })
+
+  it('verifies that the price target is met, floats', () => {
+    assert.ok(isTargetMet({ priceTarget: 0.5, priceDelta: 0 }, 0.5))
+    assert.ok(isTargetMet({ priceTarget: 0.5, priceDelta: 0.2 }, 0.7))
+    assert.ok(!isTargetMet({ priceTarget: 0.5, priceDelta: 0.2 }, 0.8))
+  })
 })
