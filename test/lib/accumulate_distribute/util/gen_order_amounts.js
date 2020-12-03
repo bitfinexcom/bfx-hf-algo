@@ -14,4 +14,11 @@ describe('accumulate_distribute:util:gen_order_amounts', () => {
 
     assert.ok(Math.abs(total - 10) <= DUST, 'deviation greater than DUST')
   })
+
+  it('returns a total amount equal to or DUST-difference from the requested total, floats', () => {
+    const amounts = genOrderAmounts.gen({ amount: 0.07, sliceAmount: 0.01, amountDistortion: 0.0025 })
+    const total = amounts.reduce((prev, curr) => prev + curr, 0)
+
+    assert.ok(Math.abs(total - 0.07) <= DUST, 'deviation greater than DUST')
+  })
 })
