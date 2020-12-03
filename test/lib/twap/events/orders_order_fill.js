@@ -67,7 +67,7 @@ describe('twap:events:orders_order_fill', () => {
       ...instance,
       state: {
         ...instance.state,
-        remainingAmount: 0.5
+        remainingAmount: 0.3
       },
 
       h: {
@@ -76,7 +76,7 @@ describe('twap:events:orders_order_fill', () => {
         updateState: (inst, update) => {
           return new Promise((resolve) => {
             assert.deepStrictEqual(update, {
-              remainingAmount: 0.3
+              remainingAmount: 0.1
             })
             resolve()
           }).then(done).catch(done)
