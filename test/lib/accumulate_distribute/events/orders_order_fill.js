@@ -54,7 +54,7 @@ describe('accumulate_distribute:events:orders_order_fill', () => {
     }
 
     const instance = getInstance({
-      stateParams: { remainingAmount: 0.7 }
+      stateParams: { remainingAmount: 0.3 }
     })
 
     ordersOrderFill({
@@ -71,7 +71,7 @@ describe('accumulate_distribute:events:orders_order_fill', () => {
             assert.deepStrictEqual(update, {
               currentOrder: 1,
               ordersBehind: 0,
-              remainingAmount: 0.5
+              remainingAmount: 0.1
             })
             resolve()
           }).then(done).catch(done)
