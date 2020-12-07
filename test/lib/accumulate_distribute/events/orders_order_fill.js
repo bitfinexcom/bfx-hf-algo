@@ -39,7 +39,7 @@ describe('accumulate_distribute:events:orders_order_fill', () => {
     assert.strictEqual(o.getLastFillAmount(), 2, 'sanity check failed')
 
     const i = getInstance({
-      stateParams: {remainingAmount: 0}
+      stateParams: { remainingAmount: 0 }
     })
     await ordersOrderFill(i, o)
     assert.strictEqual(o.getLastFillAmount(), 0, 'order fill amount not reset')
@@ -60,7 +60,7 @@ describe('accumulate_distribute:events:orders_order_fill', () => {
     ordersOrderFill({
       ...instance,
       state: {
-        ...instance.state,
+        ...instance.state
       },
 
       h: {
