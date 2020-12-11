@@ -55,6 +55,36 @@ describe('twap:events:orders_order_fill', () => {
     }, filledOrder)
   })
 
+  it('updates remaining amount w/ fill amount, floats', (done) => {
+    const filledOrderFloat = {
+      resetFilledAmount: () => {},
+      getLastFillAmount: () => {
+        return 0.2
+      }
+    }
+
+    onOrderFill({
+      ...instance,
+      state: {
+        ...instance.state,
+        remainingAmount: 0.3
+      },
+
+      h: {
+        ...instance.h,
+
+        updateState: (inst, update) => {
+          return new Promise((resolve) => {
+            assert.deepStrictEqual(update, {
+              remainingAmount: 0.1
+            })
+            resolve()
+          }).then(done).catch(done)
+        }
+      }
+    }, filledOrderFloat)
+  })
+
   it('does not stop if remaining amount is not dust', (done) => {
     onOrderFill({
       ...instance,
