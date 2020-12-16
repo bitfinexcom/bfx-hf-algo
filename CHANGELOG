@@ -1,3 +1,6 @@
+# 2.1.5
+ -  ma: fix SMA algo orders
+
 # 2.1.4
 - fix: iceberg: fix float issue in order display
 
