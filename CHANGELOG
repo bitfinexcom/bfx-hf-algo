@@ -1,3 +1,6 @@
+# 2.1.6
+ - ping/pong: fix forms when ordercount was changed
+
 # 2.1.5
  -  ma: fix SMA algo orders
 
