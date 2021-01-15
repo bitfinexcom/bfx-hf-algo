@@ -2,23 +2,7 @@
 
 [![Build Status](https://travis-ci.org/bitfinexcom/bfx-hf-algo.svg?branch=master)](https://travis-ci.org/bitfinexcom/bfx-hf-algo)
 
-This library implements an algorithmic order system using the Bitfinex Node.JS
-API, and provides several official algo orders which serve as reference
-implementations.
-
-The system is exchange-agnostic and relies on external adapter libraries for the
-actual exchange API connection. For bitfinex, this adapter is provided by the
-[bfx-hf-ext-plugin-bitfinex](https://github.com/bitfinexcom/bfx-hf-ext-plugin-bitfinex) library.
-
-### Features
-
-* Event-driven algorithm host (`AOHost` class)
-* Plugin-based exchange API connection, enabling the development of adapters for new exchanges
-* TWAP (see `docs/twap.md`)
-* Ping/Pong (see `docs/ping_pong.md`)
-* Accumulate/Distribute (see `docs/accumulate_distribute.md`)
-* MA Crossover (see `docs/ma_crossover.md`)
-* Iceberg (see `docs/iceberg.md`)
+For a description of the included algo orders, see our [user docs](./user-docs.md)
 
 ### Installation
 
