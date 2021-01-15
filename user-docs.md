@@ -58,6 +58,11 @@ for minimal market disruption when executing large trades.
 MA Crossover triggers either a `MARKET` or a `LIMIT` order when two
 user-defined moving averages cross. Users can configure either a standard MA
 or an EMA individually for both long & short signals.
+<br/>
+<br/>
+Calculation of the EMA and SMA start with the execution of the algo order,
+which runs locally on the users machine. Any crossover is triggered *after*
+the initial collection of candles for the selected timeframes.
 
 ## Order Creates OCO
 
