@@ -17,6 +17,12 @@ const args = {
   orderType: 'LIMIT'
 }
 
+const timeout = () => {
+  return new Promise((resolve) => {
+    setTimeout(resolve, 0)
+  })
+}
+
 describe('twap:events:self_interval_tick', () => {
   it('cancels if not trading beyond end period and there are orders', (done) => {
     onIntervalTick({
@@ -30,6 +36,7 @@ describe('twap:events:self_interval_tick', () => {
       },
 
       h: {
+        timeout,
         debug: () => {},
         emit: (eventName, gid, orders, delay) => {
           return new Promise((resolve) => {
@@ -58,6 +65,7 @@ describe('twap:events:self_interval_tick', () => {
       },
 
       h: {
+        timeout,
         debug: () => {},
         emit: (eventName, gid, orders, delay) => {
           return new Promise((resolve, reject) => {
@@ -81,6 +89,7 @@ describe('twap:events:self_interval_tick', () => {
       },
 
       h: {
+        timeout,
         debug: () => {},
         emit: (eventName, gid, orders, delay) => {
           return new Promise((resolve, reject) => {
@@ -109,12 +118,12 @@ describe('twap:events:self_interval_tick', () => {
       },
 
       h: {
+        timeout,
         debug: () => {},
         emit: (eventName, gid, orders, delay) => {
           return new Promise((resolve) => {
             assert.strictEqual(eventName, 'exec:order:submit:all')
             assert.strictEqual(gid, 100)
-            assert.strictEqual(delay, 200)
             assert.strictEqual(orders.length, 1)
 
             const [order] = orders
@@ -142,12 +151,12 @@ describe('twap:events:self_interval_tick', () => {
       },
 
       h: {
+        timeout,
         debug: () => {},
         emit: (eventName, gid, orders, delay) => {
           return new Promise((resolve) => {
             assert.strictEqual(eventName, 'exec:order:submit:all')
             assert.strictEqual(gid, 100)
-            assert.strictEqual(delay, 200)
             assert.strictEqual(orders.length, 1)
 
             const [order] = orders
@@ -175,6 +184,7 @@ describe('twap:events:self_interval_tick', () => {
       },
 
       h: {
+        timeout,
         debug: () => {},
         emit: (eventName, gid, orders, delay) => {
           return new Promise((resolve, reject) => {
@@ -203,6 +213,7 @@ describe('twap:events:self_interval_tick', () => {
       },
 
       h: {
+        timeout,
         debug: () => {},
         emit: (eventName, gid, orders, delay) => {
           return new Promise((resolve, reject) => {
