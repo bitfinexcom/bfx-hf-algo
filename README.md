@@ -31,11 +31,11 @@ const {
 
 const host = new AOHost({
   aos: [PingPong, Iceberg, TWAP, AccumulateDistribute, MACrossover],
-  adapter: new AOAdapter({
+  wsSettings: {
     apiKey: '...',
     apiSecret: '...',
     dms: 4
-  }),
+  },
 
   db: new HFDB({
     schema: HFDBBitfinexSchema,

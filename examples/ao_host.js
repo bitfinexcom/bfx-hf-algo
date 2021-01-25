@@ -1,5 +1,7 @@
 'use strict'
 
+const path = require('path')
+
 require('dotenv').config()
 
 process.env.DEBUG = '*,-bfx:api:ws:on_channel_message'
@@ -12,24 +14,29 @@ const {
 const HFDB = require('bfx-hf-models')
 const HFDBLowDBAdapter = require('bfx-hf-models-adapter-lowdb')
 const {
-  AOAdapter,
   schema: HFDBBitfinexSchema
 } = require('bfx-hf-ext-plugin-bitfinex')
 
 const { API_KEY, API_SECRET } = process.env
 
+const wsSettings = {
+  apiKey: API_KEY,
+  apiSecret: API_SECRET,
+  dms: 4,
+  withHeartbeat: true
+//  affiliateCode,
+//  wsURL,
+//  restURL
+}
+
 const host = new AOHost({
   aos: [Iceberg, TWAP, AccumulateDistribute, MACrossover],
-  adapter: new AOAdapter({
-    apiKey: API_KEY,
-    apiSecret: API_SECRET,
-    dms: 4
-  }),
+  wsSettings,
 
   db: new HFDB({
     schema: HFDBBitfinexSchema,
     adapter: HFDBLowDBAdapter({
-      dbPath: `${__dirname}/../db/example.json`
+      dbPath: path.join(__dirname, '..', 'db', 'example.json')
     })
   })
 })
