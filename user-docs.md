@@ -102,3 +102,7 @@ Available price targets/explicit target conditions:
   - OB side price (top bid/ask)
   - OB mid price
   - Last trade price
+
+When a submit delay is specified, the algo will wait until the submit delay
+in seconds has passed, then get / calculate the price for the orderbook and
+submit the order.
