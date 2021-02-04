@@ -17,6 +17,13 @@ const {
   schema: HFDBBitfinexSchema
 } = require('bfx-hf-ext-plugin-bitfinex')
 
+const algoDB = new HFDB({
+  schema: HFDBBitfinexSchema,
+  adapter: HFDBLowDBAdapter({
+    dbPath: path.join(__dirname, '..', 'db', 'example.json')
+  })
+})
+
 const { API_KEY, API_SECRET } = process.env
 
 const wsSettings = {
@@ -31,14 +38,7 @@ const wsSettings = {
 
 const host = new AOHost({
   aos: [Iceberg, TWAP, AccumulateDistribute, MACrossover],
-  wsSettings,
-
-  db: new HFDB({
-    schema: HFDBBitfinexSchema,
-    adapter: HFDBLowDBAdapter({
-      dbPath: path.join(__dirname, '..', 'db', 'example.json')
-    })
-  })
+  wsSettings
 })
 
 host.on('ao:start', (instance) => {
@@ -51,6 +51,12 @@ host.on('ao:stop', (instance) => {
   const { state = {} } = instance
   const { id, gid } = state
   debug('stopped AO %s [gid %s]', id, gid)
+})
+
+host.on('ao:persist:db:update', async (updateOpts) => {
+  const { AlgoOrder } = algoDB
+  await AlgoOrder.set(updateOpts)
+  debug('ao instance updated %s', updateOpts.gid)
 })
 
 host.on('ws2:auth:error', (packet) => {

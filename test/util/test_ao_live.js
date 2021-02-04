@@ -7,7 +7,6 @@ const PI = require('p-iteration')
 const Promise = require('bluebird')
 const _isFunction = require('lodash/isFunction')
 const debug = require('debug')('bfx:hf:algo:test:ao-live')
-const { AOAdapter } = require('bfx-hf-ext-plugin-bitfinex')
 const createTestHarness = require('../../lib/testing/create_harness')
 const AOHost = require('../../lib/ao_host')
 const {
@@ -30,13 +29,13 @@ module.exports = ({ name, aoID, aoClass, defaultParams = {}, tests = [] }) => {
     let gid = null
 
     const spawnHost = (onReadyCB) => {
-      const adapter = new AOAdapter({
+      const wsSettings = {
         apiKey: API_KEY,
         apiSecret: API_SECRET
-      })
+      }
 
       host = new AOHost({
-        adapter,
+        wsSettings,
         aos: [
           PingPong, Iceberg, TWAP, AccumulateDistribute, MACrossover, OCOCO
         ]

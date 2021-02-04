@@ -4,7 +4,7 @@
     "dictionaries": ["jsdoc"]
   },
   "source": {
-    "include": ["lib", "DOCUMENTATION.md"],
+    "include": ["lib", "user-docs.md"],
     "includePattern": ".js$",
     "excludePattern": "(node_modules/|docs)"
   },

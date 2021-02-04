@@ -1,12 +1,12 @@
 ## AO Host
 
 The [`AOHost`]{@link AOHost} class provides a wrapper around the algo order system, and manages
-lifetime events/order execution. Internally it utilizes an [`AOAdapter`]{@link https://github.com/bitfinexcom/bfx-hf-ext-plugin-bitfinex/blob/master/lib/ao_adapter/index.js}
+lifetime events/order execution. Internally it utilizes an [`AOAdapter`]{@link https://github.com/bitfinexcom/bfx-hf-algo/blob/master/lib/ws_adapter.js}
 instance to communicate with the exchange API, and listens for websocket stream
 events in order to update order state/trigger algo order events.
 
 Execution is handled by an event system, with events being triggered by
-[`AOAdapter`]{@link https://github.com/bitfinexcom/bfx-hf-ext-plugin-bitfinex/blob/master/lib/ao_adapter/index.js}
+[`AOAdapter`]{@link https://github.com/bitfinexcom/bfx-hf-algo/blob/master/lib/ws_adapter.js}
 websocket stream payloads, and the algo orders themselves.
 
 To start/stop algo orders, [`gid = startAO(id, args)`]{@link AOHost#startAO} and
