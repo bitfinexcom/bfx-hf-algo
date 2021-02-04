@@ -15,7 +15,7 @@
   ],
   "license": "Apache-2.0",
   "scripts": {
-    "lint": "standard lib/ examples/ test/ index.js",
+    "lint": "standard",
     "test": "npm run lint && npm run unit",
     "unit": "NODE_ENV=test mocha -R spec -b --recursive",
     "docs": "rm -rf docs && node_modules/.bin/jsdoc --configure .jsdoc.json --verbose"
@@ -42,7 +42,6 @@
     "bfx-api-node-plugin-wd": "^1.0.4",
     "bfx-api-node-util": "^1.0.2",
     "bfx-hf-indicators": "^2.0.0",
-    "bfx-hf-models": "^2.1.0",
     "bfx-hf-util": "^1.0.1",
     "bluebird": "^3.5.5",
     "debug": "^4.1.1",
@@ -50,9 +49,11 @@
     "p-iteration": "^1.1.7"
   },
   "devDependencies": {
+    "bfx-hf-models": "^2.1.0",
     "bfx-hf-ext-plugin-bitfinex": "^1.0.5",
     "bfx-hf-models-adapter-lowdb": "^1.0.0",
     "chai": "^4.2.0",
+    "docdash": "^1.2.0",
     "dotenv": "^8.2.0",
     "jsdoc": "^3.6.3",
     "mocha": "^7.1.0",

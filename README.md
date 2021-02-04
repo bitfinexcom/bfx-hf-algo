@@ -8,26 +8,33 @@ For a description of the included algo orders, see our [user docs](./user-docs.m
 
 ```bash
 npm i --save bfx-hf-algo
+npm i --save bfx-hf-models
 npm i --save bfx-hf-ext-plugin-bitfinex
 npm i --save bfx-hf-models-adapter-lowdb
 ```
 
 ### Quickstart & Example
 
-To get started, initialize an `AOAdapter` and `HFDB` instance, then pass them
-to a new `AOHost` instance and call `startAO(id, args)`:
+To get started, create an object wsSettings required for `AOAdapter`,
+then pass them to a new `AOHost` instance and call `startAO(id, args)`:
 
 ```js
-const HFDB = require('bfx-hf-models')
-const HFDBLowDBAdapter = require('bfx-hf-models-adapter-lowdb')
-const {
-  AOAdapter,
-  schema: HFDBBitfinexSchema
-} = require('bfx-hf-ext-plugin-bitfinex')
-
 const {
   AOHost, PingPong, Iceberg, TWAP, AccumulateDistribute, MACrossover
 } = require('bfx-hf-algo')
+
+const HFDB = require('bfx-hf-models')	
+const HFDBLowDBAdapter = require('bfx-hf-models-adapter-lowdb')	
+const {	
+  schema: HFDBBitfinexSchema	
+} = require('bfx-hf-ext-plugin-bitfinex')
+
+const algoDB = new HFDB({	
+  schema: HFDBBitfinexSchema,	
+  adapter: HFDBLowDBAdapter({	
+    dbPath: path.join(__dirname, '..', 'db', 'example.json')	
+  })	
+})
 
 const host = new AOHost({
   aos: [PingPong, Iceberg, TWAP, AccumulateDistribute, MACrossover],
@@ -35,14 +42,7 @@ const host = new AOHost({
     apiKey: '...',
     apiSecret: '...',
     dms: 4
-  },
-
-  db: new HFDB({
-    schema: HFDBBitfinexSchema,
-    adapter: HFDBLowDBAdapter({
-      dbPath: `${__dirname}/db.json`,
-    })
-  })
+  }
 })
 
 host.on('ao:start', (instance) => {
@@ -55,6 +55,12 @@ host.on('ao:stop', (instance) => {
   const { state = {} } = instance
   const { id, gid } = state
   console.log('stopped AO %s [gid %s]', id, gid)
+})
+
+host.on('ao:persist:db:update', async(updateOpts) => {
+  const { AlgoOrder } = algoDB  //algoDB is the low-adapter DB for algo
+  await AlgoOrder.set(updateOpts)
+  console.log('ao instance updated %s', updateOpts.gid)
 })
 
 host.on('ws2:auth:error', (packet) => {
