@@ -9,6 +9,7 @@ const validParams = {
   orderType: 'LIMIT',
   amount: 1,
   sliceAmount: 0.1,
+  amountDistortion: 0.2,
   sliceInterval: 1,
   submitDelay: 100,
   cancelDelay: 100,

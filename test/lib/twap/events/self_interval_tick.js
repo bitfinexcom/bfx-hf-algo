@@ -24,6 +24,31 @@ const timeout = () => {
 }
 
 describe('twap:events:self_interval_tick', () => {
+  it('doesn\'t submit a new order if order amount exceeds in case of trading beyond end', (done) => {
+    onIntervalTick({
+      state: {
+        gid: 100,
+        orders: { o: { amount: 0.4 }, p: { amount: 0.4 } },
+        args: {
+          ...args,
+          sliceAmount: 0.4
+        }
+      },
+
+      h: {
+        timeout,
+        debug: (msg) => {
+          if (msg === 'tick') {
+            return
+          }
+          assert.strictEqual(msg, 'next tick would exceed total order amount, refusing')
+          done()
+        },
+        emit: () => {}
+      }
+    })
+  })
+
   it('cancels if not trading beyond end period and there are orders', (done) => {
     onIntervalTick({
       state: {
