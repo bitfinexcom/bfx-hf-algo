@@ -45,10 +45,10 @@ describe('iceberg:meta:process_params', () => {
 
   it('converts slice amount from percent to abs value', () => {
     const params = processParams({
-      amount: 10,
+      amount: 3,
       sliceAmountPerc: 0.2
     })
 
-    assert.strictEqual(params.sliceAmount, 2)
+    assert.strictEqual(params.sliceAmount, 0.6)
   })
 })
