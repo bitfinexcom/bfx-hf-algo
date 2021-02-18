@@ -1,6 +1,7 @@
 /* eslint-env mocha */
 'use strict'
 
+const sinon = require('sinon')
 const assert = require('assert')
 const Promise = require('bluebird')
 const _isObject = require('lodash/isObject')
@@ -45,6 +46,30 @@ describe('accumulate_distribute:events:orders_order_fill', () => {
     })
     await ordersOrderFill(i, o)
     assert.strictEqual(o.getLastFillAmount(), 0, 'order fill amount not reset')
+  })
+
+  it('updates state with the new remaining amount for float amounts', async () => {
+    const o = new Order({ amount: 0.3 })
+    o.amount = 0.1
+
+    const stubbedFillAmount = sinon.stub(o, 'getLastFillAmount').returns(0.1)
+
+    const i = getInstance({
+      stateParams: {
+        remainingAmount: 0.3,
+        ordersBehind: 2,
+        currentOrder: 3
+      },
+
+      helperParams: {
+        updateState: async (instance, packet) => {
+          assert.strictEqual(packet.remainingAmount, 0.2, 'incorrect remaining amount')
+        }
+      }
+    })
+
+    await ordersOrderFill(i, o)
+    stubbedFillAmount.restore()
   })
 
   it('updates state with the new remaining amount & timeline position', async () => {
