@@ -48,6 +48,34 @@ describe('accumulate_distribute:events:orders_order_fill', () => {
     assert.strictEqual(o.getLastFillAmount(), 0, 'order fill amount not reset')
   })
 
+  it('warns when there\'s an overfill', async () => {
+    let warnedAboutOverfill = false
+    const o = new Order({ amount: 0.3 })
+    o.amount = 0.2
+
+    const stubbedFillAmount = sinon.stub(o, 'getLastFillAmount').returns(0.2)
+
+    const i = getInstance({
+      stateParams: {
+        remainingAmount: 0.1,
+        ordersBehind: 2,
+        currentOrder: 3
+      },
+
+      helperParams: {
+        debug: (msg) => {
+          if (/warning: overfill/.test(msg)) {
+            warnedAboutOverfill = true
+          }
+        }
+      }
+    })
+
+    await ordersOrderFill(i, o)
+    assert.ok(warnedAboutOverfill, 'did not warn about the overfill')
+    stubbedFillAmount.restore()
+  })
+
   it('updates state with the new remaining amount for float amounts', async () => {
     const o = new Order({ amount: 0.3 })
     o.amount = 0.1
