@@ -38,6 +38,10 @@ describe('iceberg:events:orders_order_fill', () => {
 
     onOrderFill({
       ...instance,
+      state: {
+        ...instance.state,
+        remainingAmount: 100
+      },
       h: {
         ...instance.h,
         emit: (eName, gid, orders, cancelDelay) => {
