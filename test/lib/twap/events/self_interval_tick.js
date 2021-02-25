@@ -24,6 +24,32 @@ const timeout = () => {
 }
 
 describe('twap:events:self_interval_tick', () => {
+  it('submits order for float order amount', async () => {
+    let orderSubmitted = false
+    const instance = {
+      state: {
+        gid: 100,
+        orders: { o: { amount: 0.1 }, p: { amount: 0.1 } },
+        args: {
+          ...args,
+          amount: 0.3,
+          orderType: 'MARKET'
+        }
+      },
+      h: {
+        timeout,
+        debug: () => {},
+        emit: (eventName) => {
+          if (eventName === 'exec:order:submit:all') {
+            orderSubmitted = true
+          }
+        }
+      }
+    }
+    await onIntervalTick(instance)
+    assert.ok(orderSubmitted, 'did not submit order for float amounts')
+  })
+
   it('doesn\'t submit a new order if order amount exceeds in case of trading beyond end', (done) => {
     onIntervalTick({
       state: {
