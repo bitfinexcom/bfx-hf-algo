@@ -24,33 +24,19 @@ const getInstance = ({
 })
 
 describe('ma_crossover:events:orders_order_cancel', () => {
-  it('cancels all orders', (done) => {
-    const i = getInstance({
-      helperParams: {
-        emit: async (eventName, gid, orders) => {
-          if (eventName !== 'exec:order:cancel:all') return
-
-          assert.strictEqual(gid, 42)
-          assert.deepStrictEqual(orders, {})
-          done()
-        }
-      }
-    })
-
-    ordersOrderCancel(i, {})
-  })
-
-  it('emits exec:stop', (done) => {
+  it('emits exec:stop', async () => {
+    let sawExecStop = false
     const i = getInstance({
       helperParams: {
         emit: async (eventName) => {
           if (eventName === 'exec:stop') {
-            done()
+            sawExecStop = true
           }
         }
       }
     })
 
-    ordersOrderCancel(i, {})
+    await ordersOrderCancel(i, {})
+    assert.ok(sawExecStop, 'did not see exec:stop event')
   })
 })
