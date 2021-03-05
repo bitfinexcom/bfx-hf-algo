@@ -8,8 +8,6 @@ const Config = require('../../../../lib/twap/config')
 
 describe('twap:events:life_start', () => {
   it('sets up interval & saves it on state', (done) => {
-    let interval = null
-
     onLifeStart({
       state: {
         args: {
@@ -21,20 +19,9 @@ describe('twap:events:life_start', () => {
 
       h: {
         debug: () => {},
-
-        updateState: (instance, state) => {
-          return new Promise((resolve) => {
-            assert(state.interval)
-            interval = state.interval
-            resolve()
-          }).catch(done)
-        },
-
         emitSelf: (eName) => {
           return new Promise((resolve) => {
             assert.strictEqual(eName, 'interval_tick')
-            assert(interval)
-            clearInterval(interval)
             resolve()
           }).then(done).catch(done)
         }
