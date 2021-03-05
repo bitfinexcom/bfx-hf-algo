@@ -4,13 +4,13 @@
 const onLifeStop = require('../../../../lib/twap/events/life_stop')
 
 describe('twap:events:life_stop', () => {
-  it('sets up interval & saves it on state', (done) => {
-    const interval = setInterval(() => {
-      done(new Error('interval should not have been set'))
+  it('sets up timeout & saves it on state', (done) => {
+    const timeout = setTimeout(() => {
+      done(new Error('timeout should not have been set'))
     }, 10)
 
     onLifeStop({
-      state: { interval },
+      state: { timeout },
       h: {
         updateState: () => {},
         debug: () => {}
