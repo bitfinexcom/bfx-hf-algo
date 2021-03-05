@@ -1,10 +1,11 @@
 /* eslint-env mocha */
 'use strict'
 
+const assert = require('assert')
 const onLifeStop = require('../../../../lib/twap/events/life_stop')
 
 describe('twap:events:life_stop', () => {
-  it('sets up timeout & saves it on state', (done) => {
+  it('clears timeout if exists and updates state', (done) => {
     const timeout = setTimeout(() => {
       done(new Error('timeout should not have been set'))
     }, 10)
@@ -12,7 +13,12 @@ describe('twap:events:life_stop', () => {
     onLifeStop({
       state: { timeout },
       h: {
-        updateState: () => {},
+        updateState: (_, state) => {
+          return new Promise((resolve) => {
+            assert.deepStrictEqual(state.timeout, null)
+            resolve()
+          })
+        },
         debug: () => {}
       }
     })

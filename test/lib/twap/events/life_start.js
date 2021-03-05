@@ -7,7 +7,7 @@ const onLifeStart = require('../../../../lib/twap/events/life_start')
 const Config = require('../../../../lib/twap/config')
 
 describe('twap:events:life_start', () => {
-  it('sets up interval & saves it on state', (done) => {
+  it('emits self interval event', (done) => {
     onLifeStart({
       state: {
         args: {

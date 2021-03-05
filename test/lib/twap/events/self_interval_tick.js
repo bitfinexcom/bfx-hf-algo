@@ -56,8 +56,8 @@ describe('twap:events:self_interval_tick', () => {
     assert.ok(orderSubmitted, 'did not submit order for float amounts')
   })
 
-  it('doesn\'t submit a new order if order amount exceeds in case of trading beyond end', (done) => {
-    onIntervalTick({
+  it('doesn\'t submit a new order if order amount exceeds in case of trading beyond end', async () => {
+    const instance = {
       state: {
         gid: 100,
         orders: { o: { amount: 0.4 }, p: { amount: 0.4 } },
@@ -76,11 +76,15 @@ describe('twap:events:self_interval_tick', () => {
             return
           }
           assert.strictEqual(msg, 'next tick would exceed total order amount, refusing')
-          done()
         },
-        emit: () => {}
+        emit: (eventName) => {
+          if (eventName === 'exec:order:submit:all') {
+            assert.ok(false, 'should not submit order is amount exceeds')
+          }
+        }
       }
-    })
+    }
+    await onIntervalTick(instance)
   })
 
   it('cancels if not trading beyond end period and there are orders', (done) => {
