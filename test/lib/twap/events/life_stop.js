@@ -13,7 +13,8 @@ describe('twap:events:life_stop', () => {
       state: { timeout },
       h: {
         updateState: () => {},
-        debug: () => {}
+        debug: () => {},
+        emit: () => {}
       }
     })
 
