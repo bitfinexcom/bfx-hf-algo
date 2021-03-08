@@ -49,8 +49,8 @@
     "p-iteration": "^1.1.7"
   },
   "devDependencies": {
-    "bfx-hf-models": "^2.1.0",
     "bfx-hf-ext-plugin-bitfinex": "^1.0.5",
+    "bfx-hf-models": "^2.1.0",
     "bfx-hf-models-adapter-lowdb": "^1.0.0",
     "chai": "^4.2.0",
     "docdash": "^1.2.0",
@@ -58,7 +58,7 @@
     "jsdoc": "^3.6.3",
     "mocha": "^7.1.0",
     "sinon": "^9.0.0",
-    "standard": "^14.2.0"
+    "standard": "^16.0.3"
   },
   "standard": {
     "ignore": [
