@@ -14,7 +14,8 @@ describe('iceberg:events:orders_order_fill', () => {
       args: {
         amount: 100,
         cancelDelay: 42
-      }
+      },
+      remainingAmount: 100
     },
 
     h: {
