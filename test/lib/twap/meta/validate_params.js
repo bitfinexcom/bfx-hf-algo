@@ -121,4 +121,17 @@ describe('twap:meta:validate_params', () => {
       priceDelta: 'nope'
     })))
   })
+
+  it('returns error when slice amount is greater than total amount', () => {
+    assert(_isString(validateParams({
+      ...validParams,
+      sliceAmount: 2
+    })), 'doesn\'t return error when submitted buy order')
+
+    assert(_isString(validateParams({
+      ...validParams,
+      amount: -1,
+      sliceAmount: -2
+    })), 'doesn\'t return error when submitted sell order')
+  })
 })
