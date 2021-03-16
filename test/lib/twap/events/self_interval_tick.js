@@ -54,31 +54,33 @@ describe('twap:events:self_interval_tick', () => {
     assert.ok(orderSubmitted, 'did not submit order for float amounts')
   })
 
-  it('doesn\'t submit a new order if order amount exceeds in case of trading beyond end', (done) => {
-    onIntervalTick({
+  it('doesn\'t submit a new order if order amount exceeds in case of trading beyond end', async () => {
+    let orderSubmitted = false
+    const instance = {
       state: {
         gid: 100,
         orders: { o: { amount: 0.4 }, p: { amount: 0.4 } },
         args: {
           ...args,
           sliceAmount: 0.4
-        }
+        },
+        isBookUpdated: true
       },
 
       h: {
         timeout,
         updateState: () => {},
         emitSelf: () => {},
-        debug: (msg) => {
-          if (msg === 'tick') {
-            return
+        debug: () => {},
+        emit: (eventName) => {
+          if (eventName === 'exec:order:submit:all') {
+            orderSubmitted = true
           }
-          assert.strictEqual(msg, 'next tick would exceed total order amount, refusing')
-          done()
-        },
-        emit: () => {}
+        }
       }
-    })
+    }
+    await onIntervalTick(instance)
+    assert.ok(!orderSubmitted, 'should not have submitted a new order if order amount exceeds')
   })
 
   it('cancels if not trading beyond end period and there are orders', (done) => {
@@ -89,7 +91,8 @@ describe('twap:events:self_interval_tick', () => {
         args: {
           ...args,
           tradeBeyondEnd: false
-        }
+        },
+        isBookUpdated: true
       },
 
       h: {
@@ -118,7 +121,8 @@ describe('twap:events:self_interval_tick', () => {
         args: {
           ...args,
           priceCondition: Config.PRICE_COND.MATCH_MIDPOINT
-        }
+        },
+        isBookUpdated: true
       },
 
       h: {
@@ -144,7 +148,8 @@ describe('twap:events:self_interval_tick', () => {
         args: {
           ...args,
           priceCondition: Config.PRICE_COND.MATCH_LAST
-        }
+        },
+        isBookUpdated: true
       },
 
       h: {
@@ -170,7 +175,7 @@ describe('twap:events:self_interval_tick', () => {
         lastBook: {
           midPrice: () => { return 1000 }
         },
-
+        isBookUpdated: true,
         remainingAmount: 1,
         args: {
           ...args,
@@ -210,7 +215,8 @@ describe('twap:events:self_interval_tick', () => {
         args: {
           ...args,
           priceCondition: Config.PRICE_COND.MATCH_LAST
-        }
+        },
+        isBookUpdated: true
       },
 
       h: {
@@ -245,7 +251,8 @@ describe('twap:events:self_interval_tick', () => {
         args: {
           ...args,
           priceCondition: Config.PRICE_COND.MATCH_LAST
-        }
+        },
+        isBookUpdated: true
       },
 
       h: {
@@ -271,7 +278,7 @@ describe('twap:events:self_interval_tick', () => {
         lastBook: {
           midPrice: () => { return 2000 }
         },
-
+        isBookUpdated: true,
         remainingAmount: 1,
         args: {
           ...args,
