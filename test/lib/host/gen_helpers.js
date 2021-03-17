@@ -33,9 +33,7 @@ describe('genHelpers', () => {
     const API = [
       'debug', // untested, logging func, TODO: refactor import so it can be mocked
       'emitSelf',
-      'emitSelfAsync',
       'emit',
-      'emitAsync',
       'notifyUI',
       'cancelOrderWithDelay',
       'cancelAllOrdersWithDelay',
@@ -69,20 +67,6 @@ describe('genHelpers', () => {
     })
   })
 
-  describe('emitSelfAsync', () => {
-    it('emits on the self scope after a timeout using the helper state', (done) => {
-      const ev = new AsyncEventEmitter()
-      const h = H({ ev })
-
-      ev.once('self:test', (...args) => {
-        assert.deepStrictEqual(args, [1, 2, 3], 'emitter did not pass args through')
-        done()
-      })
-
-      h.emitSelfAsync('test', 1, 2, 3)
-    })
-  })
-
   describe('emit', () => {
     it('emits immediately', async () => {
       const ev = new AsyncEventEmitter()
@@ -96,20 +80,6 @@ describe('genHelpers', () => {
 
       await h.emit('test', 1, 2, 3)
       assert.ok(eventSeen, 'event should have fired')
-    })
-  })
-
-  describe('emitAsync', () => {
-    it('emits on the self scope after a timeout using the helper state', (done) => {
-      const ev = new AsyncEventEmitter()
-      const h = H({ ev })
-
-      ev.once('test', (...args) => {
-        assert.deepStrictEqual(args, [1, 2, 3], 'emitter did not pass args through')
-        done()
-      })
-
-      h.emitAsync('test', 1, 2, 3)
     })
   })
 
