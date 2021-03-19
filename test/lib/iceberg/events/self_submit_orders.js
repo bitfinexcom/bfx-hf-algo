@@ -23,11 +23,15 @@ describe('iceberg:events:self_submit_orders', () => {
       },
 
       h: {
+        timeout: () => {
+          return [null, () => {}]
+        },
+        updateState: () => {},
         emit: (eName, gid, orders, submitDelay) => {
           return new Promise((resolve) => {
             assert.strictEqual(eName, 'exec:order:submit:all')
             assert.strictEqual(gid, 41)
-            assert.strictEqual(submitDelay, 42)
+            assert.strictEqual(submitDelay, 0)
             assert.strictEqual(orders.length, 1)
 
             const [order] = orders

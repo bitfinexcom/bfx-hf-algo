@@ -5,6 +5,10 @@ const assert = require('assert')
 const Promise = require('bluebird')
 const onOrderFill = require('../../../../lib/iceberg/events/orders_order_fill')
 
+const timeout = () => {
+  return [null, () => {}]
+}
+
 describe('iceberg:events:orders_order_fill', () => {
   const orderState = { 1: 'some_order_object' }
   const instance = {
@@ -19,6 +23,7 @@ describe('iceberg:events:orders_order_fill', () => {
     },
 
     h: {
+      timeout,
       debug: () => {},
       updateState: async () => {},
       emitSelf: async () => {},
@@ -48,7 +53,7 @@ describe('iceberg:events:orders_order_fill', () => {
           return new Promise((resolve) => {
             assert.strictEqual(gid, 100)
             assert.strictEqual(eName, 'exec:order:cancel:all')
-            assert.strictEqual(cancelDelay, 42)
+            assert.strictEqual(cancelDelay, 0)
             assert.deepStrictEqual(orders, orderState)
             resolve()
           }).then(done).catch(done)
