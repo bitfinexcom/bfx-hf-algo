@@ -185,7 +185,6 @@ await host.startAO('bfx-ping_pong', {
   pingMaxPrice: 6700,
   pongDistance: 300,
   submitDelay: 150,
-  cancelDelay: 150,
   _margin: false,
 })
 ```
@@ -208,7 +207,6 @@ await host.startAO('bfx-iceberg', {
   excessAsHidden: true,
   orderType: 'LIMIT',
   submitDelay: 150,
-  cancelDelay: 150,
   _margin: false,
 })
 ```
@@ -242,7 +240,6 @@ await host.startAO('bfx-twap', {
   tradeBeyondEnd: false,
   orderType: 'LIMIT',
   submitDelay: 150,
-  cancelDelay: 150,
   _margin: false
 })
 ```
@@ -292,7 +289,6 @@ await host.startAO('bfx-accumulate_distribute', {
   capType: 'bid',
   capDelta: 10,
   submitDelay: 150,
-  cancelDelay: 150,
   catchUp: true, // if true & behind, ignore slice interval (after prev fill)
   awaitFill: true, // await current slice fill before continuing to next slice
   _margin: false,

@@ -81,7 +81,6 @@ host.once('ws2:auth:success', async () => {
     capType: 'bid',
     capDelta: 10,
     submitDelay: 150,
-    cancelDelay: 150,
     catchUp: true, // if true & behind, ignore slice interval (after prev fill)
     awaitFill: true,
     _margin: false
