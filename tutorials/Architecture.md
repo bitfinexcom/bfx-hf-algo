@@ -90,8 +90,7 @@ The provided helpers are:
 * `emit(eventName, ...args)` - raw event emitter, i.e. `emit('life:start')`
 * `emitAsync(eventName, ...args)` - same as `emit` but operates on next tick
 * `notifyUI(level, message)` - generates and sends a notification which appears on the Bitfinex UI
-* `cancelOrderWithDelay(state, delay, order)` - takes current algo state, delay in ms
-* `cancelAllOrdersWithDelay(state, delay)` - cancels all active atomic orders on the AO state, delay in ms
+* `cancelOrder(state, order)` - takes current algo state and cancels the provided order
 * `submitOrderWithDelay(state, delay, order)` - takes current algo state, submits a new order, delay in ms
 * `declareEvent(instance, host, eventName, path)` - declares an internal AO event, see section below
 * `declareChannel(instance, host, channel, filter)` - declares a required data channel, see section below
