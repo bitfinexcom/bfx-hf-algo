@@ -16,19 +16,18 @@ describe('host:events:cancel_all_orders', () => {
 
     h: {
       debug: () => {},
-      cancelOrderWithDelay: async (state, delay, o) => {},
+      cancelOrder: async (state, o) => {},
       ...helperParams
     }
   })
 
-  it('calls cancelOrderWithDelay with each order', async () => {
+  it('calls cancelOrder with each order', async () => {
     const oA = new Order({ id: 42 })
     const oB = new Order({ id: 41 })
     const i = getInstance({
       stateParams: { orders: [oA, oB] },
       helperParams: {
-        cancelOrderWithDelay: async (state, delay, o) => {
-          assert.strictEqual(delay, 100)
+        cancelOrder: async (state, o) => {
           if (o === oA) return { ...state, cancelledA: true }
           if (o === oB) return { ...state, cancelledB: true }
           assert.ok(false, 'received unrecognized order')
@@ -39,7 +38,7 @@ describe('host:events:cancel_all_orders', () => {
     await cancelAllOrders({
       emit: async () => {},
       instances: { a: i }
-    }, 'a', [oA, oB], 100)
+    }, 'a', [oA, oB])
 
     assert.ok(i.state.cancelledA)
     assert.ok(i.state.cancelledB)
@@ -51,8 +50,7 @@ describe('host:events:cancel_all_orders', () => {
     const i = getInstance({
       stateParams: { orders: [oA, oB] },
       helperParams: {
-        cancelOrderWithDelay: async (state, delay, o) => {
-          assert.strictEqual(delay, 100)
+        cancelOrder: async (state, o) => {
           if (o === oA) return { ...state, cancelledA: true }
           if (o === oB) assert.ok(false, 'should not have cancelled order B')
           assert.ok(false, 'received unrecognized order')
@@ -63,7 +61,7 @@ describe('host:events:cancel_all_orders', () => {
     await cancelAllOrders({
       emit: async () => {},
       instances: { a: i }
-    }, 'a', [oA, oB], 100)
+    }, 'a', [oA, oB])
 
     assert.ok(i.state.cancelledA)
   })
