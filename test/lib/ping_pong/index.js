@@ -21,7 +21,6 @@ testAOLive({
     amount: 6,
     orderCount: 4,
     submitDelaySec: 0,
-    cancelDelaySec: 0,
 
     pingMinPrice: 0.4,
     pingMaxPrice: 0.6,
