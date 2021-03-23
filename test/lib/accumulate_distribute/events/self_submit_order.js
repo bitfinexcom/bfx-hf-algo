@@ -13,7 +13,6 @@ const getInstance = ({
   state: {
     gid: 42,
     args: {
-      cancelDelay: 100,
       ...argParams
     },
     ...stateParams

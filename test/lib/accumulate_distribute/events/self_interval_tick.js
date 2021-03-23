@@ -17,7 +17,6 @@ const getInstance = ({
     currentOrder: 7,
     args: {
       awaitFill: false,
-      cancelDelay: 100,
       ...argParams
     },
     ...stateParams
