@@ -19,9 +19,8 @@ describe('twap:meta:process_params', () => {
     assert.strictEqual(params.symbol, 'tBTCUSD')
   })
 
-  it('provides defaults for cancel & submit delays', () => {
+  it('provides defaults for submit delay', () => {
     const params = processParams()
-    assert(_isFinite(params.cancelDelay))
     assert(_isFinite(params.submitDelay))
   })
 

@@ -12,8 +12,7 @@ describe('twap:events:orders_order_fill', () => {
       gid: 100,
       orders: orderState,
       args: {
-        amount: 100,
-        cancelDelay: 42
+        amount: 100
       }
     },
 

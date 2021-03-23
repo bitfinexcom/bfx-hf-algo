@@ -21,7 +21,6 @@ testAOLive({
     sliceAmount: -6,
     sliceInterval: 200,
     submitDelaySec: 0,
-    cancelDelaySec: 0,
 
     priceTarget: 'OB_SIDE',
     priceDelta: 0,

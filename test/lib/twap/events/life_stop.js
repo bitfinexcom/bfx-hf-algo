@@ -1,23 +1,25 @@
 /* eslint-env mocha */
 'use strict'
 
-const onLifeStop = require('../../../../lib/twap/events/life_stop')
+const assert = require('assert')
+const onLifeStop = require('../../../../lib/ping_pong/events/life_stop')
 
 describe('twap:events:life_stop', () => {
-  it('sets up timeout & saves it on state', (done) => {
-    const timeout = setTimeout(() => {
-      done(new Error('timeout should not have been set'))
-    }, 10)
+  it('cancels all orders when twap algo stopped', async () => {
+    let cancelledOrders = false
 
-    onLifeStop({
-      state: { timeout },
+    await onLifeStop({
       h: {
         updateState: () => {},
         debug: () => {},
-        emit: () => {}
+        emit: (eventName) => {
+          if (eventName === 'exec:order:cancel:all') {
+            cancelledOrders = true
+          }
+        }
       }
     })
 
-    setTimeout(done, 50)
+    assert.ok(cancelledOrders, 'did not cancel all orders set by twap algo')
   })
 })
