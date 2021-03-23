@@ -14,17 +14,15 @@ describe('iceberg:events:orders_order_cancel', () => {
     onOrderCancel({
       state: {
         gid: 100,
-        args: { cancelDelay: 42 },
         orders: orderState
       },
 
       h: {
         debug: () => {},
-        emit: async (eName, gid, orders, cancelDelay) => {
+        emit: async (eName, gid, orders) => {
           if (call === 0) {
             assert.strictEqual(gid, 100)
             assert.strictEqual(eName, 'exec:order:cancel:all')
-            assert.strictEqual(cancelDelay, 42)
             assert.deepStrictEqual(orders, orderState)
             call += 1
           } else if (call === 1) {
