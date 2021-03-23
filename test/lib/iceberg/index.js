@@ -18,7 +18,6 @@ testAOLive({
     excessAsHidden: true,
     orderType: 'LIMIT',
     submitDelay: 0,
-    cancelDelay: 0,
     _margin: true
   },
 

@@ -16,8 +16,7 @@ describe('iceberg:events:orders_order_fill', () => {
       gid: 100,
       orders: orderState,
       args: {
-        amount: 100,
-        cancelDelay: 42
+        amount: 100
       },
       remainingAmount: 100
     },
@@ -46,14 +45,13 @@ describe('iceberg:events:orders_order_fill', () => {
       ...instance,
       h: {
         ...instance.h,
-        emit: (eName, gid, orders, cancelDelay) => {
+        emit: (eName, gid, orders) => {
           if (called !== 0) return
           called += 1
 
           return new Promise((resolve) => {
             assert.strictEqual(gid, 100)
             assert.strictEqual(eName, 'exec:order:cancel:all')
-            assert.strictEqual(cancelDelay, 0)
             assert.deepStrictEqual(orders, orderState)
             resolve()
           }).then(done).catch(done)

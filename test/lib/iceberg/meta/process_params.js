@@ -19,9 +19,8 @@ describe('iceberg:meta:process_params', () => {
     assert.strictEqual(params.symbol, 'tBTCUSD')
   })
 
-  it('provides defaults for cancel & submit delays', () => {
+  it('provides default for submit delay', () => {
     const params = processParams()
-    assert(_isFinite(params.cancelDelay))
     assert(_isFinite(params.submitDelay))
   })
 
@@ -33,13 +32,11 @@ describe('iceberg:meta:process_params', () => {
     assert.strictEqual(sellParams.amount, -1)
   })
 
-  it('converts cancel/submit delays from s to ms', () => {
+  it('converts submit delay from s to ms', () => {
     const params = processParams({
-      cancelDelaySec: 1,
       submitDelaySec: 1
     })
 
-    assert.strictEqual(params.cancelDelay, 1000)
     assert.strictEqual(params.submitDelay, 1000)
   })
 
