@@ -25,7 +25,6 @@ testAOLive({
     ocoAmount: 6,
     ocoAction: 'Buy',
 
-    cancelDelaySec: 0,
     submitDelaySec: 0
   },
 
