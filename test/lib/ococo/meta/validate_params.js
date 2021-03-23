@@ -10,7 +10,6 @@ const params = {
   orderPrice: 1,
   amount: 6,
   submitDelay: 0,
-  cancelDelay: 0,
 
   limitPrice: 6,
   stopPrice: 6,
@@ -29,8 +28,6 @@ describe('ococo:meta:unserialize', () => {
     assert.ok(!_isEmpty(validateParams({ ...params, amount: '' })))
     assert.ok(!_isEmpty(validateParams({ ...params, submitDelay: '' })))
     assert.ok(!_isEmpty(validateParams({ ...params, submitDelay: -1 })))
-    assert.ok(!_isEmpty(validateParams({ ...params, cancelDelay: '' })))
-    assert.ok(!_isEmpty(validateParams({ ...params, cancelDelay: -1 })))
     assert.ok(!_isEmpty(validateParams({ ...params, limitPrice: '' })))
     assert.ok(!_isEmpty(validateParams({ ...params, stopPrice: '' })))
     assert.ok(!_isEmpty(validateParams({ ...params, ocoAmount: '' })))
