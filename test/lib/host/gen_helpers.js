@@ -35,8 +35,7 @@ describe('genHelpers', () => {
       'emitSelf',
       'emit',
       'notifyUI',
-      'cancelOrderWithDelay',
-      'cancelAllOrdersWithDelay',
+      'cancelOrder',
       'submitOrderWithDelay',
       'declareEvent',
       'declareChannel',
@@ -101,7 +100,7 @@ describe('genHelpers', () => {
     })
   })
 
-  describe('cancelOrderWithDelay', () => {
+  describe('cancelOrder', () => {
     it('calls through to adapter', () => {
       const o = new Order({ symbol: 'tBTCUSD', price: 42, amount: 9000 })
       const ev = new AsyncEventEmitter()
@@ -109,18 +108,17 @@ describe('genHelpers', () => {
       let adapterFuncCalled = false
 
       const h = H(state, {
-        cancelOrderWithDelay: (c, delay, order) => {
+        cancelOrder: (c, order) => {
           adapterFuncCalled = true
 
           assert.strictEqual(c, 'conn', 'connection not passed to adapter')
-          assert.strictEqual(delay, 100, 'delay not passed through to adapter')
           assert.strictEqual(order.symbol, 'tBTCUSD', 'order not passed through to adapter')
           assert.strictEqual(order.price, 42, 'order not passed through to adapter')
           assert.strictEqual(order.amount, 9000, 'order not passed through to adapter')
         }
       })
 
-      h.cancelOrderWithDelay(state, 100, o)
+      h.cancelOrder(state, o)
       assert.ok(adapterFuncCalled, 'adapter func not called')
     })
 
@@ -136,70 +134,13 @@ describe('genHelpers', () => {
         cancelledOrders: {}
       }
 
-      const h = H(state, { cancelOrderWithDelay: () => {} })
-      const patchedState = await h.cancelOrderWithDelay(state, 100, o)
+      const h = H(state, { cancelOrder: () => {} })
+      const patchedState = await h.cancelOrder(state, o)
 
       assert.ok(_isObject(patchedState), 'patched state not an object')
       assert.ok(_isEmpty(patchedState.orders), 'patched state still has order which was cancelled in active orders set')
       assert.ok(_isObject(patchedState.cancelledOrders), 'patched state does not have cancelled order map')
       assert.strictEqual(patchedState.cancelledOrders[o.cid], o, 'order not marked cancelled in patched state')
-    })
-  })
-
-  describe('cancelAllOrdersWithDelay', () => {
-    it('calls through to adapter with each order individually from state', async () => {
-      const oA = new Order({ cid: '10' })
-      const oB = new Order({ cid: '20' })
-      const ev = new AsyncEventEmitter()
-      const state = {
-        id: 1,
-        gid: 42,
-        ev,
-        connection: 'conn',
-        orders: { [oA.cid]: oA, [oB.cid]: oB },
-        cancelledOrders: {}
-      }
-
-      let oACancelled = false
-      let oBCancelled = false
-
-      const h = H(state, {
-        cancelOrderWithDelay: async (conn, delay, o) => {
-          assert.strictEqual(conn, 'conn')
-          assert.strictEqual(delay, 100)
-
-          if (o === '10') oACancelled = true
-          if (o === '20') oBCancelled = true
-        }
-      })
-
-      await h.cancelAllOrdersWithDelay(state, 100)
-
-      assert.ok(oACancelled, 'order A not cancelled')
-      assert.ok(oBCancelled, 'order B not cancelled')
-    })
-
-    it('immediately patches order set', async () => {
-      const oA = new Order({ cid: '10' })
-      const oB = new Order({ cid: '20' })
-      const ev = new AsyncEventEmitter()
-      const state = {
-        id: 1,
-        gid: 42,
-        ev,
-        connection: 'conn',
-        orders: { [oA.cid]: oA, [oB.cid]: oB },
-        cancelledOrders: {}
-      }
-
-      const h = H(state, { cancelOrderWithDelay: async (conn, delay, o) => {} })
-      const patchedState = await h.cancelAllOrdersWithDelay(state, 100)
-
-      assert.ok(_isObject(patchedState), 'patched state not an object')
-      assert.ok(_isEmpty(patchedState.orders), 'patched state still has order which was cancelled in active orders set')
-      assert.ok(_isObject(patchedState.cancelledOrders), 'patched state does not have cancelled order map')
-      assert.strictEqual(patchedState.cancelledOrders[oA.cid], oA, 'order A not marked cancelled in patched state')
-      assert.strictEqual(patchedState.cancelledOrders[oB.cid], oB, 'order B not marked cancelled in patched state')
     })
   })
 

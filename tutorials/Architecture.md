@@ -90,8 +90,7 @@ The provided helpers are:
 * `emit(eventName, ...args)` - raw event emitter, i.e. `emit('life:start')`
 * `emitAsync(eventName, ...args)` - same as `emit` but operates on next tick
 * `notifyUI(level, message)` - generates and sends a notification which appears on the Bitfinex UI
-* `cancelOrderWithDelay(state, delay, order)` - takes current algo state, delay in ms
-* `cancelAllOrdersWithDelay(state, delay)` - cancels all active atomic orders on the AO state, delay in ms
+* `cancelOrder(state, order)` - takes current algo state and cancels the provided order
 * `submitOrderWithDelay(state, delay, order)` - takes current algo state, submits a new order, delay in ms
 * `declareEvent(instance, host, eventName, path)` - declares an internal AO event, see section below
 * `declareChannel(instance, host, channel, filter)` - declares a required data channel, see section below
@@ -186,7 +185,6 @@ await host.startAO('bfx-ping_pong', {
   pingMaxPrice: 6700,
   pongDistance: 300,
   submitDelay: 150,
-  cancelDelay: 150,
   _margin: false,
 })
 ```
@@ -209,7 +207,6 @@ await host.startAO('bfx-iceberg', {
   excessAsHidden: true,
   orderType: 'LIMIT',
   submitDelay: 150,
-  cancelDelay: 150,
   _margin: false,
 })
 ```
@@ -243,7 +240,6 @@ await host.startAO('bfx-twap', {
   tradeBeyondEnd: false,
   orderType: 'LIMIT',
   submitDelay: 150,
-  cancelDelay: 150,
   _margin: false
 })
 ```
@@ -293,7 +289,6 @@ await host.startAO('bfx-accumulate_distribute', {
   capType: 'bid',
   capDelta: 10,
   submitDelay: 150,
-  cancelDelay: 150,
   catchUp: true, // if true & behind, ignore slice interval (after prev fill)
   awaitFill: true, // await current slice fill before continuing to next slice
   _margin: false,

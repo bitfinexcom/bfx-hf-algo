@@ -82,7 +82,6 @@ host.once('ws2:auth:success', async () => {
     excessAsHidden: true,
     orderType: 'LIMIT',
     submitDelay: 150,
-    cancelDelay: 150,
     _margin: false,
   })
 

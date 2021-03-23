@@ -3,7 +3,6 @@
 
 require('dotenv').config()
 
-const PI = require('p-iteration')
 const Promise = require('bluebird')
 const _isFunction = require('lodash/isFunction')
 const debug = require('debug')('bfx:hf:algo:test:ao-live')
@@ -62,9 +61,10 @@ module.exports = ({ name, aoID, aoClass, defaultParams = {}, tests = [] }) => {
 
           await host.stopAO(gid) // stop first so it does not detect cancel(s)
           await Promise.delay(5 * 1000) // allow confirmations to come in
-          await PI.forEachSeries(Object.values(orders), (order) => {
-            return host.getAdapter().cancelOrderWithDelay(connection, 0, order)
-          })
+
+          for (const order of Object.values(orders)) {
+            await host.getAdapter().cancelOrder(connection, order)
+          }
 
           gid = null
         }
