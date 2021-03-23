@@ -19,7 +19,6 @@ testAOLive({
     amount: 6,
 
     submitDelay: 0,
-    cancelDelay: 0,
 
     longType: 'EMA',
     longEMAPrice: 'close',

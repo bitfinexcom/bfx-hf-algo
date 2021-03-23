@@ -10,10 +10,7 @@ const getInstance = ({
   state: {
     gid: 42,
     orders: {},
-    args: {
-      cancelDelay: 100,
-      ...argParams
-    },
+    args: argParams,
     ...stateParams
   },
 
@@ -30,12 +27,11 @@ describe('ma_crossover:events:orders_order_cancel', () => {
   it('cancels all orders', (done) => {
     const i = getInstance({
       helperParams: {
-        emit: async (eventName, gid, orders, cancelDelay) => {
+        emit: async (eventName, gid, orders) => {
           if (eventName !== 'exec:order:cancel:all') return
 
           assert.strictEqual(gid, 42)
           assert.deepStrictEqual(orders, {})
-          assert.strictEqual(cancelDelay, 100)
           done()
         }
       }
@@ -47,7 +43,7 @@ describe('ma_crossover:events:orders_order_cancel', () => {
   it('emits exec:stop', (done) => {
     const i = getInstance({
       helperParams: {
-        emit: async (eventName, gid, orders, cancelDelay) => {
+        emit: async (eventName) => {
           if (eventName === 'exec:stop') {
             done()
           }
