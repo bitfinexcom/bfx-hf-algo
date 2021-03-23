@@ -10,7 +10,6 @@ const Config = require('../../../../lib/twap/config')
 const args = {
   priceTarget: 1000,
   tradeBeyondEnd: true,
-  cancelDelay: 100,
   submitDelay: 200,
   sliceAmount: 0.1,
   amount: 1,
@@ -106,7 +105,6 @@ describe('twap:events:self_interval_tick', () => {
             }
             assert.strictEqual(gid, 100)
             assert.deepStrictEqual(orders, { o: 42 })
-            assert.strictEqual(delay, 0)
             resolve()
           }).then(done).catch(done)
         }
