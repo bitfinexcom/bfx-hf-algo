@@ -42,21 +42,19 @@ describe('accumulate_distribute:events:orders_order_cancel', () => {
     let sawCancelAll = false
     const orders = [new Order(), new Order()]
     const i = getInstance({
-      argParams: { cancelDelay: 100 },
       stateParams: {
         orders,
         gid: 42
       },
 
       helperParams: {
-        emit: async (eventName, gid, receivedOrders, delay) => {
+        emit: async (eventName, gid, receivedOrders) => {
           if (eventName !== 'exec:order:cancel:all') {
             return
           }
 
           assert.strictEqual(gid, 42, 'received wrong gid')
           assert.strictEqual(receivedOrders, orders, 'received wrong orders')
-          assert.strictEqual(delay, 100, 'received wrong delay')
           sawCancelAll = true
         }
       }
@@ -70,7 +68,6 @@ describe('accumulate_distribute:events:orders_order_cancel', () => {
     let sawExecStop = false
     const orders = [new Order(), new Order()]
     const i = getInstance({
-      argParams: { cancelDelay: 100 },
       stateParams: {
         orders,
         gid: 42
