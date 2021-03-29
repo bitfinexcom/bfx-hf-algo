@@ -45,8 +45,7 @@
     "bfx-hf-util": "^1.0.1",
     "bluebird": "^3.5.5",
     "debug": "^4.1.1",
-    "lodash": "^4.17.15",
-    "p-iteration": "^1.1.7"
+    "lodash": "^4.17.15"
   },
   "devDependencies": {
     "bfx-hf-ext-plugin-bitfinex": "^1.0.5",
