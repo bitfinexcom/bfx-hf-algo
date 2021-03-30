@@ -108,7 +108,7 @@ describe('genHelpers', () => {
       let adapterFuncCalled = false
 
       const h = H(state, {
-        cancelOrder: (c, order) => {
+        cancelOrder: async (c, order) => {
           adapterFuncCalled = true
 
           assert.strictEqual(c, 'conn', 'connection not passed to adapter')
@@ -134,7 +134,9 @@ describe('genHelpers', () => {
         cancelledOrders: {}
       }
 
-      const h = H(state, { cancelOrder: () => {} })
+      const h = H(state, {
+        cancelOrder: async () => {}
+      })
       const patchedState = await h.cancelOrder(state, o)
 
       assert.ok(_isObject(patchedState), 'patched state not an object')
