@@ -36,14 +36,17 @@ describe('accumulate_distribute:events:self_submit_order', () => {
       argParams: { submitDelay: 100 },
       stateParams: { gid: 42 },
       helperParams: {
-        emit: async (eventName, gid, orders, delay) => {
+        timeout: () => {
+          return [null, () => {}]
+        },
+        updateState: () => {},
+        emit: async (eventName, gid, orders) => {
           if (eventName !== 'exec:order:submit:all') {
             return
           }
 
           assert.strictEqual(gid, 42, 'invalid gid')
           assert.deepStrictEqual(orders, [o], 'invalid orders')
-          assert.strictEqual(delay, 100, 'invalid submit delay')
           sawSubmit = true
         }
       }
