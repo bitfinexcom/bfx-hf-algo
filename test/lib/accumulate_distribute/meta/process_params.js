@@ -9,7 +9,6 @@ const args = {
   _symbol: 'tBTCUSD',
   _futures: true,
   lev: 3.3,
-  submitDelay: 5000,
   sliceIntervalSec: 1,
   amountDistortion: 2,
   intervalDistortion: 2,
@@ -42,12 +41,10 @@ describe('accumulate_distribute:meta:process_params', () => {
   it('provides sane defaults', () => {
     const params = processParams({
       ...args,
-      submitDelay: null,
       amountDistortion: null,
       intervalDistortion: null
     })
 
-    assert.strictEqual(params.submitDelay, 5000, 'incorrect submit delay')
     assert.strictEqual(params.amountDistortion, 0, 'incorrect amount distortion')
     assert.strictEqual(params.intervalDistortion, 0, 'incorrect interval distortion')
   })
