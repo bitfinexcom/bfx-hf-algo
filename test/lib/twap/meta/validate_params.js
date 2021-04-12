@@ -11,7 +11,6 @@ const validParams = {
   sliceAmount: 0.1,
   amountDistortion: 0.2,
   sliceInterval: 1,
-  submitDelay: 100,
   priceTarget: 1000,
   priceCondition: 'MATCH_LAST'
 }
@@ -51,18 +50,6 @@ describe('twap:meta:validate_params', () => {
     assert(_isString(validateParams({
       ...validParams,
       sliceInterval: -100
-    })))
-  })
-
-  it('returns error on invalid or negative submit delay', () => {
-    assert(_isString(validateParams({
-      ...validParams,
-      submitDelay: 'nope'
-    })))
-
-    assert(_isString(validateParams({
-      ...validParams,
-      submitDelay: -100
     })))
   })
 

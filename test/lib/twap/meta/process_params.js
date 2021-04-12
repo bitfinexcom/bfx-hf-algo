@@ -2,7 +2,6 @@
 'use strict'
 
 const assert = require('assert')
-const _isFinite = require('lodash/isFinite')
 const processParams = require('../../../../lib/twap/meta/process_params')
 
 describe('twap:meta:process_params', () => {
@@ -17,11 +16,6 @@ describe('twap:meta:process_params', () => {
   it('integrates supplied _symbol', () => {
     const params = processParams({ symbol: 'tETHUSD', _symbol: 'tBTCUSD' })
     assert.strictEqual(params.symbol, 'tBTCUSD')
-  })
-
-  it('provides defaults for submit delay', () => {
-    const params = processParams()
-    assert(_isFinite(params.submitDelay))
   })
 
   it('negates amount if selling', () => {

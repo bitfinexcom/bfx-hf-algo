@@ -10,7 +10,6 @@ const Config = require('../../../../lib/twap/config')
 const args = {
   priceTarget: 1000,
   tradeBeyondEnd: true,
-  submitDelay: 200,
   sliceAmount: 0.1,
   amount: 1,
   orderType: 'LIMIT'
