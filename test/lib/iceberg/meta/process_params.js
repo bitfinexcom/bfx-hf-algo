@@ -2,7 +2,6 @@
 'use strict'
 
 const assert = require('assert')
-const _isFinite = require('lodash/isFinite')
 const processParams = require('../../../../lib/iceberg/meta/process_params')
 
 describe('iceberg:meta:process_params', () => {
@@ -19,25 +18,12 @@ describe('iceberg:meta:process_params', () => {
     assert.strictEqual(params.symbol, 'tBTCUSD')
   })
 
-  it('provides default for submit delay', () => {
-    const params = processParams()
-    assert(_isFinite(params.submitDelay))
-  })
-
   it('negates amount if selling', () => {
     const buyParams = processParams({ amount: 1 })
     const sellParams = processParams({ amount: 1, action: 'Sell' })
 
     assert.strictEqual(buyParams.amount, 1)
     assert.strictEqual(sellParams.amount, -1)
-  })
-
-  it('converts submit delay from s to ms', () => {
-    const params = processParams({
-      submitDelaySec: 1
-    })
-
-    assert.strictEqual(params.submitDelay, 1000)
   })
 
   it('converts slice amount from percent to abs value', () => {
