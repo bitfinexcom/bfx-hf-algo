@@ -18,30 +18,39 @@ describe('iceberg:meta:validate_params', () => {
   })
 
   it('returns error on invalid order type', () => {
-    assert(_isString(validateParams({
+    const err = validateParams({
       ...validParams,
       orderType: 'nope'
-    })))
+    })
+    assert.deepStrictEqual(err.field, 'orderType')
+    assert(_isString(err.message))
   })
 
   it('returns error on invalid amount', () => {
-    assert(_isString(validateParams({
+    const err = validateParams({
       ...validParams,
       amount: 'nope'
-    })))
+    })
+    assert.deepStrictEqual(err.field, 'amount')
+    assert(_isString(err.message))
   })
 
   it('returns error on invalid slice amount', () => {
-    assert(_isString(validateParams({
+    const err = validateParams({
       ...validParams,
       sliceAmount: 'nope'
-    })))
+    })
+    assert.deepStrictEqual(err.field, 'sliceAmount')
+    assert(_isString(err.message))
   })
 
   it('returns error if non-MARKET type and no price provided', () => {
     const params = { ...validParams }
     delete params.price
-    assert(_isString(validateParams(params)))
+
+    const noPriceErr = validateParams(params)
+    assert.deepStrictEqual(noPriceErr.field, 'price')
+    assert(_isString(noPriceErr.message))
 
     assert.strictEqual(validateParams({
       ...params,
@@ -50,9 +59,12 @@ describe('iceberg:meta:validate_params', () => {
   })
 
   it('returns error if amount & sliceAmount differ in sign', () => {
-    assert(_isString(validateParams({
+    const err = validateParams({
       ...validParams,
       amount: -1
-    })))
+    })
+
+    assert.deepStrictEqual(err.field, 'sliceAmount')
+    assert(_isString(err.message))
   })
 })
