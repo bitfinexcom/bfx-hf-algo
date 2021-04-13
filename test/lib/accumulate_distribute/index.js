@@ -22,7 +22,6 @@ testAOLive({
     amount: -18,
     sliceAmount: -6,
     sliceInterval: 1000,
-    submitDelay: 0,
     _margin: true,
     _futures: false,
 
