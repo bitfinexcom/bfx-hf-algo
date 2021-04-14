@@ -9,8 +9,7 @@ const validParams = {
   price: 1000,
   orderType: 'LIMIT',
   amount: 1,
-  sliceAmount: 0.1,
-  submitDelay: 100
+  sliceAmount: 0.1
 }
 
 describe('iceberg:meta:validate_params', () => {
@@ -36,18 +35,6 @@ describe('iceberg:meta:validate_params', () => {
     assert(_isString(validateParams({
       ...validParams,
       sliceAmount: 'nope'
-    })))
-  })
-
-  it('returns error on invalid or negative submit delay', () => {
-    assert(_isString(validateParams({
-      ...validParams,
-      submitDelay: 'nope'
-    })))
-
-    assert(_isString(validateParams({
-      ...validParams,
-      submitDelay: -100
     })))
   })
 

@@ -10,7 +10,6 @@ const params = {
   amount: 1,
   sliceAmount: 1,
   orderType: 'LIMIT',
-  submitDelay: 0,
   intervalDistortion: 0,
   amountDistortion: 0,
   sliceInterval: 1000,
@@ -44,7 +43,6 @@ describe('accumulate_distribute:meta:unserialize', () => {
     assert.ok(!_isEmpty(validateParams({ ...params, lev: 0 })))
     assert.ok(!_isEmpty(validateParams({ ...params, lev: 101 })))
     assert.ok(!_isEmpty(validateParams({ ...params, sliceAmount: 'not' })))
-    assert.ok(!_isEmpty(validateParams({ ...params, submitDelay: 'testing' })))
     assert.ok(!_isEmpty(validateParams({ ...params, catchUp: 'day' })))
     assert.ok(!_isEmpty(validateParams({ ...params, awaitFill: 'and' })))
     assert.ok(!_isEmpty(validateParams({ ...params, sliceInterval: 'it' })))

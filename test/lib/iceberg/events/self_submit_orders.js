@@ -12,7 +12,6 @@ describe('iceberg:events:self_submit_orders', () => {
         gid: 41,
         remainingAmount: 0.05,
         args: {
-          submitDelay: 42,
           excessAsHidden: false,
           sliceAmount: 0.1,
           amount: 1,
@@ -27,11 +26,10 @@ describe('iceberg:events:self_submit_orders', () => {
           return [null, () => {}]
         },
         updateState: () => {},
-        emit: (eName, gid, orders, submitDelay) => {
+        emit: (eName, gid, orders) => {
           return new Promise((resolve) => {
             assert.strictEqual(eName, 'exec:order:submit:all')
             assert.strictEqual(gid, 41)
-            assert.strictEqual(submitDelay, 0)
             assert.strictEqual(orders.length, 1)
 
             const [order] = orders
