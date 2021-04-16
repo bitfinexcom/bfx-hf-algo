@@ -17,7 +17,6 @@ testAOLive({
     sliceAmount: -6,
     excessAsHidden: true,
     orderType: 'LIMIT',
-    submitDelay: 0,
     _margin: true
   },
 

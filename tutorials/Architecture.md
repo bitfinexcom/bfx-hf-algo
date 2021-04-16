@@ -91,7 +91,7 @@ The provided helpers are:
 * `emitAsync(eventName, ...args)` - same as `emit` but operates on next tick
 * `notifyUI(level, message)` - generates and sends a notification which appears on the Bitfinex UI
 * `cancelOrder(state, order)` - takes current algo state and cancels the provided order
-* `submitOrderWithDelay(state, delay, order)` - takes current algo state, submits a new order, delay in ms
+* `submitOrder(state, order)` - takes current algo state, submits a new order
 * `declareEvent(instance, host, eventName, path)` - declares an internal AO event, see section below
 * `declareChannel(instance, host, channel, filter)` - declares a required data channel, see section below
 * `updateState(instance, update)` - update the current state for an AO instance
@@ -184,7 +184,6 @@ await host.startAO('bfx-ping_pong', {
   pingMinPrice: 6000,
   pingMaxPrice: 6700,
   pongDistance: 300,
-  submitDelay: 150,
   _margin: false,
 })
 ```
@@ -206,7 +205,6 @@ await host.startAO('bfx-iceberg', {
   sliceAmount: -0.1,
   excessAsHidden: true,
   orderType: 'LIMIT',
-  submitDelay: 150,
   _margin: false,
 })
 ```
@@ -239,7 +237,6 @@ await host.startAO('bfx-twap', {
   priceCondition: TWAP.Config.PRICE_COND.MATCH_LAST,
   tradeBeyondEnd: false,
   orderType: 'LIMIT',
-  submitDelay: 150,
   _margin: false
 })
 ```
@@ -288,7 +285,6 @@ await host.startAO('bfx-accumulate_distribute', {
   offsetDelta: -10,
   capType: 'bid',
   capDelta: 10,
-  submitDelay: 150,
   catchUp: true, // if true & behind, ignore slice interval (after prev fill)
   awaitFill: true, // await current slice fill before continuing to next slice
   _margin: false,

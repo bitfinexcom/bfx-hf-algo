@@ -9,7 +9,6 @@ const params = {
   orderPrice: 100,
   orderType: 'LIMIT',
   amount: 1,
-  submitDelay: 10,
   _futures: false,
   lev: 3.3,
 
@@ -32,8 +31,6 @@ describe('ma_crossover:meta:unserialize', () => {
   it('validates', () => {
     assert.ok(!_isEmpty(validateParams({ ...params, orderType: '' })))
     assert.ok(!_isEmpty(validateParams({ ...params, amount: '' })))
-    assert.ok(!_isEmpty(validateParams({ ...params, submitDelay: '' })))
-    assert.ok(!_isEmpty(validateParams({ ...params, submitDelay: -1 })))
     assert.ok(!_isEmpty(validateParams({ ...params, orderPrice: '' })))
 
     assert.ok(!_isEmpty(validateParams({ ...params, long: '' })))

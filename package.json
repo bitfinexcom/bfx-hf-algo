@@ -1,6 +1,6 @@
 {
   "name": "bfx-hf-algo",
-  "version": "3.1.4",
+  "version": "3.2.0",
   "description": "HF Algorithmic Order Module",
   "main": "index.js",
   "engines": {
@@ -35,7 +35,7 @@
   ],
   "dependencies": {
     "@bitfinex/lib-js-util-math": "git+https://github.com/bitfinexcom/lib-js-util-math.git",
-    "bfx-api-node-core": "^1.1.8",
+    "bfx-api-node-core": "^1.2.0",
     "bfx-api-node-models": "^1.1.9",
     "bfx-api-node-plugin-managed-candles": "^1.0.2",
     "bfx-api-node-plugin-managed-ob": "^1.0.2",
