@@ -20,6 +20,7 @@ const getInstance = ({
   h: {
     debug: () => {},
     updateState: async () => {},
+    subscribeDataChannels: async () => {},
     ...helperParams
   },
 

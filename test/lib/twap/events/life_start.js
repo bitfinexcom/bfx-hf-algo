@@ -19,6 +19,7 @@ describe('twap:events:life_start', () => {
 
       h: {
         debug: () => {},
+        subscribeDataChannels: async () => {},
         emitSelf: (eName) => {
           return new Promise((resolve) => {
             assert.strictEqual(eName, 'interval_tick')
