@@ -21,6 +21,7 @@ const getInstance = ({
     debug: () => {},
     updateState: async () => {},
     subscribeDataChannels: async () => {},
+    sendPing: async () => { return { ts: Date.now() } },
     ...helperParams
   },
 
