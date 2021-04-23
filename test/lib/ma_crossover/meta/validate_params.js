@@ -31,6 +31,7 @@ describe('ma_crossover:meta:unserialize', () => {
   it('validates', () => {
     assert.ok(!_isEmpty(validateParams({ ...params, orderType: '' })))
     assert.ok(!_isEmpty(validateParams({ ...params, amount: '' })))
+    assert.ok(!_isEmpty(validateParams({ ...params, amount: 0 })))
     assert.ok(!_isEmpty(validateParams({ ...params, orderPrice: '' })))
 
     assert.ok(!_isEmpty(validateParams({ ...params, long: '' })))
