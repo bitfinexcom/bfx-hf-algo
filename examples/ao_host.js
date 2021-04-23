@@ -67,7 +67,7 @@ host.on('error', (err) => {
   debug('error: %s', err)
 })
 
-host.once('ws2:auth:success', async () => {
+host.once('ready', async () => {
   const gid = await host.startAO('bfx-accumulate_distribute', {
     symbol: 'tBTCUSD',
     amount: -0.2,
