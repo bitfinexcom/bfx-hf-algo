@@ -18,7 +18,7 @@ describe('host:events:submit_all_orders', () => {
 
     h: {
       debug: () => {},
-      submitOrderWithDelay: async (state, delay, o) => {},
+      submitOrder: async (state, o) => {},
       ...helperParams
     }
   })
@@ -52,8 +52,7 @@ describe('host:events:submit_all_orders', () => {
         a: getInstance({
           stateParams: { id: 'known-ao' },
           helperParams: {
-            submitOrderWithDelay: (_, delay, o) => {
-              assert.strictEqual(delay, 100)
+            submitOrder: (_, o) => {
               assert.ok(_isString(o.meta.label) && !_isEmpty(o.meta.label))
               assert.strictEqual(o.meta.label, 'some-label')
               done()
@@ -78,8 +77,7 @@ describe('host:events:submit_all_orders', () => {
         a: getInstance({
           stateParams: { id: 'known-ao' },
           helperParams: {
-            submitOrderWithDelay: (_, delay, o) => {
-              assert.strictEqual(delay, 100)
+            submitOrder: (_, o) => {
               assert.strictEqual(o.meta._HF, 1)
               done()
             }

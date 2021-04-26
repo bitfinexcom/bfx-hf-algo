@@ -36,7 +36,7 @@ describe('genHelpers', () => {
       'emit',
       'notifyUI',
       'cancelOrder',
-      'submitOrderWithDelay',
+      'submitOrder',
       'declareEvent',
       'declareChannel',
       'updateState'

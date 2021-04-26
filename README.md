@@ -81,7 +81,6 @@ host.once('ws2:auth:success', async () => {
     sliceAmount: -0.1,
     excessAsHidden: true,
     orderType: 'LIMIT',
-    submitDelay: 150,
     _margin: false,
   })
 
