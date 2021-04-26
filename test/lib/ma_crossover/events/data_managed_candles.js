@@ -8,7 +8,7 @@ const { Candle } = require('bfx-api-node-models')
 const dataManagedCandles = require('../../../../lib/ma_crossover/events/data_managed_candles')
 
 const CANDLE = new Candle({ open: 1, high: 1.2, low: 0.9, close: 1, volume: 100 })
-const CANDLE_KEY = 'key:1m:tLEOUSD'
+const CANDLE_KEY = 'key:1m:tTESTBTC:TESTUSD'
 const getInstance = ({
   params = {}, argParams = {}, stateParams = {}, helperParams = {}
 }) => ({
@@ -18,7 +18,7 @@ const getInstance = ({
     longIndicator: new EMA([100]),
     shortIndicator: new EMA([20]),
     args: {
-      symbol: 'tLEOUSD',
+      symbol: 'tTESTBTC:TESTUSD',
       long: { candleTimeFrame: '1m', candlePrice: 'close' },
       short: { candleTimeFrame: '1m', candlePrice: 'close' },
       ...argParams
