@@ -71,7 +71,7 @@ host.on('error', (err) => {
   console.log('error: %s', err)
 })
 
-host.once('ws2:auth:success', async () => {
+host.once('ready', async () => {
 
   // Start an Iceberg order instance
   const gid = await host.startAO('bfx-iceberg', {
