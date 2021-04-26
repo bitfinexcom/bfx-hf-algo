@@ -270,4 +270,31 @@ describe('genHelpers', () => {
       sinon.assert.calledWithExactly(adapter.subscribe, state.connection, channel, payload)
     })
   })
+
+  describe('clearAllTimeouts', () => {
+    const adapter = { subscribe: sinon.stub() }
+    const h = H({}, adapter)
+
+    it('should clear pending responses and its timeouts if any', async () => {
+      const channel = 'book'
+      const payload = {
+        symbol: 'LEO'
+      }
+      const state = {
+        connection: 'connection',
+        channels: [
+          {
+            channel,
+            filter: payload
+          }
+        ]
+      }
+
+      const promise = h.subscribeDataChannels(state, { timeout: 1000 })
+      h.clearAllTimeouts()
+
+      await promise
+      sinon.assert.calledWithExactly(adapter.subscribe, state.connection, channel, payload)
+    })
+  })
 })
