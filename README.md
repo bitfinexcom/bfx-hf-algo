@@ -63,7 +63,7 @@ host.on('ao:persist:db:update', async(updateOpts) => {
   console.log('ao instance updated %s', updateOpts.gid)
 })
 
-host.on('ws2:auth:error', (packet) => {
+host.on('auth:error', (packet) => {
   console.log('error authenticating: %j', packet)
 })
 
