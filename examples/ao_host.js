@@ -59,7 +59,7 @@ host.on('ao:persist:db:update', async (updateOpts) => {
   debug('ao instance updated %s', updateOpts.gid)
 })
 
-host.on('ws2:auth:error', (packet) => {
+host.on('auth:error', (packet) => {
   debug('error authenticating: %j', packet)
 })
 
@@ -67,7 +67,7 @@ host.on('error', (err) => {
   debug('error: %s', err)
 })
 
-host.once('ws2:auth:success', async () => {
+host.once('ready', async () => {
   const gid = await host.startAO('bfx-accumulate_distribute', {
     symbol: 'tBTCUSD',
     amount: -0.2,
