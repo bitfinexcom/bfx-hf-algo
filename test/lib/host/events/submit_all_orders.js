@@ -90,4 +90,32 @@ describe('host:events:submit_all_orders', () => {
 
     submitAllOrders(host, 'a', [o])
   })
+
+  it('clear state on cancel', async () => {
+    const o1 = new Order({ cid: 'test-cid1' })
+    const o2 = new Order({ cid: 'test-cid2' })
+    const instance = getInstance({
+      stateParams: { id: 'known-ao' },
+      helperParams: {
+        submitOrder: (_, o, onCancel) => {
+          if (o1 === o) {
+            return onCancel()
+          }
+        }
+      }
+    })
+    const host = {
+      emit: () => {},
+      getAO: (type) => {
+        assert.strictEqual(type, 'known-ao')
+        return {}
+      },
+      instances: {
+        a: instance
+      }
+    }
+
+    await submitAllOrders(host, 'a', [o1, o2])
+    assert.deepStrictEqual(Object.keys(instance.state.orders), ['test-cid2'])
+  })
 })
