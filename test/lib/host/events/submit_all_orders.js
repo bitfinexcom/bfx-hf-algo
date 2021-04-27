@@ -18,7 +18,7 @@ describe('host:events:submit_all_orders', () => {
 
     h: {
       debug: () => {},
-      submitOrderWithDelay: async (state, delay, o) => {},
+      submitOrder: async (state, o) => {},
       ...helperParams
     }
   })
@@ -29,7 +29,7 @@ describe('host:events:submit_all_orders', () => {
     }
 
     try {
-      await submitAllOrders(host, 'a', [], 100)
+      await submitAllOrders(host, 'a', [])
       assert.ok(false)
     } catch (e) {
       assert.ok(true)
@@ -39,6 +39,7 @@ describe('host:events:submit_all_orders', () => {
   it('provides a label with each order', (done) => {
     const o = new Order()
     const host = {
+      emit: () => {},
       getAO: (type) => {
         assert.strictEqual(type, 'known-ao')
         return {
@@ -52,8 +53,7 @@ describe('host:events:submit_all_orders', () => {
         a: getInstance({
           stateParams: { id: 'known-ao' },
           helperParams: {
-            submitOrderWithDelay: (_, delay, o) => {
-              assert.strictEqual(delay, 100)
+            submitOrder: (_, o) => {
               assert.ok(_isString(o.meta.label) && !_isEmpty(o.meta.label))
               assert.strictEqual(o.meta.label, 'some-label')
               done()
@@ -63,12 +63,13 @@ describe('host:events:submit_all_orders', () => {
       }
     }
 
-    submitAllOrders(host, 'a', [o], 100)
+    submitAllOrders(host, 'a', [o])
   })
 
   it('sets the HF meta flag', (done) => {
     const o = new Order()
     const host = {
+      emit: () => {},
       getAO: (type) => {
         assert.strictEqual(type, 'known-ao')
         return {}
@@ -78,8 +79,7 @@ describe('host:events:submit_all_orders', () => {
         a: getInstance({
           stateParams: { id: 'known-ao' },
           helperParams: {
-            submitOrderWithDelay: (_, delay, o) => {
-              assert.strictEqual(delay, 100)
+            submitOrder: (_, o) => {
               assert.strictEqual(o.meta._HF, 1)
               done()
             }
@@ -88,6 +88,6 @@ describe('host:events:submit_all_orders', () => {
       }
     }
 
-    submitAllOrders(host, 'a', [o], 100)
+    submitAllOrders(host, 'a', [o])
   })
 })

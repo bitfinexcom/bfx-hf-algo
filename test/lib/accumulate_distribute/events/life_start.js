@@ -23,6 +23,7 @@ const getInstance = ({
     updateState: async () => {},
     scheduleTick: async () => {},
     notifyUI: async () => {},
+    subscribeDataChannels: () => {},
     ...helperParams
   },
 

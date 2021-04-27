@@ -8,15 +8,18 @@ const _isFunction = require('lodash/isObject')
 const { Order } = require('bfx-api-node-models')
 const genHelpers = require('../../../lib/host/gen_helpers')
 const AsyncEventEmitter = require('../../../lib/async_event_emitter')
+const sinon = require('sinon')
 
-const H = (args = {}, adapter = null) => (
-  genHelpers({
+const manager = new AsyncEventEmitter()
+const H = (args = {}, adapter = {}) => {
+  const state = {
     ev: new AsyncEventEmitter(),
     id: 1,
     gid: 42,
     ...args
-  }, adapter)
-)
+  }
+  return genHelpers(state, { m: manager, ...adapter })
+}
 
 describe('genHelpers', () => {
   /**
@@ -36,7 +39,7 @@ describe('genHelpers', () => {
       'emit',
       'notifyUI',
       'cancelOrder',
-      'submitOrderWithDelay',
+      'submitOrder',
       'declareEvent',
       'declareChannel',
       'updateState'
@@ -108,7 +111,7 @@ describe('genHelpers', () => {
       let adapterFuncCalled = false
 
       const h = H(state, {
-        cancelOrder: (c, order) => {
+        cancelOrder: async (c, order) => {
           adapterFuncCalled = true
 
           assert.strictEqual(c, 'conn', 'connection not passed to adapter')
@@ -134,7 +137,9 @@ describe('genHelpers', () => {
         cancelledOrders: {}
       }
 
-      const h = H(state, { cancelOrder: () => {} })
+      const h = H(state, {
+        cancelOrder: async () => {}
+      })
       const patchedState = await h.cancelOrder(state, o)
 
       assert.ok(_isObject(patchedState), 'patched state not an object')
@@ -191,6 +196,105 @@ describe('genHelpers', () => {
       const state = { ev, gid: '42' }
       const h = H(state)
       h.updateState({ h, state }, 'some-update')
+    })
+  })
+
+  describe('subscribeDataChannels', () => {
+    const adapter = { subscribe: sinon.stub() }
+    const h = H({}, adapter)
+
+    it('subscribes to channels and wait for response', async () => {
+      const channel = 'book'
+      const payload = {
+        symbol: 'LEO'
+      }
+      const state = {
+        connection: 'connection',
+        channels: [
+          {
+            channel,
+            filter: payload
+          }
+        ]
+      }
+      const promise = h.subscribeDataChannels(state)
+      await manager.emit('ws2:event:subscribed', {
+        channel,
+        ...payload
+      })
+
+      await promise
+      sinon.assert.calledWithExactly(adapter.subscribe, state.connection, channel, payload)
+    })
+
+    it('fire and forget', async () => {
+      const channel = 'book'
+      const payload = {
+        symbol: 'LEO'
+      }
+      const state = {
+        connection: 'connection',
+        channels: [
+          {
+            channel,
+            filter: payload
+          }
+        ]
+      }
+      await h.subscribeDataChannels(state, { fireAndForget: true })
+      sinon.assert.calledWithExactly(adapter.subscribe, state.connection, channel, payload)
+    })
+
+    it('subscribes with max wait time', async () => {
+      const channel = 'book'
+      const payload = {
+        symbol: 'LEO'
+      }
+      const state = {
+        connection: 'connection',
+        channels: [
+          {
+            channel,
+            filter: payload
+          }
+        ]
+      }
+
+      try {
+        await h.subscribeDataChannels(state, { timeout: 10 })
+        assert.fail()
+      } catch (e) {
+        assert.strictEqual(e.message, 'Subscription to channel \'book\' timed out')
+      }
+
+      sinon.assert.calledWithExactly(adapter.subscribe, state.connection, channel, payload)
+    })
+  })
+
+  describe('clearAllTimeouts', () => {
+    const adapter = { subscribe: sinon.stub() }
+    const h = H({}, adapter)
+
+    it('should clear pending responses and its timeouts if any', async () => {
+      const channel = 'book'
+      const payload = {
+        symbol: 'LEO'
+      }
+      const state = {
+        connection: 'connection',
+        channels: [
+          {
+            channel,
+            filter: payload
+          }
+        ]
+      }
+
+      const promise = h.subscribeDataChannels(state, { timeout: 1000 })
+      h.clearAllTimeouts()
+
+      await promise
+      sinon.assert.calledWithExactly(adapter.subscribe, state.connection, channel, payload)
     })
   })
 })
