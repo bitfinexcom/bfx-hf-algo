@@ -63,7 +63,7 @@ host.on('ao:persist:db:update', async(updateOpts) => {
   console.log('ao instance updated %s', updateOpts.gid)
 })
 
-host.on('ws2:auth:error', (packet) => {
+host.on('auth:error', (packet) => {
   console.log('error authenticating: %j', packet)
 })
 
@@ -71,7 +71,7 @@ host.on('error', (err) => {
   console.log('error: %s', err)
 })
 
-host.once('ws2:auth:success', async () => {
+host.once('ready', async () => {
 
   // Start an Iceberg order instance
   const gid = await host.startAO('bfx-iceberg', {
@@ -81,7 +81,6 @@ host.once('ws2:auth:success', async () => {
     sliceAmount: -0.1,
     excessAsHidden: true,
     orderType: 'LIMIT',
-    submitDelay: 150,
     _margin: false,
   })
 

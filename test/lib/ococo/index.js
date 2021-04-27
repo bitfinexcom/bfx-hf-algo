@@ -23,9 +23,7 @@ testAOLive({
     limitPrice: 0.8,
     stopPrice: 2.1,
     ocoAmount: 6,
-    ocoAction: 'Buy',
-
-    submitDelaySec: 0
+    ocoAction: 'Buy'
   },
 
   tests: [{

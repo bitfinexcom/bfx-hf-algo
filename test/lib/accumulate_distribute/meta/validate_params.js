@@ -10,7 +10,6 @@ const params = {
   amount: 1,
   sliceAmount: 1,
   orderType: 'LIMIT',
-  submitDelay: 0,
   intervalDistortion: 0,
   amountDistortion: 0,
   sliceInterval: 1000,
@@ -37,14 +36,15 @@ const params = {
 describe('accumulate_distribute:meta:unserialize', () => {
   it('returns an error string for invalid parameters', () => {
     assert.ok(!_isEmpty(validateParams({ ...params, orderType: 'unknown' })))
+    assert.ok(!_isEmpty(validateParams({ ...params, amount: 0 })))
     assert.ok(!_isEmpty(validateParams({ ...params, amount: 'not' })))
     assert.ok(!_isEmpty(validateParams({ ...params, amount: 1, sliceAmount: -1 })))
     assert.ok(!_isEmpty(validateParams({ ...params, amount: -1, sliceAmount: 1 })))
     assert.ok(!_isEmpty(validateParams({ ...params, lev: '' })))
     assert.ok(!_isEmpty(validateParams({ ...params, lev: 0 })))
     assert.ok(!_isEmpty(validateParams({ ...params, lev: 101 })))
+    assert.ok(!_isEmpty(validateParams({ ...params, sliceAmount: 0 })))
     assert.ok(!_isEmpty(validateParams({ ...params, sliceAmount: 'not' })))
-    assert.ok(!_isEmpty(validateParams({ ...params, submitDelay: 'testing' })))
     assert.ok(!_isEmpty(validateParams({ ...params, catchUp: 'day' })))
     assert.ok(!_isEmpty(validateParams({ ...params, awaitFill: 'and' })))
     assert.ok(!_isEmpty(validateParams({ ...params, sliceInterval: 'it' })))

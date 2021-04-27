@@ -33,17 +33,15 @@ describe('accumulate_distribute:events:self_submit_order', () => {
     const o = new Order({ price: 42, amount: 9001 })
     const stubbedOrderGen = sinon.stub(generateOrder, 'gen').returns(o)
     const i = getInstance({
-      argParams: { submitDelay: 100 },
       stateParams: { gid: 42 },
       helperParams: {
-        emit: async (eventName, gid, orders, delay) => {
+        emit: async (eventName, gid, orders) => {
           if (eventName !== 'exec:order:submit:all') {
             return
           }
 
           assert.strictEqual(gid, 42, 'invalid gid')
           assert.deepStrictEqual(orders, [o], 'invalid orders')
-          assert.strictEqual(delay, 100, 'invalid submit delay')
           sawSubmit = true
         }
       }
