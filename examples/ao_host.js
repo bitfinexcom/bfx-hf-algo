@@ -31,6 +31,9 @@ const wsSettings = {
   apiSecret: API_SECRET,
   dms: 4,
   withHeartbeat: true
+//  authToken,
+//  userId,
+//  authTokenExpiresAt
 //  affiliateCode,
 //  wsURL,
 //  restURL
