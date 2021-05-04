@@ -8,9 +8,11 @@ const _isFunction = require('lodash/isObject')
 const { Order } = require('bfx-api-node-models')
 const genHelpers = require('../../../lib/host/gen_helpers')
 const AsyncEventEmitter = require('../../../lib/async_event_emitter')
+const { EventEmitter } = require('events')
 const sinon = require('sinon')
+const { assert: assertFn } = sinon
 
-const manager = new AsyncEventEmitter()
+const manager = new EventEmitter()
 const H = (args = {}, adapter = {}) => {
   const state = {
     ev: new AsyncEventEmitter(),
@@ -22,6 +24,10 @@ const H = (args = {}, adapter = {}) => {
 }
 
 describe('genHelpers', () => {
+  afterEach(() => {
+    manager.removeAllListeners()
+  })
+
   /**
    * These tests enforce the helper API; it is used by all AOs and serves as
    * the core of bfx-hf-algo alongside the AO Host (which processes all events)
@@ -201,7 +207,11 @@ describe('genHelpers', () => {
 
   describe('subscribeDataChannels', () => {
     const adapter = { subscribe: sinon.stub() }
-    const h = H({}, adapter)
+    let h
+
+    beforeEach(() => {
+      h = H({}, adapter)
+    })
 
     it('subscribes to channels and wait for response', async () => {
       const channel = 'book'
@@ -224,7 +234,7 @@ describe('genHelpers', () => {
       })
 
       await promise
-      sinon.assert.calledWithExactly(adapter.subscribe, state.connection, channel, payload)
+      assertFn.calledWithExactly(adapter.subscribe, state.connection, channel, payload)
     })
 
     it('fire and forget', async () => {
@@ -242,7 +252,7 @@ describe('genHelpers', () => {
         ]
       }
       await h.subscribeDataChannels(state, { fireAndForget: true })
-      sinon.assert.calledWithExactly(adapter.subscribe, state.connection, channel, payload)
+      assertFn.calledWithExactly(adapter.subscribe, state.connection, channel, payload)
     })
 
     it('subscribes with max wait time', async () => {
@@ -267,13 +277,17 @@ describe('genHelpers', () => {
         assert.strictEqual(e.message, 'Subscription to channel \'book\' timed out')
       }
 
-      sinon.assert.calledWithExactly(adapter.subscribe, state.connection, channel, payload)
+      assertFn.calledWithExactly(adapter.subscribe, state.connection, channel, payload)
     })
   })
 
-  describe('clearAllTimeouts', () => {
+  describe('close', () => {
     const adapter = { subscribe: sinon.stub() }
-    const h = H({}, adapter)
+    let h
+
+    beforeEach(() => {
+      h = H({}, adapter)
+    })
 
     it('should clear pending responses and its timeouts if any', async () => {
       const channel = 'book'
@@ -291,10 +305,12 @@ describe('genHelpers', () => {
       }
 
       const promise = h.subscribeDataChannels(state, { timeout: 1000 })
-      h.clearAllTimeouts()
+      assert(manager.listenerCount('ws2:event:subscribed') > 0)
+      h.close()
 
       await promise
-      sinon.assert.calledWithExactly(adapter.subscribe, state.connection, channel, payload)
+      assertFn.calledWithExactly(adapter.subscribe, state.connection, channel, payload)
+      assert(manager.listenerCount('ws2:event:subscribed') === 0)
     })
   })
 })
