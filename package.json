@@ -44,7 +44,7 @@
     "bfx-hf-indicators": "^2.0.0",
     "bfx-hf-util": "^1.0.1",
     "bluebird": "^3.5.5",
-    "debug": "^4.1.1",
+    "debug": "^4.3.1",
     "flat-promise": "^1.0.2",
     "lodash": "^4.17.15"
   },
