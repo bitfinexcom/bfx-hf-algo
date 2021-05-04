@@ -7,8 +7,10 @@ const { EMA } = require('bfx-hf-indicators')
 const { Candle } = require('bfx-api-node-models')
 const dataManagedCandles = require('../../../../lib/ma_crossover/events/data_managed_candles')
 
-const CANDLE = new Candle({ open: 1, high: 1.2, low: 0.9, close: 1, volume: 100 })
+const candleOpts = { open: 1, high: 1.2, low: 0.9, close: 1, volume: 100, mts: 100 }
+const CANDLE = new Candle(candleOpts)
 const CANDLE_KEY = 'key:1m:tTESTBTC:TESTUSD'
+
 const getInstance = ({
   params = {}, argParams = {}, stateParams = {}, helperParams = {}
 }) => ({
@@ -90,6 +92,27 @@ describe('ma_crossover:events:data_managed_candles', () => {
     assert.strictEqual(i.state.shortIndicator.l(), 1)
   })
 
+  it('does not update the candle if outdated candle is received', async () => {
+    let sawUpdateOpts = false
+    let updateCount = 0
+    const i = getInstance({
+      stateParams: { lastCandleShort: CANDLE, lastCandleLong: CANDLE },
+      helperParams: {
+        updateState: () => {
+          sawUpdateOpts = true
+          updateCount += 1
+        }
+      }
+    })
+    i.state.shortIndicator.add(CANDLE.close)
+    i.state.longIndicator.add(CANDLE.close)
+    const outdatedCandle = new Candle({ ...candleOpts, mts: 99 })
+    await dataManagedCandles(i, [outdatedCandle], { chanFilter: { key: CANDLE_KEY } })
+    assert.ok(!sawUpdateOpts, 'should not have updated the last candle')
+    assert.deepStrictEqual(updateCount, 0, 'should not have updated any candles')
+    assert.notDeepStrictEqual(updateCount, 1, 'should not have updated either candles')
+  })
+
   it('submits order and stops if indicators crossed', async () => {
     let sawSubmitOrder = false
     let sawExecStop = false
@@ -114,8 +137,38 @@ describe('ma_crossover:events:data_managed_candles', () => {
 
     await dataManagedCandles(i, [CANDLE], { chanFilter: { key: CANDLE_KEY } })
 
-    assert.ok(sawSubmitOrder)
-    assert.ok(sawExecStop)
+    assert.ok(sawSubmitOrder, 'should have submitted order')
+    assert.ok(sawExecStop, 'should have stopped the algo')
+
+    stubbedCrossed.restore()
+  })
+
+  it('does not submit order and stop if indicators did not cross', async () => {
+    let sawSubmitOrder = false
+    let sawExecStop = false
+
+    const i = getInstance({
+      helperParams: {
+        emitSelf: async (eventName) => {
+          if (eventName === 'submit_order') {
+            sawSubmitOrder = true
+          }
+        },
+
+        emit: async (eventName) => {
+          if (eventName === 'exec:stop') {
+            sawExecStop = true
+          }
+        }
+      }
+    })
+
+    const stubbedCrossed = sinon.stub(i.state.shortIndicator, 'crossed').returns(false)
+
+    await dataManagedCandles(i, [CANDLE], { chanFilter: { key: CANDLE_KEY } })
+
+    assert.ok(!sawSubmitOrder, 'should not have submitted order')
+    assert.ok(!sawExecStop, 'should not have stopped the algo')
 
     stubbedCrossed.restore()
   })
