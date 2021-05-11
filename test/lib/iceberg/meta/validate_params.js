@@ -12,6 +12,12 @@ const validParams = {
   sliceAmount: 0.1
 }
 
+const pairConfig = {
+  minSize: 0.01,
+  maxSize: 20,
+  lev: 5
+}
+
 describe('iceberg:meta:validate_params', () => {
   it('returns no error on valid params', () => {
     assert.strictEqual(validateParams(validParams), null)
@@ -65,6 +71,52 @@ describe('iceberg:meta:validate_params', () => {
     })
 
     assert.deepStrictEqual(err.field, 'sliceAmount')
+    assert(_isString(err.message))
+  })
+
+  it('returns error if amount is less than the minimum order size', () => {
+    const err = validateParams({
+      ...validParams,
+      amount: 0.001
+    }, pairConfig)
+    assert.deepStrictEqual(err.field, 'amount')
+    assert(_isString(err.message))
+  })
+
+  it('returns error if slice amount is less than the minimum order size', () => {
+    const err = validateParams({
+      ...validParams,
+      sliceAmount: 0.001
+    }, pairConfig)
+    assert.deepStrictEqual(err.field, 'sliceAmount')
+    assert(_isString(err.message))
+  })
+
+  it('returns error if amount is greater than the maximum order size', () => {
+    const err = validateParams({
+      ...validParams,
+      amount: 25
+    }, pairConfig)
+    assert.deepStrictEqual(err.field, 'amount')
+    assert(_isString(err.message))
+  })
+
+  it('returns error if slice amount is greater than the maximum order size', () => {
+    const err = validateParams({
+      ...validParams,
+      sliceAmount: 25
+    }, pairConfig)
+    assert.deepStrictEqual(err.field, 'sliceAmount')
+    assert(_isString(err.message))
+  })
+
+  it('returns error if leverage is greater than the allowed leverage', () => {
+    const err = validateParams({
+      ...validParams,
+      _futures: true,
+      lev: 6
+    }, pairConfig)
+    assert.deepStrictEqual(err.field, 'lev')
     assert(_isString(err.message))
   })
 })
