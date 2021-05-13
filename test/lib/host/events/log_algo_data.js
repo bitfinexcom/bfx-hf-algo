@@ -1,13 +1,12 @@
 /* eslint-env mocha */
 'use strict'
 
-const fs = require('fs')
 const sinon = require('sinon')
 const assert = require('assert')
-const fsOperations = require('../../../../lib/util/fs_operations')
+const CsvLogWriter = require('../../../../lib/util/csv_log_writer')
 const logAlgoData = require('../../../../lib/host/events/log_algo_data')
 
-let pathExistsStub, createDirStub, writeToFileStub, fsStub
+let csvLogWriterStub, csvLogInitStub
 
 describe('host:events:log_algo_data', () => {
   const getInstance = ({ stateParams = {}, helperParams = {} }) => ({
@@ -23,17 +22,13 @@ describe('host:events:log_algo_data', () => {
   })
 
   beforeEach(() => {
-    fsStub = sinon.stub(fs, 'createWriteStream').resolves()
-    pathExistsStub = sinon.stub(fsOperations, 'pathExists').resolves(true)
-    createDirStub = sinon.stub(fsOperations, 'createDir').resolves(true)
-    writeToFileStub = sinon.stub(fsOperations, 'writeToFile').resolves()
+    csvLogInitStub = sinon.stub(CsvLogWriter.prototype, 'init').returns(true)
+    csvLogWriterStub = sinon.stub(CsvLogWriter.prototype, 'write').resolves()
   })
 
   afterEach(async () => {
-    fsStub.restore()
-    pathExistsStub.restore()
-    createDirStub.restore()
-    writeToFileStub.restore()
+    csvLogInitStub.restore()
+    csvLogWriterStub.restore()
   })
 
   it('does not write to file if log options is not provided', async () => {
@@ -43,7 +38,8 @@ describe('host:events:log_algo_data', () => {
       }
     }
     await logAlgoData(host, 'a', [])
-    assert(writeToFileStub.notCalled, 'should not have written data to file')
+    assert(csvLogInitStub.notCalled, 'should not have initialized log stream')
+    assert(csvLogWriterStub.notCalled, 'should not have written data to file')
   })
 
   it('writes to file if log options is provided with permission to log data', async () => {
@@ -54,7 +50,8 @@ describe('host:events:log_algo_data', () => {
       }
     }
     await logAlgoData(host, 'a', [])
-    assert(writeToFileStub.called, 'should have written data to file')
+    assert(csvLogInitStub.called, 'should have initialized log stream')
+    assert(csvLogWriterStub.called, 'should have written data to file')
   })
 
   it('does not write to file if log options is provided with option to not log data', async () => {
@@ -65,99 +62,59 @@ describe('host:events:log_algo_data', () => {
       }
     }
     await logAlgoData(host, 'a', [])
-    assert(writeToFileStub.notCalled, 'should not have written data to file')
+    assert(csvLogInitStub.notCalled, 'should not have initialized log stream')
+    assert(csvLogWriterStub.notCalled, 'should not have written data to file')
   })
 
   describe('when write stream is saved in state', () => {
     it('does not check for path and directory and create write stream', async () => {
+      let dataLogged = false
       const host = {
         logAlgoOpts: { logAlgo: true, logAlgoDir: 'abc' },
         instances: {
           a: getInstance({
             stateParams: {
-              wls: () => {}
+              algoLogWriter: {
+                write: () => {
+                  dataLogged = true
+                }
+              }
             }
           })
         }
       }
       await logAlgoData(host, 'a', [])
-      assert(writeToFileStub.calledOnce, 'should have written data to file once')
-      assert(pathExistsStub.notCalled, 'should not have checked if path or directory exists')
-      assert(createDirStub.notCalled, 'should not have created directory')
-      assert(fsStub.notCalled, 'should not have created write stream')
+      assert.ok(dataLogged, 'should have logged data from stream saved in state')
     })
   })
 
   describe('when write stream is not saved in state', () => {
-    it('checks if directory and file path exists', async () => {
+    it('initializes the log stream and writes data to the stream', async () => {
       const host = {
         logAlgoOpts: { logAlgo: true, logAlgoDir: 'abc' },
         instances: {
           a: getInstance({})
         }
       }
-      await logAlgoData(host, 'a', [])
-      assert(pathExistsStub.called, 'should have checked if the directory exists or not')
-      assert.deepStrictEqual(pathExistsStub.getCall(0).args[0], 'abc/test-id_logs')
-      assert.deepStrictEqual(pathExistsStub.getCall(1).args[0], 'abc/test-id_logs/a.csv')
+      await logAlgoData(host, 'a', 'values')
+      assert(csvLogInitStub.called, 'should have initialized log stream')
+      assert(csvLogWriterStub.called, 'should have written data to file')
+      assert.deepStrictEqual(csvLogWriterStub.getCall(0).firstArg, 'values')
     })
 
-    it('creates directory if it does not exists', async () => {
+    it('does not write to file if there was an error while initializing the log stream', async () => {
       const host = {
         logAlgoOpts: { logAlgo: true, logAlgoDir: 'abc' },
         instances: {
           a: getInstance({})
         }
       }
-      pathExistsStub.onFirstCall().returns(false)
+      csvLogInitStub.returns(false)
       await logAlgoData(host, 'a', [])
-      assert(createDirStub.called, 'should not have created directory')
+      assert(csvLogWriterStub.notCalled, 'should not have written data to file')
     })
 
-    it('does not write to file if there was an error while creating directory', async () => {
-      const host = {
-        logAlgoOpts: { logAlgo: true, logAlgoDir: 'abc' },
-        instances: {
-          a: getInstance({})
-        }
-      }
-      pathExistsStub.onFirstCall().returns(false)
-      createDirStub.throws()
-      await logAlgoData(host, 'a', [])
-      assert(writeToFileStub.notCalled, 'should not have called write file')
-    })
-
-    it('writes headers to file if it did not exist', async () => {
-      const headersForLogFile = 'headers'
-      const host = {
-        logAlgoOpts: { logAlgo: true, logAlgoDir: 'abc' },
-        instances: {
-          a: getInstance({
-            stateParams: {
-              headersForLogFile
-            }
-          })
-        }
-      }
-      pathExistsStub.onSecondCall().returns(false)
-      await logAlgoData(host, 'a', [])
-      assert.deepStrictEqual(writeToFileStub.getCall(0).args[1][0], headersForLogFile, 'should have written headers on first call')
-    })
-
-    it('does not write headers to file if not defined', async () => {
-      const host = {
-        logAlgoOpts: { logAlgo: true, logAlgoDir: 'abc' },
-        instances: {
-          a: getInstance({})
-        }
-      }
-      pathExistsStub.onSecondCall().returns(false)
-      await logAlgoData(host, 'a', [])
-      assert(writeToFileStub.calledOnce, 'should have only called once')
-      assert.deepStrictEqual(writeToFileStub.getCall(0).args[1].length, 0, 'should not have written headers on first call')
-    })
-
-    it('updates state with write stream if created', async () => {
+    it('updates state with log writer after initialized', async () => {
       let stateUpdated = false
       const host = {
         logAlgoOpts: { logAlgo: true, logAlgoDir: 'abc' },
@@ -165,7 +122,7 @@ describe('host:events:log_algo_data', () => {
           a: getInstance({
             helperParams: {
               updateState: (_, updateOpts) => {
-                if (updateOpts.wls) {
+                if (updateOpts.algoLogWriter) {
                   stateUpdated = true
                 }
               }
@@ -174,7 +131,7 @@ describe('host:events:log_algo_data', () => {
         }
       }
       await logAlgoData(host, 'a', [])
-      assert.ok(stateUpdated, 'should have updated state with write stream')
+      assert.ok(stateUpdated, 'should have updated state with log writer')
     })
   })
 })
