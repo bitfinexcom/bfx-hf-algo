@@ -65,56 +65,58 @@ const getInstance = ({
 })
 
 describe('ma_crossover:events:data_managed_candles', () => {
-  it('seeds long indicator with all candles if needed', async () => {
+  it('seeds long indicator with ema values calculated with candles after the given emaPeriod', async () => {
     const i = getInstance({})
     const candles = []
 
     for (let i = 0; i < 240; i += 1) { candles.push(CANDLE) }
 
-    assert.strictEqual(i.state.longIndicator.l(), 0)
+    assert.deepStrictEqual(i.state.longIndicator.l(), 0)
     await dataManagedCandles(i, candles, { chanFilter: { key: CANDLE_KEY } })
-    assert.strictEqual(i.state.longIndicator.l(), 240)
+    assert.deepStrictEqual(i.state.longIndicator.bl(), 100)
+    assert.deepStrictEqual(i.state.longIndicator.l(), 141)
   })
 
   it('adds data on long indicator if new candle', async () => {
     const i = getInstance({})
-    assert.strictEqual(i.state.longIndicator.l(), 0)
+    assert.deepStrictEqual(i.state.longIndicator.bl(), 0)
     await dataManagedCandles(i, [CANDLE], { chanFilter: { key: CANDLE_KEY } })
-    assert.strictEqual(i.state.longIndicator.l(), 1)
+    assert.deepStrictEqual(i.state.longIndicator.bl(), 1)
   })
 
   it('updates data on long indicator if known candle', async () => {
     const i = getInstance({ stateParams: { lastCandleLong: CANDLE } })
     i.state.longIndicator.add(CANDLE.close)
-    assert.strictEqual(i.state.longIndicator.l(), 1)
+    assert.deepStrictEqual(i.state.longIndicator.bl(), 1)
     await dataManagedCandles(i, [CANDLE], { chanFilter: { key: CANDLE_KEY } })
-    assert.strictEqual(i.state.longIndicator.l(), 1)
+    assert.deepStrictEqual(i.state.longIndicator.bl(), 1)
   })
 
-  it('seeds short indicator with all candles if needed', async () => {
+  it('seeds short indicator with ema values calculated with candles after the given emaPeriod', async () => {
     const i = getInstance({})
     const candles = []
 
     for (let i = 0; i < 240; i += 1) { candles.push(CANDLE) }
 
-    assert.strictEqual(i.state.shortIndicator.l(), 0)
+    assert.deepStrictEqual(i.state.shortIndicator.l(), 0)
     await dataManagedCandles(i, candles, { chanFilter: { key: CANDLE_KEY } })
-    assert.strictEqual(i.state.shortIndicator.l(), 240)
+    assert.deepStrictEqual(i.state.shortIndicator.bl(), 20)
+    assert.deepStrictEqual(i.state.shortIndicator.l(), 221)
   })
 
   it('adds data on short indicator if new candle', async () => {
     const i = getInstance({})
-    assert.strictEqual(i.state.shortIndicator.l(), 0)
+    assert.deepStrictEqual(i.state.shortIndicator.l(), 0)
     await dataManagedCandles(i, [CANDLE], { chanFilter: { key: CANDLE_KEY } })
-    assert.strictEqual(i.state.shortIndicator.l(), 1)
+    assert.deepStrictEqual(i.state.shortIndicator.bl(), 1)
   })
 
   it('updates data on short indicator if known candle', async () => {
     const i = getInstance({ stateParams: { lastCandleShort: CANDLE } })
     i.state.shortIndicator.add(CANDLE.close)
-    assert.strictEqual(i.state.shortIndicator.l(), 1)
+    assert.deepStrictEqual(i.state.shortIndicator.bl(), 1)
     await dataManagedCandles(i, [CANDLE], { chanFilter: { key: CANDLE_KEY } })
-    assert.strictEqual(i.state.shortIndicator.l(), 1)
+    assert.deepStrictEqual(i.state.shortIndicator.bl(), 1)
   })
 
   it('does not update the candle if outdated candle is received', async () => {
@@ -129,8 +131,10 @@ describe('ma_crossover:events:data_managed_candles', () => {
         }
       }
     })
+
     i.state.shortIndicator.add(CANDLE.close)
     i.state.longIndicator.add(CANDLE.close)
+
     const outdatedCandle = new Candle({ ...candleOpts, mts: 99 })
     await dataManagedCandles(i, [outdatedCandle], { chanFilter: { key: CANDLE_KEY } })
     assert.ok(!sawUpdateOpts, 'should not have updated the last candle')
@@ -158,8 +162,12 @@ describe('ma_crossover:events:data_managed_candles', () => {
       }
     })
 
-    const stubbedCrossed = sinon.stub(i.state.shortIndicator, 'crossed').returns(true)
+    for (let n = 0; n < 100; n += 1) {
+      i.state.shortIndicator.add(CANDLE.close)
+      i.state.longIndicator.add(CANDLE.close)
+    }
 
+    const stubbedCrossed = sinon.stub(i.state.shortIndicator, 'crossed').returns(true)
     await dataManagedCandles(i, [CANDLE], { chanFilter: { key: CANDLE_KEY } })
 
     assert.ok(sawSubmitOrder, 'should have submitted order')
@@ -187,6 +195,11 @@ describe('ma_crossover:events:data_managed_candles', () => {
         }
       }
     })
+
+    for (let n = 0; n < 100; n += 1) {
+      i.state.shortIndicator.add(CANDLE.close)
+      i.state.longIndicator.add(CANDLE.close)
+    }
 
     const stubbedCrossed = sinon.stub(i.state.shortIndicator, 'crossed').returns(false)
 
