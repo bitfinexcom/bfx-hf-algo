@@ -23,17 +23,17 @@ const {
   AOHost, PingPong, Iceberg, TWAP, AccumulateDistribute, MACrossover
 } = require('bfx-hf-algo')
 
-const HFDB = require('bfx-hf-models')	
-const HFDBLowDBAdapter = require('bfx-hf-models-adapter-lowdb')	
-const {	
-  schema: HFDBBitfinexSchema	
+const HFDB = require('bfx-hf-models')
+const HFDBLowDBAdapter = require('bfx-hf-models-adapter-lowdb')
+const {
+  schema: HFDBBitfinexSchema
 } = require('bfx-hf-ext-plugin-bitfinex')
 
-const algoDB = new HFDB({	
-  schema: HFDBBitfinexSchema,	
-  adapter: HFDBLowDBAdapter({	
-    dbPath: path.join(__dirname, '..', 'db', 'example.json')	
-  })	
+const algoDB = new HFDB({
+  schema: HFDBBitfinexSchema,
+  adapter: HFDBLowDBAdapter({
+    dbPath: path.join(__dirname, '..', 'db', 'example.json')
+  })
 })
 
 const host = new AOHost({
@@ -91,6 +91,12 @@ host.once('ready', async () => {
 ### Docs
 
 [Refer to the `docs/`](/docs) folder for JSDoc-generated API documentation.
+
+### Benchmarking
+
+Run `TARGET=<benchmark name> npm run benchmark` to generate the reports (destination folder is ./benchmarks/reports),
+where TARGET is name of JS file in the root of `benchmarks` folder
+Visualize the report using `REPORT=<path to report> npm run benchmark:visualize`
 
 ### Contributing
 
