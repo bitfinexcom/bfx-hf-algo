@@ -41,20 +41,20 @@ function spawnHost () {
   return host
 }
 
-function connectHost(host) {
-  return new Promise((res, rej) => {
+function connectHost (host) {
+  return new Promise((resolve, reject) => {
     host.connect()
 
     host.once('error', (err) => {
-      rej(err)
+      reject(err)
     })
     host.once('ready', async () => {
-      res()
+      resolve()
     })
   })
 }
 
-function destroyHost(host) {
+function destroyHost (host) {
   host.removeAllListeners()
   host.close()
   host.cleanState()

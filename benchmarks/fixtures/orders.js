@@ -1,14 +1,14 @@
-function waitOrderStop(host, gid) {
-  return new Promise((res) => {
+function waitOrderStop (host, gid) {
+  return new Promise((resolve) => {
     host.once('ao:stop', (instance) => {
       const { state = {} } = instance
 
-      if (state.gid === gid) res()
+      if (state.gid === gid) resolve()
     })
   })
 }
 
-async function performOrder(host) {
+async function performOrder (host) {
   const gid = await host.startAO('bfx-iceberg', {
     symbol: 'tBTCUSD',
     price: 21000,
@@ -16,7 +16,7 @@ async function performOrder(host) {
     sliceAmount: -0.1,
     excessAsHidden: true,
     orderType: 'LIMIT',
-    _margin: false,
+    _margin: false
   })
 
   return gid

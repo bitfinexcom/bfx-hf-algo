@@ -2,7 +2,7 @@
 
 const restify = require('restify')
 
-function setupBenchmark(execute) {
+function setupBenchmark (execute) {
   const server = restify.createServer()
 
   server.get('/', async (req, res, next) => {
