@@ -94,6 +94,7 @@ host.once('ready', async () => {
 
 ### Benchmarking
 
+Environment variables API_KEY and API_SECRET must be defined (in paper mode)
 Run `TARGET=<benchmark name> npm run benchmark` to generate the reports (destination folder is ./benchmarks/reports),
 where TARGET is name of JS file in the root of `benchmarks` folder
 Visualize the report using `REPORT=<path to report> npm run benchmark:visualize`
