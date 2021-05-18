@@ -12,7 +12,7 @@ function waitOrderStop (host, gid) {
 
 async function performOrder (host) {
   const gid = await host.startAO('bfx-iceberg', {
-    symbol: 'tBTCUSD',
+    symbol: 'tAAABBB',
     price: 21000,
     amount: -0.5,
     sliceAmount: -0.1,
