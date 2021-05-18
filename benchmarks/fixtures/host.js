@@ -1,3 +1,4 @@
+'use strict'
 
 const {
   AOHost, PingPong, Iceberg, TWAP, AccumulateDistribute, MACrossover

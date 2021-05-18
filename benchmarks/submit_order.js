@@ -1,3 +1,5 @@
+'use strict'
+
 const { setupBenchmark } = require('./utils/setup')
 const { spawnHost, connectHost } = require('./fixtures/host')
 

@@ -1,3 +1,5 @@
+'use strict'
+
 function waitOrderStop (host, gid) {
   return new Promise((resolve) => {
     host.once('ao:stop', (instance) => {
