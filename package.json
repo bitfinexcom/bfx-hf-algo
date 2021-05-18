@@ -19,7 +19,7 @@
     "test": "npm run lint && npm run unit",
     "unit": "NODE_ENV=test mocha -R spec -b --recursive",
     "docs": "rm -rf docs && node_modules/.bin/jsdoc --configure .jsdoc.json --verbose",
-    "benchmark": "clinic doctor --dest benchmarks/reports/$TARGET --on-port 'autocannon -d 5 localhost:$PORT' -- node ./benchmarks/$TARGET.js",
+    "benchmark": "clinic doctor --dest benchmarks/reports/$TARGET --on-port 'autocannon -d 30 localhost:$PORT' -- node --inspect ./benchmarks/$TARGET.js",
     "benchmark:visualize": "clinic doctor --visualize-only $REPORT",
     "postbenchmark:visualize": "open-cli $REPORT.html"
   },
