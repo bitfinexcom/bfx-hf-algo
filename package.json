@@ -18,7 +18,10 @@
     "lint": "standard",
     "test": "npm run lint && npm run unit",
     "unit": "NODE_ENV=test mocha -R spec -b --recursive",
-    "docs": "rm -rf docs && node_modules/.bin/jsdoc --configure .jsdoc.json --verbose"
+    "docs": "rm -rf docs && node_modules/.bin/jsdoc --configure .jsdoc.json --verbose",
+    "benchmark": "clinic doctor --dest benchmarks/reports/$TARGET --on-port 'autocannon -d 30 localhost:$PORT' -- node --inspect ./benchmarks/$TARGET.js",
+    "benchmark:visualize": "clinic doctor --visualize-only $REPORT",
+    "postbenchmark:visualize": "open-cli $REPORT.html"
   },
   "repository": {
     "type": "git",
@@ -49,16 +52,21 @@
     "lodash": "^4.17.15"
   },
   "devDependencies": {
+    "autocannon": "^7.3.0",
     "bfx-hf-ext-plugin-bitfinex": "^1.0.5",
     "bfx-hf-models": "^2.1.0",
     "bfx-hf-models-adapter-lowdb": "^1.0.0",
     "chai": "^4.2.0",
+    "clinic": "^9.0.0",
     "docdash": "^1.2.0",
     "dotenv": "^8.2.0",
     "jsdoc": "^3.6.3",
     "mocha": "^7.1.0",
+    "open-cli": "^6.0.1",
+    "restify": "^8.5.1",
     "sinon": "^9.0.0",
-    "standard": "^16.0.3"
+    "standard": "^16.0.3",
+    "ws": "^7.4.5"
   },
   "standard": {
     "ignore": [
