@@ -6,7 +6,7 @@ const hasIndicatorOffset = require('../../../../lib/accumulate_distribute/util/h
 
 describe('accumulate_distribute:util:has_indicator_offset', () => {
   it('reports offset presence', () => {
-    assert.ok(hasIndicatorOffset({ relativeOffset: { type: 'ma' } }), 'offset presence not detected')
+    assert.ok(hasIndicatorOffset({ relativeOffset: { type: 'sma' } }), 'offset presence not detected')
     assert.ok(hasIndicatorOffset({ relativeOffset: { type: 'ema' } }), 'offset presence not detected')
   })
 

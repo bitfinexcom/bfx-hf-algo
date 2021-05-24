@@ -75,7 +75,7 @@ describe('accumulate_distribute:meta:declare_channels', () => {
   })
 
   it('declares candle channels for cap/offset indicators if needed', async () => {
-    for (const indicatorType of ['ma', 'ema']) {
+    for (const indicatorType of ['sma', 'ema']) {
       for (const candleReqSource of ['relativeOffset', 'relativeCap']) {
         let sawChannel = false
 

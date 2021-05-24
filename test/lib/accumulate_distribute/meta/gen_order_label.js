@@ -32,11 +32,11 @@ describe('accumulate_distribute:meta:gen_order_label', () => {
         ...state.args,
         orderType: null,
         relativeOffset: { type: 'ema' },
-        relativeCap: { type: 'ma' }
+        relativeCap: { type: 'sma' }
       }
     })
 
     assert.ok(_includes(str, 'Offset EMA'), 'relative offset type not included')
-    assert.ok(_includes(str, 'Cap MA'), 'relative cap type not included')
+    assert.ok(_includes(str, 'Cap SMA'), 'relative cap type not included')
   })
 })
