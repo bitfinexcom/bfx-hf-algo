@@ -23,17 +23,17 @@ const {
   AOHost, PingPong, Iceberg, TWAP, AccumulateDistribute, MACrossover
 } = require('bfx-hf-algo')
 
-const HFDB = require('bfx-hf-models')	
-const HFDBLowDBAdapter = require('bfx-hf-models-adapter-lowdb')	
-const {	
-  schema: HFDBBitfinexSchema	
+const HFDB = require('bfx-hf-models')
+const HFDBLowDBAdapter = require('bfx-hf-models-adapter-lowdb')
+const {
+  schema: HFDBBitfinexSchema
 } = require('bfx-hf-ext-plugin-bitfinex')
 
-const algoDB = new HFDB({	
-  schema: HFDBBitfinexSchema,	
-  adapter: HFDBLowDBAdapter({	
-    dbPath: path.join(__dirname, '..', 'db', 'example.json')	
-  })	
+const algoDB = new HFDB({
+  schema: HFDBBitfinexSchema,
+  adapter: HFDBLowDBAdapter({
+    dbPath: path.join(__dirname, '..', 'db', 'example.json')
+  })
 })
 
 const host = new AOHost({
@@ -45,22 +45,8 @@ const host = new AOHost({
   }
 })
 
-host.on('ao:start', (instance) => {
-  const { state = {} } = instance
-  const { id, gid } = state
-  console.log('started AO %s [gid %s]', id, gid)
-})
-
-host.on('ao:stop', (instance) => {
-  const { state = {} } = instance
-  const { id, gid } = state
-  console.log('stopped AO %s [gid %s]', id, gid)
-})
-
-host.on('ao:persist:db:update', async(updateOpts) => {
-  const { AlgoOrder } = algoDB  //algoDB is the low-adapter DB for algo
-  await AlgoOrder.set(updateOpts)
-  console.log('ao instance updated %s', updateOpts.gid)
+host.on('ao:state:update', async (updateOpts) => {
+  // send ui updates
 })
 
 host.on('auth:error', (packet) => {
@@ -72,9 +58,8 @@ host.on('error', (err) => {
 })
 
 host.once('ready', async () => {
-
   // Start an Iceberg order instance
-  const gid = await host.startAO('bfx-iceberg', {
+  const [serialized] = await host.startAO('bfx-iceberg', {
     symbol: 'tBTCUSD',
     price: 21000,
     amount: -0.5,
