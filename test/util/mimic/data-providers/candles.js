@@ -1,6 +1,6 @@
 'use strict'
 
-const timeFrames = require('../../../../lib/constants/time_frames')
+const timeFrames = require('bfx-hf-util/lib/candles/time_frames')
 const parseChannelKey = require('../../../../lib/util/parse_channel_key')
 
 /**
