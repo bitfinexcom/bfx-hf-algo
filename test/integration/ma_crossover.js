@@ -48,14 +48,13 @@ describe('ema integration test', () => {
     low: 9_000,
     volume: 3
   })
-  const randomizer = new Randomizer()
+  const seed = 59
+  const randomizer = new Randomizer(seed)
   const dataProviders = {
     candles: candlesDataProvider(randomizer.fork(), baseCandle.serialize())
   }
 
   before(async () => {
-    console.log('seed: ', randomizer.seed())
-
     apiMock = new ApiMock({
       session: {
         eventHandlers: {
