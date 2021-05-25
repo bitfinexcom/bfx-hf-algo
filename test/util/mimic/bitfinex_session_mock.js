@@ -157,8 +157,6 @@ class BitfinexSessionMock extends EventEmitter {
       payload = _omit(message, 'event')
     }
 
-    console.log('->', JSON.stringify(message)) // TODO
-
     if (!event) {
       debug('could not handle message %j', message)
       return
