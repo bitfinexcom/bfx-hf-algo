@@ -29,7 +29,7 @@ const apiMock = new ApiMock({
   },
   session: {
     eventHandlers: {
-      auth: authHandler(() => true),
+      auth: authHandler(() => true, 10),
       ping: pingHandler,
       subscribe: subscribeToChannelHandler(dataProviders),
       unsubscribe: unsubscribeHandler,

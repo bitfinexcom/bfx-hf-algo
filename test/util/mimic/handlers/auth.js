@@ -14,7 +14,7 @@
  * @param {function(AuthEvent): boolean} fn
  * @returns {function(BitfinexSessionMock): function(AuthEvent)}
  */
-module.exports = (fn) => (session) => (event) => {
+module.exports = (fn, delay = 1000) => (session) => (event) => {
   const isAuthorized = fn(event)
 
   if (!isAuthorized) {
@@ -36,5 +36,5 @@ module.exports = (fn) => (session) => (event) => {
     caps: {}
   })
 
-  session.after(1000, () => session.sendSnapshots())
+  session.after(delay, () => session.sendSnapshots())
 }
