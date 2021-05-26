@@ -31,7 +31,7 @@ describe('ma_crossover:meta:declare_channels', () => {
 
     const i = getInstance({
       helperParams: {
-        declareChannel: async (instance, host, channel, filter) => {
+        declareChannel: async (instance, channel, filter) => {
           const { key } = filter
 
           assert.strictEqual(channel, 'candles')

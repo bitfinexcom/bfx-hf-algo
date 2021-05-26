@@ -185,7 +185,7 @@ describe('genHelpers', () => {
 
       const state = { ev, gid: '42' }
       const h = H(state)
-      h.declareChannel({ h, state }, {}, 'some-channel', 'some-filter')
+      h.declareChannel({ h, state }, 'some-channel', 'some-filter')
     })
   })
 
