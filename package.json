@@ -20,7 +20,7 @@
     "unit": "NODE_ENV=test mocha -R spec -b --recursive test/lib",
     "integration": "NODE_ENV=test mocha -R spec -b --recursive --timeout=60000 test/integration",
     "docs": "rm -rf docs && node_modules/.bin/jsdoc --configure .jsdoc.json --verbose",
-    "benchmark": "clinic doctor --dest benchmarks/reports/$TARGET --on-port 'autocannon -d 30 localhost:$PORT' -- node --inspect ./benchmarks/$TARGET.js",
+    "benchmark": "clinic doctor --dest ./.benchmarks_reports/$TARGET --on-port 'autocannon -d 30 localhost:$PORT' -- node --inspect ./benchmarks/$TARGET.js",
     "benchmark:visualize": "clinic doctor --visualize-only $REPORT",
     "postbenchmark:visualize": "open-cli $REPORT.html"
   },

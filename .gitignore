@@ -16,3 +16,4 @@ tags
 .nyc_output
 .undodir
 Session.vim
+.benchmarks_reports
