@@ -1,4 +1,4 @@
-
+const { spawnSync, spawn } = require('child_process');
 const ApiMock = require('../../test/util/mimic/bitfinex_api_mock')
 const { Candle } = require('bfx-api-node-models')
 const Randomizer = require('../../test/util/randomizer')
@@ -10,32 +10,43 @@ const newOrderHandler = require('../../test/util/mimic/handlers/new_order')
 const unsubscribeHandler = require('../../test/util/mimic/handlers/unsubscribe')
 const { NEW_ORDER } = require('../../test/util/mimic/signal_types')
 
-const seed = 59
-const randomizer = new Randomizer(seed)
-const baseCandle = new Candle({
-  mts: 0,
-  open: 12_000,
-  close: 15_000,
-  high: 16_000,
-  low: 9_000,
-  volume: 3
-})
-const dataProviders = {
-  candles: candlesDataProvider(randomizer.fork(), baseCandle.serialize())
-}
-const apiMock = new ApiMock({
-  server: {
-    port: 5555
-  },
-  session: {
-    eventHandlers: {
-      auth: authHandler(() => true, 10),
-      ping: pingHandler,
-      subscribe: subscribeToChannelHandler(dataProviders),
-      unsubscribe: unsubscribeHandler,
-      [NEW_ORDER]: newOrderHandler
-    }
+function createApiMock() {
+  const seed = 59
+  const randomizer = new Randomizer(seed)
+  const baseCandle = new Candle({
+    mts: 0,
+    open: 12_000,
+    close: 15_000,
+    high: 16_000,
+    low: 9_000,
+    volume: 3
+  })
+  const dataProviders = {
+    candles: candlesDataProvider(randomizer.fork(), baseCandle.serialize())
   }
-});
+  const apiMock = new ApiMock({
+    server: {
+      port: process.env.MOCK_PORT
+    },
+    session: {
+      eventHandlers: {
+        auth: authHandler(() => true, 10),
+        ping: pingHandler,
+        subscribe: subscribeToChannelHandler(dataProviders),
+        unsubscribe: unsubscribeHandler,
+        [NEW_ORDER]: newOrderHandler
+      }
+    }
+  });
 
-console.log('apiMock: ', apiMock.url())
+  return apiMock
+}
+
+if (process.argv[2] === 'spawn') {
+  createApiMock()
+  console.log('Mock API spawned')
+}
+
+module.exports = {
+  createApiMock
+}

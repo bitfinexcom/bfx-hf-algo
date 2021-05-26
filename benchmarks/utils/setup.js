@@ -15,6 +15,7 @@ function setupBenchmark (execute) {
   process.on('SIGINT', function () {
     console.error('Caught SIGINT, shutting down.')
     server.close()
+    process.exit(0)
   })
 }
 
