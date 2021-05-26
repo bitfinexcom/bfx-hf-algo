@@ -1,6 +1,5 @@
 'use strict'
 
-const { spawnApiMock } = require('./utils/api_mock')
 const { setupBenchmark } = require('./utils/setup')
 const { spawnHost, connectHost, destroyHost } = require('./fixtures/host')
 
