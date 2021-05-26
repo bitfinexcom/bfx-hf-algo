@@ -20,9 +20,7 @@
     "unit": "NODE_ENV=test mocha -R spec -b --recursive test/lib",
     "integration": "NODE_ENV=test mocha -R spec -b --recursive --timeout=60000 test/integration",
     "docs": "rm -rf docs && node_modules/.bin/jsdoc --configure .jsdoc.json --verbose",
-    "benchmark": "clinic doctor --dest ./.benchmarks_reports/$TARGET --on-port 'autocannon -d 30 localhost:$PORT' -- node --inspect ./benchmarks/$TARGET.js",
-    "benchmark:visualize": "clinic doctor --visualize-only $REPORT",
-    "postbenchmark:visualize": "open-cli $REPORT.html"
+    "benchmark": "clinic doctor --dest ./.benchmarks_reports/$TARGET --on-port 'autocannon -d 30 localhost:$PORT' -- node --inspect ./benchmarks/$TARGET.js"
   },
   "repository": {
     "type": "git",
@@ -63,7 +61,6 @@
     "dotenv": "^8.2.0",
     "jsdoc": "^3.6.3",
     "mocha": "^7.1.0",
-    "open-cli": "^6.0.1",
     "restify": "^8.5.1",
     "sinon": "^9.0.0",
     "standard": "^16.0.3",
