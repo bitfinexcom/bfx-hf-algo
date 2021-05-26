@@ -4,9 +4,10 @@ const { setupBenchmark } = require('./utils/setup')
 const { spawnHost, connectHost } = require('./fixtures/host')
 const { performOrder } = require('./fixtures/orders')
 
-const { API_KEY, API_SECRET } = process.env
+const apiKey = 'api key'
+const apiSecret = 'api secret'
 
-const host = spawnHost({ apiKey: API_KEY, apiSecret: API_SECRET })
+const host = spawnHost({ apiKey, apiSecret, wsURL: process.env.API_URL })
 const connectPromise = connectHost(host)
 
 setupBenchmark(async () => {
