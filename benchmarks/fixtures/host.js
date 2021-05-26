@@ -4,14 +4,13 @@ const {
   AOHost, PingPong, Iceberg, TWAP, AccumulateDistribute, MACrossover
 } = require('../..')
 
-const { API_KEY, API_SECRET } = process.env
+function spawnHost ({ apiKey, apiSecret, wsURL }) {
+  if (!apiKey || !apiSecret) throw new Error('API_KEY and API_SECRET are required')
 
-if (!API_KEY || !API_SECRET) throw new Error('API_KEY and API_SECRET are required')
-
-function spawnHost () {
   const wsSettings = {
-    apiKey: API_KEY,
-    apiSecret: API_SECRET,
+    apiKey,
+    apiSecret,
+    wsURL,
     dms: 4
   }
   const host = new AOHost({
