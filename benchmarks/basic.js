@@ -3,11 +3,12 @@
 const { setupBenchmark } = require('./utils/setup')
 const { spawnHost, connectHost, destroyHost } = require('./fixtures/host')
 
-const { API_KEY, API_SECRET } = process.env
+const apiKey = 'api key'
+const apiSecret = 'api secret'
 
 setupBenchmark(async () => {
-  const host = spawnHost({ apiKey: API_KEY, apiSecret: API_SECRET })
+  const host = spawnHost({ apiKey, apiSecret, wsURL: 'ws://localhost:5555' })
 
   await connectHost(host)
-  await destroyHost(host)
+  destroyHost(host)
 })
