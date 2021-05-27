@@ -1,3 +1,5 @@
+'use strict'
+
 const ApiMock = require('../../test/util/mimic/bitfinex_api_mock')
 const { Candle } = require('bfx-api-node-models')
 const Randomizer = require('../../test/util/randomizer')
