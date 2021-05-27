@@ -77,6 +77,13 @@ host.once('ready', async () => {
 
 [Refer to the `docs/`](/docs) folder for JSDoc-generated API documentation.
 
+### Benchmarking
+
+Environment variables API_KEY and API_SECRET must be defined (in paper mode)
+Run `npm run benchmark:mock` and keep it running in a separate terminal
+Run `TARGET=<benchmark name> npm run benchmark:run` to generate the reports (destination folder is ./benchmarks_reports),
+where TARGET is name of JS file in the root of `benchmarks` folder
+
 ### Contributing
 
 1. Fork it

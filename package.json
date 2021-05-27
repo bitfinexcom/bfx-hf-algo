@@ -17,8 +17,11 @@
   "scripts": {
     "lint": "standard",
     "test": "npm run lint && npm run unit",
-    "unit": "NODE_ENV=test mocha -R spec -b --recursive",
-    "docs": "rm -rf docs && node_modules/.bin/jsdoc --configure .jsdoc.json --verbose"
+    "unit": "NODE_ENV=test mocha -R spec -b --recursive test/lib",
+    "integration": "NODE_ENV=test mocha -R spec -b --recursive --timeout=60000 test/integration",
+    "docs": "rm -rf docs && node_modules/.bin/jsdoc --configure .jsdoc.json --verbose",
+    "benchmark:mock": "MOCK_PORT=5555 node ./benchmarks/utils/api_mock.js spawn",
+    "benchmark:run": "API_URL=ws://localhost:5555 clinic doctor --dest ./.benchmarks_reports/$TARGET --on-port 'autocannon -d 30 localhost:$PORT' -- node --inspect ./benchmarks/$TARGET.js"
   },
   "repository": {
     "type": "git",
@@ -49,16 +52,20 @@
     "lodash": "^4.17.15"
   },
   "devDependencies": {
+    "autocannon": "^7.3.0",
     "bfx-hf-ext-plugin-bitfinex": "^1.0.5",
     "bfx-hf-models": "^2.1.0",
     "bfx-hf-models-adapter-lowdb": "^1.0.0",
     "chai": "^4.2.0",
+    "clinic": "^9.0.0",
     "docdash": "^1.2.0",
     "dotenv": "^8.2.0",
     "jsdoc": "^3.6.3",
     "mocha": "^7.1.0",
+    "restify": "^8.5.1",
     "sinon": "^9.0.0",
-    "standard": "^16.0.3"
+    "standard": "^16.0.3",
+    "ws": "^7.4.5"
   },
   "standard": {
     "ignore": [

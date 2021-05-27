@@ -24,16 +24,16 @@ const { AlgoOrder } = new HFDB({
   })
 })
 
-const { API_KEY, API_SECRET } = process.env
+const { API_KEY, API_SECRET, WS_URL, AUTH_TOKEN } = process.env
 
 const wsSettings = {
   apiKey: API_KEY,
   apiSecret: API_SECRET,
+  authToken: AUTH_TOKEN,
   dms: 4,
-  withHeartbeat: true
+  withHeartbeat: true,
+  wsURL: WS_URL // it will point to prod if empty
 //  affiliateCode,
-//  wsURL,
-//  restURL
 }
 
 const host = new AOHost({
