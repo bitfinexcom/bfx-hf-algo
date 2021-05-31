@@ -12,5 +12,6 @@ const connectPromise = connectHost(host)
 
 setupBenchmark(async () => {
   await connectPromise
-  await performOrder(host)
+  const id = await performOrder(host)
+  await host.stopAO(id)
 })
