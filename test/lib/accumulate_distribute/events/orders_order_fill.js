@@ -7,6 +7,17 @@ const _isObject = require('lodash/isObject')
 const { Order } = require('bfx-api-node-models')
 const ordersOrderFill = require('../../../../lib/accumulate_distribute/events/orders_order_fill')
 
+const timeout = (ms) => {
+  let id = null
+
+  const p = new Promise((resolve) => {
+    id = { ms }
+    resolve()
+  })
+
+  return [id, () => p]
+}
+
 const getInstance = ({
   params = {}, argParams = {}, stateParams = {}, helperParams = {}
 }) => ({
@@ -22,7 +33,9 @@ const getInstance = ({
   },
 
   h: {
+    timeout,
     emit: async () => {},
+    emitSelf: async () => {},
     updateState: async () => {},
     notifyUI: async () => {},
     debug: () => {},

@@ -5,6 +5,17 @@ const assert = require('assert')
 const { EMA } = require('bfx-hf-indicators')
 const lifeStart = require('../../../../lib/accumulate_distribute/events/life_start')
 
+const timeout = (ms) => {
+  let id = null
+
+  const p = new Promise((resolve) => {
+    id = { ms }
+    resolve()
+  })
+
+  return [id, () => p]
+}
+
 const getInstance = ({
   params = {}, argParams = {}, stateParams = {}, helperParams = {}
 }) => ({
@@ -18,8 +29,10 @@ const getInstance = ({
   },
 
   h: {
+    timeout,
     debug: () => {},
     emit: async () => {},
+    emitSelf: async () => {},
     updateState: async () => {},
     scheduleTick: async () => {},
     notifyUI: async () => {},
