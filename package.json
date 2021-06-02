@@ -21,7 +21,8 @@
     "integration": "NODE_ENV=test mocha -R spec -b --recursive --timeout=60000 test/integration",
     "docs": "rm -rf docs && node_modules/.bin/jsdoc --configure .jsdoc.json --verbose",
     "benchmark:mock": "MOCK_PORT=5555 node ./benchmarks/utils/api_mock.js spawn",
-    "benchmark:run": "API_URL=ws://localhost:5555 clinic doctor --dest ./.benchmarks_reports/$TARGET --on-port 'autocannon -d 30 localhost:$PORT' -- node --inspect ./benchmarks/$TARGET.js"
+    "benchmark:debug": "API_URL=ws://localhost:5555 node --expose-gc  --inspect ./benchmarks/$TARGET.js",
+    "benchmark:run": "API_URL=ws://localhost:5555 clinic doctor --dest ./.benchmarks_reports/$TARGET --on-port 'autocannon -d 10 localhost:$PORT && curl \"localhost:$PORT/gc?interval=4&iterations=5\"' -- node --expose-gc --inspect ./benchmarks/$TARGET.js"
   },
   "repository": {
     "type": "git",

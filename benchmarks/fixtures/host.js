@@ -18,18 +18,6 @@ function spawnHost ({ apiKey, apiSecret, wsURL }) {
     wsSettings
   })
 
-  host.on('ao:start', (instance) => {
-    const { state = {} } = instance
-    const { id, gid } = state
-    console.log('started AO %s [gid %s]', id, gid)
-  })
-
-  host.on('ao:stop', (instance) => {
-    const { state = {} } = instance
-    const { id, gid } = state
-    console.log('stopped AO %s [gid %s]', id, gid)
-  })
-
   host.on('auth:error', (packet) => {
     console.log('error authenticating: %j', packet)
   })
