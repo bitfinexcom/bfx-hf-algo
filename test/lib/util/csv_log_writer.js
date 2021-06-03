@@ -7,7 +7,6 @@ const assert = require('assert')
 const CsvLogWriter = require('../../../lib/util/csv_log_writer')
 const writer = new CsvLogWriter({
   id: 'test-id',
-  gid: 123,
   logAlgoDir: 'abc',
   headersForLogFile: ['header1', 'header2']
 })
@@ -52,14 +51,19 @@ describe('Csv Log Writer', () => {
 
     it('initializes the log stream properly', async () => {
       await writer.init()
+      await writer.initFile(123)
       assert.ok(fsStub.called, 'should have created log stream')
-      assert.deepStrictEqual(writer.logStream, mockedLogStream, 'should have returned logStream')
+      assert.deepStrictEqual(writer.logStreams[123], mockedLogStream, 'should have returned logStream')
     })
 
     it('writes headers if file did not exist and headers is an array', async () => {
+      const spy = sinon.spy(mockedLogStream, 'write')
       await writer.init()
-      assert.ok(writeStub.calledOnce, 'should have written headers in file')
-      assert.ok(writeStub.getCall(0).firstArg, writer.headersForLogFile, 'did not write headers in file properly')
+      await writer.initFile(123)
+
+      assert.ok(spy.calledOnce, 'should have written headers in file')
+      assert.ok(spy.getCall(0).firstArg, writer.headersForLogFile.join(',') + '\n', 'did not write headers in file properly')
+      spy.restore()
     })
 
     it('does not write header if file already exists', async () => {
