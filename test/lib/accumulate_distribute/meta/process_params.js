@@ -18,11 +18,11 @@ const args = {
   offsetIndicatorPriceEMA: 'high',
   offsetIndicatorTFEMA: 'ONE_MINUTE',
   offsetIndicatorPeriodEMA: 10,
-  capType: 'MA',
+  capType: 'SMA',
   capDelta: 12,
-  capIndicatorPriceMA: 'low',
-  capIndicatorTFMA: 'FIVE_MINUTES',
-  capIndicatorPeriodMA: 20,
+  capIndicatorPriceSMA: 'low',
+  capIndicatorTFSMA: 'FIVE_MINUTES',
+  capIndicatorPeriodSMA: 20,
   amount: 7,
   sliceAmount: 3
 }

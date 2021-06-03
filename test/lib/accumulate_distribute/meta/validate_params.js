@@ -128,8 +128,8 @@ describe('accumulate_distribute:meta:validate_params', () => {
     })
 
     it('returns error if cap candle price is invalid', () => {
-      const err = validateParams({ ...params, relativeCap: { ...params.relativeCap, type: 'ma', candlePrice: false } }, pairConfig)
-      assert.deepStrictEqual(err.field, 'capIndicatorPriceMA')
+      const err = validateParams({ ...params, relativeCap: { ...params.relativeCap, type: 'sma', candlePrice: false } }, pairConfig)
+      assert.deepStrictEqual(err.field, 'capIndicatorPriceSMA')
       assert(_isString(err.message))
     })
 
@@ -154,8 +154,8 @@ describe('accumulate_distribute:meta:validate_params', () => {
     })
 
     it('returns error if offset candle price is invalid', () => {
-      const err = validateParams({ ...params, relativeOffset: { ...params.relativeOffset, type: 'ma', candlePrice: false } }, pairConfig)
-      assert.deepStrictEqual(err.field, 'offsetIndicatorPriceMA')
+      const err = validateParams({ ...params, relativeOffset: { ...params.relativeOffset, type: 'sma', candlePrice: false } }, pairConfig)
+      assert.deepStrictEqual(err.field, 'offsetIndicatorPriceSMA')
       assert(_isString(err.message))
     })
 
