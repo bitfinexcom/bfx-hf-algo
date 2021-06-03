@@ -99,7 +99,7 @@ describe('host:events:log_algo_data', () => {
       await logAlgoData(host, 'a', 'values')
       assert(csvLogInitStub.called, 'should have initialized log stream')
       assert(csvLogWriterStub.called, 'should have written data to file')
-      assert.deepStrictEqual(csvLogWriterStub.getCall(0).firstArg, 'values')
+      assert.deepStrictEqual(csvLogWriterStub.getCall(0).args[1], 'values')
     })
 
     it('does not write to file if there was an error while initializing the log stream', async () => {
