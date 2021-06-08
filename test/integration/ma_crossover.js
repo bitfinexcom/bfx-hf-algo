@@ -6,7 +6,7 @@ const { delay } = require('bluebird')
 const { Candle } = require('bfx-api-node-models')
 const { expect } = require('chai')
 
-const { spawnHost, connectHost, destroyHost } = require('../../benchmarks/fixtures/host')
+const { spawnHost, connectHost, destroyHost } = require('../util/host')
 const ApiMock = require('../util/mimic/bitfinex_api_mock')
 const { candles: candlesDataProvider } = require('../util/mimic/data-providers')
 const Randomizer = require('../util/randomizer')

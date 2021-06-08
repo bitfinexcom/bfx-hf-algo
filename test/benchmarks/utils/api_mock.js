@@ -1,15 +1,15 @@
 'use strict'
 
-const ApiMock = require('../../test/util/mimic/bitfinex_api_mock')
+const ApiMock = require('../../util/mimic/bitfinex_api_mock')
 const { Candle } = require('bfx-api-node-models')
-const Randomizer = require('../../test/util/randomizer')
-const { candles: candlesDataProvider } = require('../../test/util/mimic/data-providers')
-const authHandler = require('../../test/util/mimic/handlers/auth')
-const pingHandler = require('../../test/util/mimic/handlers/ping')
-const subscribeToChannelHandler = require('../../test/util/mimic/handlers/subscribe_to_channel')
-const newOrderHandler = require('../../test/util/mimic/handlers/new_order')
-const unsubscribeHandler = require('../../test/util/mimic/handlers/unsubscribe')
-const { NEW_ORDER } = require('../../test/util/mimic/signal_types')
+const Randomizer = require('../../util/randomizer')
+const { candles: candlesDataProvider } = require('../../util/mimic/data-providers')
+const authHandler = require('../../util/mimic/handlers/auth')
+const pingHandler = require('../../util/mimic/handlers/ping')
+const subscribeToChannelHandler = require('../../util/mimic/handlers/subscribe_to_channel')
+const newOrderHandler = require('../../util/mimic/handlers/new_order')
+const unsubscribeHandler = require('../../util/mimic/handlers/unsubscribe')
+const { NEW_ORDER } = require('../../util/mimic/signal_types')
 
 function createApiMock () {
   const seed = 59
