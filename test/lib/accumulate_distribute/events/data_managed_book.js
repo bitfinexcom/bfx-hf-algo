@@ -19,6 +19,7 @@ const getInstance = ({
   },
 
   h: {
+    emit: () => {},
     debug: () => {},
     updateState: async () => {},
     ...helperParams
