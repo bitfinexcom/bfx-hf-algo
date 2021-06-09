@@ -1,7 +1,7 @@
 'use strict'
 
 const { setupBenchmark } = require('./utils/setup')
-const { spawnHost, connectHost, destroyHost } = require('./fixtures/host')
+const { spawnHost, connectHost, destroyHost } = require('../util/host')
 
 const apiKey = 'api key'
 const apiSecret = 'api secret'
