@@ -28,7 +28,7 @@ function performOrder (host) {
   })
 }
 
-describe('ema integration test', () => {
+describe('MA crossover', () => {
   let host, apiMock, spyServer
   const apiKey = 'api key'
   const apiSecret = 'api secret'
@@ -50,27 +50,25 @@ describe('ema integration test', () => {
     apiMock.close()
   })
 
-  it('test', async () => {
+  it('emits subscribed and order events', async () => {
     await performOrder(host)
     await delay(20_000)
 
-    expect(spyServer.connections.length).to.eql(1)
-    spyServer.connections.forEach(spyConn => {
-      expect(spyConn.countReceived(NEW_ORDER)).to.eq(1)
+    const spyConn = spyServer.connections[0]
 
-      spyConn
-        .received('auth', (e) => expect(e.apiKey).to.eq(apiKey))
-        .received('subscribe', (e) => expect(e.channel).to.eq('candles'))
-        .sent('subscribed', (e) => {
-          expect(e.key).to.eq('trade:1m:tAAABBB')
-          expect(e.chanId).to.be.a('number')
-        })
-        .received(NEW_ORDER, ({ fields: [placeholder, details] }) => {
-          expect(details.symbol).to.eq('tAAABBB')
-          expect(details.type).to.eq('EXCHANGE MARKET')
-          expect(details.amount).to.eq('1.00000000')
-          expect(details.flags).to.eq(0)
-        })
-    })
+    expect(spyConn.countReceived(NEW_ORDER)).to.eq(1)
+
+    spyConn
+      .received('subscribe', (e) => expect(e.channel).to.eq('candles'))
+      .sent('subscribed', (e) => {
+        expect(e.key).to.eq('trade:1m:tAAABBB')
+        expect(e.chanId).to.be.a('number')
+      })
+      .received(NEW_ORDER, ({ fields: [placeholder, details] }) => {
+        expect(details.symbol).to.eq('tAAABBB')
+        expect(details.type).to.eq('EXCHANGE MARKET')
+        expect(details.amount).to.eq('1.00000000')
+        expect(details.flags).to.eq(0)
+      })
   })
 })
