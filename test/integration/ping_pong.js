@@ -55,4 +55,28 @@ describe('ping-pong', () => {
         expect(+details.price).to.eq(+pricesTable[i])
       })
   })
+
+  it('equal prices', async () => {
+    await host.startAO('bfx-ping_pong', {
+      symbol: 'tAAABBB',
+      amount: 0.5,
+      orderCount: 3,
+      pingMinPrice: 100,
+      pingMaxPrice: 100,
+      pongDistance: 300,
+      _margin: false
+    })
+    await delay(2_000)
+
+    const spyConn = spyServer.connections[0]
+    expect(spyConn.countReceived(NEW_ORDER), 'incorrect number of orders').to.eq(3)
+
+    spyConn
+      .received(NEW_ORDER, ({ fields: [placeholder, details] }, i) => {
+        expect(details.symbol).to.eq('tAAABBB')
+        expect(details.type).to.eq('EXCHANGE LIMIT')
+        expect(details.amount).to.eq('0.50000000')
+        expect(details.price).to.eq('100.00')
+      })
+  })
 })
