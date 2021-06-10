@@ -20,6 +20,8 @@ const getInstance = ({
   h: {
     debug: () => {},
     updateState: async () => {},
+    subscribeDataChannels: async () => {},
+    sendPing: async () => { return { ts: Date.now() } },
     ...helperParams
   },
 
@@ -27,17 +29,16 @@ const getInstance = ({
 })
 
 describe('ma_crossover:events:life_start', () => {
-  it('updates state with long and short indicator instances', (done) => {
+  it('updates state with long and short indicator instances', async () => {
     const i = getInstance({
       helperParams: {
         updateState: async (_, update) => {
           assert.ok(update.longIndicator instanceof EMA)
           assert.ok(update.shortIndicator instanceof EMA)
-          done()
         }
       }
     })
 
-    lifeStart(i)
+    await lifeStart(i)
   })
 })

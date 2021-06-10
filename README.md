@@ -23,17 +23,17 @@ const {
   AOHost, PingPong, Iceberg, TWAP, AccumulateDistribute, MACrossover
 } = require('bfx-hf-algo')
 
-const HFDB = require('bfx-hf-models')	
-const HFDBLowDBAdapter = require('bfx-hf-models-adapter-lowdb')	
-const {	
-  schema: HFDBBitfinexSchema	
+const HFDB = require('bfx-hf-models')
+const HFDBLowDBAdapter = require('bfx-hf-models-adapter-lowdb')
+const {
+  schema: HFDBBitfinexSchema
 } = require('bfx-hf-ext-plugin-bitfinex')
 
-const algoDB = new HFDB({	
-  schema: HFDBBitfinexSchema,	
-  adapter: HFDBLowDBAdapter({	
-    dbPath: path.join(__dirname, '..', 'db', 'example.json')	
-  })	
+const algoDB = new HFDB({
+  schema: HFDBBitfinexSchema,
+  adapter: HFDBLowDBAdapter({
+    dbPath: path.join(__dirname, '..', 'db', 'example.json')
+  })
 })
 
 const host = new AOHost({
@@ -45,25 +45,11 @@ const host = new AOHost({
   }
 })
 
-host.on('ao:start', (instance) => {
-  const { state = {} } = instance
-  const { id, gid } = state
-  console.log('started AO %s [gid %s]', id, gid)
+host.on('ao:state:update', async (updateOpts) => {
+  // send ui updates
 })
 
-host.on('ao:stop', (instance) => {
-  const { state = {} } = instance
-  const { id, gid } = state
-  console.log('stopped AO %s [gid %s]', id, gid)
-})
-
-host.on('ao:persist:db:update', async(updateOpts) => {
-  const { AlgoOrder } = algoDB  //algoDB is the low-adapter DB for algo
-  await AlgoOrder.set(updateOpts)
-  console.log('ao instance updated %s', updateOpts.gid)
-})
-
-host.on('ws2:auth:error', (packet) => {
+host.on('auth:error', (packet) => {
   console.log('error authenticating: %j', packet)
 })
 
@@ -71,17 +57,15 @@ host.on('error', (err) => {
   console.log('error: %s', err)
 })
 
-host.once('ws2:auth:success', async () => {
-
+host.once('ready', async () => {
   // Start an Iceberg order instance
-  const gid = await host.startAO('bfx-iceberg', {
+  const [serialized] = await host.startAO('bfx-iceberg', {
     symbol: 'tBTCUSD',
     price: 21000,
     amount: -0.5,
     sliceAmount: -0.1,
     excessAsHidden: true,
     orderType: 'LIMIT',
-    submitDelay: 150,
     _margin: false,
   })
 
@@ -92,6 +76,13 @@ host.once('ws2:auth:success', async () => {
 ### Docs
 
 [Refer to the `docs/`](/docs) folder for JSDoc-generated API documentation.
+
+### Benchmarking
+
+Environment variables API_KEY and API_SECRET must be defined (in paper mode)
+Run `npm run benchmark:mock` and keep it running in a separate terminal
+Run `TARGET=<benchmark name> npm run benchmark:run` to generate the reports (destination folder is ./benchmarks_reports),
+where TARGET is name of JS file in the root of `test/benchmarks` folder
 
 ### Contributing
 

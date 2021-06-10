@@ -24,7 +24,8 @@ describe('host:events:stop', () => {
       emit: async () => {},
       instances: {
         a: { state: { ev } }
-      }
+      },
+      _stopAlgo: () => {}
     }, 'a')
 
     ev.emit('test')
@@ -37,22 +38,19 @@ describe('host:events:stop', () => {
       emit: async () => {},
       instances: {
         a: { state: { ev } }
-      }
+      },
+      _stopAlgo: () => {}
     }, 'a', done)
   })
 
-  it('emits ao:stop event on host', (done) => {
+  it('calls _stopAlgo on host', (done) => {
     const ev = new AsyncEventEmitter()
 
     stop({
-      emit: async (eventName) => {
-        if (eventName === 'ao:stop') {
-          done()
-        }
-      },
       instances: {
         a: { state: { ev } }
-      }
+      },
+      _stopAlgo: () => { done() }
     }, 'a')
   })
 
@@ -62,6 +60,7 @@ describe('host:events:stop', () => {
 
     await stop({
       instances,
+      _stopAlgo: () => {},
       emit: async (eventName) => {}
     }, 'a')
 

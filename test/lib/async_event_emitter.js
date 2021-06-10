@@ -89,6 +89,23 @@ describe('AsyncEventEmitter', () => {
 
       assert.ok(fired, 'listener not called')
     })
+
+    it('listener only fires once in case of race condition', async () => {
+      const e = new AsyncEventEmitter()
+      let fired = false
+
+      e.once('test', async () => {
+        if (fired) {
+          assert(false, 'should not have been called twice')
+        } else {
+          fired = true
+        }
+      })
+
+      await Promise.all([e.emit('test'), e.emit('test')])
+
+      assert.ok(fired, 'listener not called')
+    })
   })
 
   describe('on', () => {

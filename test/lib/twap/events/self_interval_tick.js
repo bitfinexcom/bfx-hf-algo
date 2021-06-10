@@ -168,6 +168,7 @@ describe('twap:events:self_interval_tick', () => {
       state: {
         gid: 100,
         lastBook: {
+          serialize: () => [],
           midPrice: () => { return 1000 }
         },
 
@@ -184,6 +185,7 @@ describe('twap:events:self_interval_tick', () => {
         emitSelf: () => {},
         debug: () => {},
         emit: (eventName, gid, orders, delay) => {
+          if (eventName !== 'exec:order:submit:all') return
           return new Promise((resolve) => {
             assert.strictEqual(eventName, 'exec:order:submit:all')
             assert.strictEqual(gid, 100)
@@ -219,6 +221,7 @@ describe('twap:events:self_interval_tick', () => {
         emitSelf: () => {},
         debug: () => {},
         emit: (eventName, gid, orders, delay) => {
+          if (eventName !== 'exec:order:submit:all') return
           return new Promise((resolve) => {
             assert.strictEqual(eventName, 'exec:order:submit:all')
             assert.strictEqual(gid, 100)

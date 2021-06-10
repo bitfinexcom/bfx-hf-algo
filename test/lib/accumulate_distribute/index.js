@@ -8,6 +8,7 @@ const { EMA } = require('bfx-hf-indicators')
 const { Config } = require('bfx-api-node-core')
 const AccumulateDistribute = require('../../../lib/accumulate_distribute')
 const testAOLive = require('../../util/test_ao_live')
+const parseChannelKey = require('../../../lib/util/parse_channel_key')
 
 const { DUST } = Config
 
@@ -119,7 +120,8 @@ testAOLive({
       let emaSeeded = false
 
       harness.once('internal:data:managedCandles', (candles, meta) => {
-        if (meta.chanFilter.key.split(':')[2] !== 'tLEOUSD') {
+        const { symbol } = parseChannelKey(meta.chanFilter.key)
+        if (symbol !== 'tLEOUSD') {
           return
         }
 

@@ -8,17 +8,26 @@ const _isFunction = require('lodash/isObject')
 const { Order } = require('bfx-api-node-models')
 const genHelpers = require('../../../lib/host/gen_helpers')
 const AsyncEventEmitter = require('../../../lib/async_event_emitter')
+const { EventEmitter } = require('events')
+const sinon = require('sinon')
+const { assert: assertFn } = sinon
 
-const H = (args = {}, adapter = null) => (
-  genHelpers({
+const manager = new EventEmitter()
+const H = (args = {}, adapter = {}) => {
+  const state = {
     ev: new AsyncEventEmitter(),
     id: 1,
     gid: 42,
     ...args
-  }, adapter)
-)
+  }
+  return genHelpers(state, { m: manager, ...adapter })
+}
 
 describe('genHelpers', () => {
+  afterEach(() => {
+    manager.removeAllListeners()
+  })
+
   /**
    * These tests enforce the helper API; it is used by all AOs and serves as
    * the core of bfx-hf-algo alongside the AO Host (which processes all events)
@@ -36,7 +45,7 @@ describe('genHelpers', () => {
       'emit',
       'notifyUI',
       'cancelOrder',
-      'submitOrderWithDelay',
+      'submitOrder',
       'declareEvent',
       'declareChannel',
       'updateState'
@@ -176,7 +185,7 @@ describe('genHelpers', () => {
 
       const state = { ev, gid: '42' }
       const h = H(state)
-      h.declareChannel({ h, state }, {}, 'some-channel', 'some-filter')
+      h.declareChannel({ h, state }, 'some-channel', 'some-filter')
     })
   })
 
@@ -193,6 +202,115 @@ describe('genHelpers', () => {
       const state = { ev, gid: '42' }
       const h = H(state)
       h.updateState({ h, state }, 'some-update')
+    })
+  })
+
+  describe('subscribeDataChannels', () => {
+    const adapter = { subscribe: sinon.stub() }
+    let h
+
+    beforeEach(() => {
+      h = H({}, adapter)
+    })
+
+    it('subscribes to channels and wait for response', async () => {
+      const channel = 'book'
+      const payload = {
+        symbol: 'LEO'
+      }
+      const state = {
+        connection: 'connection',
+        channels: [
+          {
+            channel,
+            filter: payload
+          }
+        ]
+      }
+      const promise = h.subscribeDataChannels(state)
+      await manager.emit('ws2:event:subscribed', {
+        channel,
+        ...payload
+      })
+
+      await promise
+      assertFn.calledWithExactly(adapter.subscribe, state.connection, channel, payload)
+    })
+
+    it('fire and forget', async () => {
+      const channel = 'book'
+      const payload = {
+        symbol: 'LEO'
+      }
+      const state = {
+        connection: 'connection',
+        channels: [
+          {
+            channel,
+            filter: payload
+          }
+        ]
+      }
+      await h.subscribeDataChannels(state, { fireAndForget: true })
+      assertFn.calledWithExactly(adapter.subscribe, state.connection, channel, payload)
+    })
+
+    it('subscribes with max wait time', async () => {
+      const channel = 'book'
+      const payload = {
+        symbol: 'LEO'
+      }
+      const state = {
+        connection: 'connection',
+        channels: [
+          {
+            channel,
+            filter: payload
+          }
+        ]
+      }
+
+      try {
+        await h.subscribeDataChannels(state, { timeout: 10 })
+        assert.fail()
+      } catch (e) {
+        assert.strictEqual(e.message, 'Subscription to channel \'book\' timed out')
+      }
+
+      assertFn.calledWithExactly(adapter.subscribe, state.connection, channel, payload)
+    })
+  })
+
+  describe('close', () => {
+    const adapter = { subscribe: sinon.stub() }
+    let h
+
+    beforeEach(() => {
+      h = H({}, adapter)
+    })
+
+    it('should clear pending responses and its timeouts if any', async () => {
+      const channel = 'book'
+      const payload = {
+        symbol: 'LEO'
+      }
+      const state = {
+        connection: 'connection',
+        channels: [
+          {
+            channel,
+            filter: payload
+          }
+        ]
+      }
+
+      const promise = h.subscribeDataChannels(state, { timeout: 1000 })
+      assert(manager.listenerCount('ws2:event:subscribed') > 0)
+      h.close()
+
+      await promise
+      assertFn.calledWithExactly(adapter.subscribe, state.connection, channel, payload)
+      assert(manager.listenerCount('ws2:event:subscribed') === 0)
     })
   })
 })
