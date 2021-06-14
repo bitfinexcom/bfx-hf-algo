@@ -71,4 +71,18 @@ describe('MA crossover', () => {
         expect(details.flags).to.eq(0)
       })
   })
+
+  it('sends ping', async () => {
+    await performOrder(host)
+    await delay(2_000)
+    const spyConn = spyServer.connections[0]
+
+    spyConn
+      .received('ping', (event) => {
+        expect(event.cid).to.be.a('number')
+      })
+      .sent('pong', (event) => {
+        expect(event.cid).to.be.a('number')
+      })
+  })
 })
