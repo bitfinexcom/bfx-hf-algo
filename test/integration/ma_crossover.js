@@ -33,7 +33,7 @@ describe('MA crossover', () => {
   const apiKey = 'api key'
   const apiSecret = 'api secret'
 
-  before(async () => {
+  beforeEach(async () => {
     apiMock = new BaseApiMock({
       apiKey,
       dataProviders: BaseApiMock.getDataProviders()
@@ -45,7 +45,7 @@ describe('MA crossover', () => {
     await connectHost(host)
   })
 
-  after(() => {
+  afterEach(() => {
     destroyHost(host)
     apiMock.close()
   })
