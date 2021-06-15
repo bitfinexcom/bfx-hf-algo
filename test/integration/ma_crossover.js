@@ -52,7 +52,7 @@ describe('MA crossover', () => {
 
   it('emits subscribed and order events', async () => {
     await performOrder(host)
-    await delay(20_000)
+    await delay(2_000)
 
     const spyConn = spyServer.connections[0]
 
