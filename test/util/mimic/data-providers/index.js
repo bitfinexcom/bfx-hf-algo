@@ -6,5 +6,6 @@
 
 module.exports = {
   book: require('./book'),
-  candles: require('./candles')
+  candles: require('./candles'),
+  trades: require('./trades')
 }
