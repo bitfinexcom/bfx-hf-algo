@@ -1,10 +1,10 @@
 'use strict'
 
-const { Candle, PublicTrade } = require('bfx-api-node-models')
+const { Candle, PublicTrade, OrderBook } = require('bfx-api-node-models')
 
 const Randomizer = require('./randomizer')
 const ApiMock = require('./mimic/bitfinex_api_mock')
-const { candles: candlesDataProvider, trades: tradesDataProvider } = require('./mimic/data-providers')
+const { candles: candlesDataProvider, trades: tradesDataProvider, book: bookDataProvider } = require('./mimic/data-providers')
 const authHandler = require('./mimic/handlers/auth')
 const pingHandler = require('./mimic/handlers/ping')
 const subscribeToChannelHandler = require('./mimic/handlers/subscribe_to_channel')
@@ -40,12 +40,19 @@ class BaseApiMock extends ApiMock {
       volume: 3
     })
     const baseTrade = new PublicTrade({ price: 5000, amount: 9001 })
+    const baseBook = new OrderBook([
+      [67536333723, 32843, -2.21780369],
+      [67538314922, 32843, -2],
+      [67535007022, 32842, 2],
+      [67538455208, 32837, 2]
+    ])
     const seed = 59
     const randomizer = new Randomizer(seed)
 
     return {
       candles: candlesDataProvider(randomizer.fork(), baseCandle.serialize()),
-      trades: tradesDataProvider(randomizer.fork(), baseTrade.serialize())
+      trades: tradesDataProvider(randomizer.fork(), baseTrade.serialize()),
+      book: bookDataProvider(randomizer.fork(), baseBook.serialize())
     }
   }
 }
