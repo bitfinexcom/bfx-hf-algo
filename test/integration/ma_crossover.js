@@ -52,7 +52,7 @@ describe('MA crossover', () => {
 
   it('emits subscribed and order events', async () => {
     await performOrder(host)
-    await delay(2_000)
+    await delay(2_500)
 
     const spyConn = spyServer.connections[0]
 
@@ -74,7 +74,7 @@ describe('MA crossover', () => {
 
   it('sends ping', async () => {
     await performOrder(host)
-    await delay(2_000)
+    await delay(2_500)
     const spyConn = spyServer.connections[0]
 
     spyConn
