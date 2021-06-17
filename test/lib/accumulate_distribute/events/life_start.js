@@ -4,17 +4,7 @@
 const assert = require('assert')
 const { EMA } = require('bfx-hf-indicators')
 const lifeStart = require('../../../../lib/accumulate_distribute/events/life_start')
-
-const timeout = (ms) => {
-  let id = null
-
-  const p = new Promise((resolve) => {
-    id = { ms }
-    resolve()
-  })
-
-  return [id, () => p]
-}
+const timeout = require('../../../util/timeout')
 
 const getInstance = ({
   params = {}, argParams = {}, stateParams = {}, helperParams = {}

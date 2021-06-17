@@ -5,18 +5,8 @@ const assert = require('assert')
 const Promise = require('bluebird')
 const _isObject = require('lodash/isObject')
 const { Order } = require('bfx-api-node-models')
+const timeout = require('../../../util/timeout')
 const ordersOrderFill = require('../../../../lib/accumulate_distribute/events/orders_order_fill')
-
-const timeout = (ms) => {
-  let id = null
-
-  const p = new Promise((resolve) => {
-    id = { ms }
-    resolve()
-  })
-
-  return [id, () => p]
-}
 
 const getInstance = ({
   params = {}, argParams = {}, stateParams = {}, helperParams = {}
