@@ -17,26 +17,23 @@ const {
   schema: HFDBBitfinexSchema
 } = require('bfx-hf-ext-plugin-bitfinex')
 
-const algoDB = new HFDB({
+const { AlgoOrder } = new HFDB({
   schema: HFDBBitfinexSchema,
   adapter: HFDBLowDBAdapter({
     dbPath: path.join(__dirname, '..', 'db', 'example.json')
   })
 })
 
-const { API_KEY, API_SECRET } = process.env
+const { API_KEY, API_SECRET, WS_URL, AUTH_TOKEN } = process.env
 
 const wsSettings = {
   apiKey: API_KEY,
   apiSecret: API_SECRET,
+  authToken: AUTH_TOKEN,
   dms: 4,
-  withHeartbeat: true
-//  authToken,
-//  userId,
-//  authTokenExpiresAt
+  withHeartbeat: true,
+  wsURL: WS_URL // it will point to prod if empty
 //  affiliateCode,
-//  wsURL,
-//  restURL
 }
 
 const host = new AOHost({
@@ -44,22 +41,9 @@ const host = new AOHost({
   wsSettings
 })
 
-host.on('ao:start', (instance) => {
-  const { state = {} } = instance
-  const { id, gid } = state
-  debug('started AO %s [gid %s]', id, gid)
-})
-
-host.on('ao:stop', (instance) => {
-  const { state = {} } = instance
-  const { id, gid } = state
-  debug('stopped AO %s [gid %s]', id, gid)
-})
-
-host.on('ao:persist:db:update', async (updateOpts) => {
-  const { AlgoOrder } = algoDB
-  await AlgoOrder.set(updateOpts)
+host.on('ao:state:update', async (updateOpts) => {
   debug('ao instance updated %s', updateOpts.gid)
+  console.log(updateOpts)
 })
 
 host.on('auth:error', (packet) => {
@@ -71,7 +55,7 @@ host.on('error', (err) => {
 })
 
 host.once('ready', async () => {
-  const gid = await host.startAO('bfx-accumulate_distribute', {
+  const [serialized] = await host.startAO('bfx-accumulate_distribute', {
     symbol: 'tBTCUSD',
     amount: -0.2,
     sliceAmount: -0.1,
@@ -88,7 +72,8 @@ host.once('ready', async () => {
     _margin: false
   })
 
-  debug('started AO %s', gid)
+  debug('started AO %s', serialized.gid)
+  await AlgoOrder.set(serialized)
 })
 
 host.connect()

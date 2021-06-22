@@ -23,8 +23,8 @@ const getInstance = ({
     offsetIndicator: new EMA([10]),
     capIndicator: new EMA([10]),
     args: {
-      relativeOffset: { type: 'ema' },
-      relativeCap: { type: 'ema' },
+      relativeOffset: { type: 'ema', candleTimeFrame: '1m' },
+      relativeCap: { type: 'ema', candleTimeFrame: '1m' },
       ...argParams
     },
     ...stateParams
@@ -66,12 +66,12 @@ describe('accumulate_distribute:events:data_managed_candles', () => {
       argParams: { symbol: 'tBTCUSD' },
       stateParams: {
         offsetIndicator: {
-          l: () => candlesAddedToOffsetIndicator,
+          isSeeded: () => candlesAddedToOffsetIndicator !== 0,
           add: (c) => { candlesAddedToOffsetIndicator++ }
         },
 
         capIndicator: {
-          l: () => candlesAddedToCapIndicator,
+          isSeeded: () => candlesAddedToCapIndicator !== 0,
           add: (c) => { candlesAddedToCapIndicator++ }
         }
       },
@@ -101,15 +101,15 @@ describe('accumulate_distribute:events:data_managed_candles', () => {
     const i = getInstance({
       argParams: {
         symbol: 'tBTCUSD',
-        relativeCap: { type: 'ema', candlePrice: 'high' },
+        relativeCap: { type: 'ema', candleTimeFrame: '1m', candlePrice: 'high' },
         relativeOffset: {}
       },
 
       stateParams: {
-        lastCandle: { mts: 0 },
+        lastCandleCap: { mts: 0 },
         offsetIndicator: null,
         capIndicator: {
-          l: () => 1,
+          isSeeded: () => true,
           update: (price) => {
             assert.strictEqual(price, 42, 'got wrong candle')
             capCandleUpdated = true
@@ -140,15 +140,15 @@ describe('accumulate_distribute:events:data_managed_candles', () => {
     const i = getInstance({
       argParams: {
         symbol: 'tBTCUSD',
-        relativeOffset: { type: 'ema', candlePrice: 'high' },
+        relativeOffset: { type: 'ema', candleTimeFrame: '1m', candlePrice: 'high' },
         relativeCap: {}
       },
 
       stateParams: {
-        lastCandle: { mts: 0 },
+        lastCandleOffset: { mts: 0 },
         capIndicator: null,
         offsetIndicator: {
-          l: () => 1,
+          isSeeded: () => true,
           update: (price) => {
             assert.strictEqual(price, 42, 'got wrong candle')
             offsetCandleUpdated = true

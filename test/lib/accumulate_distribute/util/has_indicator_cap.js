@@ -6,7 +6,7 @@ const hasIndicatorCap = require('../../../../lib/accumulate_distribute/util/has_
 
 describe('accumulate_distribute:util:has_indicator_cap', () => {
   it('reports cap presence', () => {
-    assert.ok(hasIndicatorCap({ relativeCap: { type: 'ma' } }), 'cap presence not detected')
+    assert.ok(hasIndicatorCap({ relativeCap: { type: 'sma' } }), 'cap presence not detected')
     assert.ok(hasIndicatorCap({ relativeCap: { type: 'ema' } }), 'cap presence not detected')
   })
 

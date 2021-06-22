@@ -29,9 +29,8 @@ describe('accumulate_distribute:meta:declare_channels', () => {
           [bookReqSource]: { type: 'trade' }
         },
         helperParams: {
-          declareChannel: async (instance, host, type, filter) => {
+          declareChannel: async (instance, type, filter) => {
             assert.strictEqual(instance, i, 'unknown instance')
-            assert.strictEqual(host, 42, 'unknown host')
             assert.strictEqual(type, 'trades', 'unknown channel type')
             assert.deepStrictEqual(filter, { symbol: 'tBTCUSD' }, 'unknown channel filter')
             sawChannel = true
@@ -55,9 +54,8 @@ describe('accumulate_distribute:meta:declare_channels', () => {
           },
 
           helperParams: {
-            declareChannel: async (instance, host, type, filter) => {
+            declareChannel: async (instance, type, filter) => {
               assert.strictEqual(instance, i, 'unknown instance')
-              assert.strictEqual(host, 42, 'unknown host')
               assert.strictEqual(type, 'book', 'unknown channel type')
               assert.deepStrictEqual(filter, {
                 symbol: 'tBTCUSD',
@@ -77,7 +75,7 @@ describe('accumulate_distribute:meta:declare_channels', () => {
   })
 
   it('declares candle channels for cap/offset indicators if needed', async () => {
-    for (const indicatorType of ['ma', 'ema']) {
+    for (const indicatorType of ['sma', 'ema']) {
       for (const candleReqSource of ['relativeOffset', 'relativeCap']) {
         let sawChannel = false
 
@@ -87,9 +85,8 @@ describe('accumulate_distribute:meta:declare_channels', () => {
           },
 
           helperParams: {
-            declareChannel: async (instance, host, type, filter) => {
+            declareChannel: async (instance, type, filter) => {
               assert.strictEqual(instance, i, 'unknown instance')
-              assert.strictEqual(host, 42, 'unknown host')
               assert.strictEqual(type, 'candles', 'unknown channel type')
               assert.deepStrictEqual(filter, {
                 key: 'trade:1m:tBTCUSD'
