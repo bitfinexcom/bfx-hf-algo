@@ -43,8 +43,6 @@ const host = new AOHost({
     apiSecret: '...',
     // Authentication with auth tokens is available as an alternative for API credentials
     // authToken,
-    // userId,
-    // authTokenExpiresAt (optional)
     dms: 4
   }
 })
