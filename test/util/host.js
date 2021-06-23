@@ -1,7 +1,7 @@
 'use strict'
 
 const {
-  AOHost, PingPong, Iceberg, TWAP, AccumulateDistribute, MACrossover
+  AOHost, PingPong, Iceberg, TWAP, AccumulateDistribute, MACrossover, OCOCO
 } = require('../..')
 
 function spawnHost ({ apiKey, apiSecret, wsURL }) {
@@ -14,7 +14,7 @@ function spawnHost ({ apiKey, apiSecret, wsURL }) {
     dms: 4
   }
   const host = new AOHost({
-    aos: [PingPong, Iceberg, TWAP, AccumulateDistribute, MACrossover],
+    aos: [PingPong, Iceberg, TWAP, AccumulateDistribute, MACrossover, OCOCO],
     wsSettings
   })
 
