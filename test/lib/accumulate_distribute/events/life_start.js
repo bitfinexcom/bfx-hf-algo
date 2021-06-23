@@ -23,6 +23,7 @@ const getInstance = ({
     updateState: async () => {},
     scheduleTick: async () => {},
     notifyUI: async () => {},
+    sendPing: async () => { return { ts: Date.now() } },
     subscribeDataChannels: () => Promise.resolve(),
     ...helperParams
   },
