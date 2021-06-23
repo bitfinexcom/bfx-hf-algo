@@ -41,6 +41,8 @@ const host = new AOHost({
   wsSettings: {
     apiKey: '...',
     apiSecret: '...',
+    // Authentication with auth tokens is available as an alternative for API credentials
+    // authToken,
     dms: 4
   }
 })
