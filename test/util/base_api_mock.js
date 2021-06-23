@@ -41,10 +41,10 @@ class BaseApiMock extends ApiMock {
     })
     const baseTrade = new PublicTrade({ price: 5000, amount: 9001 })
     const baseBook = new OrderBook([
-      [67536333723, 32843, -2.21780369],
-      [67538314922, 32843, -2],
-      [67535007022, 32842, 2],
-      [67538455208, 32837, 2]
+      [67536333723, 500, -2],
+      [67538314922, 600, -2],
+      [67535007022, 500, 2],
+      [67538455208, 400, 2]
     ])
     const seed = 59
     const randomizer = new Randomizer(seed)

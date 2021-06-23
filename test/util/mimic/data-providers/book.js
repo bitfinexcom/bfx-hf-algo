@@ -7,8 +7,13 @@
  */
 module.exports = (randomizer, baseBook) => {
   return (fields, prevBook) => {
-    const [price, rate, period, count, amount] = prevBook || baseBook
+    if (!prevBook) {
+      return baseBook
+    }
+    const [id, price, amount] = baseBook[0]
     const variation = randomizer.range(-100, 100)
-    return [[price + variation, rate, period, count, amount]]
+    const amountOffset = randomizer.range(-5, 0)
+
+    return [id, price + variation, amount + amountOffset]
   }
 }
