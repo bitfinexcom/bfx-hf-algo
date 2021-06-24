@@ -59,11 +59,11 @@ describe('accumulate_distribute:meta:validate_params', () => {
 
     it('returns error when slice amount is invalid or zero', () => {
       const invalidErr = validateParams({ ...params, sliceInterval: 'it' })
-      assert.deepStrictEqual(invalidErr.field, 'sliceInterval')
+      assert.deepStrictEqual(invalidErr.field, 'sliceIntervalSec')
       assert(_isString(invalidErr.message))
 
       const lessThanZeroErr = validateParams({ ...params, sliceInterval: -1 })
-      assert.deepStrictEqual(lessThanZeroErr.field, 'sliceInterval')
+      assert.deepStrictEqual(lessThanZeroErr.field, 'sliceIntervalSec')
       assert(_isString(lessThanZeroErr.message))
     })
 
