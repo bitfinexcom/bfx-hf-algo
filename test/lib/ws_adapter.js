@@ -29,6 +29,7 @@ describe('WsAdapter', () => {
     const wsURL = 'ws url'
     const apiKey = 'api key'
     const apiSecret = 'api secret'
+    const authToken = 'auth token'
     const agent = 'agent'
     const dms = 'dms'
     const withHeartbeat = true
@@ -37,7 +38,7 @@ describe('WsAdapter', () => {
 
     it('creates a new instance', () => {
       const adapter = new WsAdapter({
-        wsURL, apiKey, apiSecret, agent, dms, withHeartbeat, affiliateCode, plugins: [plugin]
+        wsURL, apiKey, apiSecret, authToken, agent, dms, withHeartbeat, affiliateCode, plugins: [plugin]
       })
 
       expect(adapter.affiliateCode).to.eq(affiliateCode)
@@ -78,6 +79,7 @@ describe('WsAdapter', () => {
         dms,
         apiSecret,
         apiKey,
+        authToken,
         agent,
         wsURL
       })
