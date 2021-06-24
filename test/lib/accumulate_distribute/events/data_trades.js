@@ -18,6 +18,7 @@ const getInstance = ({
   },
 
   h: {
+    emit: () => {},
     debug: () => {},
     updateState: async () => {},
     ...helperParams
@@ -56,7 +57,7 @@ describe('accumulate_distribute:events:data_trades', () => {
 
   it('updates state if the AO has a trade relative offset', async () => {
     let stateUpdated = false
-    const t = new PublicTrade({ price: 42, amount: 9001 })
+    const t = new PublicTrade({ id: 1, price: 42, amount: 9001 })
     const i = getInstance({
       argParams: {
         symbol: 'tBTCUSD',
@@ -79,7 +80,7 @@ describe('accumulate_distribute:events:data_trades', () => {
 
   it('updates state if the AO has a trade relative cap', async () => {
     let stateUpdated = false
-    const t = new PublicTrade({ price: 42, amount: 9001 })
+    const t = new PublicTrade({ id: 1, price: 42, amount: 9001 })
     const i = getInstance({
       argParams: {
         symbol: 'tBTCUSD',

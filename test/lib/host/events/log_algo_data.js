@@ -12,6 +12,7 @@ describe('host:events:log_algo_data', () => {
   const getInstance = ({ stateParams = {}, helperParams = {} }) => ({
     state: {
       id: 'test-id',
+      headersForLogFile: ['header1', 'header2'],
       ...stateParams
     },
     h: {
