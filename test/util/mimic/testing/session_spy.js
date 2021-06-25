@@ -30,6 +30,14 @@ class SessionSpy {
     return this
   }
 
+  findReceived (name) {
+    return this._getEvents(this._incomingEvents, name).map(item => item.payload)
+  }
+
+  findSent (name) {
+    return this._getEvents(this._outgoingEvents, name).map(item => item.payload)
+  }
+
   countReceived (name) {
     return this._count(this._incomingEvents, name)
   }
