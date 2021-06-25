@@ -8,8 +8,10 @@ const CsvLogWriter = require('../../../lib/util/csv_log_writer')
 const writer = new CsvLogWriter({
   id: 'test-id',
   logAlgoDir: 'abc',
-  headersForLogFile: ['header1', 'header2']
+  gid: '1'
 })
+
+const headers = ['header1', 'header2']
 
 let pathExistsStub, createDirStub, writeStub, fsStub
 const mockedLogStream = {
@@ -59,10 +61,10 @@ describe('Csv Log Writer', () => {
     it('writes headers if file did not exist and headers is an array', async () => {
       const spy = sinon.spy(mockedLogStream, 'write')
       await writer.init()
-      await writer.initFile(123)
+      await writer.initFile(123, headers)
 
       assert.ok(spy.calledOnce, 'should have written headers in file')
-      assert.ok(spy.getCall(0).firstArg, writer.headersForLogFile.join(',') + '\n', 'did not write headers in file properly')
+      assert.ok(spy.getCall(0).firstArg, headers.join(',') + '\n', 'did not write headers in file properly')
       spy.restore()
     })
 

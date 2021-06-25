@@ -44,7 +44,7 @@ describe('accumulate_distribute:events:life_stop', () => {
         updateState: () => {},
         debug: () => {},
         emit: (eventName) => {
-          if (eventName === 'exec:order:cancel:all') {
+          if (eventName === 'exec:order:cancel:gid') {
             cancelledOrders = true
           }
         }

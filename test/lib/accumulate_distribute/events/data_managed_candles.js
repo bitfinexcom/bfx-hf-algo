@@ -31,6 +31,7 @@ const getInstance = ({
   },
 
   h: {
+    emit: () => {},
     debug: () => {},
     updateState: async () => {},
     ...helperParams
@@ -66,13 +67,17 @@ describe('accumulate_distribute:events:data_managed_candles', () => {
       argParams: { symbol: 'tBTCUSD' },
       stateParams: {
         offsetIndicator: {
+          getName: () => 'offset indicator',
           isSeeded: () => candlesAddedToOffsetIndicator !== 0,
-          add: (c) => { candlesAddedToOffsetIndicator++ }
+          add: (c) => { candlesAddedToOffsetIndicator++ },
+          v: () => 1
         },
 
         capIndicator: {
+          getName: () => 'cap indicator',
           isSeeded: () => candlesAddedToCapIndicator !== 0,
-          add: (c) => { candlesAddedToCapIndicator++ }
+          add: (c) => { candlesAddedToCapIndicator++ },
+          v: () => 1
         }
       },
 
@@ -89,7 +94,6 @@ describe('accumulate_distribute:events:data_managed_candles', () => {
   })
 
   it('updates cap indicator if needed', async () => {
-    console.log(CANDLE.constructor.unserialize + '')
     const candles = [Candle.unserialize({
       ...CANDLE.toJS(),
       high: 42
@@ -110,6 +114,8 @@ describe('accumulate_distribute:events:data_managed_candles', () => {
         offsetIndicator: null,
         capIndicator: {
           isSeeded: () => true,
+          getName: () => 'cap indicator',
+          v: () => 1,
           update: (price) => {
             assert.strictEqual(price, 42, 'got wrong candle')
             capCandleUpdated = true
@@ -148,6 +154,8 @@ describe('accumulate_distribute:events:data_managed_candles', () => {
         lastCandleOffset: { mts: 0 },
         capIndicator: null,
         offsetIndicator: {
+          getName: () => 'offset indicator',
+          v: () => 1,
           isSeeded: () => true,
           update: (price) => {
             assert.strictEqual(price, 42, 'got wrong candle')
