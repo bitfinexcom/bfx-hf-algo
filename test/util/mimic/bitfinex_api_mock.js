@@ -36,6 +36,13 @@ class BitfinexApiMock extends EventEmitter {
     return this._server.url()
   }
 
+  /**
+   * @returns {BitfinexSessionMock[]}
+   */
+  getSessions () {
+    return this._sessions
+  }
+
   close () {
     this.emit('close')
     this._sessions.forEach(s => s.close())
