@@ -33,4 +33,12 @@ describe('util:get_min_max_distorted_amount', () => {
     assert.deepStrictEqual(minDistortedAmount, 0.75, 'should have distorted to minimum possible slice amount')
     assert.deepStrictEqual(maxDistortedAmount, 1.25, 'should have distorted to maximum possible slice amount')
   })
+
+  it('returns the distorted float amounts properly', () => {
+    const orderParams = { amount: 10, sliceAmount: 0.1, amountDistortion: 0.25 }
+    const { minDistortedAmount, maxDistortedAmount } = getMinMaxDistortedAmount(orderParams, pairConfig)
+
+    assert.deepStrictEqual(minDistortedAmount, 0.075, 'should have distorted to minimum possible slice amount')
+    assert.deepStrictEqual(maxDistortedAmount, 0.125, 'should have distorted to maximum possible slice amount')
+  })
 })
