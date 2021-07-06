@@ -54,7 +54,7 @@
   },
   "devDependencies": {
     "autocannon": "^7.3.0",
-    "bfx-hf-ext-plugin-bitfinex": "^1.0.5",
+    "bfx-hf-ext-plugin-bitfinex": "^1.0.7",
     "bfx-hf-models": "^2.1.0",
     "bfx-hf-models-adapter-lowdb": "^1.0.0",
     "chai": "^4.2.0",
