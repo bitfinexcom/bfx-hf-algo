@@ -51,14 +51,41 @@ describe('twap:util:generate_order', () => {
     assert.strictEqual(o.meta._HF, 1)
   })
 
-  it('distorts the amount to the given distortion range', () => {
-    const amountDistortion = 0.2
-    const state = getState({ argOverrides: { amountDistortion } })
-    const highestDistortedAmount = nBN(state.args.sliceAmount).multipliedBy(1.2).toNumber()
-    const lowestDistortedAmount = nBN(state.args.sliceAmount).multipliedBy(0.8).toNumber()
-    const o = generateOrder(state, 42)
-    const amountInDistortedRange = o.amount <= highestDistortedAmount && o.amount >= lowestDistortedAmount
-    assert.strictEqual(amountInDistortedRange, true)
+  describe('check order amount within distortion range', () => {
+    it('distorts the amount to the given distortion range', () => {
+      const amountDistortion = 0.2
+      const state = getState({ argOverrides: { amountDistortion } })
+      const highestDistortedAmount = nBN(state.args.sliceAmount).multipliedBy(1.2).toNumber()
+      const lowestDistortedAmount = nBN(state.args.sliceAmount).multipliedBy(0.8).toNumber()
+      const o = generateOrder(state, 42)
+      const amountInDistortedRange = o.amount <= highestDistortedAmount && o.amount >= lowestDistortedAmount
+      assert.strictEqual(amountInDistortedRange, true)
+    })
+
+    it('distorts the amount within the range of minimum allowed size and max distorted size', () => {
+      const amountDistortion = 0.4
+      const pairConfig = { minSize: 1, maxSize: 100 }
+      const state = getState({ argOverrides: { amountDistortion }, overrides: { pairConfig } })
+      const highestDistortedAmount = nBN(state.args.sliceAmount).multipliedBy(1.4).toNumber()
+      const lowestDistortedAmount = 1
+      const o = generateOrder(state, 42)
+      const amountInDistortedRange = o.amount <= highestDistortedAmount && o.amount >= lowestDistortedAmount
+      assert.strictEqual(amountInDistortedRange, true)
+    })
+
+    it('distorts the amount within the range of minimum distorted size and max allowed size', () => {
+      const amountDistortion = 0.4
+      const pairConfig = { minSize: 1, maxSize: 100 }
+      const state = getState({
+        argOverrides: { amountDistortion, sliceAmount: 100, amount: 1000 },
+        overrides: { pairConfig, remainingAmount: 1000 }
+      })
+      const highestDistortedAmount = 100
+      const lowestDistortedAmount = nBN(state.args.sliceAmount).multipliedBy(0.6).toNumber()
+      const o = generateOrder(state, 42)
+      const amountInDistortedRange = o.amount <= highestDistortedAmount && o.amount >= lowestDistortedAmount
+      assert.strictEqual(amountInDistortedRange, true)
+    })
   })
 
   it('doesn\'t overuse the total amount while generating order', () => {
