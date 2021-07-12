@@ -1,3 +1,5 @@
+'use strict'
+
 module.exports = function ({ id, gid, cid, amount, status }) {
   return [
     id,
