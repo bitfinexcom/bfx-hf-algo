@@ -59,7 +59,8 @@ describe('twap:events:orders_order_fill', () => {
       ...instance,
       state: {
         ...instance.state,
-        remainingAmount: 100
+        remainingAmount: 100,
+        minDistortedAmount: 0.002
       },
 
       h: {
