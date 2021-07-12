@@ -54,36 +54,42 @@ describe('twap:util:generate_order', () => {
   describe('check order amount within distortion range', () => {
     it('distorts the amount to the given distortion range', () => {
       const amountDistortion = 0.2
-      const state = getState({ argOverrides: { amountDistortion } })
-      const highestDistortedAmount = nBN(state.args.sliceAmount).multipliedBy(1.2).toNumber()
-      const lowestDistortedAmount = nBN(state.args.sliceAmount).multipliedBy(0.8).toNumber()
+      const maxDistortedAmount = 1.2
+      const minDistortedAmount = 0.8
+      const state = getState({
+        argOverrides: { amountDistortion },
+        overrides: { minDistortedAmount, maxDistortedAmount }
+      })
       const o = generateOrder(state, 42)
-      const amountInDistortedRange = o.amount <= highestDistortedAmount && o.amount >= lowestDistortedAmount
+      const amountInDistortedRange = o.amount <= maxDistortedAmount && o.amount >= minDistortedAmount
       assert.strictEqual(amountInDistortedRange, true)
     })
 
     it('distorts the amount within the range of minimum allowed size and max distorted size', () => {
       const amountDistortion = 0.4
       const pairConfig = { minSize: 1, maxSize: 100 }
-      const state = getState({ argOverrides: { amountDistortion }, overrides: { pairConfig } })
-      const highestDistortedAmount = nBN(state.args.sliceAmount).multipliedBy(1.4).toNumber()
-      const lowestDistortedAmount = 1
+      const minDistortedAmount = 1
+      const maxDistortedAmount = 1.4
+      const state = getState({
+        argOverrides: { amountDistortion },
+        overrides: { pairConfig, minDistortedAmount, maxDistortedAmount }
+      })
       const o = generateOrder(state, 42)
-      const amountInDistortedRange = o.amount <= highestDistortedAmount && o.amount >= lowestDistortedAmount
+      const amountInDistortedRange = o.amount <= maxDistortedAmount && o.amount >= minDistortedAmount
       assert.strictEqual(amountInDistortedRange, true)
     })
 
     it('distorts the amount within the range of minimum distorted size and max allowed size', () => {
       const amountDistortion = 0.4
       const pairConfig = { minSize: 1, maxSize: 100 }
+      const maxDistortedAmount = 100
+      const minDistortedAmount = 0.6
       const state = getState({
         argOverrides: { amountDistortion, sliceAmount: 100, amount: 1000 },
-        overrides: { pairConfig, remainingAmount: 1000 }
+        overrides: { pairConfig, remainingAmount: 1000, minDistortedAmount, maxDistortedAmount }
       })
-      const highestDistortedAmount = 100
-      const lowestDistortedAmount = nBN(state.args.sliceAmount).multipliedBy(0.6).toNumber()
       const o = generateOrder(state, 42)
-      const amountInDistortedRange = o.amount <= highestDistortedAmount && o.amount >= lowestDistortedAmount
+      const amountInDistortedRange = o.amount <= maxDistortedAmount && o.amount >= minDistortedAmount
       assert.strictEqual(amountInDistortedRange, true)
     })
   })
@@ -96,7 +102,7 @@ describe('twap:util:generate_order', () => {
     const remainingAmount = nBN(amount).minus(openAmount).toNumber()
     const amountDistortion = 0.02
     const state = getState({
-      overrides: { orders, amount, remainingAmount },
+      overrides: { orders, amount, remainingAmount, minDistortedAmount: 0.98, maxDistortedAmount: 1.02 },
       argOverrides: { amountDistortion }
     })
     const o = generateOrder(state, 42)
