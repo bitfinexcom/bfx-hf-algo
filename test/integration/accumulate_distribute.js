@@ -69,7 +69,7 @@ describe('Accumulate/Distribute', () => {
       .received(NEW_ORDER, ({ fields: [placeholder, details] }) => {
         expect(details.symbol).to.eq('tAAABBB')
         expect(details.type).to.eq('EXCHANGE LIMIT')
-        expect(+details.amount).to.be.within(-0.2, -Number.EPSILON)
+        expect(+details.amount).to.be.within(-0.12, -0.08)
         expect(+details.price).to.be.within(400, 600)
         expect(details.flags).to.eq(0)
       })
