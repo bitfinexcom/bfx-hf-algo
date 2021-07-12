@@ -43,7 +43,7 @@ class BaseApiMock extends ApiMock {
     const baseBook = new OrderBook([
       [67536333723, 500, -2],
       [67538314922, 600, -2],
-      [67535007022, 500, 2],
+      [67535007022, 499, 2],
       [67538455208, 400, 2]
     ])
     const seed = 59
