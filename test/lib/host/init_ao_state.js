@@ -36,7 +36,6 @@ describe('host:init_ao_state', () => {
   it('generates a valid group ID', () => {
     const { gid } = initAOState()
     assert.ok(_isString(gid))
-    assert.ok(_isFinite(+gid))
   })
 
   it('defaults to active:false', () => {

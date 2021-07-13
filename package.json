@@ -50,7 +50,8 @@
     "bluebird": "^3.5.5",
     "debug": "^4.3.1",
     "flat-promise": "^1.0.2",
-    "lodash": "^4.17.15"
+    "lodash": "^4.17.15",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "autocannon": "^7.3.0",
