@@ -47,10 +47,8 @@
     "bfx-api-node-util": "^1.0.2",
     "bfx-hf-indicators": "^2.0.8",
     "bfx-hf-util": "^1.0.1",
-    "biguint-format": "^1.0.2",
     "bluebird": "^3.5.5",
     "debug": "^4.3.1",
-    "flake-idgen": "^1.4.0",
     "flat-promise": "^1.0.2",
     "lodash": "^4.17.15"
   },
