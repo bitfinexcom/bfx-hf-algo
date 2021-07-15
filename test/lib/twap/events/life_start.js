@@ -20,6 +20,9 @@ describe('twap:events:life_start', () => {
       h: {
         debug: () => {},
         subscribeDataChannels: async () => {},
+        updateState: (instance, state) => {
+          assert.deepStrictEqual(Object.keys(state), ['minDistortedAmount', 'maxDistortedAmount'])
+        },
         emitSelf: (eName) => {
           return new Promise((resolve) => {
             assert.strictEqual(eName, 'interval_tick')

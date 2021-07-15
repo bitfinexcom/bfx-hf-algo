@@ -10,6 +10,7 @@ describe('twap:events:orders_order_fill', () => {
   const instance = {
     state: {
       gid: 100,
+      minDistortedAmount: 40,
       orders: orderState,
       args: {
         amount: 100
@@ -59,7 +60,8 @@ describe('twap:events:orders_order_fill', () => {
       ...instance,
       state: {
         ...instance.state,
-        remainingAmount: 100
+        remainingAmount: 100,
+        minDistortedAmount: 0.002
       },
 
       h: {
@@ -111,5 +113,9 @@ describe('twap:events:orders_order_fill', () => {
 
   it('emits stop event if no amount is left', (done) => {
     testStopAmount(42, done)
+  })
+
+  it('emits stop event if amount less than minimum order size is left', (done) => {
+    testStopAmount(60, done)
   })
 })
