@@ -116,6 +116,11 @@ class BitfinexSessionMock extends EventEmitter {
     this._conn.after(ms, fn)
   }
 
+  streamToMainChannel (signal, value) {
+    this.emit('outgoing', { name: signal, payload: value })
+    this._conn.streamTo(MAIN_CHANNEL_ID, signal, value)
+  }
+
   sendSnapshots () {
     for (const [key, signal] of Object.entries(stateToSignal)) {
       const value = this._state[key] || []

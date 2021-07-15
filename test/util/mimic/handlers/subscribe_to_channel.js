@@ -24,7 +24,7 @@ module.exports = (dataProviders) => (session) => (message) => {
 
   session.publish('subscribed', { ...fields, channel, chanId })
 
-  session.each(1000, (instance, stop, prevState) => {
+  session.each(100, (instance, stop, prevState) => {
     const state = dataProvider(fields, prevState)
     instance.streamTo(chanId, state)
 

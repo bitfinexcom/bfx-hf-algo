@@ -10,25 +10,27 @@ const { NEW_ORDER } = require('../util/mimic/signal_types')
 const ApiSpy = require('../util/mimic/testing/api_spy')
 const BaseApiMock = require('../util/base_api_mock')
 
-function performOrder (host) {
-  return host.startAO('bfx-ma_crossover', {
-    shortType: 'EMA',
-    shortEMATF: '1m',
-    shortEMAPeriod: '5',
-    shortEMAPrice: 'close',
-    longType: 'EMA',
-    longEMATF: '1m',
-    longEMAPeriod: '15',
-    longEMAPrice: 'close',
-    amount: 1,
+function performOrder (host, args = {}) {
+  return host.startAO('bfx-accumulate_distribute', {
     symbol: 'tAAABBB',
-    orderType: 'MARKET',
-    action: 'Buy',
-    _margin: false
+    amount: -0.2,
+    sliceAmount: -0.1,
+    sliceInterval: 10000,
+    intervalDistortion: 0.20,
+    amountDistortion: 0.20,
+    orderType: 'RELATIVE',
+    offsetType: 'ask',
+    offsetDelta: -10,
+    capType: 'bid',
+    capDelta: 10,
+    catchUp: true,
+    awaitFill: true,
+    _margin: false,
+    ...args
   })
 }
 
-describe('MA crossover', () => {
+describe('Accumulate/Distribute', () => {
   let host, apiMock, spyServer
   const apiKey = 'api key'
   const apiSecret = 'api secret'
@@ -59,30 +61,17 @@ describe('MA crossover', () => {
     expect(spyConn.countReceived(NEW_ORDER)).to.eq(1)
 
     spyConn
-      .received('subscribe', (e) => expect(e.channel).to.eq('candles'))
+      .received('subscribe', (e) => expect(e.channel).to.eq('book'))
       .sent('subscribed', (e) => {
-        expect(e.key).to.eq('trade:1m:tAAABBB')
+        expect(e.channel).to.eq('book')
         expect(e.chanId).to.be.a('number')
       })
       .received(NEW_ORDER, ({ fields: [placeholder, details] }) => {
         expect(details.symbol).to.eq('tAAABBB')
-        expect(details.type).to.eq('EXCHANGE MARKET')
-        expect(details.amount).to.eq('1.00000000')
+        expect(details.type).to.eq('EXCHANGE LIMIT')
+        expect(+details.amount).to.be.within(-0.12, -0.08)
+        expect(+details.price).to.be.within(400, 600)
         expect(details.flags).to.eq(0)
-      })
-  })
-
-  it('sends ping', async () => {
-    await performOrder(host)
-    await delay(2_500)
-    const spyConn = spyServer.connections[0]
-
-    spyConn
-      .received('ping', (event) => {
-        expect(event.cid).to.be.a('number')
-      })
-      .sent('pong', (event) => {
-        expect(event.cid).to.be.a('number')
       })
   })
 })
