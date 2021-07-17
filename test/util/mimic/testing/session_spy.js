@@ -2,37 +2,13 @@
 
 const assert = require('assert')
 
-class Iterator {
-  constructor () {
-    this._offset = 0
-    this._items = []
-  }
-
-  push (item) {
-    this._items.push(item)
-  }
-
-  hasNext () {
-    return this._offset < this._items.length
-  }
-
-  next () {
-    if (!this.hasNext()) return
-    return this._items[this._offset++]
-  }
-
-  items () {
-    return this._items
-  }
-}
-
 class SessionSpy {
   /**
    * @param {BitfinexSessionMock} session
    */
   constructor (session) {
-    this._incomingEvents = new Iterator()
-    this._outgoingEvents = new Iterator()
+    this._incomingEvents = []
+    this._outgoingEvents = []
 
     session.on('incoming', this._onIncomingMessage.bind(this))
     session.on('outgoing', this._onOutgoingMessage.bind(this))
@@ -70,10 +46,12 @@ class SessionSpy {
     this._outgoingEvents.push(event)
   }
 
+  _getEvents (iter, name) {
+    return iter.filter((e) => e.name === name)
+  }
+
   _count (iter, name) {
-    return iter.items()
-      .filter((e) => e.name === name)
-      .length
+    return this._getEvents(iter, name).length
   }
 
   _assertEvent (iter, name, fn) {
@@ -85,18 +63,16 @@ class SessionSpy {
     }
 
     if (fn) {
-      fn(event.payload)
+      this._forEachEvent(iter, name, (event, i) => fn(event.payload, i))
     }
   }
 
   _findEvent (iter, name) {
-    while (iter.hasNext()) {
-      const event = iter.next()
+    return iter.find(event => event.name === name)
+  }
 
-      if (event.name === name) {
-        return event
-      }
-    }
+  _forEachEvent (iter, name, fn) {
+    this._getEvents(iter, name).forEach(fn)
   }
 }
 

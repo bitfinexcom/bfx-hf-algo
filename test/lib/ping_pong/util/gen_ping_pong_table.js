@@ -3,6 +3,7 @@
 
 const assert = require('assert')
 const genPingPongTable = require('../../../../lib/ping_pong/util/gen_ping_pong_table')
+const { getKeys, getValues, extract } = require('../../../../lib/ping_pong/util/ping_pong_table')
 
 const args = {
   pingPrice: 0,
@@ -18,9 +19,9 @@ const args = {
 describe('ping_pong:util:gen_ping_pong_table', () => {
   it('generates ping pong table with correct prices', () => {
     const pingPongTable = genPingPongTable(args)
-    assert.deepStrictEqual(Object.keys(pingPongTable).length, args.orderCount, 'invalid ping pong table')
-    assert.deepStrictEqual(Object.keys(pingPongTable), ['5.6000', '7.5667', '9.5333', '11.500'], 'does not generate correct ping prices')
-    assert.deepStrictEqual(Object.values(pingPongTable), ['6.4000', '8.3667', '10.333', '12.300'], 'does not generate correct pong prices')
+    assert.deepStrictEqual(getKeys(pingPongTable).length, args.orderCount, 'invalid ping pong table')
+    assert.deepStrictEqual(getKeys(pingPongTable), ['5.6000', '7.5667', '9.5333', '11.500'], 'does not generate correct ping prices')
+    assert.deepStrictEqual(getValues(pingPongTable), ['6.4000', '8.3667', '10.333', '12.300'], 'does not generate correct pong prices')
   })
 
   it('generates the ping and pong price same as user input when orderCount is 1', () => {
@@ -31,7 +32,8 @@ describe('ping_pong:util:gen_ping_pong_table', () => {
       orderCount: 1
     }
     const pingPongTable = genPingPongTable(singleOrderCountArgs)
-    assert.deepStrictEqual(Object.keys(pingPongTable).length, 1, 'invalid ping pong table')
-    assert.deepStrictEqual(pingPongTable['50000'], '50500', 'does not generate correct ping and pong prices')
+    const [price] = extract(pingPongTable, '50000')
+    assert.deepStrictEqual(getKeys(pingPongTable).length, 1, 'invalid ping pong table')
+    assert.deepStrictEqual(price, '50500', 'does not generate correct ping and pong prices')
   })
 })
