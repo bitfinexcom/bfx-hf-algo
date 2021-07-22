@@ -28,6 +28,7 @@ const params = {
     delta: 0
   },
   catchUp: true,
+  postonly: false,
   awaitFill: true,
   lev: 3.3,
   _futures: true
@@ -116,6 +117,12 @@ describe('accumulate_distribute:meta:validate_params', () => {
     it('returns error when awaitFill field is not boolean', () => {
       const err = validateParams({ ...params, awaitFill: 'and' })
       assert.deepStrictEqual(err.field, 'awaitFill')
+      assert(_isString(err.message))
+    })
+
+    it('returns error when postonly field is not boolean', () => {
+      const err = validateParams({ ...params, postonly: 'and' })
+      assert.deepStrictEqual(err.field, 'postonly')
       assert(_isString(err.message))
     })
   })
