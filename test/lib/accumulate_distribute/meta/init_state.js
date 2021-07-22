@@ -18,6 +18,17 @@ describe('accumulate_distribute:meta:init_state', () => {
     stubOrderAmountsGen.restore()
   })
 
+  it('initializes float order amounts', () => {
+    const stubOrderAmountsGen = sinon.stub(orderAmounts, 'gen').returns([0.2, 0.1])
+    const state = initState({ amount: 0.3 })
+
+    assert.deepStrictEqual(state.orderAmounts, [0.2, 0.1])
+    assert.deepStrictEqual(state.args, { amount: 0.3 })
+    assert.strictEqual(state.remainingAmount, 0.3)
+
+    stubOrderAmountsGen.restore()
+  })
+
   it('throws an error if gen_order_amounts returns a greater total amount than requested by the user', () => {
     const stubOrderAmountsGen = sinon.stub(orderAmounts, 'gen').returns([1, 2, 1])
 
