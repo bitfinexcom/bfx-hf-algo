@@ -100,7 +100,7 @@ This package will be maintained only via github, please use latest relases from 
 
 Example on how to install specific version from github:
 ```
-npm i --save-prod https://github.com/bitfinexcom/bfx-hf-algo.git#v4.3.2
+npm i --save-prod https://github.com/bitfinexcom/bfx-hf-algo.git#v4.3.4
 ```
 
 Example on how to install it latest version from github:
