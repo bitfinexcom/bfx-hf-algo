@@ -54,7 +54,7 @@
   },
   "devDependencies": {
     "autocannon": "^7.3.0",
-    "bfx-hf-ext-plugin-bitfinex": "github:bitfinexcom/bfx-hf-ext-plugin-bitfinex#v1.0.9",
+    "bfx-hf-ext-plugin-bitfinex": "github:bitfinexcom/bfx-hf-ext-plugin-bitfinex#v1.0.10",
     "bfx-hf-models": "github:bitfinexcom/bfx-hf-models#v2.3.3",
     "bfx-hf-models-adapter-lowdb": "github:bitfinexcom/bfx-hf-models-adapter-lowdb#v1.0.4",
     "chai": "^4.2.0",
