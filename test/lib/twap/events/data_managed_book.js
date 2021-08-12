@@ -3,6 +3,7 @@
 
 const assert = require('assert')
 const Promise = require('bluebird')
+const { OrderBook } = require('bfx-api-node-models')
 const onDataManagedBook = require('../../../../lib/twap/events/data_managed_book')
 const Config = require('../../../../lib/twap/config')
 
@@ -30,7 +31,9 @@ describe('twap:events:data_managed_book', () => {
           }).then(done).catch(done)
         }
       }
-    }, 42, {
+    }, {
+      serialize: () => { return [] }
+    }, {
       chanFilter: {
         symbol: 'tBTCUSD'
       }
@@ -53,7 +56,9 @@ describe('twap:events:data_managed_book', () => {
           }).then(done).catch(done)
         }
       }
-    }, 42, {
+    }, {
+      serialize: () => { return [] }
+    }, {
       chanFilter: {
         symbol: 'tETHUSD'
       }
@@ -72,12 +77,14 @@ describe('twap:events:data_managed_book', () => {
         debug: () => {},
         updateState: (instance, state) => {
           return new Promise((resolve) => {
-            assert.strictEqual(state.lastBook, 42)
+            assert.ok(state.lastBook instanceof OrderBook)
             resolve()
           }).then(done).catch(done)
         }
       }
-    }, 42, {
+    }, {
+      serialize: () => { return [] }
+    }, {
       chanFilter: {
         symbol: 'tBTCUSD'
       }
