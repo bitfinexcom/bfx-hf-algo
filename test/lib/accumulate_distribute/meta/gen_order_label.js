@@ -17,8 +17,7 @@ describe('accumulate_distribute:meta:gen_order_label', () => {
   }
 
   it('includes basic information', () => {
-    const str = genOrderLabel(state)
-    console.log(str)
+    const { origin: str } = genOrderLabel(state)
     assert.ok(/LIMIT/.test(str), 'type not included')
     assert.ok(_includes(str, '42'), 'amount not included')
     assert.ok(_includes(str, '1'), 'price not included')
@@ -27,7 +26,7 @@ describe('accumulate_distribute:meta:gen_order_label', () => {
   })
 
   it('includes offset and cap information if used', () => {
-    const str = genOrderLabel({
+    const { origin: str } = genOrderLabel({
       args: {
         ...state.args,
         orderType: null,
