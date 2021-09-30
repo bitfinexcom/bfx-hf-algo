@@ -92,6 +92,16 @@ describe('iceberg:meta:validate_params', () => {
     assert(_isString(err.message))
   })
 
+  it('returns error if slice amount percent causes slice amount to be less than the minimum order size', () => {
+    const err = validateParams({
+      ...validParams,
+      sliceAmount: 0.001,
+      sliceAmountPerc: 0.02
+    }, pairConfig)
+    assert.deepStrictEqual(err.field, 'sliceAmountPerc')
+    assert(_isString(err.message))
+  })
+
   it('returns error if amount is greater than the maximum order size', () => {
     const err = validateParams({
       ...validParams,
@@ -107,6 +117,16 @@ describe('iceberg:meta:validate_params', () => {
       sliceAmount: 25
     }, pairConfig)
     assert.deepStrictEqual(err.field, 'sliceAmount')
+    assert(_isString(err.message))
+  })
+
+  it('returns error if slice amount percent causes slice amount to be greater than the maximum order size', () => {
+    const err = validateParams({
+      ...validParams,
+      sliceAmount: 25,
+      sliceAmountPerc: 0.5
+    }, pairConfig)
+    assert.deepStrictEqual(err.field, 'sliceAmountPerc')
     assert(_isString(err.message))
   })
 
