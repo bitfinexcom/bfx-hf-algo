@@ -25,6 +25,7 @@ describe('host:init_ao_state', () => {
 
   it('initialiazes state using the AO\'s init func', () => {
     const state = initAOState({
+      name: 'init ao',
       meta: {
         initState: () => ({ test: 42 })
       }
@@ -34,13 +35,13 @@ describe('host:init_ao_state', () => {
   })
 
   it('generates a valid group ID', () => {
-    const { gid } = initAOState()
+    const { gid } = initAOState({ name: 'init ao' })
     assert.ok(_isString(gid))
     assert.ok(_isFinite(+gid))
   })
 
   it('defaults to active:false', () => {
-    const { active } = initAOState()
+    const { active } = initAOState({ name: 'init ao' })
     assert.ok(!active)
   })
 
