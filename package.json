@@ -39,7 +39,7 @@
   ],
   "dependencies": {
     "@bitfinex/lib-js-util-math": "git+https://github.com/bitfinexcom/lib-js-util-math.git",
-    "bfx-api-node-core": "^1.5.3",
+    "bfx-api-node-core": "^1.5.5",
     "bfx-api-node-models": "^1.4.1",
     "bfx-api-node-plugin-managed-candles": "^1.0.2",
     "bfx-api-node-plugin-managed-ob": "^1.0.3",
