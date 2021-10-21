@@ -1,6 +1,6 @@
 {
   "name": "bfx-hf-algo",
-  "version": "4.7.1",
+  "version": "4.7.2",
   "description": "HF Algorithmic Order Module",
   "main": "index.js",
   "engines": {
@@ -45,7 +45,7 @@
     "bfx-api-node-plugin-managed-ob": "^1.0.3",
     "bfx-api-node-plugin-wd": "^1.0.4",
     "bfx-api-node-util": "^1.0.2",
-    "bfx-hf-indicators": "github:bitfinexcom/bfx-hf-indicators#v2.0.9",
+    "bfx-hf-indicators": "git+https://github.com/bitfinexcom/bfx-hf-indicators.git#v2.1.1",
     "bfx-hf-util": "github:bitfinexcom/bfx-hf-util#v1.0.12",
     "bluebird": "^3.5.5",
     "debug": "^4.3.1",
