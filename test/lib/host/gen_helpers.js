@@ -310,7 +310,7 @@ describe('genHelpers', () => {
 
       await promise
       assertFn.calledWithExactly(adapter.subscribe, state.connection, channel, payload)
-      assert(manager.listenerCount('ws2:event:subscribed') === 0)
+      assert(manager.listenerCount('ws2:event:subscribed') > 0)
     })
   })
 })
