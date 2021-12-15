@@ -40,7 +40,7 @@
   "dependencies": {
     "@bitfinex/lib-js-util-math": "git+https://github.com/bitfinexcom/lib-js-util-math.git",
     "bfx-api-node-core": "^1.5.5",
-    "bfx-api-node-models": "^1.4.1",
+    "bfx-api-node-models": "git+https://github.com/avsek477/bfx-api-node-models.git#add-visible-on-hit-hidden-orders",
     "bfx-api-node-plugin-managed-candles": "^1.0.2",
     "bfx-api-node-plugin-managed-ob": "^1.0.3",
     "bfx-api-node-plugin-wd": "^1.0.4",
