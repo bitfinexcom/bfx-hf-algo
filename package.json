@@ -1,6 +1,6 @@
 {
   "name": "bfx-hf-algo",
-  "version": "4.8.0",
+  "version": "4.9.0",
   "description": "HF Algorithmic Order Module",
   "main": "index.js",
   "engines": {
@@ -39,8 +39,8 @@
   ],
   "dependencies": {
     "@bitfinex/lib-js-util-math": "git+https://github.com/bitfinexcom/lib-js-util-math.git",
-    "bfx-api-node-core": "git+https://github.com/avsek477/bfx-api-node-core.git#orders-models-update",
-    "bfx-api-node-models": "git+https://github.com/avsek477/bfx-api-node-models.git#add-visible-on-hit-hidden-orders",
+    "bfx-api-node-core": "git+https://github.com/bitfinexcom/bfx-api-node-core.git#v1.5.6",
+    "bfx-api-node-models": "git+https://github.com/bitfinexcom/bfx-api-node-models.git#v1.6.2",
     "bfx-api-node-plugin-managed-candles": "^1.0.2",
     "bfx-api-node-plugin-managed-ob": "^1.0.3",
     "bfx-api-node-plugin-wd": "^1.0.4",
