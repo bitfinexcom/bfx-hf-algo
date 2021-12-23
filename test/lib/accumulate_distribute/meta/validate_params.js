@@ -31,7 +31,8 @@ const params = {
   postonly: false,
   awaitFill: true,
   lev: 3.3,
-  _futures: true
+  _futures: true,
+  hidden: false
 }
 
 const pairConfig = {
@@ -223,6 +224,20 @@ describe('accumulate_distribute:meta:validate_params', () => {
     it('returns error if leverage is greater than the allowed leverage', () => {
       const err = validateParams({ ...params, lev: 6 }, pairConfig)
       assert.deepStrictEqual(err.field, 'lev')
+      assert(_isString(err.message))
+    })
+  })
+
+  describe('Hidden option for orders', () => {
+    it('returns error if hidden option is not boolean', () => {
+      const err = validateParams({ ...params, hidden: 'hidden' }, pairConfig)
+      assert.deepStrictEqual(err.field, 'hidden')
+      assert(_isString(err.message))
+    })
+
+    it('returns error if visible on hit option is not boolean', () => {
+      const err = validateParams({ ...params, hidden: true, visibleOnHit: 'visibleOnHit' }, pairConfig)
+      assert.deepStrictEqual(err.field, 'visibleOnHit')
       assert(_isString(err.message))
     })
   })
