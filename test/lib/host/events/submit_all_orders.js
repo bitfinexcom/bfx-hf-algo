@@ -67,7 +67,7 @@ describe('host:events:submit_all_orders', () => {
   })
 
   it('sets the HF meta flag', (done) => {
-    const o = new Order()
+    const o = new Order({ meta: { _HF: 1 } })
     const host = {
       emit: () => {},
       getAO: (type) => {

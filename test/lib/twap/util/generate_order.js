@@ -47,7 +47,7 @@ describe('twap:util:generate_order', () => {
   })
 
   it('sets the _HF flag', () => {
-    const o = generateOrder(getState({}), 42)
+    const o = generateOrder(getState({ argOverrides: { meta: { _HF: 1 } } }), 42)
     assert.strictEqual(o.meta._HF, 1)
   })
 
