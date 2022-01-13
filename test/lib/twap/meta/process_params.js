@@ -5,12 +5,14 @@ const assert = require('assert')
 const processParams = require('../../../../lib/twap/meta/process_params')
 
 describe('twap:meta:process_params', () => {
-  it('adds EXCHANGE prefix for non-margin order types', () => {
+  it('adds EXCHANGE prefix for non-margin and non-derivative order types', () => {
     const exchangeParams = processParams({ orderType: 'LIMIT', _margin: false })
     const marginParams = processParams({ orderType: 'LIMIT', _margin: true })
+    const futureParams = processParams({ orderType: 'LIMIT', _futures: true })
 
     assert.strictEqual(exchangeParams.orderType, 'EXCHANGE LIMIT')
     assert.strictEqual(marginParams.orderType, 'LIMIT')
+    assert.strictEqual(futureParams.orderType, 'LIMIT')
   })
 
   it('integrates supplied _symbol', () => {
