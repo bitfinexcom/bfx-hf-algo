@@ -1,170 +1,82 @@
 /* eslint-env mocha */
 'use strict'
 
-const assert = require('assert')
-const Promise = require('bluebird')
+const { expect } = require('chai')
+const { assert, createSandbox } = require('sinon')
 const onOrderFill = require('../../../../lib/iceberg/events/orders_order_fill')
 
-const timeout = () => {
-  return [null, () => {}]
-}
-
 describe('iceberg:events:orders_order_fill', () => {
-  const orderState = { 1: 'some_order_object' }
-  const instance = {
-    state: {
-      gid: 100,
-      orders: orderState,
-      args: {
-        amount: 100
-      },
-      remainingAmount: 100
-    },
+  const sandbox = createSandbox()
 
-    h: {
-      timeout,
-      debug: () => {},
-      updateState: async () => {},
-      emitSelf: async () => {},
-      emit: async () => {},
-      debouncedSubmitOrders: () => {}
-    }
+  afterEach(() => {
+    sandbox.reset()
+  })
+
+  const order = {
+    getLastFillAmount: sandbox.stub(),
+    resetFilledAmount: sandbox.stub()
   }
-
-  const filledOrder = {
-    resetFilledAmount: () => {},
-    getLastFillAmount: () => {
-      return 42
-    }
+  const state = {
+    args: { amount: 100 },
+    orders: {},
+    gid: 123,
+    remainingAmount: 80
   }
-
-  it('cancels all known orders', (done) => {
-    let called = 0
-
-    onOrderFill({
-      ...instance,
-      h: {
-        ...instance.h,
-        emit: (eName, gid, orders) => {
-          if (called !== 0) return
-          called += 1
-
-          return new Promise((resolve) => {
-            assert.strictEqual(gid, 100)
-            assert.strictEqual(eName, 'exec:order:cancel:all')
-            assert.deepStrictEqual(orders, orderState)
-            resolve()
-          }).then(done).catch(done)
-        }
-      }
-    }, filledOrder)
-  })
-
-  it('updates remaining amount w/ fill amount', (done) => {
-    onOrderFill({
-      ...instance,
-      state: {
-        ...instance.state,
-        remainingAmount: 100
-      },
-
-      h: {
-        ...instance.h,
-
-        updateState: (inst, update) => {
-          return new Promise((resolve) => {
-            assert.deepStrictEqual(update, {
-              remainingAmount: 58
-            })
-            resolve()
-          }).then(done).catch(done)
-        }
-      }
-    }, filledOrder)
-  })
-
-  it('updates remaining amount w/ fill amount, floats', (done) => {
-    const filledOrderFloat = {
-      resetFilledAmount: () => {},
-      getLastFillAmount: () => {
-        return 0.1
-      }
-    }
-
-    onOrderFill({
-      ...instance,
-      state: {
-        ...instance.state,
-        remainingAmount: 0.3
-      },
-
-      h: {
-        ...instance.h,
-
-        updateState: (inst, update) => {
-          return new Promise((resolve) => {
-            assert.deepStrictEqual(update, {
-              remainingAmount: 0.2
-            })
-            resolve()
-          }).then(done).catch(done)
-        }
-      }
-    }, filledOrderFloat)
-  })
-
-  it('submits orders if remaining amount is not dust', (done) => {
-    onOrderFill({
-      ...instance,
-      state: {
-        ...instance.state,
-        remainingAmount: 100
-      },
-
-      h: {
-        ...instance.h,
-
-        debouncedSubmitOrders: () => {
-          done()
-        }
-      }
-    }, filledOrder)
-  })
-
-  const testStopAmount = (remainingAmount, done) => {
-    onOrderFill({
-      ...instance,
-      state: {
-        ...instance.state,
-        remainingAmount
-      },
-
-      h: {
-        ...instance.h,
-
-        emitSelf: (eName) => {
-          return new Promise((resolve) => {
-            throw new Error('should not have submitted')
-          }).then(done).catch(done)
-        },
-
-        emit: (eName) => {
-          return new Promise((resolve) => {
-            if (eName === 'exec:stop') {
-              done()
-            }
-            resolve()
-          }).catch(done)
-        }
-      }
-    }, filledOrder)
+  const tracer = {
+    createSignal: sandbox.stub()
   }
+  const h = {
+    tracer,
+    emit: sandbox.stub(),
+    updateState: sandbox.stub(),
+    debug: sandbox.stub(),
+    debouncedSubmitOrders: sandbox.stub()
+  }
+  const instance = { state, h }
 
-  it('emits stop event if dust is left', (done) => {
-    testStopAmount(42.00000001, done)
+  it('', async () => {
+    const fillSignal = { id: 1, meta: {} }
+    tracer.createSignal.onCall(0).returns(fillSignal)
+
+    const lastFillAmount = 50
+    const remainingAmount = state.remainingAmount - lastFillAmount
+    order.getLastFillAmount.returns(lastFillAmount)
+
+    await onOrderFill(instance, order)
+
+    assert.calledWithExactly(tracer.createSignal, 'order_filled')
+    assert.calledWithExactly(tracer.createSignal, 'cancel_all', fillSignal)
+    assert.calledOnce(h.emit)
+    assert.calledWithExactly(h.emit, 'exec:order:cancel:all', state.gid, state.orders)
+    assert.calledWithExactly(order.getLastFillAmount)
+    assert.calledWithExactly(order.resetFilledAmount)
+    assert.calledWithExactly(h.updateState, instance, { remainingAmount })
+    assert.calledWithExactly(h.debouncedSubmitOrders, fillSignal)
+
+    expect(fillSignal.meta.fillAmount).to.eq(lastFillAmount)
+    expect(fillSignal.meta.remainingAmount).to.eq(remainingAmount)
   })
 
-  it('emits stop event if no amount is left', (done) => {
-    testStopAmount(42, done)
+  it('', async () => {
+    const fillSignal = { id: 1, meta: {} }
+    tracer.createSignal.onCall(0).returns(fillSignal)
+
+    const lastFillAmount = 80
+    const remainingAmount = state.remainingAmount - lastFillAmount
+    order.getLastFillAmount.returns(lastFillAmount)
+
+    await onOrderFill(instance, order)
+
+    assert.calledWithExactly(tracer.createSignal, 'order_filled')
+    assert.calledWithExactly(tracer.createSignal, 'cancel_all', fillSignal)
+    assert.calledWithExactly(h.emit, 'exec:order:cancel:all', state.gid, state.orders)
+    assert.calledWithExactly(order.getLastFillAmount)
+    assert.calledWithExactly(order.resetFilledAmount)
+    assert.calledWithExactly(h.updateState, instance, { remainingAmount })
+    assert.notCalled(h.debouncedSubmitOrders)
+    assert.calledWithExactly(h.emit, 'exec:stop', null, { origin: fillSignal })
+
+    expect(fillSignal.meta.fillAmount).to.eq(lastFillAmount)
+    expect(fillSignal.meta.remainingAmount).to.eq(remainingAmount)
   })
 })
