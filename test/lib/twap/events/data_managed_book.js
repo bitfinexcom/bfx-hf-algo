@@ -18,7 +18,7 @@ describe('twap:events:data_managed_book', () => {
     [86952874847, 44034, -2],
     [86952827542, 44037, -2],
     [86952874851, 44042, -2],
-    [86951688951, 44052, -2],
+    [86951688951, 44052, -2]
   ]
 
   it('does nothing if price target/condition do not rely on book', (done) => {
