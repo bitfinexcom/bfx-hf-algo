@@ -13,6 +13,8 @@ describe('iceberg:events:orders_order_fill', () => {
   })
 
   const order = {
+    id: 87,
+    cid: 4934,
     getLastFillAmount: sandbox.stub(),
     resetFilledAmount: sandbox.stub()
   }
@@ -44,7 +46,7 @@ describe('iceberg:events:orders_order_fill', () => {
 
     await onOrderFill(instance, order)
 
-    assert.calledWithExactly(tracer.createSignal, 'order_filled')
+    assert.calledWithExactly(tracer.createSignal, 'order_filled', null, { order: { gid: 123, id: 87, cid: 4934 } })
     assert.calledWithExactly(tracer.createSignal, 'cancel_all', fillSignal)
     assert.calledOnce(h.emit)
     assert.calledWithExactly(h.emit, 'exec:order:cancel:all', state.gid, state.orders)
@@ -67,7 +69,7 @@ describe('iceberg:events:orders_order_fill', () => {
 
     await onOrderFill(instance, order)
 
-    assert.calledWithExactly(tracer.createSignal, 'order_filled')
+    assert.calledWithExactly(tracer.createSignal, 'order_filled', null, { order: { gid: 123, id: 87, cid: 4934 } })
     assert.calledWithExactly(tracer.createSignal, 'cancel_all', fillSignal)
     assert.calledWithExactly(h.emit, 'exec:order:cancel:all', state.gid, state.orders)
     assert.calledWithExactly(order.getLastFillAmount)
