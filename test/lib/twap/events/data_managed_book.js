@@ -14,6 +14,13 @@ const args = {
 }
 
 describe('twap:events:data_managed_book', () => {
+  const serializedData = [
+    [86952874847, 44034, -2],
+    [86952827542, 44037, -2],
+    [86952874851, 44042, -2],
+    [86951688951, 44052, -2],
+  ]
+
   it('does nothing if price target/condition do not rely on book', (done) => {
     onDataManagedBook({
       state: {
@@ -32,7 +39,7 @@ describe('twap:events:data_managed_book', () => {
         }
       }
     }, {
-      serialize: () => { return [] }
+      serialize: () => { return serializedData }
     }, {
       chanFilter: {
         symbol: 'tBTCUSD'
@@ -57,7 +64,7 @@ describe('twap:events:data_managed_book', () => {
         }
       }
     }, {
-      serialize: () => { return [] }
+      serialize: () => { return serializedData }
     }, {
       chanFilter: {
         symbol: 'tETHUSD'
@@ -75,6 +82,7 @@ describe('twap:events:data_managed_book', () => {
 
       h: {
         debug: () => {},
+        tracer: { createSignal: () => {} },
         updateState: (instance, state) => {
           return new Promise((resolve) => {
             assert.ok(state.lastBook instanceof OrderBook)
@@ -83,7 +91,7 @@ describe('twap:events:data_managed_book', () => {
         }
       }
     }, {
-      serialize: () => { return [] }
+      serialize: () => { return serializedData }
     }, {
       chanFilter: {
         symbol: 'tBTCUSD'
