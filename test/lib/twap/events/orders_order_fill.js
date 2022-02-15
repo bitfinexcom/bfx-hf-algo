@@ -18,6 +18,7 @@ describe('twap:events:orders_order_fill', () => {
     },
 
     h: {
+      tracer: { createSignal: () => ({ meta: {} }) },
       debug: () => {},
       updateState: async () => {},
       emitSelf: async () => {},
