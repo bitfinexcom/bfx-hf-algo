@@ -8,6 +8,7 @@ describe('twap:events:orders_order_cancel', () => {
   it('submits all known orders for cancellation & stops operation', (done) => {
     onOrderCancel({
       h: {
+        tracer: { createSignal: () => {} },
         debug: () => {},
         emit: async (eName) => {
           assert.strictEqual(eName, 'exec:stop')
