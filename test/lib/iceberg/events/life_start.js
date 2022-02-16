@@ -19,7 +19,7 @@ describe('iceberg:events:life_start', () => {
 
     await onLifeStart(instance)
 
-    assert.calledWithExactly(createSignal, 'start')
+    assert.calledWithExactly(createSignal, 'start', null, { args: {} })
     assert.calledWithExactly(emitSelf, 'submit_orders', fakeSignal)
   })
 })
