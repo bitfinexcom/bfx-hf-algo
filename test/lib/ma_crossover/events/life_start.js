@@ -18,6 +18,7 @@ const getInstance = ({
   },
 
   h: {
+    tracer: { createSignal: () => ({ meta: {} }) },
     debug: () => {},
     updateState: async () => {},
     subscribeDataChannels: async () => {},
