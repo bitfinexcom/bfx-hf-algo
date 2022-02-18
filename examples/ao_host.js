@@ -38,7 +38,11 @@ const wsSettings = {
 
 const host = new AOHost({
   aos: [Iceberg, TWAP, AccumulateDistribute, MACrossover],
-  wsSettings
+  wsSettings,
+  signalTracerOpts: {
+    enabled: true,
+    dir: process.cwd() + '/logs'
+  }
 })
 
 host.on('ao:state:update', async (updateOpts) => {
@@ -54,26 +58,39 @@ host.on('error', (err) => {
   debug('error: %s', err)
 })
 
+let gid
+
 host.once('ready', async () => {
-  const [serialized] = await host.startAO('bfx-accumulate_distribute', {
-    symbol: 'tBTCUSD',
-    amount: -0.2,
-    sliceAmount: -0.1,
-    sliceInterval: 10000,
-    intervalDistortion: 0.20,
-    amountDistortion: 0.20,
-    orderType: 'RELATIVE', // MARKET, LIMIT, RELATIVE
-    offsetType: 'ask',
-    offsetDelta: -10,
-    capType: 'bid',
-    capDelta: 10,
-    catchUp: true, // if true & behind, ignore slice interval (after prev fill)
-    awaitFill: true,
-    _margin: false
+  const [serialized] = await host.startAO('bfx-iceberg', {
+    excessAsHidden: true,
+    orderType: 'LIMIT',
+    price: 100,
+    amount: 20,
+    sliceAmount: 7.5,
+    sliceAmountPerc: 0,
+    lev: 10,
+    action: 'Buy',
+    _symbol: 'tAAABBB',
+    _margin: false,
+    _futures: false,
+    meta: { scope: 'web' }
   })
 
-  debug('started AO %s', serialized.gid)
+  gid = serialized.gid
+
+  debug('started AO %s', gid)
   await AlgoOrder.set(serialized)
 })
 
 host.connect()
+
+process.on('SIGINT', async () => {
+  if (gid in host.instances) {
+    await host.stopAO(gid)
+  }
+
+  setTimeout(async () => {
+    await host.close()
+    process.exit(0)
+  }, 5000)
+})

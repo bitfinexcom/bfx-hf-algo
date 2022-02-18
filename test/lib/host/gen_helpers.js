@@ -13,6 +13,7 @@ const sinon = require('sinon')
 const { assert: assertFn } = sinon
 
 const manager = new EventEmitter()
+const config = { signalTracerOpts: { enabled: false, dir: '' } }
 const H = (args = {}, adapter = {}) => {
   const state = {
     ev: new AsyncEventEmitter(),
@@ -20,7 +21,7 @@ const H = (args = {}, adapter = {}) => {
     gid: 42,
     ...args
   }
-  return genHelpers(state, { m: manager, ...adapter })
+  return genHelpers(state, { m: manager, ...adapter }, config)
 }
 
 describe('genHelpers', () => {
