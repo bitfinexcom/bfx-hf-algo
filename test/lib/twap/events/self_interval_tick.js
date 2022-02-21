@@ -25,6 +25,8 @@ const timeout = (ms) => {
   return [id, () => p]
 }
 
+const tracer = { createSignal: (name, origin, meta) => ({ meta: {} }) }
+
 describe('twap:events:self_interval_tick', () => {
   it('submits order for float order amount', async () => {
     let orderSubmitted = false
@@ -39,6 +41,7 @@ describe('twap:events:self_interval_tick', () => {
         }
       },
       h: {
+        tracer,
         timeout,
         updateState: () => {},
         emitSelf: () => {},
@@ -67,6 +70,7 @@ describe('twap:events:self_interval_tick', () => {
 
       h: {
         timeout,
+        tracer,
         updateState: () => {},
         emitSelf: () => {},
         debug: (msg) => {
@@ -94,6 +98,7 @@ describe('twap:events:self_interval_tick', () => {
 
       h: {
         timeout,
+        tracer,
         updateState: () => {},
         emitSelf: () => {},
         debug: () => {},
@@ -123,6 +128,7 @@ describe('twap:events:self_interval_tick', () => {
 
       h: {
         timeout,
+        tracer,
         updateState: () => {},
         emitSelf: () => {},
         debug: () => {},
@@ -148,6 +154,7 @@ describe('twap:events:self_interval_tick', () => {
       },
 
       h: {
+        tracer,
         timeout,
         updateState: () => {},
         emitSelf: () => {},
@@ -180,6 +187,7 @@ describe('twap:events:self_interval_tick', () => {
       },
 
       h: {
+        tracer,
         timeout,
         updateState: () => {},
         emitSelf: () => {},
@@ -216,6 +224,7 @@ describe('twap:events:self_interval_tick', () => {
       },
 
       h: {
+        tracer,
         timeout,
         updateState: () => {},
         emitSelf: () => {},
@@ -252,6 +261,7 @@ describe('twap:events:self_interval_tick', () => {
       },
 
       h: {
+        tracer,
         timeout,
         updateState: () => {},
         emitSelf: () => {},
@@ -283,6 +293,7 @@ describe('twap:events:self_interval_tick', () => {
       },
 
       h: {
+        tracer,
         timeout,
         updateState: () => {},
         emitSelf: () => {},
