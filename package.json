@@ -47,7 +47,7 @@
     "bfx-api-node-rest": "git+https://github.com/bitfinexcom/bfx-api-node-rest.git#v4.6.0",
     "bfx-api-node-util": "^1.0.2",
     "bfx-hf-indicators": "git+https://github.com/bitfinexcom/bfx-hf-indicators.git#v2.1.1",
-    "bfx-hf-signals": "git+https://github.com/tarcisiozf/bfx-hf-signals.git#move-to-repo",
+    "bfx-hf-signals": "git+https://github.com/bitfinexcom/bfx-hf-signals.git#v1.0.0",
     "bfx-hf-util": "github:bitfinexcom/bfx-hf-util#v1.0.12",
     "bluebird": "^3.5.5",
     "debug": "^4.3.1",
