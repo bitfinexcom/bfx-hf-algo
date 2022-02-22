@@ -3,10 +3,12 @@
 
 const { stub, assert } = require('sinon')
 const onOrderCancel = require('../../../../lib/iceberg/events/orders_order_cancel')
+const { expect } = require('chai')
+const { OrderCancelledSignal } = require('bfx-hf-signals/lib/types')
 
 describe('iceberg:events:orders_order_cancel', () => {
   const tracer = {
-    createSignal: stub()
+    collect: stub()
   }
   const h = {
     emit: stub(),
@@ -18,11 +20,13 @@ describe('iceberg:events:orders_order_cancel', () => {
 
   it('submits all known orders for cancellation & stops operation', async () => {
     const fakeSignal = { id: 10 }
-    tracer.createSignal.returns(fakeSignal)
+    tracer.collect.returns(fakeSignal)
 
     await onOrderCancel(instance, order)
 
-    assert.calledWithExactly(tracer.createSignal, 'order_cancelled', null, { order: { ...order } })
+    const [signal] = tracer.collect.firstCall.args
+    expect(signal).to.be.instanceOf(OrderCancelledSignal)
+    expect(signal.meta).to.eql({ order: { ...order } })
     assert.calledWithExactly(h.emit, 'exec:stop', null, { origin: fakeSignal })
   })
 })

@@ -25,9 +25,11 @@ const timeout = (ms) => {
   return [id, () => p]
 }
 
-const tracer = { createSignal: (name, origin, meta) => ({ meta: {} }) }
+const tracer = { collect: () => ({ meta: {} }) }
 
 describe('twap:events:self_interval_tick', () => {
+  const origin = { id: 10 }
+
   it('submits order for float order amount', async () => {
     let orderSubmitted = false
     const instance = {
@@ -53,7 +55,7 @@ describe('twap:events:self_interval_tick', () => {
         }
       }
     }
-    await onIntervalTick(instance)
+    await onIntervalTick(instance, origin)
     assert.ok(orderSubmitted, 'did not submit order for float amounts')
   })
 
@@ -82,7 +84,7 @@ describe('twap:events:self_interval_tick', () => {
         },
         emit: () => {}
       }
-    })
+    }, origin)
   })
 
   it('cancels if not trading beyond end period and there are orders', (done) => {
@@ -113,7 +115,7 @@ describe('twap:events:self_interval_tick', () => {
           }).then(done).catch(done)
         }
       }
-    })
+    }, origin)
   })
 
   it('does not submit orders if book price data needed & unavailable', (done) => {
@@ -138,7 +140,7 @@ describe('twap:events:self_interval_tick', () => {
           }).catch(done)
         }
       }
-    })
+    }, origin)
 
     done()
   })
@@ -165,7 +167,7 @@ describe('twap:events:self_interval_tick', () => {
           }).catch(done)
         }
       }
-    })
+    }, origin)
 
     done()
   })
@@ -208,7 +210,7 @@ describe('twap:events:self_interval_tick', () => {
           }).then(done).catch(done)
         }
       }
-    })
+    }, origin)
   })
 
   it('submits order if trade price data needed, available, and matched', (done) => {
@@ -245,7 +247,7 @@ describe('twap:events:self_interval_tick', () => {
           }).then(done).catch(done)
         }
       }
-    })
+    }, origin)
   })
 
   it('does not submit order if trade price data needed, available, but not matched', (done) => {
@@ -272,7 +274,7 @@ describe('twap:events:self_interval_tick', () => {
           }).catch(done)
         }
       }
-    })
+    }, origin)
 
     done()
   })
@@ -304,7 +306,7 @@ describe('twap:events:self_interval_tick', () => {
           }).catch(done)
         }
       }
-    })
+    }, origin)
 
     done()
   })

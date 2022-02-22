@@ -21,11 +21,12 @@ describe('iceberg:util:generate_orders', () => {
     excessAsHidden: false,
     price: 1000
   }
+  const origin = { id: 10 }
 
   it('generates valid slice order', () => {
     const state = { remainingAmount: args.amount, args }
     const instance = { state, h }
-    const orders = generateOrders(instance)
+    const orders = generateOrders(instance, origin)
     const [slice] = orders
 
     assert.strictEqual(orders.length, 1)
@@ -48,7 +49,7 @@ describe('iceberg:util:generate_orders', () => {
 
     const state = { remainingAmount: 0.3, args: order }
     const instance = { state, h }
-    const orders = generateOrders(instance)
+    const orders = generateOrders(instance, origin)
     const [hidden] = orders
 
     assert.strictEqual(hidden.amount, 0.2, 'not -0.19999999999999998')
@@ -57,7 +58,7 @@ describe('iceberg:util:generate_orders', () => {
   it('caps slice order at remainingAmount if less than slice', () => {
     const state = { remainingAmount: 0.05, args }
     const instance = { state, h }
-    const orders = generateOrders(instance)
+    const orders = generateOrders(instance, origin)
     const [slice] = orders
     assert.strictEqual(slice.amount, 0.05)
   })
@@ -71,7 +72,7 @@ describe('iceberg:util:generate_orders', () => {
       }
     }
     const instance = { state, h }
-    const orders = generateOrders(instance)
+    const orders = generateOrders(instance, origin)
 
     const [hidden] = orders
     assert.strictEqual(orders.length, 2)
@@ -91,7 +92,7 @@ describe('iceberg:util:generate_orders', () => {
       }
     }
     const instance = { state, h }
-    const orders = generateOrders(instance)
+    const orders = generateOrders(instance, origin)
 
     const [hidden] = orders
     assert((hidden.amount - 0.05) < DUST)
@@ -106,7 +107,7 @@ describe('iceberg:util:generate_orders', () => {
       }
     }
     const instance = { state, h }
-    const orders = generateOrders(instance)
+    const orders = generateOrders(instance, origin)
 
     assert.strictEqual(orders.length, 1)
   })

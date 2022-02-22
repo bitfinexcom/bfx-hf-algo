@@ -18,7 +18,7 @@ describe('twap:events:life_start', () => {
       },
 
       h: {
-        tracer: { createSignal: () => {} },
+        tracer: { collect: () => {} },
         debug: () => {},
         subscribeDataChannels: async () => {},
         updateState: (instance, state) => {

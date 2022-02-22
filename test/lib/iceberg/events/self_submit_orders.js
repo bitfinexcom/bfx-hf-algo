@@ -24,9 +24,10 @@ describe('iceberg:events:self_submit_orders', () => {
   const tracer = { collect: stub() }
   const h = { emit: stub(), tracer }
   const instance = { state, h }
+  const origin = { id: 10 }
 
   it('submits generated orders', async () => {
-    await onSubmitOrders(instance, null)
+    await onSubmitOrders(instance, origin)
 
     assert.calledOnce(h.emit)
     const [eventName, gid, orders] = h.emit.firstCall.args
@@ -46,7 +47,7 @@ describe('iceberg:events:self_submit_orders', () => {
     assert.calledOnce(tracer.collect)
     const [signal] = tracer.collect.firstCall.args
     expect(signal.name).to.eq('order')
-    expect(signal.parent).to.be.null
+    expect(signal.parent).to.eq(origin)
     expect(signal.meta.symbol).to.be.eq(args.symbol)
     expect(signal.meta.price).to.be.eq(args.price)
     expect(signal.meta.cid).to.be.a('number')

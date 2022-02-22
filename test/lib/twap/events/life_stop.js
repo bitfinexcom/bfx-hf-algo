@@ -10,7 +10,7 @@ describe('twap:events:life_stop', () => {
 
     await onLifeStop({
       h: {
-        tracer: { createSignal: () => {} },
+        tracer: { collect: () => {} },
         updateState: () => {},
         debug: () => {},
         emit: (eventName) => {

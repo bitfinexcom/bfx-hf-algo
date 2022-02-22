@@ -82,7 +82,7 @@ describe('twap:events:data_managed_book', () => {
 
       h: {
         debug: () => {},
-        tracer: { createSignal: () => {} },
+        tracer: { collect: () => {} },
         updateState: (instance, state) => {
           return new Promise((resolve) => {
             assert.ok(state.lastBook instanceof OrderBook)

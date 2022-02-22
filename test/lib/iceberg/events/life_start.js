@@ -2,24 +2,29 @@
 'use strict'
 
 const { stub, assert } = require('sinon')
+const { expect } = require('chai')
+const { StartSignal } = require('bfx-hf-signals/lib/types')
 
 const onLifeStart = require('../../../../lib/iceberg/events/life_start')
 
 describe('iceberg:events:life_start', () => {
   const emitSelf = stub()
-  const createSignal = stub()
+  const collect = stub()
 
-  const tracer = { createSignal }
+  const tracer = { collect }
   const h = { emitSelf, tracer }
   const instance = { h }
 
   it('submits orders on startup', async () => {
     const fakeSignal = {}
-    createSignal.returns(fakeSignal)
+    collect.returns(fakeSignal)
 
     await onLifeStart(instance)
 
-    assert.calledWithExactly(createSignal, 'start', null, { args: {} })
+    assert.calledOnce(collect)
+    const [signal] = collect.firstCall.args
+    expect(signal).to.be.instanceOf(StartSignal)
+    expect(signal.meta).to.eql({ args: {} })
     assert.calledWithExactly(emitSelf, 'submit_orders', fakeSignal)
   })
 })
