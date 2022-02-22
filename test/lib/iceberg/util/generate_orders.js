@@ -10,7 +10,7 @@ const { stub } = require('sinon')
 
 describe('iceberg:util:generate_orders', () => {
   const tracer = {
-    createSignal: stub()
+    collect: stub()
   }
   const h = { tracer }
   const args = {
