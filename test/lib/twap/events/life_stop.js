@@ -2,7 +2,7 @@
 'use strict'
 
 const assert = require('assert')
-const onLifeStop = require('../../../../lib/ping_pong/events/life_stop')
+const onLifeStop = require('../../../../lib/twap/events/life_stop')
 
 describe('twap:events:life_stop', () => {
   it('cancels all orders when twap algo stopped', async () => {
@@ -10,7 +10,7 @@ describe('twap:events:life_stop', () => {
 
     await onLifeStop({
       h: {
-        tracer: { collect: () => {} },
+        tracer: { collect: () => ({}) },
         updateState: () => {},
         debug: () => {},
         emit: (eventName) => {
