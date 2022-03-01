@@ -13,6 +13,7 @@ const getInstance = ({
   },
 
   h: {
+    tracer: { collect: () => ({}) },
     updateState: async () => {},
     emitSelf: async () => {},
     ...helperParams
