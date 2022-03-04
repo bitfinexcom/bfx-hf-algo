@@ -69,7 +69,7 @@ describe('twap:events:data_trades', () => {
       },
 
       h: {
-        tracer: { createSignal: () => {} },
+        tracer: { collect: () => {} },
         debug: () => {},
         updateState: (instance, state) => {
           return new Promise((resolve) => {

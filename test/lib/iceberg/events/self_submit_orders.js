@@ -21,12 +21,13 @@ describe('iceberg:events:self_submit_orders', () => {
     remainingAmount: 0.05,
     args
   }
-  const tracer = { createSignal: stub() }
+  const tracer = { collect: stub() }
   const h = { emit: stub(), tracer }
   const instance = { state, h }
+  const origin = { id: 10 }
 
   it('submits generated orders', async () => {
-    await onSubmitOrders(instance, null)
+    await onSubmitOrders(instance, origin)
 
     assert.calledOnce(h.emit)
     const [eventName, gid, orders] = h.emit.firstCall.args
@@ -43,15 +44,15 @@ describe('iceberg:events:self_submit_orders', () => {
     expect(order.amount).to.be.eq(0.05)
     expect(order.meta).to.be.undefined
 
-    assert.calledOnce(tracer.createSignal)
-    const [name, origin, meta] = tracer.createSignal.firstCall.args
-    expect(name).to.eq('order')
-    expect(origin).to.be.null
-    expect(meta.symbol).to.be.eq(args.symbol)
-    expect(meta.price).to.be.eq(args.price)
-    expect(meta.cid).to.be.a('number')
-    expect(meta.type).to.be.eq(args.orderType)
-    expect(meta.amount).to.be.eq(0.05)
-    expect(meta.meta).to.be.undefined
+    assert.calledOnce(tracer.collect)
+    const [signal] = tracer.collect.firstCall.args
+    expect(signal.name).to.eq('order')
+    expect(signal.parent).to.eq(origin)
+    expect(signal.meta.symbol).to.be.eq(args.symbol)
+    expect(signal.meta.price).to.be.eq(args.price)
+    expect(signal.meta.cid).to.be.a('number')
+    expect(signal.meta.type).to.be.eq(args.orderType)
+    expect(signal.meta.amount).to.be.eq(0.05)
+    expect(signal.meta.meta).to.be.undefined
   })
 })

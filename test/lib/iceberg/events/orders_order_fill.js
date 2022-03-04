@@ -4,6 +4,7 @@
 const { expect } = require('chai')
 const { assert, createSandbox } = require('sinon')
 const onOrderFill = require('../../../../lib/iceberg/events/orders_order_fill')
+const { OrderFilledSignal, CancelAllSignal } = require('bfx-hf-signals/lib/types')
 
 describe('iceberg:events:orders_order_fill', () => {
   const sandbox = createSandbox()
@@ -15,6 +16,7 @@ describe('iceberg:events:orders_order_fill', () => {
   const order = {
     id: 87,
     cid: 4934,
+    gid: 123,
     getLastFillAmount: sandbox.stub(),
     resetFilledAmount: sandbox.stub()
   }
@@ -25,7 +27,7 @@ describe('iceberg:events:orders_order_fill', () => {
     remainingAmount: 80
   }
   const tracer = {
-    createSignal: sandbox.stub()
+    collect: sandbox.stub()
   }
   const h = {
     tracer,
@@ -38,7 +40,7 @@ describe('iceberg:events:orders_order_fill', () => {
 
   it('', async () => {
     const fillSignal = { id: 1, meta: {} }
-    tracer.createSignal.onCall(0).returns(fillSignal)
+    tracer.collect.onCall(0).returns(fillSignal)
 
     const lastFillAmount = 50
     const remainingAmount = state.remainingAmount - lastFillAmount
@@ -46,8 +48,12 @@ describe('iceberg:events:orders_order_fill', () => {
 
     await onOrderFill(instance, order)
 
-    assert.calledWithExactly(tracer.createSignal, 'order_filled', null, { order: { gid: 123, id: 87, cid: 4934 } })
-    assert.calledWithExactly(tracer.createSignal, 'cancel_all', fillSignal)
+    const [[orderFilledSignal], [cancelAllSignal]] = tracer.collect.args
+    expect(orderFilledSignal).to.be.instanceOf(OrderFilledSignal)
+    expect(orderFilledSignal.meta).to.eql({ order: { gid: 123, id: 87, cid: 4934 } })
+    expect(cancelAllSignal).to.be.instanceOf(CancelAllSignal)
+    expect(cancelAllSignal.parent).to.eq(fillSignal)
+
     assert.calledOnce(h.emit)
     assert.calledWithExactly(h.emit, 'exec:order:cancel:all', state.gid, state.orders)
     assert.calledWithExactly(order.getLastFillAmount)
@@ -61,7 +67,7 @@ describe('iceberg:events:orders_order_fill', () => {
 
   it('', async () => {
     const fillSignal = { id: 1, meta: {} }
-    tracer.createSignal.onCall(0).returns(fillSignal)
+    tracer.collect.onCall(0).returns(fillSignal)
 
     const lastFillAmount = 80
     const remainingAmount = state.remainingAmount - lastFillAmount
@@ -69,8 +75,11 @@ describe('iceberg:events:orders_order_fill', () => {
 
     await onOrderFill(instance, order)
 
-    assert.calledWithExactly(tracer.createSignal, 'order_filled', null, { order: { gid: 123, id: 87, cid: 4934 } })
-    assert.calledWithExactly(tracer.createSignal, 'cancel_all', fillSignal)
+    const [[orderFilledSignal], [cancelAllSignal]] = tracer.collect.args
+    expect(orderFilledSignal).to.be.instanceOf(OrderFilledSignal)
+    expect(orderFilledSignal.meta).to.eql({ order: { gid: 123, id: 87, cid: 4934 } })
+    expect(cancelAllSignal).to.be.instanceOf(CancelAllSignal)
+    expect(cancelAllSignal.parent).to.eq(fillSignal)
     assert.calledWithExactly(h.emit, 'exec:order:cancel:all', state.gid, state.orders)
     assert.calledWithExactly(order.getLastFillAmount)
     assert.calledWithExactly(order.resetFilledAmount)
