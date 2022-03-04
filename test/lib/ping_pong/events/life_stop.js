@@ -12,6 +12,7 @@ describe('ping_pong:events:life_stop', () => {
       h: {
         updateState: () => {},
         debug: () => {},
+        tracer: { collect: () => ({}) },
         emit: (eventName) => {
           if (eventName === 'exec:order:cancel:all') {
             cancelledOrders = true
