@@ -1,0 +1,13 @@
+name: Pre-Merge
+on: [pull_request]
+jobs:
+  lint_and_tests:
+    name: check lint and tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '12'
+      - run: npm install
+      - run: npm test
