@@ -1,0 +1,7 @@
+name: GitHub Actions Demo
+on: [push]
+jobs:
+  Lint-and-Tests:
+    runs-on: docker://node:12-alpine
+    steps:
+      - run: npm test
