@@ -19,7 +19,8 @@ jobs:
       - run: npm publish --tags canary --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-      - run: |
-        git config --global user.name 'Tarcisio Ferraz'
-        git config --global user.email 'tarcisiozf@users.noreply.github.com'
-        git push --tags
+      - name: push
+        run: |
+          git config --global user.name 'Tarcisio Ferraz'
+          git config --global user.email 'tarcisiozf@users.noreply.github.com'
+          git push --tags
