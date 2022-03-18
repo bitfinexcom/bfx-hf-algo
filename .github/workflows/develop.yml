@@ -17,6 +17,7 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
       - run: git config --global user.name 'Tarcisio Ferraz'
       - run: git config --global user.email 'tarcisiozf@users.noreply.github.com'
+      - run: npm install
       - run: npm version prerelease
       - run: npm publish --tags canary --access public
         env:
