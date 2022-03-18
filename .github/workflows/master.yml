@@ -18,6 +18,7 @@ jobs:
       - run: git config --global user.name 'Tarcisio Ferraz'
       - run: git config --global user.email 'tarcisiozf@users.noreply.github.com'
       - run: npm install
+      - run: npx check-unstable-deps @bitfinexorg
       - run: npm version minor -m "[ci skip] release"
       - run: npm publish --access public
         env:
