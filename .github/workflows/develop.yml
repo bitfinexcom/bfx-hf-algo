@@ -18,9 +18,8 @@ jobs:
       - run: git config --global user.name 'Tarcisio Ferraz'
       - run: git config --global user.email 'tarcisiozf@users.noreply.github.com'
       - run: npm install
-      - run: npm version prerelease
+      - run: npm version prerelease -m "[ci skip] prerelease"
       - run: npm publish --tag canary --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-      - run: git push
-      - run: git push --tags
+      - run: git push --follow-tags
