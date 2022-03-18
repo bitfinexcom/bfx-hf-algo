@@ -22,4 +22,5 @@ jobs:
       - run: npm publish --tag canary --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - run: git push
       - run: git push --tags
