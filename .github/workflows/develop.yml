@@ -19,7 +19,7 @@ jobs:
       - run: git config --global user.email 'tarcisiozf@users.noreply.github.com'
       - run: npm install
       - run: npm version prerelease
-      - run: npm publish --tags canary --access public
+      - run: npm publish --tag canary --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
       - run: git push --tags
