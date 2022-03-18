@@ -15,12 +15,10 @@ jobs:
         with:
           node-version: '12'
           registry-url: 'https://registry.npmjs.org'
+      - run: git config --global user.name 'Tarcisio Ferraz'
+      - run: git config --global user.email 'tarcisiozf@users.noreply.github.com'
       - run: npm version prerelease
       - run: npm publish --tags canary --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-      - name: push
-        run: |
-          git config --global user.name 'Tarcisio Ferraz'
-          git config --global user.email 'tarcisiozf@users.noreply.github.com'
-          git push --tags
+      - run: git push --tags
