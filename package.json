@@ -22,7 +22,8 @@
     "docs": "rm -rf docs && node_modules/.bin/jsdoc --configure .jsdoc.json --verbose",
     "benchmark:mock": "MOCK_PORT=5555 node ./test/benchmarks/utils/api_mock.js spawn",
     "benchmark:debug": "API_URL=ws://localhost:5555 node --expose-gc  --inspect ./test/benchmarks/$TARGET.js",
-    "benchmark:run": "API_URL=ws://localhost:5555 clinic doctor --dest ./.benchmarks_reports/$TARGET --on-port 'autocannon -d 10 localhost:$PORT && curl \"localhost:$PORT/gc?interval=4&iterations=5\"' -- node --expose-gc --inspect ./test/benchmarks/$TARGET.js"
+    "benchmark:run": "API_URL=ws://localhost:5555 clinic doctor --dest ./.benchmarks_reports/$TARGET --on-port 'autocannon -d 10 localhost:$PORT && curl \"localhost:$PORT/gc?interval=4&iterations=5\"' -- node --expose-gc --inspect ./test/benchmarks/$TARGET.js",
+    "canary": "update-by-scope --tag canary @tarcisiozf"
   },
   "repository": {
     "type": "git",
@@ -70,6 +71,7 @@
     "restify": "^8.5.1",
     "sinon": "^9.0.0",
     "standard": "^16.0.3",
+    "update-by-scope": "^1.1.3",
     "ws": "^7.4.5"
   },
   "standard": {
