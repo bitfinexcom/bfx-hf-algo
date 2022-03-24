@@ -1,5 +1,5 @@
 name: Pre-Merge
-on: [ pull_request ]
+on: [pull_request]
 jobs:
   lint_and_tests:
     name: check lint and tests
