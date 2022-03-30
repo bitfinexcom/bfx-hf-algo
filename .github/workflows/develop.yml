@@ -1,0 +1,30 @@
+name: Push to Develop
+on:
+  push:
+    branches:
+      - develop
+jobs:
+  prerelease:
+    name: create prerelease and publish
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.GIT_PERSONAL_ACCESS_TOKEN }}
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '12'
+          registry-url: 'https://registry.npmjs.org'
+      - name: config git
+        run: |
+          git config --global user.name 'Tarcisio Ferraz'
+          git config --global user.email 'tarcisiozf@users.noreply.github.com'
+      - name: update version
+        run: |
+          npm install
+          npm version prerelease -m "[ci skip] prerelease"
+      - name: publish version
+        run: |
+          git push
+          git tag --force canary
+          git push --tags --force

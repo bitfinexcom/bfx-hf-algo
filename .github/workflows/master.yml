@@ -1,0 +1,28 @@
+name: Push to Master
+on:
+  push:
+    branches:
+      - master
+jobs:
+  prerelease:
+    name: create release and publish
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.GIT_PERSONAL_ACCESS_TOKEN }}
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '12'
+          registry-url: 'https://registry.npmjs.org'
+      - name: config git
+        run: |
+          git config --global user.name 'Tarcisio Ferraz'
+          git config --global user.email 'tarcisiozf@users.noreply.github.com'
+      - name: safety-checks and versioning
+        run: |
+          npm install
+          npx check-unstable-deps check-deps
+          npm version minor -m "[ci skip] release"
+      - name: publish version
+        run: git push --follow-tags
