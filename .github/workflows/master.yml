@@ -22,7 +22,7 @@ jobs:
       - name: safety-checks and versioning
         run: |
           npm install
-          npx check-unstable-deps check-deps
+          npx check-unstable-deps check-unstable-deps
           npm version minor -m "[ci skip] release"
       - name: publish version
         run: git push --follow-tags
