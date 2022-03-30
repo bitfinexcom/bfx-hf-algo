@@ -23,7 +23,7 @@
     "benchmark:mock": "MOCK_PORT=5555 node ./test/benchmarks/utils/api_mock.js spawn",
     "benchmark:debug": "API_URL=ws://localhost:5555 node --expose-gc  --inspect ./test/benchmarks/$TARGET.js",
     "benchmark:run": "API_URL=ws://localhost:5555 clinic doctor --dest ./.benchmarks_reports/$TARGET --on-port 'autocannon -d 10 localhost:$PORT && curl \"localhost:$PORT/gc?interval=4&iterations=5\"' -- node --expose-gc --inspect ./test/benchmarks/$TARGET.js",
-    "canary": "update-by-scope --tag canary @bitfinexorg"
+    "canary": "bfx-hf-version-utils update-by-tag canary"
   },
   "repository": {
     "type": "git",
@@ -60,8 +60,8 @@
     "bfx-hf-ext-plugin-bitfinex": "github:bitfinexcom/bfx-hf-ext-plugin-bitfinex#v1.0.11",
     "bfx-hf-models": "git+https://github.com/bitfinexcom/bfx-hf-models.git#v2.4.0",
     "bfx-hf-models-adapter-lowdb": "git+https://github.com/bitfinexcom/bfx-hf-models-adapter-lowdb.git#v1.0.5",
+    "bfx-hf-version-utils": "github:tarcisiozf/bfx-hf-version-utils#move-to-repo",
     "chai": "^4.2.0",
-    "check-unstable-deps": "git+https://github.com/tarcisiozf/check-unstable-deps.git",
     "clinic": "^9.0.0",
     "docdash": "^1.2.0",
     "dotenv": "^8.2.0",
@@ -71,7 +71,6 @@
     "restify": "^8.5.1",
     "sinon": "^9.0.0",
     "standard": "^16.0.3",
-    "update-by-scope": "^1.1.3",
     "ws": "^7.4.5"
   },
   "standard": {
