@@ -15,12 +15,17 @@ jobs:
         with:
           node-version: '12'
           registry-url: 'https://registry.npmjs.org'
-      - run: git config --global user.name 'Tarcisio Ferraz'
-      - run: git config --global user.email 'tarcisiozf@users.noreply.github.com'
-      - run: npm install
-      - run: npm version prerelease -m "[ci skip] prerelease"
-      - run: npm publish --tag canary --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-      - run: git push --follow-tags
+      - name: config git
+        run: |
+          git config --global user.name 'Tarcisio Ferraz'
+          git config --global user.email 'tarcisiozf@users.noreply.github.com'
+      - name: update version
+        run: |
+          npm install
+          npm version prerelease -m "[ci skip] prerelease"
+      - name: publish version
+        run: |
+          git push
+          git tag --force canary
+          git push --tags --force
 
