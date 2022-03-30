@@ -1,5 +1,5 @@
 {
-  "name": "@bitfinexorg/bfx-hf-algo",
+  "name": "bfx-hf-algo",
   "version": "4.13.0",
   "description": "HF Algorithmic Order Module",
   "main": "index.js",
