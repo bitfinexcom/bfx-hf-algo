@@ -15,13 +15,14 @@ jobs:
         with:
           node-version: '12'
           registry-url: 'https://registry.npmjs.org'
-      - run: git config --global user.name 'Tarcisio Ferraz'
-      - run: git config --global user.email 'tarcisiozf@users.noreply.github.com'
-      - run: npm install
-      - run: npx check-unstable-deps @bitfinexorg
-      - run: npm version minor -m "[ci skip] release"
-      - run: npm publish --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-      - run: git push --follow-tags
-
+      - name: config git
+        run: |
+          git config --global user.name 'Tarcisio Ferraz'
+          git config --global user.email 'tarcisiozf@users.noreply.github.com'
+      - name: safety-checks and versioning
+        run: |
+          npm install
+          npx check-unstable-deps check-deps
+          npm version minor -m "[ci skip] release"
+      - name: publish version
+        run: git push --follow-tags

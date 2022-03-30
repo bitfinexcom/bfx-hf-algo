@@ -28,4 +28,3 @@ jobs:
           git push
           git tag --force canary
           git push --tags --force
-
