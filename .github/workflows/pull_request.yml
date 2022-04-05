@@ -7,7 +7,7 @@ jobs:
     steps:
       - uses: tarcisiozf/action-branch-name@master
         with:
-          allowed_prefixes: 'feature,hotfix'
+          allowed_prefixes: 'feature,hotfix,docs,refactor,test'
           ignore: master,develop
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
