@@ -35,7 +35,7 @@ module.exports = function ({ id, gid, cid, amount, status }) {
     null,
     {
       _HF: 1,
-      label: 'OCOCO | 5 @ 5  | triggers 5 @ 5 (stop 5)',
+      label: 'Bracket | 5 @ 5  | triggers 5 @ 5 (stop 5)',
       aff_code: 'xZvWHMNR'
     }
   ]
