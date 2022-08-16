@@ -9,7 +9,7 @@ const debug = require('debug')('bfx:hf:algo:test:ao-live')
 const createTestHarness = require('../../lib/testing/create_harness')
 const AOHost = require('../../lib/ao_host')
 const {
-  PingPong, Iceberg, TWAP, AccumulateDistribute, MACrossover, OCOCO
+  PingPong, Iceberg, TWAP, AccumulateDistribute, MACrossover, Bracket
 } = require('../../')
 
 const { SKIP_LIVE_TESTS, API_KEY, API_SECRET } = process.env
@@ -36,7 +36,7 @@ module.exports = ({ name, aoID, aoClass, defaultParams = {}, tests = [] }) => {
       host = new AOHost({
         wsSettings,
         aos: [
-          PingPong, Iceberg, TWAP, AccumulateDistribute, MACrossover, OCOCO
+          PingPong, Iceberg, TWAP, AccumulateDistribute, MACrossover, Bracket
         ]
       })
 

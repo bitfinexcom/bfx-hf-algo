@@ -5,7 +5,7 @@
  - [Accumulate/Distribute](#ad)
  - [Iceberg](#iceberg)
  - [MA Crossover](#macross)
- - [Order Creates OCO](#ococo)
+ - [Bracket](#bracket)
  - [Ping/Pong](#pingpong)
  - [TWAP](#twap)
 
@@ -64,10 +64,10 @@ Calculation of the EMA and SMA start with the execution of the algo order,
 which runs locally on the users machine. Any crossover is triggered *after*
 the initial collection of candles for the selected timeframes.
 
-## Order Creates OCO
+## Bracket Order
 
-<a id="ococo" />
-Order Creates OCO (or OCOCO) triggers an OCO order after an initial MARKET
+<a id="bracket" />
+Bracket Orders triggers an OCO order after an initial MARKET
 or LIMIT order fills.
 
 ## Ping/Pong

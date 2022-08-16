@@ -1,6 +1,6 @@
 {
   "name": "bfx-hf-algo",
-  "version": "4.13.4",
+  "version": "4.14.0",
   "description": "HF Algorithmic Order Module",
   "main": "index.js",
   "engines": {
@@ -55,10 +55,9 @@
     "lodash": "^4.17.15"
   },
   "devDependencies": {
-    "autocannon": "^7.3.0",
-    "bfx-hf-ext-plugin-bitfinex": "git+https://github.com/bitfinexcom/bfx-hf-ext-plugin-bitfinex#v1.0.11",
-    "bfx-hf-models": "git+https://github.com/bitfinexcom/bfx-hf-models.git#v2.6.0",
-    "bfx-hf-models-adapter-lowdb": "git+https://github.com/bitfinexcom/bfx-hf-models-adapter-lowdb.git#v1.0.5",
+    "bfx-hf-ext-plugin-bitfinex": "git+https://github.com/bitfinexcom/bfx-hf-ext-plugin-bitfinex#v1.0.13",
+    "bfx-hf-models": "git+https://github.com/bitfinexcom/bfx-hf-models.git#v4.0.1",
+    "bfx-hf-models-adapter-lowdb": "git+https://github.com/bitfinexcom/bfx-hf-models-adapter-lowdb.git#v1.0.6",
     "chai": "^4.2.0",
     "clinic": "^9.0.0",
     "docdash": "^1.2.0",
