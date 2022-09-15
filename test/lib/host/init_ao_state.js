@@ -46,15 +46,14 @@ describe('host:init_ao_state', () => {
   })
 
   it('provides necessary default data', () => {
-    const state = initAOState({ name: 'test', id: 'some-id' }, 42)
-
+    const state = initAOState({ name: 'test', id: 'some-id' }, { arg1: 42 })
     assert.ok(_isArray(state.channels) && _isEmpty(state.channels))
     assert.ok(_isObject(state.orders) && _isEmpty(state.orders))
     assert.ok(_isObject(state.cancelledOrders) && _isEmpty(state.cancelledOrders))
     assert.ok(_isObject(state.allOrders) && _isEmpty(state.allOrders))
     assert.ok(state.ev instanceof AsyncEventEmitter)
     assert.ok(_isString(state.label) && !_isEmpty(state.name))
-    assert.strictEqual(state.args, 42)
+    assert.deepStrictEqual(state.args, { arg1: 42, meta: { algoOrderId: 'some-id' } })
     assert.strictEqual(state.id, 'some-id')
   })
 })
