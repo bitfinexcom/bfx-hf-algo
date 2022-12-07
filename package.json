@@ -15,6 +15,7 @@
   ],
   "license": "Apache-2.0",
   "scripts": {
+    "lint": "standard",
     "lint:fix": "standard --fix",
     "test": "npm run lint && npm run unit",
     "unit": "NODE_ENV=test mocha -R spec -b --recursive test/lib",
