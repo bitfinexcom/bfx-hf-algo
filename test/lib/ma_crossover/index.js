@@ -28,7 +28,7 @@ testAOLive({
     shortEMATF: '1m',
     shortEMAPeriod: 20,
 
-    action: 'Sell',
+    action: 'sell',
     _margin: true,
     _futures: false
   },

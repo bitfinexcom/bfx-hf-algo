@@ -64,7 +64,7 @@ describe('accumulate_distribute:meta:process_params', () => {
   })
 
   it('negates amount on sell', () => {
-    const params = processParams({ ...args, action: 'Sell' })
+    const params = processParams({ ...args, action: 'sell' })
 
     assert.strictEqual(params.amount, -7, 'incorrect amount')
     assert.strictEqual(params.sliceAmount, -3, 'incorrect slice amount')

@@ -17,13 +17,13 @@ testAOLive({
 
     orderType: 'LIMIT',
     orderPrice: 2,
-    action: 'Sell',
+    action: 'sell',
     amount: 6,
 
     limitPrice: 0.8,
     stopPrice: 2.1,
     ocoAmount: 6,
-    ocoAction: 'Buy'
+    ocoAction: 'buy'
   },
 
   tests: [{

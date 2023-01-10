@@ -17,7 +17,7 @@ testAOLive({
   defaultParams: {
     _symbol: 'tLEOUSD',
     _margin: true,
-    action: 'Buy',
+    action: 'buy',
     amount: 6,
     orderCount: 4,
 

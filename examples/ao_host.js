@@ -69,7 +69,7 @@ host.once('ready', async () => {
     sliceAmount: 7.5,
     sliceAmountPerc: 0,
     lev: 10,
-    action: 'Buy',
+    action: 'buy',
     _symbol: 'tAAABBB',
     _margin: false,
     _futures: false,

@@ -310,7 +310,7 @@ await host.startAO('bfx-ma_crossover', {
   amount: 1,
   symbol: 'tEOSUSD',
   orderType: 'MARKET',
-  action: 'Buy',
+  action: 'buy',
   _margin: false,
 })
 ```

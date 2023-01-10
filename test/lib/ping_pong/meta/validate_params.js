@@ -6,7 +6,7 @@ const _isString = require('lodash/isString')
 const validateParams = require('../../../../lib/ping_pong/meta/validate_params')
 
 const params = {
-  action: 'Buy',
+  action: 'buy',
   orderCount: 1,
   pingAmount: 10,
   pongAmount: 10,
@@ -79,7 +79,7 @@ describe('ping_pong:meta:validate_params', () => {
     })
 
     it('returns error when pong price is greater than ping price for sell order', () => {
-      const err = validateParams({ ...params, pingAmount: -10, action: 'Sell' })
+      const err = validateParams({ ...params, pingAmount: -10, action: 'sell' })
       assert.deepStrictEqual(err.field, 'pongPrice')
       assert(_isString(err.message))
     })
