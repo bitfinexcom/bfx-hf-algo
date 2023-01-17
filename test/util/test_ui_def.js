@@ -23,6 +23,9 @@ const VALID_FIELDS = [
   'input.price',
   'input.radio',
   'input.range',
+  'recurring_amount',
+  'recurring_endDate',
+  'recurring_summary',
   'ui.checkbox_group'
 ]
 
