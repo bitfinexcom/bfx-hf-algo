@@ -17,11 +17,11 @@ function performOrder (host, args = {}) {
     orderType: 'LIMIT',
     orderPrice: 2,
     amount: 30,
-    action: 'Sell',
+    action: 'sell',
     limitPrice: 1.7,
     stopPrice: 2.1,
     ocoAmount: 30,
-    ocoAction: 'Buy',
+    ocoAction: 'buy',
     margin: true,
     ...args
   })

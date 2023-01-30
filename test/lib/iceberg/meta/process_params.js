@@ -20,7 +20,7 @@ describe('iceberg:meta:process_params', () => {
 
   it('negates amount if selling', () => {
     const buyParams = processParams({ amount: 1 })
-    const sellParams = processParams({ amount: 1, action: 'Sell' })
+    const sellParams = processParams({ amount: 1, action: 'sell' })
 
     assert.strictEqual(buyParams.amount, 1)
     assert.strictEqual(sellParams.amount, -1)

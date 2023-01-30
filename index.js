@@ -8,5 +8,6 @@ module.exports = {
   PingPong: require('./lib/ping_pong'),
   MACrossover: require('./lib/ma_crossover'),
   Bracket: require('./lib/bracket'),
+  Recurring: require('./lib/recurring'),
   AsyncEventEmitter: require('./lib/async_event_emitter')
 }

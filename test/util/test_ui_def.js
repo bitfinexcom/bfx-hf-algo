@@ -13,6 +13,7 @@ const _isUndefined = require('lodash/isUndefined')
 
 const VALID_ACTIONS = ['buy', 'sell', 'preview', 'submit']
 const VALID_FIELDS = [
+  'input.alias',
   'input.amount',
   'input.checkbox',
   'input.date',
@@ -22,6 +23,9 @@ const VALID_FIELDS = [
   'input.price',
   'input.radio',
   'input.range',
+  'recurring_amount',
+  'recurring_endDate',
+  'recurring_summary',
   'ui.checkbox_group'
 ]
 

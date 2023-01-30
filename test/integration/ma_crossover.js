@@ -23,7 +23,7 @@ function performOrder (host) {
     amount: 1,
     symbol: 'tAAABBB',
     orderType: 'MARKET',
-    action: 'Buy',
+    action: 'buy',
     _margin: false
   })
 }

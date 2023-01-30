@@ -14,8 +14,8 @@ const params = {
   stopPrice: 6,
   ocoAmount: 6,
 
-  action: 'Buy',
-  ocoAction: 'Sell',
+  action: 'buy',
+  ocoAction: 'sell',
 
   _futures: false,
   lev: 3.3,

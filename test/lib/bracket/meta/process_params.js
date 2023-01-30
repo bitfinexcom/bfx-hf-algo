@@ -8,8 +8,8 @@ const params = {
   _symbol: 'tLEOUSD',
   _future: false,
 
-  action: 'Sell',
-  ocoAction: 'Sell',
+  action: 'sell',
+  ocoAction: 'sell',
   lev: 3.3,
 
   amount: 6,
@@ -20,8 +20,8 @@ describe('bracket:meta:process_params', () => {
   it('process params correctly', () => {
     assert.strictEqual(processParams(params).symbol, 'tLEOUSD')
     assert.ok(!processParams(params).lev)
-    assert.strictEqual(processParams({ ...params, action: 'Buy' }).amount, 6)
-    assert.strictEqual(processParams({ ...params, ocoAction: 'Buy' }).ocoAmount, 6)
+    assert.strictEqual(processParams({ ...params, action: 'buy' }).amount, 6)
+    assert.strictEqual(processParams({ ...params, ocoAction: 'buy' }).ocoAmount, 6)
     assert.strictEqual(processParams(params).amount, -6)
     assert.strictEqual(processParams(params).ocoAmount, -6)
   })
