@@ -40,7 +40,7 @@ describe('twap:meta:process_params', () => {
   })
 
   it('converts slice interval from seconds to ms', () => {
-    const params = processParams({ sliceInterval: 1 })
+    const params = processParams({ sliceIntervalSec: 1 })
     assert.strictEqual(params.sliceInterval, 1000)
   })
 
