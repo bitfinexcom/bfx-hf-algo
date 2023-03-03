@@ -21,11 +21,13 @@ describe('twap:meta:process_params', () => {
   })
 
   it('negates amount if selling', () => {
-    const buyParams = processParams({ amount: 1 })
+    const buyParams = processParams({ amount: 1, action: 'buy' })
     const sellParams = processParams({ amount: 1, action: 'sell' })
 
     assert.strictEqual(buyParams.amount, 1)
     assert.strictEqual(sellParams.amount, -1)
+    assert.strictEqual(buyParams.action, 'buy')
+    assert.strictEqual(sellParams.action, 'sell')
   })
 
   it('integrates custom price target from price field', () => {

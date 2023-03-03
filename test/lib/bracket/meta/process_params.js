@@ -20,8 +20,12 @@ describe('bracket:meta:process_params', () => {
   it('process params correctly', () => {
     assert.strictEqual(processParams(params).symbol, 'tLEOUSD')
     assert.ok(!processParams(params).lev)
+    assert.strictEqual(processParams(params).action, 'sell')
+    assert.strictEqual(processParams(params).ocoAction, 'sell')
     assert.strictEqual(processParams({ ...params, action: 'buy' }).amount, 6)
     assert.strictEqual(processParams({ ...params, ocoAction: 'buy' }).ocoAmount, 6)
+    assert.strictEqual(processParams({ ...params, action: 'sell' }).amount, -6)
+    assert.strictEqual(processParams({ ...params, ocoAction: 'sell' }).ocoAmount, -6)
     assert.strictEqual(processParams(params).amount, -6)
     assert.strictEqual(processParams(params).ocoAmount, -6)
   })

@@ -24,7 +24,8 @@ const args = {
   capIndicatorTFSMA: 'FIVE_MINUTES',
   capIndicatorPeriodSMA: 20,
   amount: 7,
-  sliceAmount: 3
+  sliceAmount: 3,
+  action: 'buy'
 }
 
 describe('accumulate_distribute:meta:process_params', () => {
@@ -36,6 +37,7 @@ describe('accumulate_distribute:meta:process_params', () => {
     assert.strictEqual(params.sliceInterval, 1000, 'incorrect slice interval')
     assert.strictEqual(params.amount, 7, 'incorrect amount')
     assert.strictEqual(params.sliceAmount, 3, 'incorrect slice amount')
+    assert.strictEqual(params.action, 'buy', 'incorrect action')
   })
 
   it('provides sane defaults', () => {
@@ -68,5 +70,6 @@ describe('accumulate_distribute:meta:process_params', () => {
 
     assert.strictEqual(params.amount, -7, 'incorrect amount')
     assert.strictEqual(params.sliceAmount, -3, 'incorrect slice amount')
+    assert.strictEqual(params.action, 'sell', 'incorrect action')
   })
 })
