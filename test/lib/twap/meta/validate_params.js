@@ -10,7 +10,7 @@ const validParams = {
   amount: 1,
   sliceAmount: 0.1,
   amountDistortion: 0.2,
-  sliceInterval: 1,
+  sliceInterval: 1000,
   priceTarget: 1000,
   priceCondition: 'MATCH_LAST'
 }
