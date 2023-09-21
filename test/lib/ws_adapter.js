@@ -54,6 +54,7 @@ describe('WsAdapter', () => {
         'ws2:managed:book',
         'ws2:managed:candles',
         'ws2:notification',
+        'ws2:message',
         'socket:updated',
         'ws2:event:info-server-restart',
         'ws2:reopen',
