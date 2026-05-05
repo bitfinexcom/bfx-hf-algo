@@ -45,7 +45,7 @@
     "bfx-api-node-plugin-managed-candles": "^1.0.2",
     "bfx-api-node-plugin-managed-ob": "^1.0.3",
     "bfx-api-node-plugin-wd": "^1.0.4",
-    "bfx-api-node-rest": "^4.6.0",
+    "bfx-api-node-rest": "^8.0.0",
     "bfx-api-node-util": "^1.0.2",
     "bfx-hf-indicators": "git+https://github.com/bitfinexcom/bfx-hf-indicators.git#v2.2.0",
     "bfx-hf-signals": "git+https://github.com/bitfinexcom/bfx-hf-signals.git#v1.1.0",
